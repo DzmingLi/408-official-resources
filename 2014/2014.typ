@@ -251,7 +251,7 @@ D. 队空：end1==(end2+1) mod M;队满：end2==(end1+1) mod (M-1)
 ]
 #block(breakable: false)[\28. 下列措施中，能加快虚实地址转换的是\_\_\_。
 
-I. 增大块表（TLB）容量 II. 让页表常驻内存 III. 增大交换区（swap）
+I. 增大快表（TLB）容量 II. 让页表常驻内存 III. 增大交换区（swap）
 
 #tasks(label: none, columns: "auto-fit", max-columns: 4)[
 + A. 仅Ⅰ
