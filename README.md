@@ -38,9 +38,7 @@ typst compile 2009.typ
 
 - **OCR**：智谱 GLM-OCR（`glm-ocr`，模型 `glm-ocr`）识别原始 PDF
 - **打磨**：DeepSeek（`deepseek-chat`）修复数学公式、恢复代码块、修正 OCR 错字
-- **校对**：与以下仓库交叉核对，补齐漏题、去除页眉/答案速查等 OCR 杂质，并修正题号缺失
-  - [tiankai-333/master408](https://github.com/tiankai-333/master408)（2011–2024 选择题题库）
-  - [neville-studio/408-exam-paper](https://github.com/neville-studio/408-exam-paper)（2009–2025 重构版真题）
+- **校对**：与 [neville-studio/408-exam-paper](https://github.com/neville-studio/408-exam-paper) 的重构版真题 PDF（2009–2025）交叉核对，补齐漏题、去除页眉/答案速查等 OCR 杂质，并修正题号缺失。
 
 ## 工具
 

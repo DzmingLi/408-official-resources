@@ -227,7 +227,7 @@ C. Cache-主存层次可采用回写法写策略，主存-外存层次通常采�
 #tasks(label: none, columns: "auto-fit", max-columns: 4)[
 + A.终止子进程
 + B.回收进程占用的设备
-+ C.释放进程控制块
++ C.撤销进程控制块
 + D.回收为进程分配的内存
 ]
 ]
