@@ -3,8 +3,6 @@
 #+language: zh-CN
 #+startup: overview
 #+options: num:nil
-#+source: [[file:../内容来源/2027年计算机考试大纲.pdf][教育部教育考试院，2027年版]]
-#+comment: 逐页人工录入；原书第4—7页，PDF第9—12页。仅收录本科目的考查目标和考试内容。
 
 * 考查目标
 
