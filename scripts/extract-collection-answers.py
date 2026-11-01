@@ -19,8 +19,6 @@ rebase_images = EXTRACT['rebase_images']
 def answers(root, year, sample=False):
     if sample:
         source = root / '旧版题型示例/2013-题型示例-答案.typ'
-    elif year in (2016, 2017):
-        source = root / f'分类汇编/答案来源补录/{year}.typ'
     else:
         source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
     text = source.read_text()
@@ -52,13 +50,9 @@ def answers(root, year, sample=False):
         result.update({int(n): letter for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text)})
         if set(range(1, 41)) - result.keys():
             raise ValueError(f'{source}: incomplete official answer key')
-        if year in (2016, 2017):
-            numbers = (41, 45, 46, 44, 42, 43, 47) if year == 2016 else (42, 47, 45, 46, 43, 44, 41)
-            blocks = questions(source, expected=len(numbers), command='answer-question')
-        else:
-            numbers = range(41, 48)
-            command = 'question' if year == 2022 else 'answer-question'
-            blocks = questions(source, expected=7, command=command)
+        numbers = range(41, 48)
+        command = 'question' if year == 2022 else 'answer-question'
+        blocks = questions(source, expected=7, command=command)
         result.update(zip(numbers, (body.strip() for body in blocks)))
     result.update({int(n): letter for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text)})
     # Like the syllabus answer appendix, MCQs publish only their answer letter.

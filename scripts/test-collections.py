@@ -19,7 +19,7 @@ class CollectionTests(unittest.TestCase):
         publisher = runpy.run_path(str(ROOT / 'scripts/publish-release.py'))
         groups = publisher['collection_plan']()
         self.assertEqual({g['subject']: len(g['rows']) for g in groups}, {
-            '数据结构': 31, '计算机组成原理': 28, '操作系统': 15, '计算机网络': 17})
+            '数据结构': 31, '计算机组成原理': 28, '操作系统': 15, '计算机网络': 16})
         ds = groups[0]['rows']
         self.assertEqual(list(dict.fromkeys(r['chapter'] for r in ds)),
                          ['基本概念', '线性表', '栈、队列和数组', '树与二叉树', '图', '查找', '排序'])
@@ -171,7 +171,8 @@ class CollectionTests(unittest.TestCase):
                                        (2017, 43, '4B7F FFFFH'),
                                        (2017, 44, '96个字节')):
             source, items = module['answers'](ROOT, year)
-            self.assertIn('答案来源补录', str(source))
+            self.assertEqual(source, ROOT / f'历年真题+参考解答/{year}/{year}-答案.typ')
+            self.assertEqual(set(items), set(range(1, 48)))
             self.assertIn(evidence, items[number])
 
     def test_complete_os_coverage_and_exact_syllabus_leaves(self):
@@ -316,7 +317,7 @@ class CollectionTests(unittest.TestCase):
             '物理层分类汇编-题目': ('通信基础', '传输介质'),
             '传输层提供的服务与UDP协议-题目': ('传输层提供的服务', 'UDP协议'),
             'FTP与电子邮件-题目': ('FTP', '电子邮件'),
-            '流量控制与可靠传输机制-题目': ('数据链路层的功能', '流量控制与可靠传输机制'),
+            '流量控制与可靠传输机制-题目': ('数据链路层的功能', '差错控制', '流量控制与可靠传输机制'),
             'DNS系统-题目': ('网络应用模型', 'DNS系统'),
         }
         self.assertEqual(builder['MERGED_COLLECTIONS'], expected_merges)
