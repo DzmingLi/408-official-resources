@@ -1,7 +1,9 @@
 """Regression checks for source identity, classification and reserved papers."""
 from pathlib import Path
 import runpy
+import tempfile
 import unittest
+from unittest.mock import patch
 
 MODULE = runpy.run_path(str(Path(__file__).with_name('extract-collections.py')))
 ROOT = Path(__file__).resolve().parent.parent
@@ -12,6 +14,69 @@ class CollectionTests(unittest.TestCase):
     def setUpClass(cls):
         builder = runpy.run_path(str(ROOT / 'scripts/build-collections.py'))
         builder['generate_previews'](ROOT)
+
+    def test_collection_release_downloads_cover_all_subjects_in_syllabus_order(self):
+        publisher = runpy.run_path(str(ROOT / 'scripts/publish-release.py'))
+        groups = publisher['collection_plan']()
+        self.assertEqual({g['subject']: len(g['rows']) for g in groups}, {
+            '数据结构': 31, '计算机组成原理': 28, '操作系统': 15, '计算机网络': 17})
+        ds = groups[0]['rows']
+        self.assertEqual(list(dict.fromkeys(r['chapter'] for r in ds)),
+                         ['基本概念', '线性表', '栈、队列和数组', '树与二叉树', '图', '查找', '排序'])
+        self.assertEqual(next(r for r in ds if r['chapter'] == '树与二叉树')['title'], '树的基本概念')
+        for group in groups:
+            names = [r[key] for r in group['rows'] for key in ('question_name', 'answer_name')]
+            self.assertEqual(len(names), len(set(names)))
+            self.assertTrue(all(name.isascii() and name.endswith('.pdf') for name in names))
+            notes = publisher['collection_notes'](group, 'commit', 'owner/repo')
+            for row in group['rows']:
+                self.assertIn(row['title'], notes)
+                self.assertIn('/' + row['question_name'] + ')', notes)
+                self.assertIn('/' + row['answer_name'] + ')', notes)
+
+    def test_collection_release_rejects_partial_or_unexpected_builds(self):
+        publisher = runpy.run_path(str(ROOT / 'scripts/publish-release.py'))
+        groups = publisher['collection_plan']()
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            files = [directory / row[key] for group in groups for row in group['rows']
+                     for key in ('question', 'answer')]
+            for path in files:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.touch()
+            self.assertEqual(len(publisher['collection_release_files'](directory)), 4)
+            files[-1].unlink()
+            with self.assertRaisesRegex(ValueError, 'Collection PDF mismatch'):
+                publisher['collection_release_files'](directory)
+            files[-1].touch()
+            (directory / 'unexpected.pdf').touch()
+            with self.assertRaisesRegex(ValueError, 'Collection PDF mismatch'):
+                publisher['collection_release_files'](directory)
+
+    def test_collection_upload_failure_keeps_previous_assets(self):
+        publisher = runpy.run_path(str(ROOT / 'scripts/publish-release.py'))
+        calls = []
+
+        def failing_upload(*args):
+            calls.append(args)
+            if args[:2] == ('release', 'upload'):
+                path, label = args[3].split('#')
+                self.assertEqual(Path(path).name, 'ds-01-01-questions.pdf')
+                self.assertEqual(label, '算法的基本概念-题目.pdf')
+                self.assertEqual(Path(path).read_bytes(), b'complete PDF')
+                raise RuntimeError('Upload failed')
+            return ''
+
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / '算法的基本概念-题目.pdf'
+            source.write_bytes(b'complete PDF')
+            assets = {'ds-01-01-questions.pdf': (source, source.name)}
+            with patch.dict(publisher['publish_assets'].__globals__, gh=failing_upload):
+                with self.assertRaisesRegex(RuntimeError, 'Upload failed'):
+                    publisher['publish_assets']('collection-数据结构', '数据结构分类汇编', 'notes',
+                                                assets, 'commit', 'owner/repo', set(), latest=False)
+        self.assertFalse(any(call[:2] == ('release', 'delete-asset') for call in calls))
+        self.assertIn('--latest=false', calls[0])
 
     def test_complete_ds_coverage_and_exact_syllabus_leaves(self):
         ds = runpy.run_path(str(ROOT / 'scripts/ds-collection-plan.py'))
@@ -44,11 +109,14 @@ class CollectionTests(unittest.TestCase):
     def test_all_papers_have_complete_coverage_across_subjects(self):
         actual = {e for p in MODULE['PLANS'].values()
                   for entries in p['sections'].values() for e in entries if len(e) == 2}
-        excluded = set(MODULE['EXCLUDED_NETWORK_QUESTIONS']) | set(MODULE['EXCLUDED_COA_QUESTIONS'])
+        # Hamming codes remain in the networking syllabus; subject-level
+        # exclusions must not be mistaken for exclusions from all collections.
+        excluded = {(2013, 37), (2013, 20)}
         expected = {(y, n) for y in range(2009, 2023) for n in range(1, 48)}
-        self.assertEqual(len(expected - excluded), 655)
+        self.assertEqual(len(expected - excluded), 656)
         self.assertEqual(actual, expected - excluded)
-        for entry, owner in (((2009, 11), '指令执行过程'),
+        self.assertEqual(MODULE['PLANS']['差错控制']['sections']['纠错编码'], [(2013, 15)])
+        for entry, owner in (((2013, 15), '差错控制'), ((2009, 11), '指令执行过程'),
                              ((2016, 47), '文件'), ((2019, 43), '同步与互斥')):
             self.assertEqual([t for t, p in MODULE['PLANS'].items()
                               for entries in p['sections'].values() if entry in entries], [owner])
@@ -305,8 +373,9 @@ class CollectionTests(unittest.TestCase):
         expected = {(year, n) for year in range(2009, 2023) for n in range(33, 41)}
         expected |= {(year, 47) for year in range(2009, 2023) if year not in (2014, 2016)}
         expected |= {(2014, 42), (2014, 43), (2016, 41)}
+        expected.add((2013, 15))
         expected -= MODULE['EXCLUDED_NETWORK_QUESTIONS'].keys()
-        self.assertEqual(len(expected), 126)
+        self.assertEqual(len(expected), 127)
         self.assertEqual(actual, expected)
         self.assertEqual(samples, {(2013, 7, 'sample'), (2013, 8, 'sample'), (2013, 15, 'sample')})
         self.assertEqual(list(MODULE['PLANS']['传输介质']['sections']),
@@ -347,7 +416,7 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(locations, ['介质访问控制'])
 
     def test_only_requested_lectures_exist(self):
-        self.assertEqual(len(MODULE['PLANS']), 96)
+        self.assertEqual(len(MODULE['PLANS']), 97)
         self.assertEqual(MODULE['MAX_YEAR'], 2022)
 
     def test_no_reserved_or_duplicate_questions(self):

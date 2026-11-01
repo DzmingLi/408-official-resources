@@ -10,7 +10,7 @@ import re
 import runpy
 
 MAX_YEAR = 2022
-# Retain original papers, but omit questions dependent on removed syllabus items.
+# Exclusions below apply within each subject, not across all four subjects.
 EXCLUDED_NETWORK_QUESTIONS = {(2013, 37): 'HDLC协议条目已从现行考纲移除'}
 # Classification rule: keep each question whole and assign it to the last
 # actually examined topic in syllabus order, not to background/distractor terms.
@@ -171,6 +171,13 @@ PLANS = {
             '路由与转发': [(2011, 33), (2021, 33)],
             'SDN基本概念': [(2022, 37)],
             '拥塞控制': [],
+        },
+    },
+    '差错控制': {
+        'directory': '计算机网络/数据链路层/差错控制',
+        'sections': {
+            '检错编码': [],
+            '纠错编码': [(2013, 15)],
         },
     },
     '介质访问控制': {
