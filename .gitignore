@@ -8,6 +8,9 @@ result-*
 /tmp/
 __pycache__/
 /本地参考/
+/教材习题/
+/分类汇编/preview/
+/分类汇编/answers-preview/
 
 
 # 旧网络稿图片不再使用；重绘用的图标放在 assets 中。
@@ -56,12 +59,3 @@ __pycache__/
 !/历年真题+参考解答/2026/official-images/q44.png
 !/历年真题+参考解答/2026/official-images/q46-directory.png
 !/历年真题+参考解答/2026/official-images/q47.png
-/题型示例/2026/official-images/network-internet.png
-/题型示例/2026/official-images/network-web-internet.png
-/题型示例/2026/official-images/network-router.png
-/题型示例/2026/official-images/network-switch.png
-/题型示例/2026/official-images/network-server.png
-/题型示例/2026/official-images/network-pc.png
-/题型示例/2026/official-images/network-laptop.png
-/题型示例/2026/official-images/network-web-pc.png
-/题型示例/2026/official-images/network-web-router.png

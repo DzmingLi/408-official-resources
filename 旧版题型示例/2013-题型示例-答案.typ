@@ -1,4 +1,4 @@
-#import "../../template.typ": exam, subquestions, answer-key
+#import "../template.typ": exam, subquestions, answer-key
 #show: exam.with(year: 2013, title: "2013年考试大纲旧版题型示例", solutions: true)
 #set document(title: "2013年旧版题型示例参考解析（非官方）")
 

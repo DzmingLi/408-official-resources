@@ -4,7 +4,7 @@
  Source: https://www.graffletopia.com/stencils/528
  User-supplied Detailed_Network_Diagram.zip SHA256: ce1a7a9456eec0549341fade597eff0e588366eb30bb25b92d7bb5d177d385f6
  Original group ID: 281. SVG extracted from the embedded vector PDF.
- Reproduce with scripts/import-network-stencil.py; outlines and shading are preserved.
+ Extracted from the OmniGraffle stencil; outlines and shading are preserved.
  Only the PDF page background is removed for transparency.
 -->
 

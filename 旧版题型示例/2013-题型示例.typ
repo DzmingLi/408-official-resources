@@ -1,4 +1,4 @@
-#import "../../template.typ": exam, choices, subquestions, inline-node
+#import "../template.typ": exam, choices, subquestions, inline-node
 #show: exam.with(year: 2013, subject: "计算机学科专业基础", code: "408", sample: true)
 #set document(title: "2013年计算机学科专业基础综合考试大纲题型示例")
 #import "@preview/ezexam:0.3.1": mode-state, HANDOUTS, answer-state, question, counter-question

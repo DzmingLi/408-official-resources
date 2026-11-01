@@ -18,7 +18,7 @@ rebase_images = EXTRACT['rebase_images']
 
 def answers(root, year, sample=False):
     if sample:
-        source = root / '题型示例/旧版/2013-题型示例-答案.typ'
+        source = root / '旧版题型示例/2013-题型示例-答案.typ'
     elif year in (2016, 2017):
         source = root / f'分类汇编/答案来源补录/{year}.typ'
     else:
@@ -136,12 +136,6 @@ def outputs(root):
                 else:
                     lines += [body, '']
         yield target, '\n'.join(lines).rstrip() + '\n'
-    # Preserve every formal merge and its order verbatim in the answer edition.
-    for preview in sorted((root / '分类汇编/preview').glob('*-题目.typ')):
-        text = preview.read_text().replace('"template.typ"', '"../preview/template.typ"')
-        text = text.replace('collection.with(', 'collection.with(solutions: true, ')
-        text = text.replace('-题目.typ"', '-answers.typ"')
-        yield root / '分类汇编/answers-preview' / preview.name.replace('-题目', '-answers'), text
 
 
 def main():

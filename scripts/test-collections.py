@@ -8,6 +8,11 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class CollectionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        builder = runpy.run_path(str(ROOT / 'scripts/build-collections.py'))
+        builder['generate_previews'](ROOT)
+
     def test_complete_ds_coverage_and_exact_syllabus_leaves(self):
         ds = runpy.run_path(str(ROOT / 'scripts/ds-collection-plan.py'))
         plans = {t: p for t, p in MODULE['PLANS'].items()
@@ -213,8 +218,7 @@ class CollectionTests(unittest.TestCase):
     def test_answers_are_complete_and_reproducible(self):
         module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
         outputs = list(module['outputs'](ROOT))
-        preview_count = len(list((ROOT / '分类汇编/preview').glob('*-题目.typ')))
-        self.assertEqual(len(outputs), len(MODULE['PLANS']) + preview_count)
+        self.assertEqual(len(outputs), len(MODULE['PLANS']))
         for target, content in outputs:
             self.assertEqual(target.read_text(), content, str(target))
         for title, plan in MODULE['PLANS'].items():

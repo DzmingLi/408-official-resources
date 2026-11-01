@@ -1,4 +1,4 @@
-#import "../../template.typ": exam
+#import "../template.typ": exam
 #import "@preview/ezexam:0.3.1": mode-state, HANDOUTS
 #let collection(title: "分类汇编", subject: "计算机网络", solutions: false, body) = {
   mode-state.update(HANDOUTS)

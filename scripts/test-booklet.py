@@ -232,9 +232,9 @@ class ReleaseTests(unittest.TestCase):
         module = runpy.run_path(str(Path(__file__).with_name('build-pdfs.py')))
         self.assertEqual(module['print_cover_blanks'](Path('2024/2024-答案.typ')),
                          {'cover_back_blank': False, 'back_cover_blank': False})
-        self.assertEqual(module['print_cover_blanks'](Path('题型示例/旧版/2013-题型示例-答案.typ')),
+        self.assertEqual(module['print_cover_blanks'](Path('旧版题型示例/2013-题型示例-答案.typ')),
                          {'cover_back_blank': False, 'back_cover_blank': False})
-        for source in ('2024/2024.typ', '题型示例/旧版/2013-题型示例.typ'):
+        for source in ('2024/2024.typ', '旧版题型示例/2013-题型示例.typ'):
             self.assertEqual(module['print_cover_blanks'](Path(source)),
                              {'cover_back_blank': True, 'back_cover_blank': True})
 
@@ -244,8 +244,8 @@ class ReleaseTests(unittest.TestCase):
         expected = {
             '2024/2024.typ': '2024',
             '2024/2024-答案.typ': '2024-answers',
-            '题型示例/旧版/2013-题型示例.typ': '2013-sample',
-            '题型示例/旧版/2013-题型示例-答案.typ': '2013-sample-answers',
+            '旧版题型示例/2013-题型示例.typ': '2013-sample',
+            '旧版题型示例/2013-题型示例-答案.typ': '2013-sample-answers',
         }
         for source, stem in expected.items():
             with self.subTest(source=source):
@@ -265,9 +265,9 @@ class ReleaseTests(unittest.TestCase):
         module = runpy.run_path(str(Path(__file__).with_name('build-pdfs.py')))
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            for name in ('旧版/2013-题型示例.typ', '旧版/2013-题型示例-答案.typ',
-                         '新版/2026-题型示例.typ'):
-                source = root / '题型示例' / name
+            for name in ('旧版题型示例/2013-题型示例.typ', '旧版题型示例/2013-题型示例-答案.typ',
+                         '新版题型示例/2026-题型示例.typ'):
+                source = root / name
                 source.parent.mkdir(parents=True, exist_ok=True)
                 source.touch()
             selected = module['sources'](root)
