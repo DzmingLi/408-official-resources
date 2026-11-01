@@ -1,7 +1,6 @@
 #+title: 操作系统
 #+subtitle: 2027年全国硕士研究生招生考试计算机学科专业基础考试大纲
 #+language: zh-CN
-#+startup: overview
 #+options: num:nil
 
 * 考查目标
