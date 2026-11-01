@@ -103,7 +103,7 @@ def collection_release_files(directory):
 def collection_notes(group, commit, repo):
     lines = [f'由提交 {commit} 自动生成，共 {len(group["rows"])} 讲，各含题目与答案 PDF（A4 阅读版）。',
              '', '收录2009—2022年真题及相关旧版题型示例，保留2023—2026年整卷练习。',
-             '选择题仅列答案字母；综合题保留对应参考答案或整理解析。',
+             '历年真题选择题仅列答案字母；综合题保留对应参考答案或整理解析。旧版题型示例保留详细解析，标注为自制、非官方。',
              '下载文件按科目、章节和讲次编号，中文讲名及下载入口如下。', '']
     chapter = None
     for row in group['rows']:
@@ -184,6 +184,7 @@ def main():
                            assets, commit, repo, existing_tags, latest=False)
         return
     notes = (f'由提交 {commit} 自动生成，共 {len(actual)//2} 份阅读版和 {len(actual)//2} 份小册子打印版 PDF。\n\n'
+             '旧版题型示例解析为本仓库自制，非官方答案，包含选择题与综合题的详细解析。\n\n'
              '只提供可单独下载的 PDF，打印版文件名以 -print.pdf 结尾。'
              '打印版使用 ISO B4 横向纸张，100% 打印、双面短边翻转，每面 1 页。'
              '不要再次开启小册子拼版，也不要跳过空白面；请先用一张纸试打。\n')

@@ -54,16 +54,17 @@ def answers(root, year, sample=False):
         command = 'question' if year == 2022 else 'answer-question'
         blocks = questions(source, expected=7, command=command)
         result.update(zip(numbers, (body.strip() for body in blocks)))
-    result.update({int(n): letter for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text)})
-    # Like the syllabus answer appendix, MCQs publish only their answer letter.
-    # Old sample composite numbers 9–15 are aliases for source numbers 41–47.
-    limit = 8 if sample else 40
-    for number in range(1, limit + 1):
+    for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text):
+        result.setdefault(int(n), letter)
+    # Official paper MCQs publish only letters; self-authored sample answers
+    # retain their explanations. Sample numbers 9–15 alias source 41–47.
+    for number in range(1, 9 if sample else 41):
         if number in result:
             match = re.match(r'^([ABCD])(?:\s|$)', result[number])
             if not match:
                 raise ValueError(f'{source}: missing MCQ answer letter {number}')
-            result[number] = match[1]
+            if not sample:
+                result[number] = match[1]
     return source, result
 
 
@@ -119,7 +120,7 @@ def outputs(root):
                 label = '旧版题型示例' if sample else f'{year} {number}'
                 lines += [f'=== {label}', '']
                 if sample:
-                    body = '编注：以下为本仓库整理解析，非官方参考答案。\n\n' + body
+                    body = '自制解析（非官方）：原考纲未提供示例答案，以下答案与解析由本仓库自行编写。\n\n' + body
                 if (sample and number not in (10, 14)) or (year, number) in ((2009, 41), (2011, 41), (2015, 42), (2016, 41), (2017, 47)):
                     lines += ['#block(breakable: false)[', body, ']', '']
                 elif not sample and number <= 40 and body in 'ABCD':

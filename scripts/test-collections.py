@@ -269,7 +269,7 @@ class CollectionTests(unittest.TestCase):
             self.assertFalse((ROOT / f'分类汇编/preview/{name}-题目.typ').exists())
             self.assertFalse((ROOT / f'分类汇编/answers-preview/{name}-answers.typ').exists())
 
-    def test_mcq_answers_have_no_explanations(self):
+    def test_official_mcqs_keep_letters_and_samples_keep_self_authored_explanations(self):
         module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
         for year in range(2009, 2023):
             _, items = module['answers'](ROOT, year)
@@ -277,7 +277,12 @@ class CollectionTests(unittest.TestCase):
                 self.assertIn(items[number], ('A', 'B', 'C', 'D'), (year, number))
         _, sample = module['answers'](ROOT, 2013, sample=True)
         for number in range(1, 9):
-            self.assertIn(sample[number], ('A', 'B', 'C', 'D'))
+            self.assertEqual(sample[number][0], 'AADBCBBB'[number - 1])
+            self.assertIn('\n\n', sample[number])
+            self.assertGreater(len(sample[number]), 40)
+        for target, content in module['outputs'](ROOT):
+            for block in content.split('=== 旧版题型示例\n')[1:]:
+                self.assertIn('自制解析（非官方）', block.split('=== ', 1)[0])
         for year in range(2009, 2015):
             text = (ROOT / f'历年真题+参考解答/{year}/{year}-答案.typ').read_text()
             choices, solutions = text.split('= 二、综合应用题', 1)
