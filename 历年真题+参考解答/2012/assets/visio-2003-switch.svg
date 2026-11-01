@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="109.8pt" height="96.2pt" viewBox="17.1 23.9 109.8 96.2">
+<!-- Original Visio 2003 NETSYM_U.VSS master 5; native vector paths, grayscale paint for printing. --><g id="Layer1031">
+<g id="Layer1032">
+<defs>
+  <linearGradient id="grad25">
+    <stop offset="0%" stop-color="#dfdfdf" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad25" id="grad26" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(-0 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M72.0000,87.1038 L126.0000,55.9269 L72.0000,24.7500 L18.0000,55.9269 L72.0000,87.1038 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad26); " />
+<path d="  M72.0000,87.1038 L126.0000,55.9269 L72.0000,24.7500 L18.0000,55.9269 L72.0000,87.1038 Z" style="stroke-width: 0.7200; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<text x="18.0000" y="55.9269">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+<g id="Layer1033">
+<g id="Layer1034">
+<defs>
+  <linearGradient id="grad27">
+    <stop offset="0%" stop-color="#a7a7a7" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad27" id="grad28" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M72.0000,119.2500 L126.0000,88.0731 L126.0000,55.9269 L72.0000,87.1038 L72.0000,119.2500 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad28); " />
+<path d="  M72.0000,119.2500 L126.0000,88.0731 L126.0000,55.9269 L72.0000,87.1038 L72.0000,119.2500 Z" style="stroke-width: 0.7200; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<text x="72.0000" y="87.5885">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+<g id="Layer1035">
+<defs>
+  <linearGradient id="grad29">
+    <stop offset="0%" stop-color="#c0c0c0" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad29" id="grad30" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(225 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M18.0000,88.0731 L72.0000,119.2500 L72.0000,87.1038 L18.0000,55.9269 L18.0000,88.0731 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad30); " />
+<path d="  M18.0000,88.0731 L72.0000,119.2500 L72.0000,87.1038 L18.0000,55.9269 L18.0000,88.0731 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<path d="  M18.0000,55.9269 L18.0000,88.0731 L72.0000,119.2500 L126.0000,88.0731 L126.0000,55.9269 L72.0000,24.7500 L18.0000,55.9269 Z" style="stroke-width: 1.5000; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<g id="Layer1036">
+<path d="  M101.6543,57.1500 L100.0955,66.3300 L84.1952,67.2300 L91.3659,63.0900 L75.4657,53.9100 L78.5834,52.1100 L94.4836,61.2900 L101.6543,57.1500 Z" style="stroke-width: 0.2400; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #363636; " />
+<path d="  M101.6543,57.1500 L100.0955,66.3300 L84.1952,67.2300 L91.3659,63.0900 L75.4657,53.9100 L78.5834,52.1100 L94.4836,61.2900 L101.6543,57.1500 Z" style="stroke-width: 0.2400; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1037">
+<path d="  M63.7920,42.3180 L65.3508,33.1380 L81.2511,32.2380 L74.0804,36.3780 L89.9806,45.5580 L86.8629,47.3580 L70.9627,38.1780 L63.7920,42.3180 Z" style="stroke-width: 0.2400; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #363636; " />
+<path d="  M63.7920,42.3180 L65.3508,33.1380 L81.2511,32.2380 L74.0804,36.3780 L89.9806,45.5580 L86.8629,47.3580 L70.9627,38.1780 L63.7920,42.3180 Z" style="stroke-width: 0.2400; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1038">
+<path d="  M80.2800,69.5340 L78.7212,78.7140 L62.8209,79.6140 L69.9916,75.4740 L54.0914,66.2940 L57.2091,64.4940 L73.1093,73.6740 L80.2800,69.5340 Z" style="stroke-width: 0.2400; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #363636; " />
+<path d="  M80.2800,69.5340 L78.7212,78.7140 L62.8209,79.6140 L69.9916,75.4740 L54.0914,66.2940 L57.2091,64.4940 L73.1093,73.6740 L80.2800,69.5340 Z" style="stroke-width: 0.2400; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1039">
+<path d="  M42.1200,54.8460 L43.6788,45.6660 L59.5791,44.7660 L52.4084,48.9060 L68.3086,58.0860 L65.1909,59.8860 L49.2907,50.7060 L42.1200,54.8460 Z" style="stroke-width: 0.2400; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #363636; " />
+<path d="  M42.1200,54.8460 L43.6788,45.6660 L59.5791,44.7660 L52.4084,48.9060 L68.3086,58.0860 L65.1909,59.8860 L49.2907,50.7060 L42.1200,54.8460 Z" style="stroke-width: 0.2400; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+</svg>
+

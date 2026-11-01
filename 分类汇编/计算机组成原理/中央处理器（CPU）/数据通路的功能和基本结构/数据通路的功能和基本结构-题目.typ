@@ -1,0 +1,300 @@
+// 自动提取完整题干；分类由 scripts/extract-collections.py 人工维护。
+#import "../../../../template.typ": choices, subquestions, statements, inline-node
+#import "@preview/ezexam:0.3.1": question, answer-state
+#import "@preview/cetz:0.5.2" as cetz
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#answer-state.update(false)
+#let emphasis = underline.with(stroke: (thickness: 0.07em, dash: (array: (0pt, 1em), phase: 0.5em), cap: "round"), offset: 0.16em)
+= 分类汇编：数据通路的功能和基本结构
+
+#question(label: n => [2009 44])[
+（13分）某计算机字长16位，采用16位定长指令字结构，部分数据通路结构如下图所示，图中所有控制信号为1时表示有效、为0时表示无效，例如控制信号MDRinE为1
+
+#image("../../../../历年真题+参考解答/2009/official-images/page-106-img-9.jpg")
+
+表示允许数据从DB打入MDR，MDRin为1表示允许数据从内总线打入MDR。假设MAR的输出一直处于使能状态。加法指令“ADD（R1），R0”的功能为（R0）+（（R1））
+$arrow.r$
+（R1），即将R0中的数据与R1的内容所指主存单元的数据相加，并将结果送入R1的内容所指主存单元中保存。
+
+下表给出了上述指令取指和译码阶段每个节拍（时钟周期）的功能和有效控制信号，请按表中描述方式用表格列出指令执行阶段每个节拍的功能和有效控制信号。
+
+#figure(
+  align(center)[#table(
+    columns: 3,
+    align: (auto,auto,auto,),
+    [时钟], [功能], [有效控制信号],
+    [C1], [MAR←(PC)], [PCout,MARin],
+    [C2], [MDR←M(MAR)\ PC←(PC)+1], [MemR,MDRinE\ PC+1],
+    [C3], [IR←(MDR)], [MDRout,IRin],
+    [C4], [指令译码], [无],
+  )]
+  , kind: table
+  )
+
+]
+
+#question(label: n => [2013 44])[
+（14分）某计算机采用16位定长指令字格式，其CPU中有一个标志寄存器，其中包含进位/借位标志CF、零标志ZF和符号标志NF。假定为该机设计了条件转移指令，其格式如下：
+
+#align(center)[
+  #box(width: 44%)[
+    #let bit-range(first, last) = box(width: 100%)[
+      #grid(
+        columns: (1fr, 1fr),
+        inset: (x: 0.10em),
+        align: (left, right),
+        first,
+        last,
+      )
+    ]
+    #grid(
+      columns: 1,
+      row-gutter: 0.15em,
+      grid(
+        columns: (5fr, 1fr, 1fr, 1fr, 8fr),
+        column-gutter: 0pt,
+        text(size: 0.75em)[#bit-range([15], [11])],
+        text(size: 0.75em)[#align(center)[10]],
+        text(size: 0.75em)[#align(center)[9]],
+        text(size: 0.75em)[#align(center)[8]],
+        text(size: 0.75em)[#bit-range([7], [0])],
+      ),
+      table(
+        columns: (5fr, 1fr, 1fr, 1fr, 8fr),
+        align: center + horizon,
+        stroke: 0.6pt,
+        [00000], [C], [Z], [N], [OFFSET],
+      ),
+    )
+  ]
+]
+
+其中，00000为操作码OP；C、Z和N分别为CF、ZF和NF的对应检测位，某检测位为1时表示需检测对应标志，需检测的标志位中只要有一个为1就转移，否则不转移，例如，若
+$"C" = 1, quad "Z" = 0, quad "N" = 1$
+，则需检测CF和NF的值，当CF=1或NF=1时发生转移；OFFSET是相对偏移量，用补码表示。转移执行时，转移目标地址为（PC）+2+2×OFFSET；顺序执行时，下条指令地址为（PC）+2。请回答下列问题。
+
+#subquestions[
++ 
+  该计算机存储器按字节编址还是按字编址？该条件转移指令向后（反向）最多可跳转多少条指令？
+  \
++ 
+  某条件转移指令的地址为200CH，指令内容如下图所示，若该指令执行时
+  $"CF" = 0$、$"ZF" = 0$、$"NF" = 1$
+  ，则该指令执行后PC的值是多少？若该指令执行时 $"CF" = 1$、
+  $"ZF" = 0$、$"NF" = 0$
+  ，则该指令执行后PC的值又是多少？请给出计算过程。
+  
+  #align(center)[
+    #box(width: 44%)[
+      #let bit-range(first, last) = box(width: 100%)[
+        #grid(
+          columns: (1fr, 1fr),
+          inset: (x: 0.10em),
+          align: (left, right),
+          first,
+          last,
+        )
+      ]
+      #grid(
+        columns: 1,
+        row-gutter: 0.15em,
+        grid(
+          columns: (5fr, 1fr, 1fr, 1fr, 8fr),
+          column-gutter: 0pt,
+          text(size: 0.75em)[#bit-range([15], [11])],
+          text(size: 0.75em)[#align(center)[10]],
+          text(size: 0.75em)[#align(center)[9]],
+          text(size: 0.75em)[#align(center)[8]],
+          text(size: 0.75em)[#bit-range([7], [0])],
+        ),
+        table(
+          columns: (5fr, 1fr, 1fr, 1fr, 8fr),
+          align: center + horizon,
+          stroke: 0.6pt,
+          [00000], [0], [1], [1], [11100011],
+        ),
+      )
+    ]
+  ]
+  \
++ 
+  实现“无符号数比较小于等于时转移”功能的指令中，C、Z和N应各是什么？
+  \
++ 
+  以下是该指令对应的数据通路示意图，要求给出图中部件①～③的名称或功能说明。
+  
+  #align(center)[
+    #cetz.canvas(length: 0.95cm, {
+      import cetz.draw: *
+      set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  
+      let wire = 0.55pt
+      let and-gate(cx, top) = merge-path({
+        line((cx - 0.47, top), (cx + 0.47, top), (cx + 0.47, top - 0.29))
+        bezier(
+          (cx + 0.47, top - 0.29), (cx, top - 0.98),
+          (cx + 0.47, top - 0.72), (cx + 0.20, top - 0.98),
+        )
+        bezier(
+          (cx, top - 0.98), (cx - 0.47, top - 0.29),
+          (cx - 0.20, top - 0.98), (cx - 0.47, top - 0.72),
+        )
+      }, close: true, fill: white, stroke: wire)
+      let or-gate(cx, top) = merge-path({
+        bezier(
+          (cx - 0.72, top), (cx + 0.72, top),
+          (cx - 0.38, top - 0.54), (cx + 0.38, top - 0.54),
+        )
+        bezier(
+          (cx + 0.72, top), (cx, top - 1.55),
+          (cx + 0.70, top - 0.78), (cx + 0.35, top - 1.47),
+        )
+        bezier(
+          (cx, top - 1.55), (cx - 0.72, top),
+          (cx - 0.35, top - 1.47), (cx - 0.70, top - 0.78),
+        )
+      }, close: true, fill: white, stroke: wire)
+  
+      hide(rect((-0.15, 0), (14.45, 8.35), stroke: none), bounds: true)
+  
+      // The wires sit behind the components, matching the ordering in the scan.
+      line((0.72, 6.88), (0.72, 5.70), stroke: wire)
+      line((1.65, 6.88), (1.65, 5.70), stroke: wire)
+      line((2.58, 6.88), (2.58, 5.70), stroke: wire)
+      line((5.45, 6.88), (5.45, 6.35), (0.92, 6.35), (0.92, 5.70), stroke: wire)
+      line((5.93, 6.88), (5.93, 6.08), (1.85, 6.08), (1.85, 5.70), stroke: wire)
+      line((6.43, 6.88), (6.43, 5.82), (2.78, 5.82), (2.78, 5.70), stroke: wire)
+  
+      line((0.72, 4.72), (0.72, 3.96), (1.18, 3.96), (1.18, 3.41), stroke: wire)
+      line((1.65, 4.72), (1.65, 3.19), stroke: wire)
+      line((2.58, 4.72), (2.58, 3.96), (2.12, 3.96), (2.12, 3.41), stroke: wire)
+      line(
+        (1.65, 2.18), (1.65, 1.12), (7.78, 1.12),
+        stroke: wire,
+        mark: (end: ">", fill: black, scale: 0.68),
+      )
+  
+      line((7.55, 6.88), (7.55, 5.47), stroke: wire)
+      line((7.16, 4.67), (7.16, 4.30), stroke: wire)
+      line((7.16, 3.63), (7.16, 2.79), stroke: wire)
+      line((8.15, 2.36), (8.15, 1.55), stroke: wire)
+  
+      line((11.58, 7.00), (11.58, 5.77), stroke: wire)
+      line((9.83, 6.63), (9.83, 5.77), stroke: wire)
+      line((10.75, 4.65), (10.75, 2.78), (9.25, 2.78), stroke: wire)
+      line((10.75, 2.78), (10.75, 1.55), stroke: wire)
+      line((9.20, 0.72), (9.20, 0.18), (13.58, 0.18), (13.58, 8.10), (11.58, 8.10), (11.58, 7.75), stroke: wire)
+  
+      rect((0, 6.88), (3.30, 7.98), fill: white, stroke: wire)
+      content((1.65, 7.43), text(size: 0.88em)[标志寄存器])
+      line((1.65, 7.98), (1.65, 8.30), stroke: wire)
+  
+      rect((4.10, 6.88), (8.40, 7.98), fill: white, stroke: wire)
+      content((6.25, 7.66), text(size: 0.88em)[①])
+      content((4.43, 7.16), text(size: 0.78em)[OP])
+      content((5.45, 7.16), text(size: 0.78em)[C])
+      content((5.93, 7.16), text(size: 0.78em)[Z])
+      content((6.43, 7.16), text(size: 0.78em)[N])
+      content((7.55, 7.16), text(size: 0.78em)[OFFSET])
+      line((6.25, 7.98), (6.25, 8.30), stroke: wire)
+  
+      and-gate(0.72, 5.70)
+      and-gate(1.65, 5.70)
+      and-gate(2.58, 5.70)
+      or-gate(1.65, 3.73)
+  
+      rect((6.12, 4.67), (8.20, 5.47), fill: white, stroke: wire)
+      content((7.16, 5.07), text(size: 0.86em)[符号扩展器])
+      rect((6.10, 3.63), (8.22, 4.30), fill: white, stroke: wire)
+      content((7.16, 3.97), text(size: 0.88em)[②])
+      rect((7.00, 2.36), (9.25, 3.19), fill: white, stroke: wire)
+      content((8.13, 2.78), text(size: 0.88em)[③])
+  
+      rect((10.50, 7.00), (12.66, 7.75), fill: white, stroke: wire)
+      content((11.58, 7.38), text(size: 0.88em)[PC])
+      content((9.60, 6.24), text(size: 0.82em)[2])
+      line(
+        (9.55, 5.77), (10.30, 5.77), (10.75, 5.43),
+        (11.15, 5.77), (12.02, 5.77), (11.56, 4.65), (10.08, 4.65),
+        close: true,
+        fill: white,
+        stroke: wire,
+      )
+      content((10.79, 5.11), text(size: 0.88em)[加法器])
+  
+      rect((7.78, 0.72), (10.75, 1.55), fill: white, stroke: wire)
+      content((9.27, 1.13), text(size: 0.88em)[多路选择器])
+    })
+  ]
+  
+    
+]
+]
+
+#block(breakable: false)[#question(label: n => [2021 18])[
+下列关于数据通路的叙述中，#emphasis[错误]的是
+
+#choices([数据通路包含 ALU 等组合逻辑（操作）元件], [数据通路包含寄存器等时序逻辑（状态）元件], [数据通路不包含用于异常事件检测及响应的电路], [数据通路中的数据流动路径由控制信号进行控制])
+]]
+
+#question(label: n => [旧版题型示例])[
+下图是一个简化的 CPU 与主存连接结构示意图（图中省略了所有多路选择器）。其中有一个累加寄存器 AC、一个状态寄存器和其他四个寄存器：主存地址寄存器 MAR、主存数据寄存器 MDR、程序计数器 PC 和指令寄存器 IR，各部件及其之间的连线表示数据通路，箭头表示信息传送方向。
+
+#figure(
+  cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+    // 坐标对照官方图：统一换算到正文 em，避免图片缩放改变字图比例。
+    let p(x, y) = (x / 35, (680 - y) / 35)
+    let wire(..pts, arrow: true) = line(..pts.pos().map(q => p(..q)),
+      stroke: 0.065em,
+      mark: if arrow { (end: ">", fill: black, scale: 0.65) } else { none })
+    let unit(x1, y1, x2, y2, body) = {
+      rect(p(x1, y1), p(x2, y2), fill: white, stroke: 0.065em)
+      content(p((x1 + x2) / 2, (y1 + y2) / 2), align(center, body))
+    }
+    wire((525, 256), (525, 0), (328, 0), (328, 41))
+    wire((525, 197), (749, 197), (749, 256))
+    wire((525, 197), (313, 197), (313, 153))
+    wire((313, 153), (313, 256))
+    wire((269, 316), (269, 473))
+    wire((0, 580), (0, 287), (125, 287), (125, 327))
+    wire((0, 580), (525, 580), (525, 458))
+    wire((0, 580), (341, 580), (341, 316))
+    wire((126, 388), (126, 407), (250, 407), (250, 473))
+    wire((286, 544), (286, 615))
+    wire((525, 458), (525, 580), (422, 580), (422, 349), (499, 349), (499, 316))
+    wire((749, 359), (749, 316))
+    wire((749, 359), (374, 359), (374, 316))
+    wire((525, 400), (525, 316))
+    wire((695, 316), (695, 553))
+    wire((657, 426), (599, 426))
+    for q in ((286, 580), (422, 349), (695, 359), (525, 197)) {
+      circle(p(..q), radius: 0.075, fill: black, stroke: none)
+    }
+    unit(156, 41, 500, 153, [主存储器])
+    unit(235, 256, 389, 316, [a])
+    unit(446, 256, 600, 316, [c])
+    unit(670, 256, 822, 316, [b])
+    unit(33, 327, 213, 388, [AC])
+    unit(447, 400, 599, 458, [d])
+    line(p(254, 473), p(336, 473), p(310, 544), p(279, 544), close: true, fill: white, stroke: 0.065em)
+    content(p(295, 508), [ALU])
+    unit(176, 615, 436, 675, [状态寄存器])
+    unit(548, 553, 778, 677, [微操作信 \
+      号发生器])
+    content(p(636, 403), [+1])
+  }),
+  caption: [一个简化的 CPU 与主存连接结构示意图],
+  supplement: none,
+  numbering: none,
+)
+
+要求： \
+#subquestions[
++ 请写出图中 a、b、c、d 四个寄存器的名称。
++ 简述图中指令从主存取到控制器的过程。
++ 说明数据从主存取出、运算、写回主存所经过的数据通路（假定数据地址已在 MAR 中）。
+
+]
+]
