@@ -25,17 +25,6 @@
 
 如发现录入错字、图片或排版错误，欢迎提交 Issue 或 PR，并指出对应的官方资料位置。
 
-* 获取扫描件
-
-扫描件通过 Git LFS 下载。首次克隆前安装 Git LFS，然后运行：
-
-#+begin_src sh
-git lfs install
-git clone https://github.com/DzmingLi/408-official-resources.git
-#+end_src
-
-已有克隆可在仓库内运行 =git lfs pull= 补齐扫描件。GitHub 自动生成的源码压缩包可能只含 LFS 指针，建议使用 Git 克隆。
-
 * PDF 与构建
 
 PDF 通过 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub Releases]] 提供，随仓库更新自动构建。运行 =nix build= 后，输出位于 =result/=，只包含 PDF。
