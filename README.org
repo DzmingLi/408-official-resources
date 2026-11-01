@@ -73,4 +73,4 @@ PDF 通过 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub
 
 * 友情链接
 
-- [[https://github.com/DzmingLi/kaoyan-math-official-resources][考研数学官方资料]]
+- [[https://github.com/DzmingLi/kaoyan-math-official-resources][kaoyan-math-official-resources]]：考研数学官方资料。
