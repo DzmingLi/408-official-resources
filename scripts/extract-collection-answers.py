@@ -18,7 +18,7 @@ rebase_images = EXTRACT['rebase_images']
 
 def answers(root, year, sample=False):
     if sample:
-        source = root / '旧版题型示例/2013-题型示例-答案.typ'
+        source = root / '旧版题型示例/题型示例-答案.typ'
     else:
         source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
     text = source.read_text()

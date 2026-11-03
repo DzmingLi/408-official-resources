@@ -1,6 +1,6 @@
 #import "../template.typ": exam, choices, subquestions, inline-node
-#show: exam.with(year: 2013, subject: "计算机学科专业基础", code: "408", sample: true)
-#set document(title: "2013年计算机学科专业基础综合考试大纲题型示例")
+#show: exam.with(title: "旧版题型示例", subject: "计算机学科专业基础", code: "408", sample: true)
+#set document(title: "旧版题型示例")
 #import "@preview/ezexam:0.3.1": mode-state, HANDOUTS, answer-state, question, counter-question
 #mode-state.update(HANDOUTS)
 #import "@preview/cetz:0.5.2" as cetz

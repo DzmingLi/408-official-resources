@@ -22,7 +22,7 @@ def gh(*args):
 def release_files(directory):
     """Require a nonempty PDF-only directory of complete reading/print pairs."""
     entries = list(directory.iterdir())
-    pattern = r'20\d{2}(?:-answers|-sample(?:-answers)?)?(?:-print)?\.pdf'
+    pattern = r'(?:20\d{2}(?:-answers)?|old-sample(?:-answers)?)(?:-print)?\.pdf'
     invalid = [p.name for p in entries if not p.is_file() or not re.fullmatch(pattern, p.name)]
     if invalid:
         raise ValueError(f'Unexpected release files: {sorted(invalid)}')

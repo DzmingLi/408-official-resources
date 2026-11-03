@@ -1,6 +1,6 @@
 #import "../template.typ": exam, subquestions, answer-key
-#show: exam.with(year: 2013, title: "2013年考试大纲旧版题型示例", solutions: true)
-#set document(title: "2013年旧版题型示例自制解析（非官方）")
+#show: exam.with(title: "旧版题型示例", solutions: true)
+#set document(title: "旧版题型示例自制解析（非官方）")
 
 *自制解析（非官方）*：原考纲未提供这些示例的答案；以下答案与详细解析由本仓库自行编写，不是官方参考答案或评分标准。题号与旧版示例对应：选择题1～8，综合题41～47。
 

@@ -232,9 +232,9 @@ class ReleaseTests(unittest.TestCase):
         module = runpy.run_path(str(Path(__file__).with_name('build-pdfs.py')))
         self.assertEqual(module['print_cover_blanks'](Path('2024/2024-答案.typ')),
                          {'cover_back_blank': False, 'back_cover_blank': False})
-        self.assertEqual(module['print_cover_blanks'](Path('旧版题型示例/2013-题型示例-答案.typ')),
+        self.assertEqual(module['print_cover_blanks'](Path('旧版题型示例/题型示例-答案.typ')),
                          {'cover_back_blank': False, 'back_cover_blank': False})
-        for source in ('2024/2024.typ', '旧版题型示例/2013-题型示例.typ'):
+        for source in ('2024/2024.typ', '旧版题型示例/题型示例.typ'):
             self.assertEqual(module['print_cover_blanks'](Path(source)),
                              {'cover_back_blank': True, 'back_cover_blank': True})
 
@@ -244,8 +244,8 @@ class ReleaseTests(unittest.TestCase):
         expected = {
             '2024/2024.typ': '2024',
             '2024/2024-答案.typ': '2024-answers',
-            '旧版题型示例/2013-题型示例.typ': '2013-sample',
-            '旧版题型示例/2013-题型示例-答案.typ': '2013-sample-answers',
+            '旧版题型示例/题型示例.typ': 'old-sample',
+            '旧版题型示例/题型示例-答案.typ': 'old-sample-answers',
         }
         for source, stem in expected.items():
             with self.subTest(source=source):
@@ -265,21 +265,21 @@ class ReleaseTests(unittest.TestCase):
         module = runpy.run_path(str(Path(__file__).with_name('build-pdfs.py')))
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            for name in ('旧版题型示例/2013-题型示例.typ', '旧版题型示例/2013-题型示例-答案.typ',
+            for name in ('旧版题型示例/题型示例.typ', '旧版题型示例/题型示例-答案.typ',
                          '新版题型示例/2026-题型示例.typ'):
                 source = root / name
                 source.parent.mkdir(parents=True, exist_ok=True)
                 source.touch()
             selected = module['sources'](root)
             self.assertEqual({p.name for p in selected},
-                             {'2013-题型示例.typ', '2013-题型示例-答案.typ'})
+                             {'题型示例.typ', '题型示例-答案.typ'})
 
     def test_reading_and_print_assets_are_both_expected(self):
         module = runpy.run_path(str(Path(__file__).with_name('publish-release.py')))
         names = {'2024.pdf', '2024-print.pdf',
                  '2024-answers.pdf', '2024-answers-print.pdf',
-                 '2013-sample.pdf', '2013-sample-print.pdf',
-                 '2013-sample-answers.pdf', '2013-sample-answers-print.pdf'}
+                 'old-sample.pdf', 'old-sample-print.pdf',
+                 'old-sample-answers.pdf', 'old-sample-answers-print.pdf'}
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
             for name in names:
@@ -288,7 +288,7 @@ class ReleaseTests(unittest.TestCase):
 
     def test_reject_extra_release_files(self):
         module = runpy.run_path(str(Path(__file__).with_name('publish-release.py')))
-        for extra in ('SHA256SUMS', 'PRINTING.txt', 'manifest.json', 'past-exams.zip'):
+        for extra in ('SHA256SUMS', 'PRINTING.txt', 'manifest.json', 'past-exams.zip', '2013-sample.pdf'):
             with self.subTest(extra=extra), tempfile.TemporaryDirectory() as tmp:
                 directory = Path(tmp)
                 for name in ('2024.pdf', '2024-print.pdf', extra):
@@ -298,7 +298,7 @@ class ReleaseTests(unittest.TestCase):
 
     def test_reject_incomplete_pdf_pairs(self):
         module = runpy.run_path(str(Path(__file__).with_name('publish-release.py')))
-        for name in ('2024.pdf', '2024-print.pdf'):
+        for name in ('2024.pdf', '2024-print.pdf', 'old-sample.pdf', 'old-sample-print.pdf'):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
                 directory = Path(tmp)
                 (directory / name).touch()

@@ -337,7 +337,7 @@ def render(root, title, plan):
                 raise ValueError(f'Invalid/duplicate classification: {year}-{number}')
             seen.add((kind, year, number))
             if kind == 'sample':
-                source = root / '旧版题型示例' / '2013-题型示例.typ'
+                source = root / '旧版题型示例' / '题型示例.typ'
                 body = questions(source, expected=15)[number - 1]
                 label = '旧版题型示例'
             else:

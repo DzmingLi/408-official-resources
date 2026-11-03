@@ -34,13 +34,13 @@ PDF 通过 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub
 - [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-操作系统][操作系统分类汇编]]
 - [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-计算机网络][计算机网络分类汇编]]
 
-历年试卷的文件命名如下：
+PDF文件命名如下：
 
 - =年份.pdf= ：阅读版。
 - =年份-print.pdf= ：小册子打印版，使用 ISO B4 横向纸张，100% 实际大小、双面短边翻转；不要再次启用小册子拼版。
 - =年份-answers.pdf= 与 =年份-answers-print.pdf= ：参考答案阅读版、打印版。
-- =年份-sample.pdf= 与 =年份-sample-print.pdf= ：题型示例阅读版、打印版。
-- =年份-sample-answers.pdf= 与 =年份-sample-answers-print.pdf= ：题型示例解析阅读版、打印版。
+- =old-sample.pdf= 与 =old-sample-print.pdf= ：题型示例阅读版、打印版。
+- =old-sample-answers.pdf= 与 =old-sample-answers-print.pdf= ：题型示例解析阅读版、打印版。
 
 分类汇编的收录范围、分类规则、答案提取与合并方式见 [[file:分类汇编/README.org][分类汇编说明]]。
 

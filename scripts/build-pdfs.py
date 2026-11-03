@@ -18,19 +18,20 @@ def sources(root):
     papers = [p for year in paper_root.iterdir() if year.is_dir() and re.fullmatch(r'20\d{2}', year.name)
               and year.name not in SUSPENDED_YEARS
               for p in year.glob('*.typ') if p.name in (year.name + '.typ', year.name + '-答案.typ')]
-    samples = list((root / '旧版题型示例').glob('*-题型示例*.typ'))
+    samples = [p for name in ('题型示例.typ', '题型示例-答案.typ')
+               if (p := root / '旧版题型示例' / name).is_file()]
     return sorted(papers + samples)
 
 
 def output_stem(source, root):
-    """Use year[-answers|-sample][-print] names for this single subject."""
+    """Use year[-answers] or old-sample[-answers] names."""
     relative = source.relative_to(root)
     if relative.parts[0] != '旧版题型示例' and re.fullmatch(r'20\d{2}', source.parent.name):
         suffix = '-answers' if source.stem.endswith('-答案') else ''
         return f'{source.parent.name}{suffix}'
     if relative.parts[0] == '旧版题型示例':
         suffix = '-answers' if source.stem.endswith('-答案') else ''
-        return f'{source.stem.split("-", 1)[0]}-sample{suffix}'
+        return f'old-sample{suffix}'
     raise ValueError(f'Unsupported source: {relative}')
 
 
