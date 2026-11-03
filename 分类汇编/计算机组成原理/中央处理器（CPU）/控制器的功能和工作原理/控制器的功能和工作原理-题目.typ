@@ -28,16 +28,24 @@
   
   #align(center, cetz.canvas(length: 1em, {
     import cetz.draw: *
-    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
-    let p(x, y) = (x / 30, (625 - y) / 30)
+    // 对照2016年考纲书内第65页（PDF第69页）；九个端点为原题待补连线。
+    set-style(content: (wrap: body => {
+      set text(top-edge: "bounds", bottom-edge: "bounds")
+      set par(leading: 0.1em, spacing: 0pt)
+      body
+    }))
+    let p(x, y) = (x / 34, (625 - y) / 34)
+    let label(x, y, body, size: 0.85em) = {
+      content(p(x, y), text(size: size, body))
+    }
     let wire(..pts, arrow: true, dotted: false, both: false) = line(
       ..pts.pos().map(q => p(..q)),
       stroke: if dotted { (thickness: 0.07em, dash: "dotted") } else { 0.065em },
-      mark: if arrow { (start: if both { "<" } else { none }, end: ">", fill: black, scale: 0.7) } else { none },
+      mark: if arrow { (start: if both { "stealth" } else { none }, end: "stealth", fill: black, scale: 0.6) } else { none },
     )
     let unit(x1, y1, x2, y2, body) = {
       rect(p(x1, y1), p(x2, y2), fill: white, stroke: 0.075em)
-      content(p((x1 + x2) / 2, (y1 + y2) / 2), align(center, text(size: 0.9em)[#body]))
+      label((x1 + x2) / 2, (y1 + y2) / 2, body, size: 0.9em)
     }
     let port(x, y, tx, ty, body) = {
       circle(p(x, y), radius: 0.10, fill: black, stroke: none)
@@ -52,8 +60,8 @@
         p(x - 21, bottom - 12), p(x - 8, bottom - 12), p(x - 8, top + 12),
         p(x - 21, top + 12), close: true, fill: white, stroke: 0.05em)
     }
-    wire((177, 75), (177, 51), (701, 51))
-    wire((714, 547), (104, 547), (104, 404))
+    wire((177, 75), (177, 51), (706, 51))
+    wire((706, 547), (104, 547), (104, 404))
     wire((105, 354), (105, 296))
     wire((177, 227), (177, 188))
     wire((177, 121), (177, 106))
@@ -61,8 +69,8 @@
     wire((230, 377), (142, 377), dotted: true)
     wire((413, 91), (264, 91), dotted: true)
     wire((395, 153), (268, 153), dotted: true)
-    wire((373, 264), (274, 264), dotted: true)
-    wire((258, 426), (349, 426), dotted: true)
+    wire((373, 264), (270, 264), dotted: true)
+    wire((258, 426), (353, 426), dotted: true)
     wire((407, 377), (407, 391), arrow: false)
     wire((369, 491), (369, 457))
     wire((440, 501), (440, 457))
@@ -89,11 +97,13 @@
         p(x2 - 9, y - 10), p(x2, y), p(x2 - 9, y + 10), p(x2 - 9, y + 3),
         p(x1 + 9, y + 3), p(x1 + 9, y + 10), close: true, fill: white, stroke: 0.04em)
     }
-    unit(1073, 119, 1150, 257, [主 \
-      存])
+    unit(1073, 119, 1150, 257, [])
+    label(1111.5, 167, [主], size: 0.9em)
+    label(1111.5, 209, [存], size: 0.9em)
     unit(70, 354, 142, 404, [T])
-    unit(86, 121, 268, 188, [移位寄存器 \
-      SR])
+    unit(86, 121, 268, 188, [])
+    label(177, 143, [移位寄存器], size: 0.8em)
+    label(177, 172, [SR], size: 0.85em)
     rect(p(86, 74), p(264, 106), fill: white, stroke: (thickness: 0.065em, dash: "dotted"))
     line(p(52, 296), p(123, 227), p(232, 227), p(303, 296), p(213, 296),
       p(176, 269), p(145, 296), close: true, fill: white, stroke: 0.075em)
@@ -105,14 +115,13 @@
     content(p(369, 446), text(size: 0.8em)[0])
     content(p(440, 446), text(size: 0.8em)[1])
     content(p(369, 514), [2])
-    content(p(818, 49), text(size: 0.9em)[CPU \
-      （中央处理器）])
-    content(p(663, 484), text(size: 0.9em)[CPU \
-      内总线])
-    content(p(1038, 510), text(size: 0.9em)[主 \
-      存 \
-      总 \
-      线])
+    label(818, 43, [CPU], size: 0.9em)
+    label(818, 76, [（中央处理器）], size: 0.75em)
+    label(663, 474, [CPU], size: 0.8em)
+    label(663, 507, [内总线], size: 0.8em)
+    for (y, body) in ((452, [主]), (486, [存]), (520, [总]), (554, [线])) {
+      label(1038, y, body, size: 0.8em)
+    }
     content(p(841, 567), [⋯])
     content(p(337, 75), text(size: 0.9em)[SRout])
     content(p(333, 137), text(size: 0.9em)[SRop])
