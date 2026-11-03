@@ -387,33 +387,57 @@ Thread4()
 + 每传送一个字符，在异步串行通信线上共需传输多少位？在设备D持续工作过程中，每秒钟最多可向I/O端口送入多少个字符？
 + 设备D采用中断方式进行输入/输出，示意图如下：
 
-  #align(center)[
-  #set text(size: .85em)
-  #cetz.canvas(length:1em,{
+  #align(center, cetz.canvas(length: 1em, {
     import cetz.draw: *
-    set-style(stroke:0.045em, content:(wrap: body => box({
-      set par(leading: 0pt, spacing: 0pt)
-      set text(top-edge: "bounds", bottom-edge: "bounds")
-      body
-    })))
-    content((-1.8,4),[外设D]); content((-1.8,.8),[CPU])
-    line((0,0),(8.7,0))
-    for x in (1.5,11.5,21.5) {
-      line((x,0),(x,4),stroke:(dash:"dashed"))
-      line((x,4),(x+6,4))
-      line((x+6,4),(x+6,0),mark:(end:">"),stroke:(dash:"dashed"))
-      line((x+7.2,0),(x+7.2,2),mark:(end:">"))
-      line((x+7.2,2),(x+10.6,2))
-      line((x+10.6,2),(x+10.6,0),mark:(end:">"),stroke:(dash:"dashed"))
-      line((x+6,0),(x+7.2,0))
-      line((x+10.6,0),(if x < 21.5 { x+17.2 } else { x+11.4 },0))
-      content((x+3,4.7),[工作]); content((x+7.1,4.1),[完\ 成])
-      if x == 1.5 { content((x,-1.1),[启\ 动]) }
-      content((x+6,-1.1),[请\ 求]); content((x+7.2,-1.1),[响\ 应])
-      if x < 21.5 { content((x+9.4,1.2),[启\ 动]); content((x+10.8,-1.1),[返\ 回]) }
+    // 对照原考纲书内第47页：后两次启动发生在中断服务期间。
+    let pen = 0.045em
+    let dashed = (thickness: pen, dash: "dashed")
+    let arrow = (end: ">", fill: black, scale: 0.7)
+    let label(x, y, body) = content((x, y), {
+      set par(leading: 0.2em, spacing: 0pt)
+      show par: it => it
+      box(text(top-edge: "bounds", bottom-edge: "bounds", body))
+    }, anchor: "center")
+    let device-y = 4.4
+    let service-y = 2.4
+    let starts = (1.3, 10.1, 18.9)
+    let work = 5.4
+    let response-delay = 0.75
+    let service = 3.4
+
+    label(-2, device-y, [外设D])
+    label(-2, 0.8, [CPU])
+    for (i, start) in starts.enumerate() {
+      let request = start + work
+      let response = request + response-delay
+      let returned = response + service
+      let previous-return = if i == 0 { 0 } else {
+        starts.at(i - 1) + work + response-delay + service
+      }
+      // 设备启动和工作完成用虚线；完成时向CPU提出中断请求。
+      line((start, if i == 0 { 0 } else { service-y }),
+        (start, device-y), stroke: dashed)
+      line((start, device-y), (request, device-y), stroke: pen)
+      line((request, device-y), (request, 0), stroke: dashed, mark: arrow)
+      label(start + work / 2, device-y + 0.9, [工作])
+      label(request + 0.8, device-y + 0.05, [完\ 成])
+
+      // CPU响应后进入中断服务，随后返回原程序。
+      line((previous-return, 0), (response, 0), stroke: pen)
+      line((response, 0), (response, service-y), stroke: pen, mark: arrow)
+      line((response, service-y), (returned, service-y), stroke: pen)
+      line((returned, service-y), (returned, 0), stroke: dashed, mark: arrow)
+      label(request - 0.3, -1.35, [请\ 求])
+      label(response + 0.4, -1.35, [响\ 应])
+      if i == 0 { label(start, -1.35, [启\ 动]) }
+      if i < starts.len() - 1 {
+        label(starts.at(i + 1), service-y / 2, [启\ 动])
+        label(returned + 0.05, -1.35, [返\ 回])
+      } else {
+        line((returned, 0), (returned + 0.65, 0), stroke: pen)
+      }
     }
-  })
-  ]
+  }))
 
   I/O端口每收到一个字符申请一次中断，中断响应需10个时钟周期，中断服务程序共有20条指令，其中第15条指令启动D工作。若CPU需从D读取1000个字符，则完成这一任务所需时间大约是多少个时钟周期？CPU用于完成这任务的时间大约是多少个时钟周期？在中断响应阶段CPU进行了哪些操作？
 ]
