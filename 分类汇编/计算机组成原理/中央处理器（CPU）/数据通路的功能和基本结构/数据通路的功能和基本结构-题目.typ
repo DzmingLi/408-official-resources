@@ -243,47 +243,71 @@ $"C" = 1, quad "Z" = 0, quad "N" = 1$
 #figure(
   cetz.canvas(length: 1em, {
     import cetz.draw: *
-    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
-    // 坐标对照官方图：统一换算到正文 em，避免图片缩放改变字图比例。
-    let p(x, y) = (x / 35, (680 - y) / 35)
+    // 对照原考纲书内第20页：交叉处的跨线弧表示不相连。
+    let p(x, y) = (x / 42, (735 - y) / 42)
+    let pen = 0.05em
     let wire(..pts, arrow: true) = line(..pts.pos().map(q => p(..q)),
-      stroke: 0.065em,
+      stroke: pen,
       mark: if arrow { (end: ">", fill: black, scale: 0.65) } else { none })
+    let bridge(x, y) = bezier(p(x - 8, y), p(x + 8, y),
+      p(x - 8, y - 12), p(x + 8, y - 12),
+      fill: white, stroke: pen)
+    let label(x, y, body) = content(p(x, y), {
+      set par(leading: 0.2em, spacing: 0pt)
+      show par: it => it
+      box(text(top-edge: "bounds", bottom-edge: "bounds", body))
+    }, anchor: "center")
     let unit(x1, y1, x2, y2, body) = {
-      rect(p(x1, y1), p(x2, y2), fill: white, stroke: 0.065em)
-      content(p((x1 + x2) / 2, (y1 + y2) / 2), align(center, body))
+      rect(p(x1, y1), p(x2, y2), fill: white, stroke: pen)
+      label((x1 + x2) / 2, (y1 + y2) / 2, body)
     }
-    wire((525, 256), (525, 0), (328, 0), (328, 41))
-    wire((525, 197), (749, 197), (749, 256))
-    wire((525, 197), (313, 197), (313, 153))
-    wire((313, 153), (313, 256))
-    wire((269, 316), (269, 473))
-    wire((0, 580), (0, 287), (125, 287), (125, 327))
-    wire((0, 580), (525, 580), (525, 458))
-    wire((0, 580), (341, 580), (341, 316))
-    wire((126, 388), (126, 407), (250, 407), (250, 473))
-    wire((286, 544), (286, 615))
-    wire((525, 458), (525, 580), (422, 580), (422, 349), (499, 349), (499, 316))
-    wire((749, 359), (749, 316))
-    wire((749, 359), (374, 359), (374, 316))
-    wire((525, 400), (525, 316))
-    wire((695, 316), (695, 553))
-    wire((657, 426), (599, 426))
-    for q in ((286, 580), (422, 349), (695, 359), (525, 197)) {
-      circle(p(..q), radius: 0.075, fill: black, stroke: none)
-    }
-    unit(156, 41, 500, 153, [主存储器])
-    unit(235, 256, 389, 316, [a])
-    unit(446, 256, 600, 316, [c])
-    unit(670, 256, 822, 316, [b])
-    unit(33, 327, 213, 388, [AC])
-    unit(447, 400, 599, 458, [d])
-    line(p(254, 473), p(336, 473), p(310, 544), p(279, 544), close: true, fill: white, stroke: 0.065em)
-    content(p(295, 508), [ALU])
-    unit(176, 615, 436, 675, [状态寄存器])
-    unit(548, 553, 778, 677, [微操作信 \
+
+    // 主存与a双向传送数据；c的地址线跨过读出数据线。
+    wire((580, 286), (580, 12), (370, 12), (370, 55))
+    wire((355, 225), (355, 172))
+    wire((355, 225), (355, 286))
+    wire((355, 225), (572, 225), arrow: false)
+    bridge(580, 225)
+    wire((588, 225), (822, 225), (822, 286))
+
+    // AC和a送ALU；运算结果沿底部通路回送AC、a、c和d。
+    wire((153, 424), (153, 446), (289, 446), (289, 515))
+    wire((326, 348), (326, 515))
+    wire((296, 593), (296, 631))
+    wire((23, 631), (320, 631), arrow: false)
+    wire((336, 631), (584, 631), arrow: false)
+    wire((23, 631), (23, 319), (152, 319), (152, 362))
+    wire((388, 631), (388, 348))
+    wire((479, 631), (479, 385), (554, 385), (554, 348))
+    wire((584, 631), (584, 501))
+
+    // ALU状态输出单独送状态寄存器，与底部数据通路不相连。
+    wire((328, 593), (328, 669))
+    bridge(328, 631)
+
+    // d送c；b分别送a和微操作信号发生器，两处交叉均跨线。
+    wire((584, 439), (584, 348))
+    wire((767, 348), (767, 605))
+    wire((822, 348), (822, 395), (775, 395), arrow: false)
+    bridge(767, 395)
+    wire((759, 395), (487, 395), arrow: false)
+    bridge(479, 395)
+    wire((471, 395), (425, 395), (425, 348))
+    wire((725, 470), (665, 470))
+
+    unit(188, 55, 555, 172, [主存储器])
+    unit(273, 286, 435, 348, [a])
+    unit(499, 286, 662, 348, [c])
+    unit(740, 286, 903, 348, [b])
+    unit(57, 362, 249, 424, [AC])
+    unit(502, 439, 665, 501, [d])
+    line(p(229, 515), p(381, 515), p(343, 593), p(268, 593),
+      close: true, fill: white, stroke: pen)
+    label(305, 552, [ALU])
+    unit(209, 669, 489, 730, [状态寄存器])
+    unit(609, 605, 855, 735, [微操作信 \
       号发生器])
-    content(p(636, 403), [+1])
+    label(701, 443, [+1])
   }),
   caption: [一个简化的 CPU 与主存连接结构示意图],
   supplement: none,
