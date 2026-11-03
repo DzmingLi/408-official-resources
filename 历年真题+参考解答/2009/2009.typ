@@ -604,13 +604,143 @@ k为正整数）。若查找成功，算法输出该结点的data域的值，并
 ]
 
 #question[
-（13分）某计算机字长16位，采用16位定长指令字结构，部分数据通路结构如下图所示，图中所有控制信号为1时表示有效、为0时表示无效，例如控制信号MDRinE为1
-
-#image("official-images/page-106-img-9.jpg")
-
-表示允许数据从DB打入MDR，MDRin为1表示允许数据从内总线打入MDR。假设MAR的输出一直处于使能状态。加法指令“ADD（R1），R0”的功能为（R0）+（（R1））
+（13分）某计算机字长16位，采用16位定长指令字结构，部分数据通路结构如下图所示，图中所有控制信号为1时表示有效、为0时表示无效，例如控制信号MDRinE为1表示允许数据从DB打入MDR，MDRin为1表示允许数据从内总线打入MDR。假设MAR的输出一直处于使能状态。加法指令“ADD（R1），R0”的功能为（R0）+（（R1））
 $arrow.r$
 （R1），即将R0中的数据与R1的内容所指主存单元的数据相加，并将结果送入R1的内容所指主存单元中保存。
+
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  // 对照2010年考纲书内第29页；MDR右侧输入信号按题干订正为MDRinE。
+  let p(x, y) = (x / 37.5, (1115 - y) / 37.5)
+  let pen = 0.05em
+  let wire(..pts, arrow: true) = line(..pts.pos().map(q => p(..q)),
+    stroke: pen, mark: if arrow { (end: ">", fill: black, scale: 0.65) } else { none })
+  let label(x, y, body, anchor: "center") = content(p(x, y), {
+    set par(leading: 0.2em, spacing: 0pt)
+    show par: it => it
+    box(text(top-edge: "bounds", bottom-edge: "bounds", body))
+  }, anchor: anchor)
+  let unit(x1, y1, x2, y2, body) = {
+    rect(p(x1, y1), p(x2, y2), fill: white, stroke: pen)
+    label((x1 + x2) / 2, (y1 + y2) / 2, body)
+  }
+  let bus(y, name, fill: white) = {
+    line(..((15, y), (65, y - 22), (65, y - 10),
+      (1275, y - 10), (1275, y - 22), (1320, y),
+      (1275, y + 22), (1275, y + 10), (65, y + 10),
+      (65, y + 22)).map(q => p(..q)), close: true, fill: fill, stroke: pen)
+    label(1200, y - 33, name, anchor: "west")
+  }
+  let gate(x, y, up: true) = {
+    let direction = if up { -1 } else { 1 }
+    line(p(x, y + direction * 14), p(x - 13, y - direction * 12),
+      p(x + 13, y - direction * 12), close: true, fill: white, stroke: pen)
+  }
+
+  // 存储器和外部总线。跨越其他总线的线段由总线轮廓遮断。
+  wire((592, 201), (592, 135))
+  wire((750, 201), (750, 135))
+  wire((905, 245), (905, 135))
+  wire((905, 245), (905, 271))
+  wire((1060, 337), (1060, 135))
+  wire((195, 437), (195, 357))
+  wire((742, 430), (742, 291))
+  wire((824, 291), (824, 430))
+
+  // 内总线对MAR、MDR、R0、R1、A、PC和IR的传送。
+  wire((195, 576), (195, 494))
+  wire((744, 576), (744, 486))
+  wire((825, 486), (825, 576))
+  wire((411, 689), (411, 628), (228, 628), (228, 596))
+  wire((411, 827), (411, 769), (228, 769), (228, 596))
+  wire((576, 596), (576, 716), (472, 716))
+  wire((576, 716), (576, 852), (472, 852))
+  wire((805, 596), (805, 641))
+  wire((1077, 596), (1077, 683))
+  wire((1118, 683), (1118, 596))
+  wire((1022, 596), (1022, 885), (1078, 885))
+
+  // ALU的两个输入、运算结果和AC回送通路。
+  wire((805, 695), (805, 754))
+  wire((896, 596), (896, 754))
+  wire((837, 829), (837, 859))
+  wire((837, 914), (837, 1002), (630, 1002), (630, 596))
+  wire((1120, 914), (1120, 997))
+  wire((1096, 780), (1096, 739))
+
+  bus(211, [CB])
+  bus(281, [DB])
+  bus(347, [AB])
+  bus(586, [内总线], fill: luma(75%))
+
+  rect(p(328, 5), p(1238, 135), fill: white, stroke: pen)
+  label(783, 51, [存储器（M）])
+  for (x, name) in ((592, [MemR]), (750, [MemW]), (905, [Data]), (1060, [Addr])) {
+    label(x, 108, name)
+  }
+  unit(125, 437, 255, 494, [MAR])
+  unit(707, 430, 854, 486, [MDR])
+  unit(378, 689, 472, 742, [R0])
+  unit(378, 827, 472, 880, [R1])
+  unit(755, 641, 850, 695, [A])
+  unit(1055, 683, 1145, 739, [PC])
+  unit(788, 859, 884, 914, [AC])
+  unit(1078, 859, 1180, 914, [IR])
+  line(..((748, 754), (800, 754), (837, 775), (859, 754),
+    (928, 754), (882, 829), (791, 829)).map(q => p(..q)),
+    close: true, fill: white, stroke: pen)
+  label(838, 798, [ALU])
+
+  // 空心三角形为三态门，控制端为不带箭头的短线。
+  gate(742, 390)
+  wire((729, 390), (700, 390), arrow: false)
+  label(688, 390, [MDRoutE], anchor: "east")
+  gate(825, 520, up: false)
+  wire((838, 523), (896, 523), arrow: false)
+  label(908, 523, [MDRout], anchor: "west")
+  for (y, name) in ((650, [R0out]), (794, [R1out])) {
+    gate(411, y)
+    wire((424, y), (449, y), arrow: false)
+    label(461, y, name, anchor: "west")
+  }
+  gate(1118, 650)
+  wire((1131, 650), (1155, 650), arrow: false)
+  label(1167, 650, [PCout], anchor: "west")
+  gate(837, 947, up: false)
+  wire((824, 950), (796, 950), arrow: false)
+  label(784, 950, [ACout], anchor: "east")
+
+  // 寄存器输入控制端及ALU加法控制端。
+  for (x1, x2, y, name) in (
+    (313, 255, 466, [MARin]), (915, 854, 458, [MDRinE]),
+    (1196, 1145, 711, [PCin]), (1230, 1180, 886, [IRin]),
+  ) {
+    wire((x1, y), (x2, y))
+    label(x1 + 12, y, name, anchor: "west")
+  }
+  for (x1, x2, y, name) in (
+    (645, 707, 458, [MDRin]), (335, 378, 716, [R0in]),
+    (335, 378, 852, [R1in]), (700, 755, 667, [Ain]),
+    (718, 773, 798, [Add]), (736, 788, 885, [ACin]),
+  ) {
+    wire((x1, y), (x2, y))
+    label(x1 - 12, y, name, anchor: "east")
+  }
+  label(1096, 810, [PC+1])
+  label(1120, 1035, [至指令译码部件])
+
+  // 原图控制信号图例。
+  rect(p(15, 910), p(595, 1115), fill: white, stroke: pen)
+  label(305, 948, [控制信号图例])
+  gate(50, 1006)
+  wire((63, 1006), (93, 1006), arrow: false)
+  label(105, 1006, [Xout], anchor: "west")
+  label(215, 1006, [三态门及其控制信号], anchor: "west")
+  wire((95, 1070), (35, 1070))
+  label(105, 1070, [Xin], anchor: "west")
+  label(215, 1070, [寄存器输入控制信号], anchor: "west")
+}))
+
 
 下表给出了上述指令取指和译码阶段每个节拍（时钟周期）的功能和有效控制信号，请按表中描述方式用表格列出指令执行阶段每个节拍的功能和有效控制信号。
 
