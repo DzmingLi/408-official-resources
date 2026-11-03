@@ -477,83 +477,138 @@ $T_2$ 的存储结果如下：
 
 #figure(align(center, cetz.canvas(length: 1em, {
   import cetz.draw: *
+  // 对照2024年考纲书内第54页（PDF第59页）逐线重绘。
   set-style(stroke: 0.045em)
-  rect((3,-6),(27,4.5))
-  line((0,5.5),(27,5.5), mark: (start: "stealth", end: "stealth", scale: 0.7))
-  line((3.3,1),(26.7,1), stroke: 0.3em, mark: (start: "stealth", end: "stealth", scale: 0.5))
-  content((6.8,1.7), text(size: 0.85em)[内部总线])
-  rect((0,-1),(2,3.4))
-  content((1,1.2), [主\ 存\ 储\ 器])
-  line((1,3.4),(1,5.5), stroke: 0.15em, mark: (start: "stealth", end: "stealth", scale: 0.5))
-  for (x,label) in ((4.6,[MAR]),(10.2,[MDR]),(16,[PC])) {
-    rect((x - 1.1,2.8),(x + 1.1,3.8), fill: white)
-    content((x,3.3), label)
-    line((x,1),(x,2.8), mark: (end: "stealth", scale: 0.65))
+  set-style(content: (wrap: body => {
+    set par(leading: 0.1em, spacing: 0pt)
+    set text(top-edge: "bounds", bottom-edge: "bounds")
+    body
+  }))
+  let p(x, y) = (x / 40, (650 - y) / 40)
+  let label(x, y, body, size: 0.8em, anchor: "center") = {
+    content(p(x, y), text(size: size, body), anchor: anchor)
   }
-  line((4.6,3.8),(4.6,5.5), mark: (end: "stealth", scale: 0.65))
-  line((10.2,3.8),(10.2,5.5), mark: (start: "stealth", end: "stealth", scale: 0.65))
-  line((10.5,2.8),(10.5,1), mark: (end: "stealth", scale: 0.65))
-  line((16.3,2.8),(16.3,1), mark: (end: "stealth", scale: 0.65))
-  rect((20,2),(22.2,3), fill: white)
-  content((21.1,2.5), [IR])
-  line((21.1,1),(21.1,2), mark: (end: "stealth", scale: 0.65))
-  line((20.7,3),(20.7,3.8), mark: (end: "stealth", scale: 0.65))
-  line((21.5,3),(21.5,3.8), mark: (end: "stealth", scale: 0.65))
-  content((21.1,4.1), text(size: 0.75em)[送CU等部件])
-  for (a,b,label,pos) in (
-    ((7.2,3.3),(5.7,3.3),[MARin],(7,3.8)),
-    ((12.8,3.3),(11.3,3.3),[MDRin],(12.6,3.8)),
-    ((12.8,1.8),(10.5,1.8),[MDRout],(12.6,2.3)),
-    ((18.4,3.3),(17.1,3.3),[PCin],(18.2,3.8)),
-    ((18.4,1.8),(16.3,1.8),[PCout],(18.2,2.3)),
-    ((24,2.5),(22.2,2.5),[IRin],(23.7,3)),
-    ((25,3.5),(25,5.5),[Read],(24.2,3.3)),
-    ((26,2.7),(26,5.5),[Write],(26,2.3)),
-  ) {
-    line(a,b, stroke: (dash: "dashed"), mark: (end: "stealth", scale: 0.55))
-    content(pos, text(size: 0.75em, label))
+  let wire(..pts, both: false, arrow: true, dashed: false) = {
+    line(..pts.pos().map(q => p(..q)),
+      stroke: if dashed { (thickness: 0.045em, dash: "dashed") } else { 0.045em },
+      mark: if arrow { (start: if both { "stealth" } else { none }, end: "stealth", fill: black, scale: 0.55) } else { none })
   }
-  rect((4,-1.3),(6.2,-0.3), fill: white)
-  content((5.1,-0.8), [Y])
-  line((5.1,1),(5.1,-0.3), mark: (end: "stealth", scale: 0.6))
-  line((5.1,-1.3),(5.1,-2),(9,-2),(9,-0.2),(11,-0.2),(11,-1.1), mark: (end: "stealth", scale: 0.6))
-  line((13.5,1),(13.5,-1.1), mark: (end: "stealth", scale: 0.6))
-  line((10.2,-1.1),(14.4,-1.1),(13.5,-2.5),(11.2,-2.5),close: true,fill:white)
-  content((12.3,-1.7), [ALU])
-  content((11.3,-0.6), text(size: 0.8em)[A])
-  content((14,-0.6), text(size: 0.8em)[B])
-  content((10.3,0.3), text(size: 0.75em)[16])
-  content((13.2,0.3), text(size: 0.75em)[16])
-  line((12.3,-2.5),(12.3,-3.8), mark: (end: "stealth", scale: 0.6))
-  content((13,-3), text(size: 0.8em)[F])
-  content((11.8,-3), text(size: 0.75em)[16], anchor: "east")
-  rect((11.2,-4.8),(13.4,-3.8), fill: white)
-  content((12.3,-4.3), [Z])
-  line((12.3,-4.8),(12.3,-5.6),(16.5,-5.6),(16.5,1), mark: (end: "stealth", scale: 0.6))
-  rect((7.5,-4.8),(10.5,-3.8), fill: white)
-  content((9,-4.3), text(size: 0.8em)[SF OF ⋯])
-  content((7.3,-4.3), [FR], anchor: "east")
-  line((12.3,-3.1),(9,-3.1),(9,-3.8), mark: (end: "stealth", scale: 0.6))
-  rect((20,-3),(23,-0.6), fill: white)
-  content((21.5,-1.8), [GPRs])
-  line((20.8,1),(20.8,-0.6), mark: (end: "stealth", scale: 0.6))
-  line((23,-1.3),(24,-1.3),(24,1), mark: (end: "stealth", scale: 0.6))
-  for (a,b,label,pos) in (
-    ((7.5,-0.8),(6.2,-0.8),[Yin],(7.2,-0.3)),
-    ((15.5,-1.7),(14,-1.7),[ALUop],(15.7,-2.2)),
-    ((18.8,-4.6),(16.5,-4.6),[Zout],(18.6,-4.1)),
-    ((25.8,-0.3),(24,-0.3),[GPRout],(25.2,-0.9)),
-    ((21.5,-4.5),(21.5,-3),[GPRin],(21.5,-5)),
-  ) {
-    line(a,b, stroke: (dash: "dashed"), mark: (end: "stealth", scale: 0.55))
-    content(pos, text(size: 0.75em, label))
+  let unit(x1, y1, x2, y2, body) = {
+    rect(p(x1, y1), p(x2, y2), fill: white)
+    label((x1 + x2) / 2, (y1 + y2) / 2, body, size: 0.88em)
   }
-  line((18.7,-2.3),(20,-2.3), mark: (end:"stealth", scale:0.6))
-  line((24.3,-2.3),(23,-2.3), mark: (end:"stealth", scale:0.6))
-  content((18.3,-2.3), text(size:0.8em)[rd], anchor:"east")
-  content((24.6,-2.3), text(size:0.8em)[rs], anchor:"west")
-  content((19.2,-1.9), text(size:0.7em)[4])
-  content((23.8,-1.9), text(size:0.7em)[4])
+  let bus(x1, x2, y, half-width: 10, head: 25) = {
+    line(p(x1, y), p(x1 + head, y - head), p(x1 + head, y - half-width),
+      p(x2 - head, y - half-width), p(x2 - head, y - head), p(x2, y),
+      p(x2 - head, y + head), p(x2 - head, y + half-width),
+      p(x1 + head, y + half-width), p(x1 + head, y + head),
+      close: true, fill: white)
+  }
+  let buffer(x, y, up: false) = {
+    let d = if up { -1 } else { 1 }
+    line(p(x, y + d * 11), p(x - 8, y - d * 9), p(x + 8, y - d * 9),
+      close: true, fill: white)
+  }
+  let width-mark(x, y, body) = {
+    wire((x - 7, y + 7), (x + 7, y - 7), arrow: false)
+    label(x - 13, y - 19, body)
+  }
+
+  rect(p(195, 160), p(1263, 638))
+  bus(30, 1300, 95, half-width: 16, head: 36)
+  label(665, 50, [系统总线], size: 0.85em)
+  bus(209, 1248, 330, half-width: 10, head: 25)
+  label(367, 295, [内部总线], size: 0.85em)
+  // 主存与系统总线之间为双向空心箭头。
+  line(p(100, 115), p(75, 143), p(89, 143), p(89, 195),
+    p(75, 195), p(100, 222), p(125, 195), p(111, 195),
+    p(111, 143), p(125, 143), close: true, fill: white)
+  unit(57, 224, 144, 432, [主#linebreak()存#linebreak()储#linebreak()器])
+
+  unit(209, 195, 307, 242, [MAR])
+  wire((258, 320), (258, 242))
+  wire((258, 195), (258, 115))
+  wire((384, 218), (307, 218), dashed: true)
+  label(371, 197, [MARin])
+
+  unit(455, 195, 554, 242, [MDR])
+  wire((504, 195), (504, 115), both: true)
+  wire((490, 320), (490, 242))
+  wire((518, 242), (518, 320))
+  buffer(518, 270)
+  wire((632, 218), (554, 218), dashed: true)
+  label(623, 197, [MDRin])
+  wire((623, 270), (526, 270), dashed: true)
+  label(631, 249, [MDRout])
+
+  unit(709, 195, 806, 242, [PC])
+  wire((743, 320), (743, 242))
+  wire((772, 242), (772, 320))
+  buffer(772, 270)
+  wire((883, 218), (806, 218), dashed: true)
+  label(862, 197, [PCin])
+  wire((881, 270), (780, 270), dashed: true)
+  label(870, 249, [PCout])
+
+  unit(930, 238, 1027, 285, [IR])
+  wire((978, 320), (978, 285))
+  wire((958, 238), (958, 210))
+  wire((1007, 238), (1007, 210))
+  label(984, 222, [⋯])
+  label(1000, 180, [送CU等部件], size: 0.75em)
+  wire((1100, 261), (1027, 261), dashed: true)
+  label(1084, 240, [IRin])
+  wire((1177, 191), (1177, 115), dashed: true)
+  wire((1220, 230), (1220, 115), dashed: true)
+  label(1176, 211, [Read])
+  label(1219, 251, [Write])
+
+  unit(242, 390, 340, 438, [Y])
+  wire((291, 340), (291, 390))
+  wire((291, 438), (291, 469), (459, 469), (459, 384), (562, 384), (562, 418), arrow: false)
+  wire((410, 414), (340, 414), dashed: true)
+  label(386, 393, [Yin])
+  width-mark(539, 384, [16])
+  wire((659, 340), (659, 418))
+  width-mark(659, 385, [16])
+  line(p(528, 418), p(695, 418), p(653, 474), p(571, 474), close: true, fill: white)
+  label(612, 447, [ALU], size: 0.9em)
+  label(586, 400, [A])
+  label(680, 400, [B])
+  wire((735, 445), (675, 445), dashed: true)
+  label(727, 470, [ALUop])
+  wire((619, 474), (619, 536))
+  wire((612, 524), (626, 510), arrow: false)
+  label(589, 510, [16])
+  label(638, 492, [F])
+  wire((576, 474), (576, 501), (478, 501), (478, 536))
+  rect(p(420, 536), p(538, 583), fill: white)
+  wire((458, 536), (458, 583), arrow: false)
+  wire((498, 536), (498, 583), arrow: false)
+  label(440, 560, [SF], size: 0.75em)
+  label(479, 560, [OF], size: 0.75em)
+  label(518, 560, [⋯], size: 0.75em)
+  label(394, 560, [FR])
+  unit(570, 536, 667, 583, [Z])
+  wire((619, 583), (619, 616), (798, 616), (798, 340))
+  buffer(798, 550, up: true)
+  wire((870, 550), (806, 550), dashed: true)
+  label(865, 527, [Zout])
+
+  unit(954, 389, 1074, 500, [GPRs])
+  wire((917, 340), (917, 419), (954, 419))
+  wire((1074, 419), (1113, 419), (1113, 340))
+  buffer(1113, 384, up: true)
+  wire((1170, 384), (1121, 384), dashed: true)
+  label(1188, 408, [GPRout])
+  wire((1003, 560), (1003, 500), dashed: true)
+  label(1003, 578, [GPRin])
+  wire((913, 473), (954, 473))
+  wire((1122, 473), (1074, 473))
+  width-mark(927, 473, [4])
+  width-mark(1100, 473, [4])
+  label(891, 473, [rd])
+  label(1136, 473, [rs])
 })), caption: [题43图], numbering: none)
 
 请回答下列问题。

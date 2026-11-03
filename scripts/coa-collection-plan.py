@@ -69,9 +69,9 @@ YEAR_TOPICS = {
     2009: 'integer floatop mapping connect address risc pipeimpl control bandwidth cache exceptclass',
     2010: 'performance integer floatop connect memclass paging cpu hazard bus interruptio module',
     2011: 'performance float memclass cpu address flags hazard execute bus interruptio query',
-    2012: 'performance unsigned float endian flash replace control timing bus bus interruptio',
+    2012: 'performance unsigned float endian flash replace - timing bus bus interruptio',
     2013: 'performance float integer - paging address pipeline interface - disk dma',
-    2014: 'performance integer float module hazard address control bandwidth timing port interruptio',
+    2014: 'performance integer float module hazard address - bandwidth timing port interruptio',
     2015: 'principle integer floatop write paging dram interleave timing disk port response',
     2016: 'compile integer endian mapping connect address cpu hazard control timing exceptclass',
     2017: 'performance endian hierarchy address format superscalar control pipeimpl timing port interruptio',
@@ -83,8 +83,10 @@ YEAR_TOPICS = {
 }
 
 EXCLUDED_COA_QUESTIONS = {
+    (2012, 18): '按教材覆盖深度作复习取舍，排除微指令字段直接编码计算；非官方明确删考',
     (2013, 15): '海明码已移出组成原理考纲，转入计算机网络的纠错编码',
     (2013, 20): 'RAID已从现行考纲移除',
+    (2014, 18): '按教材覆盖深度作复习取舍，排除微指令下址字段位数计算；非官方明确删考',
 }
 
 COMPOSITES = {

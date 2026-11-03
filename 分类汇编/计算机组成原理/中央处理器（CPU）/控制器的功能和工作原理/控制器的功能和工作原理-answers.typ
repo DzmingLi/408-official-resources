@@ -6,10 +6,6 @@
 
 === 2009 19：D
 
-=== 2012 18：C
-
-=== 2014 18：C
-
 === 2015 43
 
 #subquestions(allow-oversize: true)[

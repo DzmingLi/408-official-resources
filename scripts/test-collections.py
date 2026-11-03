@@ -111,9 +111,9 @@ class CollectionTests(unittest.TestCase):
                   for entries in p['sections'].values() for e in entries if len(e) == 2}
         # Hamming codes remain in the networking syllabus; subject-level
         # exclusions must not be mistaken for exclusions from all collections.
-        excluded = {(2013, 37), (2013, 20)}
+        excluded = {(2013, 37), (2013, 20), (2012, 18), (2014, 18)}
         expected = {(y, n) for y in range(2009, 2023) for n in range(1, 48)}
-        self.assertEqual(len(expected - excluded), 656)
+        self.assertEqual(len(expected - excluded), 654)
         self.assertEqual(actual, expected - excluded)
         self.assertEqual(MODULE['PLANS']['差错控制']['sections']['纠错编码'], [(2013, 15)])
         for entry, owner in (((2013, 15), '差错控制'), ((2009, 11), '指令执行过程'),
@@ -132,7 +132,7 @@ class CollectionTests(unittest.TestCase):
         expected.update({(2014, 45), (2016, 45), (2019, 45)})
         expected.difference_update(MODULE['EXCLUDED_COA_QUESTIONS'])
         expected.add((2009, 11))
-        self.assertEqual(len(expected), 180)
+        self.assertEqual(len(expected), 178)
         self.assertEqual(papers, expected)
         self.assertEqual(len(actual), len(set(actual)))
         self.assertEqual({entry for entry in actual if len(entry) == 3},
@@ -387,8 +387,9 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(list(MODULE['PLANS']['传输介质']['sections']),
                          ['双绞线、同轴电缆、光纤与无线传输介质', '物理层接口的特性'])
         original = MODULE['questions'](ROOT / '历年真题+参考解答/2013/2013.typ')[36]
-        self.assertIn('#strike[HDLC协议]', original)
-        self.assertIn('编注', original)
+        self.assertIn('#strike[HDLC协议对', original)
+        self.assertIn('#choices(', original)
+        self.assertNotIn('编注', original)
         self.assertNotIn('组帧', MODULE['PLANS'])
 
     def test_application_lectures_follow_syllabus_and_keep_cross_layer_questions(self):
