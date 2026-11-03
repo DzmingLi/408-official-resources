@@ -155,38 +155,41 @@
 #figure(
   align(center, cetz.canvas(length: 1em, {
     import cetz.draw: *
-    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
-    set-style(stroke: 0.05em)
-    line((19, 7), (19, 4.6), (9, 4.6), (9, 3))
-    line((19, 4.6), (28.5, 4.6), (28.5, 3))
-    line((0, 5.45), (39, 5.45), stroke: (thickness: 0.04em, dash: "dashed"))
-    rect((9, 7), (30, 12.2), fill: white)
-    rect((0, 0), (17.7, 3), fill: white)
-    rect((18.7, -2.4), (39, 3), fill: white)
-    content((9.3, 11.9), text(size: 0.85em)[
-      PCout=1, MARin=1, Tin=1, MEMop=read \
-      MUXop=#underline[①], ALUop=add, SRop=#underline[②] \
-      SRout=1, PCin=1 \
-      MDRout=1, IRin=1
-    ], anchor: "north-west")
-    content((0.3, 2.65), text(size: 0.85em)[
-      R1out=1, Tin=1, ALUop=#underline[③], SRop=#underline[④] \
-      SRout=1, R2in=1
-    ], anchor: "north-west")
-    content((19, 2.65), text(size: 0.85em)[
-      R1out=1, MARin=1, MEMop=#underline[⑤] \
-      R2out=1, Tin=1 \
-      MDRout=1, MUXop=1, ALUop=#underline[⑥], SRop=#underline[⑦] \
-      #underline[⑧]=1, R0in=1
-    ], anchor: "north-west")
-    content((1.3, 6.6), [取指阶段], anchor: "west")
-    content((1.3, 4.3), [执行阶段], anchor: "west")
-    content((10.7, 3.75), [shl R2, R1])
-    content((32.8, 3.75), [sub R0, R2, (R1)])
-    content((0.7, -0.65), text(size: 0.82em)[
-      注：值为0的寄存器输入/输出控制信号以及 \
-      值为任意的其他控制信号均未在图中标出。
-    ], anchor: "north-west")
+    // 2016年考纲书内第66页（PDF第70页）：逐行定位，避免正文行距挤出方框。
+    set-style(content: (wrap: body => {
+      set text(top-edge: "bounds", bottom-edge: "bounds")
+      set par(leading: 0.1em, spacing: 0pt)
+      body
+    }))
+    set-style(stroke: 0.045em)
+    let row(x, y, body, size: 0.8em) = {
+      content((x, y), text(size: size, body), anchor: "west")
+    }
+    // 取指阶段为公共入口，下接两条指令各自的执行阶段。
+    line((16.5, 6.8), (16.5, 5.55), (8.1, 5.55), (8.1, 4.25))
+    line((16.5, 5.55), (26.1, 5.55), (26.1, 4.25))
+    line((0, 6.05), (35.3, 6.05), stroke: (thickness: 0.04em, dash: "dashed"))
+    rect((7.1, 6.8), (25.6, 11.5), fill: white)
+    rect((0, 1.7), (15.9, 4.25), fill: white)
+    rect((16.8, -0.5), (35.3, 4.25), fill: white)
+
+    row(7.4, 10.85, [PCout=1, MARin=1, Tin=1, MEMop=read])
+    row(7.4, 9.75, [MUXop=#underline[①], ALUop=add, SRop=#underline[②]])
+    row(7.4, 8.65, [SRout=1, PCin=1])
+    row(7.4, 7.55, [MDRout=1, IRin=1])
+    row(0.3, 3.58, [R1out=1, Tin=1, ALUop=#underline[③], SRop=#underline[④]])
+    row(0.3, 2.48, [SRout=1, R2in=1])
+    row(17.1, 3.58, [R1out=1, MARin=1, MEMop=#underline[⑤]])
+    row(17.1, 2.48, [R2out=1, Tin=1])
+    row(17.1, 1.38, [MDRout=1, MUXop=1, ALUop=#underline[⑥], SRop=#underline[⑦]])
+    row(17.1, 0.28, [#underline[⑧]=1, R0in=1])
+
+    row(0.7, 6.95, [取指阶段], size: 0.9em)
+    row(0.7, 5.05, [执行阶段], size: 0.9em)
+    row(8.6, 4.9, [shl R2, R1])
+    row(26.6, 4.9, [sub R0, R2, (R1)])
+    row(0.4, 0.9, [注：值为0的寄存器输入/输出控制信号以及], size: 0.7em)
+    row(0.4, -0.2, [值为任意的其他控制信号均未在图中标出。], size: 0.7em)
   })),
   kind: image,
   caption: [题44图a　部分指令的控制信号],
@@ -196,7 +199,7 @@
 该机指令格式如题44图b所示，支持寄存器直接和寄存器间接两种寻址方式，寻址方式位分别为0和1，通用寄存器R0～R3的编号分别为0、1、2和3。
 
 #figure(
-  block(stroke: (thickness: 0.045em, dash: "dashed"), inset: 0.6em)[
+  block(stroke: (thickness: 0.045em, dash: "dotted"), inset: 0.6em)[
     #set align(left)
     #table(
       columns: (2fr, 1fr, 1fr, 1fr, 0.75fr, 1fr, 0.75fr),
