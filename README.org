@@ -14,7 +14,7 @@
 
 真题文字订正及考纲范围变更标记统一记录于 [[file:真题订正.org][真题订正与注解]]。新版题型示例复用了历年真题，本仓库仅保留旧版题型示例。
 
-* 目录
+** 目录
 
 - =考试大纲/= ：跟随每年发布的考试大纲更新
 - =历年真题+参考解答/= ：各年份试题和已有参考答案的 Typst 源文件。
@@ -24,7 +24,7 @@
 
 PDF 挂在 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub Releases]] ，随仓库更新自动构建。
 
-* PDF 下载
+** PDF 下载
 
 历年试卷统一发布在 [[https://github.com/DzmingLi/408-official-resources/releases/tag/pdf-latest][PDF downloads]]；
 
@@ -44,11 +44,11 @@ PDF文件命名如下：
 
 真题分类汇编的收录范围、分类规则、答案提取与合并方式见 [[file:真题分类汇编/README.org][真题分类汇编说明]]。
 
-* 构建
+** 构建
 
 需要启用 Flakes 的 Nix。
 
-** 历年试卷与参考答案
+*** 历年试卷与参考答案
 
 #+begin_src sh
 nix build .#pdfs --out-link result
@@ -56,7 +56,15 @@ nix build .#pdfs --out-link result
 
 =nix build= 等价于默认构建历年试卷阅读版。
 
-只预览一份试卷及其打印版：
+需要同时构建小册子打印版时，显式指定：
+
+#+begin_src sh
+nix build .#pdfs-with-print --out-link result-with-print
+#+end_src
+
+=result-with-print/= 中包含阅读版及对应的 =-print.pdf= 打印版。GitHub Releases 自动发布使用此构建目标。
+
+只预览一份试卷的阅读版：
 
 #+begin_src sh
 nix develop -c python3 scripts/build-pdfs.py \
@@ -64,7 +72,9 @@ nix develop -c python3 scripts/build-pdfs.py \
   --only 历年真题+参考解答/2026/2026.typ
 #+end_src
 
-** 真题分类汇编
+如需同时预览打印版，在上述命令末尾添加 =--with-print= 。
+
+*** 真题分类汇编
 
 默认构建全部2009—2026年真题、A4纸张，分别输出题目与答案册：
 
@@ -90,6 +100,6 @@ nix develop -c python3 scripts/build-collections.py \
 
 起止年份可在2009—2026年内选择；输出目录须为空，不同配置使用不同目录。筛选不修改完整分类源稿，空讲自动跳过。汇编只收录历年真题，不含旧版题型示例；2023、2026年尚无答案源稿，答案册逐题注明缺失。纸张选项只影响真题分类汇编，历年整卷的纸张与打印版拼版方式保持原有设置。
 
-* 友情链接
+** 友情链接
 
 - [[https://github.com/DzmingLi/kaoyan-math-official-resources][kaoyan-math-official-resources]]：考研数学官方资料。

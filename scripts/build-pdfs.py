@@ -53,7 +53,8 @@ def main():
     parser.add_argument('--root', type=Path, default=Path.cwd())
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--jobs', type=int, default=4)
-    parser.add_argument('--only', help='Preview one reading/print pair')
+    parser.add_argument('--only', help='Preview one supported source')
+    parser.add_argument('--with-print', action='store_true', help='Also build booklet print PDFs')
     args = parser.parse_args()
     root, output = args.root.resolve(), args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -76,9 +77,10 @@ def main():
             raise RuntimeError(f'{relative}\n{result.stderr}')
         if result.stderr:
             print(f'{relative}\n{result.stderr}', file=sys.stderr, flush=True)
-        print_target = output / (stem + '-print.pdf')
-        build_booklet(target, print_target, **print_cover_blanks(source))
-        return target.name, print_target.name
+        if args.with_print:
+            print_target = output / (stem + '-print.pdf')
+            build_booklet(target, print_target, **print_cover_blanks(source))
+        return target.name
 
     records, failed = [], False
     with ThreadPoolExecutor(max_workers=max(1, args.jobs)) as executor:
@@ -86,7 +88,7 @@ def main():
         for future in as_completed(futures):
             try:
                 records.append(future.result())
-                print(f'Compiled reading/print pair {len(records)}/{len(selected)}', flush=True)
+                print(f'Compiled {len(records)}/{len(selected)} sources', flush=True)
             except Exception as error:
                 print(error, file=sys.stderr, flush=True)
                 failed = True
@@ -95,7 +97,8 @@ def main():
     if args.only:
         print(f'Preview built in {output}.', flush=True)
         return
-    print(f'Built {len(records)} reading PDFs and {len(records)} print PDFs in {output}', flush=True)
+    print_summary = f' and {len(records)} print PDFs' if args.with_print else ''
+    print(f'Built {len(records)} reading PDFs{print_summary} in {output}', flush=True)
 
 
 if __name__ == '__main__':

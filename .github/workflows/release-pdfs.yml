@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - uses: cachix/install-nix-action@v31.11.1
       - name: Build all PDFs with locked fonts and Typst packages
-        run: nix build path:.#pdfs --out-link result --print-build-logs
+        run: nix build path:.#pdfs-with-print --out-link result --print-build-logs
       - name: Verify PDF-only output
         run: python3 scripts/publish-release.py --directory result --check-only
       - name: Build A4 topic collections
