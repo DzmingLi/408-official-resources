@@ -46,7 +46,7 @@ PDF文件命名如下：
 
 * 构建
 
-需要启用 Flakes 的 Nix。以下命令在仓库根目录执行；依赖、字体和Typst包由 =flake.lock= 锁定，首次构建会下载所需内容。
+需要启用 Flakes 的 Nix。
 
 ** 历年试卷与参考答案
 
@@ -54,7 +54,7 @@ PDF文件命名如下：
 nix build .#pdfs --out-link result
 #+end_src
 
-=nix build= 等价于默认构建历年试卷。 =result/= 中包含阅读版及小册子打印版；旧版题型示例只单独构建题目，不构建自制解析。
+=nix build= 等价于默认构建历年试卷阅读版。
 
 只预览一份试卷及其打印版：
 
