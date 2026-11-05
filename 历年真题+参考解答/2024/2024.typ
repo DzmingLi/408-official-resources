@@ -293,7 +293,7 @@ DMA 控制 I/O 方式下，设备的输入/输出由 DMA 控制器控制完成�
     content(pos,text(size: 0.65em,label), angle: if a==1 and b==2 {31deg} else if a==2 and b==3 {-31deg} else if a==1 and b==4 {-31deg} else if a==4 and b==3 {31deg} else {0deg})
   }
   for i in (1,2,3,4) {
-    content(ps.at(i),image("../2009/assets/router-symbol.svg",width: 1.3em))
+    content(ps.at(i),image("../../assets/network/cisco-router.svg",width: 1.3em))
     content((ps.at(i).at(0),ps.at(i).at(1)-1.05),text(size: 0.65em)[路由器])
   }
   for (i,label) in ((0,[H1]),(5,[H2])) {
@@ -348,7 +348,7 @@ DMA 控制 I/O 方式下，设备的输入/输出由 DMA 控制器控制完成�
     if label==[H4] {
       line((x - 0.7,y),(x - 0.35,y+0.7),(x+0.6,y+0.7),(x+0.25,y),close: true,fill: luma(75%))
       line((x - 0.7,y),(x - 0.9,y - 0.3),(x+0.35,y - 0.3),(x+0.25,y),close: true,fill: white)
-    } else { content((x,y),image("../2012/assets/visio-2007-isometric-pc.png",width: 1.5em)) }
+    } else { content((x,y),image("../../assets/network/visio-2007-isometric-pc.png",width: 1.5em)) }
     content((tx,ty),text(size: 0.65em,label))
     content((tx,ty - 0.7),text(size: 0.63em,ip))
     content((tx,ty - 1.4),text(size: 0.63em,mac))
@@ -590,7 +590,7 @@ add  r1, r1, r5    // R[r1]←R[r1]+R[r5]
   line((-6.5,-1.3),ps.at(3)); line(ps.at(5),(6.5,-1.3))
   for (a,b) in (((-8,4.8),(-10.5,4.8)),((-8,4.8),(-10,6.2)),((-8,4.8),(-8,6.6)),((0,5.8),(-1.3,7.1)),((0,5.8),(1.3,7.1)),((8,4.8),(8,6.6)),((8,4.8),(10.2,6)),((8,4.8),(10.7,4.8))) { line(a,b) }
   for (i,p) in ps.enumerate() {
-    content(p,image("../2009/assets/router-symbol.svg",width: 1.4em))
+    content(p,image("../../assets/network/cisco-router.svg",width: 1.4em))
     let label=[#("R"+str(if i < 6 {11+i} else {(22,33,44).at(i - 6)}))]
     content(if i==0 {(p.at(0) - 1.35,p.at(1))} else if i==2 {(p.at(0)+1.35,p.at(1))} else if i==7 {(p.at(0) - 1.4,p.at(1))} else {(p.at(0),p.at(1) - 1.05)},text(size: 0.8em,label))
   }

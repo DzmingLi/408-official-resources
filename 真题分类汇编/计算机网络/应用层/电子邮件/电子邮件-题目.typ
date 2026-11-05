@@ -23,12 +23,12 @@
     // Server: https://www.graffletopia.com/stencils/523
     let pc(x) = content(
       (x, 1.36),
-      image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png", width: 0.88cm),
+      image("../../../../assets/network/visio-2007-isometric-pc.png", width: 0.88cm),
     )
 
     let server(x) = content(
       (x, 1.36),
-      image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png", width: 0.88cm),
+      image("../../../../assets/network/visio-2007-isometric-server.png", width: 0.88cm),
     )
 
     let numbered-arrow(x1, x2, n) = {

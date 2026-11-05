@@ -367,7 +367,7 @@ $-0.4375$ 的 IEEE 754 单精度浮点数表示为
   content((16.2,1.7), text(size: 0.8em)[192.168.1.62/27], anchor: "west")
   content((15,0), std.rect(fill: white, inset: 0.3em, stroke: 0.045em)[⇄])
   content((13,-0.1), [交换机], anchor: "east")
-  content((21,0), image("../2012/assets/visio-2007-isometric-pc.png", width: 2.5em))
+  content((21,0), image("../../assets/network/visio-2007-isometric-pc.png", width: 2.5em))
   content((23,0), text(size: 0.8em)[H\ 192.168.1.60], anchor: "west")
 }))
 
@@ -701,7 +701,7 @@ $T_2$ 的存储结果如下：
   let p(x,y)=((x - 195) / 35,(1380 - y) / 35)
   let label(x,y,body)=content(p(x,y),text(size:0.72em,body))
   let icon(x,y,w,name)=content(p(x,y),image("official-images/network-"+name+".png",width:w / 35 * 1em))
-  let vector(x,y,w,h,name)=content(p(x,y),image("../2012/assets/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
+  let vector(x,y,w,h,name)=content(p(x,y),image("../../assets/network/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
   for (a,b) in (((345,1075),(916,1075)),((456,1075),(456,1318)),
     ((285,1198),(456,1198)),((285,1318),(606,1318)),((760,1075),(760,1198))) {line(p(..a),p(..b))}
   vector(275,1078,160,77,"cloud")

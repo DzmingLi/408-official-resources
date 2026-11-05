@@ -95,7 +95,7 @@
     
       let router(x, y, label) = {
         content((x, y), box(fill: white, inset: 0pt)[
-          #image("../../../../历年真题+参考解答/2014/assets/router-symbol.svg",
+          #image("../../../../assets/network/router-symbol.svg",
             width: 0.82cm, height: 0.82cm, fit: "stretch")
         ])
         content((x, y - 0.25), [#text(size: 0.86em)[#label]])

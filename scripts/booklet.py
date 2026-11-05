@@ -112,3 +112,16 @@ def build_booklet(source, target, *, cover_back_blank=False, back_cover_blank=Fa
         # One-based reading PDF page numbers; null means an inserted blank.
         'page_order': [[None if n is None else n + 1 for n in pair] for pair in sides],
     }
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('source', type=Path)
+    parser.add_argument('target', type=Path)
+    parser.add_argument('--cover-back-blank', action='store_true')
+    parser.add_argument('--back-cover-blank', action='store_true')
+    args = parser.parse_args()
+    build_booklet(args.source, args.target, cover_back_blank=args.cover_back_blank,
+                  back_cover_blank=args.back_cover_blank)

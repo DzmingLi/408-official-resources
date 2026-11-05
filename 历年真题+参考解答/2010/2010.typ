@@ -730,18 +730,18 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
     let host(x, label) = {
       // VSDfx Generic 3D 的 CRT Monitor 与 Keyboard：原图也是两个符号叠放。
       content((x, 1.38), box(fill: white, inset: 0pt)[
-        #image("assets/crt-monitor-symbol.png",
+        #image("../../assets/network/crt-monitor-symbol.png",
           width: 0.57cm, height: 0.60cm, fit: "stretch")
       ])
       content((x - 0.18, 0.94), box(fill: white, inset: 0pt)[
-        #image("assets/keyboard-symbol.png",
+        #image("../../assets/network/keyboard-symbol.png",
           width: 0.47cm, height: 0.33cm, fit: "stretch")
       ])
       content((x, 0.40), [#text(size: 0.78em)[#label]])
     }
 
     let router(x, y) = content((x, y), box(fill: white, inset: 0pt)[
-      #image("assets/router-symbol.svg",
+      #image("../../assets/network/router-symbol.svg",
         width: 0.78cm, height: 0.58cm, fit: "stretch")
     ])
 

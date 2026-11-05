@@ -1066,13 +1066,13 @@ coend
       circle((12.45, 0.65), radius: (1.75, 0.38), fill: white, stroke: 0.065em)
 
       content((7.00, 5.00), box(inset: 0pt)[
-        #image("assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
       content((7.00, 2.82), box(inset: 0pt)[
-        #image("assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
       content((7.00, 0.65), box(inset: 0pt)[
-        #image("assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
 
       content((1.95, 5.00), text(size: 0.90em)[153.14.5.0/25])

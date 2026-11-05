@@ -253,11 +253,11 @@ struct record {
   set-style(stroke: 0.045em)
   line((0,0),(18,0))
   for (x,label) in ((0,[H1]),(18,[H2])) {
-    content((x,0),image("../2012/assets/visio-2007-isometric-pc.png",width: 2em))
+    content((x,0),image("../../assets/network/visio-2007-isometric-pc.png",width: 2em))
     content((x,-1.3),label)
   }
   for (x,label) in ((6,[R1]),(12,[R2])) {
-    content((x,0),image("../2014/assets/router-symbol.svg",width: 1.8em))
+    content((x,0),image("../../assets/network/router-symbol.svg",width: 1.8em))
     content((x,-0.9),label)
   }
   for (x,label) in ((3,[10 Mb/s]),(9,[100 Mb/s]),(15,[1000 Mb/s])) { content((x,0.8),label) }
@@ -287,9 +287,9 @@ struct record {
   // 大纲 PDF 第 81 页。报文的省略行、地址行分别定位，不继承正文段落行距。
   let p(x,y)=((x - 348) / 35,(1425 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(350,1133),image("../2012/assets/visio-2007-isometric-pc.png",width:3.2em))
+  content(p(350,1133),image("../../assets/network/visio-2007-isometric-pc.png",width:3.2em))
   content(p(350,1054),[H])
-  content(p(834,1138),image("../2012/assets/visio-2007-isometric-server.png",width:2.3em))
+  content(p(834,1138),image("../../assets/network/visio-2007-isometric-server.png",width:2.3em))
   content(p(845,1036),[DHCP服务器]); content(p(845,1064),[192.168.5.1])
   for x in (348,833) {line(p(x,1170),p(x,1425),mark:(end:">",fill:black,scale:0.7))}
   line(p(833,1202),p(348,1265),mark:(end:">",fill:black,scale:0.7))
@@ -324,8 +324,8 @@ struct record {
   // 大纲 PDF 第 82 页，保留原图的斜率、两次发送的间距和标签离线距离。
   let p(x,y)=((x - 399) / 35,(1560 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(400,1100),image("../2012/assets/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
-  content(p(978,1102),image("../2012/assets/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
+  content(p(400,1100),image("../../assets/network/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
+  content(p(978,1102),image("../../assets/network/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
   for x in (399,978) {line(p(x,1147),p(x,1560),mark:(end:">",fill:black,scale:0.7))}
   for (a,b) in (((399,1174),(978,1318)),((399,1222),(747,1308)),
     ((978,1318),(399,1484)),((399,1484),(496,1512))) {
@@ -536,7 +536,7 @@ void main()
   // 大纲 PDF 第 88 页：按原图像素坐标和正文 35 px 的字号比例重画。
   let p(x,y)=((x - 197) / 35,(1530 - y) / 35)
   let label(x,y,body)=content(p(x,y),text(size:0.62em,body))
-  let icon(x,y,w,h,name)=content(p(x,y),image("../2012/assets/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
+  let icon(x,y,w,h,name)=content(p(x,y),image("../../assets/network/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
   rect(p(197,1263),p(748,1528)); rect(p(819,1351),p(1131,1530))
   circle(p(403,1395),radius:(188 / 35,76 / 35))
   circle(p(619,1314),radius:(71 / 35,34 / 35))
@@ -554,13 +554,13 @@ void main()
   icon(363,1391.5,63,58,"pc"); icon(474.5,1392.5,63,55,"switch")
   icon(619.5,1393.5,63,62,"router"); label(619.5,1409,[R1])
   // 原始 Visio 模具的矢量图元：TR1 水平镜像，TR2 保留原朝向。
-  content(p(684,1393), std.scale(x: -100%, image("assets/visio-satellite-dish.svg", width: 56 / 35 * 1em)))
-  content(p(885.5,1393.5), image("assets/visio-satellite-dish.svg", width: 57 / 35 * 1em))
+  content(p(684,1393), std.scale(x: -100%, image("../../assets/network/visio-satellite-dish.svg", width: 56 / 35 * 1em)))
+  content(p(885.5,1393.5), image("../../assets/network/visio-satellite-dish.svg", width: 57 / 35 * 1em))
   icon(950.5,1394,65,62,"router"); label(950.5,1409,[R2])
   icon(950,1480,63,55,"switch"); icon(1040,1480,50,60,"server")
   icon(949,1293.5,98,54,"cloud")
   content(p(949,1293.5),text(size:0.62em,fill:white,[Internet]))
-  content(p(792,1292), image("assets/visio-satellite.svg", width: 72 / 35 * 1em))
+  content(p(792,1292), image("../../assets/network/visio-satellite.svg", width: 72 / 35 * 1em))
   for (x,y,body) in ((272,1280,[工程部网络]),(277,1395,[管理区子网]),
     (619,1316,[作业区子网]),(619,1477,[生活区子网]),(365,1432,[H]),
     (376,1451,[10.10.10.33/26]),(450,1366,[S1]),(729,1386,[TR1]),(846,1388,[TR2]),

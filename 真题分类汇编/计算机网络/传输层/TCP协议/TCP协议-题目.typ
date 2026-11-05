@@ -289,8 +289,8 @@ Time 是一个提供时间查询服务的 C/S 架构网络应用，支持客户�
   import cetz.draw: *
   set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
   set-style(stroke:0.065em)
-  content((0,1.7),image("../../../../历年真题+参考解答/2012/assets/visio-2003-pc.svg",width:2.1em))
-  content((13,1.7),image("../../../../历年真题+参考解答/2012/assets/visio-2003-server.svg",width:1.5em))
+  content((0,1.7),image("../../../../assets/network/visio-2003-pc.svg",width:2.1em))
+  content((13,1.7),image("../../../../assets/network/visio-2003-server.svg",width:1.5em))
   content((0,3.2),[甲]);content((13,3.2),[乙])
   line((0,0),(0,-4.7),mark:(end:">",scale:0.7));line((13,0),(13,-4.7),mark:(end:">",scale:0.7))
   line((0,-0.4),(7.7,-1.1),mark:(end:">",scale:0.7))
@@ -376,8 +376,8 @@ MSS = 1 KB 大小的段发送数据，并一直有数据发送；乙每收到一
   // 大纲 PDF 第 82 页，保留原图的斜率、两次发送的间距和标签离线距离。
   let p(x,y)=((x - 399) / 35,(1560 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(400,1100),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
-  content(p(978,1102),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
+  content(p(400,1100),image("../../../../assets/network/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
+  content(p(978,1102),image("../../../../assets/network/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
   for x in (399,978) {line(p(x,1147),p(x,1560),mark:(end:">",fill:black,scale:0.7))}
   for (a,b) in (((399,1174),(978,1318)),((399,1222),(747,1308)),
     ((978,1318),(399,1484)),((399,1484),(496,1512))) {

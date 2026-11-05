@@ -841,7 +841,7 @@ B {
     server(7.4, 16.6)
     server(14.3, 16.6)
     for x in (3.5, 10.3, 22.5) {
-      content((x, 4.4), image("assets/visio-2007-isometric-pc.png", width: 5.4em))
+      content((x, 4.4), image("../../assets/network/visio-2007-isometric-pc.png", width: 5.4em))
     }
     label(7.4, 19.8, [WWW服务器])
     label(14.3, 19.8, [DHCP服务器])

@@ -19,9 +19,9 @@
     import cetz.draw: *
     // Original proportions: host at left, gateway on the link, Internet at right.
     line((1.1, 0), (26.4, 0), stroke: 0.55pt)
-    content((1.1, 0), image("../../../../历年真题+参考解答/2012/assets/visio-2003-pc.svg", width: 2.2em, height: 2.2em, fit: "stretch"))
-    content((13.4, 0), image("../../../../历年真题+参考解答/2012/assets/visio-2003-router.svg", width: 2.9em, height: 1.85em, fit: "stretch"))
-    content((26.6, 0.2), image("../../../../历年真题+参考解答/2012/assets/visio-2003-cloud.svg", width: 6.3em, height: 3.5em, fit: "stretch"))
+    content((1.1, 0), image("../../../../assets/network/visio-2003-pc.svg", width: 2.2em, height: 2.2em, fit: "stretch"))
+    content((13.4, 0), image("../../../../assets/network/visio-2003-router.svg", width: 2.9em, height: 1.85em, fit: "stretch"))
+    content((26.6, 0.2), image("../../../../assets/network/visio-2003-cloud.svg", width: 6.3em, height: 3.5em, fit: "stretch"))
     content((26.6, 0.2), text(fill: white, size: 0.95em)[Internet])
     content((5.1, 0.75), text(size: 0.78em)[10.2.128.100])
     content((10.0, 0.75), text(size: 0.78em)[10.2.128.1])
@@ -220,7 +220,7 @@ Cookie: 123456
   line((1,0),(1,2)); line((4.5,0),(4.5,2))
   line((2.6,0),(2.6,-1.4))
   line((5.3,2),(6.5,1.7),(6,1.3),(7.2,1),(8,1.4))
-  content((1,2.3),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:1.4em))
+  content((1,2.3),image("../../../../assets/network/visio-2007-isometric-server.png",width:1.4em))
   merge-path({
     line((3.6,2.65),(3.6,1.9))
     bezier((3.6,1.9),(5.4,1.9),(3.6,1.35),(5.4,1.35))
@@ -231,14 +231,14 @@ Cookie: 123456
   line((5.05,2.77),(4.6,2.65),mark:(end:">",fill:black,scale:0.5))
   line((4.3,2.45),(4.1,2.67),mark:(end:">",fill:black,scale:0.5))
   line((4.75,2.62),(5,2.43),mark:(end:">",fill:black,scale:0.5))
-  content((2.6,-2),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:1.7em))
+  content((2.6,-2),image("../../../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
   content((1,4.25),text(size:0.8em)[本地域名])
   content((1,3.4),text(size:0.8em)[服务器])
   content((4.5,3.7),text(size:0.8em)[路由器])
   content((0.1,-0.8),text(size:0.8em)[局域网],anchor:"west")
   content((3.8,-2),[H]); content((10.7,4.65),text(size:0.8em)[Internet])
   for (x,y) in ((8.8,2.5),(14,4.6),(14.8,2),(12.5,-0.5)) {
-    content((x,y),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:1.4em))
+    content((x,y),image("../../../../assets/network/visio-2007-isometric-server.png",width:1.4em))
   }
   for (x,y,label) in ((9.8,3,[com顶级]),(9.8,2.1,[域名服务器]),(15,5.1,[根域名]),
     (15,4.2,[服务器]),(15.8,2.5,[abc.com]),(15.8,1.6,[域名服务器]),(13.5,-0.5,[www.abc.com])) {

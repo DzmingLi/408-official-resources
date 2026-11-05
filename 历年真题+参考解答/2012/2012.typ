@@ -605,12 +605,12 @@ ARP协议的功能是
     // Server: https://www.graffletopia.com/stencils/523
     let pc(x) = content(
       (x, 1.36),
-      image("assets/visio-2007-isometric-pc.png", width: 0.88cm),
+      image("../../assets/network/visio-2007-isometric-pc.png", width: 0.88cm),
     )
 
     let server(x) = content(
       (x, 1.36),
-      image("assets/visio-2007-isometric-server.png", width: 0.88cm),
+      image("../../assets/network/visio-2007-isometric-server.png", width: 0.88cm),
     )
 
     let numbered-arrow(x1, x2, n) = {

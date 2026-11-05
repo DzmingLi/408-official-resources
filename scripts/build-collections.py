@@ -81,7 +81,7 @@ def collection_inputs(source, collections, plans=None):
 
 def prepare_sources(root, stage, plans):
     """Render filtered questions/answers in an isolated, disposable source tree."""
-    for name in ('template.typ', '历年真题+参考解答'):
+    for name in ('template.typ', '历年真题+参考解答', 'assets'):
         (stage / name).symlink_to(root / name, target_is_directory=(root / name).is_dir())
     collections = stage / '真题分类汇编'
     collections.mkdir()

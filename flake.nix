@@ -47,26 +47,76 @@
               let
                 relative = lib.removePrefix (toString ./. + "/") (toString path);
                 parts = lib.splitString "/" relative;
-                allowedRoots = [ "历年真题+参考解答" "旧版题型示例" "真题分类汇编" "考试大纲" "scripts" "template.typ" ];
+                allowedRoots = [ "历年真题+参考解答" "旧版题型示例" "真题分类汇编" "考试大纲" "scripts" "assets" "template.typ" ];
                 allowed = lib.elem (lib.head parts) allowedRoots || builtins.match "20[0-9][0-9]" (lib.head parts) != null;
                 excluded = lib.any (part: lib.elem part [ "backups" ".build" ".git" "output" ]) parts;
               in
               !excluded && allowed &&
               (type == "directory" || lib.any (ext: lib.hasSuffix ext relative) [ ".typ" ".py" ".org" ".svg" ".png" ".jpg" ".jpeg" ".json" ".toml" ]);
           };
-          mkPastExams = printVersion: typixLib.mkTypstDerivation {
-            name = "kaoyan-408-official-pdfs" + lib.optionalString printVersion "-print-version";
-            inherit src fontPaths;
+          paperRoot = "历年真题+参考解答";
+          paperDirectories = builtins.readDir (./. + "/${paperRoot}");
+          years = lib.filter (year:
+            paperDirectories.${year} == "directory" && builtins.match "20[0-9][0-9]" year != null
+          ) (builtins.attrNames paperDirectories);
+          documents = lib.concatMap (year:
+            let directory = "${paperRoot}/${year}";
+            in [ { name = year; source = "${directory}/${year}.typ"; cover = true; } ]
+              ++ lib.optional (builtins.pathExists (./. + "/${directory}/${year}-答案.typ"))
+                { name = "${year}-answers"; source = "${directory}/${year}-答案.typ"; cover = false; }
+          ) years ++ [ { name = "old-sample"; source = "旧版题型示例/题型示例.typ"; cover = true; } ];
+          paperSrc = document: builtins.path {
+            path = ./.;
+            name = "408-${document.name}-sources";
+            filter = path: type:
+              let
+                relative = lib.removePrefix (toString ./. + "/") (toString path);
+                directory = builtins.dirOf document.source;
+                inPaper = lib.hasPrefix "${directory}/" relative;
+                sharedAsset = lib.hasPrefix "assets/" relative;
+                image = lib.any (ext: lib.hasSuffix ext relative) [ ".svg" ".png" ".jpg" ".jpeg" ];
+              in
+              if type == "directory" then
+                lib.hasPrefix "${relative}/" document.source
+                || lib.hasPrefix "${directory}/" relative
+                || relative == "assets" || sharedAsset
+              else relative == "template.typ" || relative == document.source
+                || (image && (inPaper || sharedAsset));
+          };
+          mkPaper = document: typixLib.mkTypstDerivation {
+            name = "408-${document.name}";
+            src = paperSrc document;
+            inherit fontPaths;
             emojiFont = null;
             unstable_typstPackages = typstPackages;
-            nativeBuildInputs = [ pdfPython ];
             buildPhaseTypstCommand = ''
-              python3 scripts/build-pdfs.py --output "$out" --jobs 4 ${lib.optionalString printVersion "--print-version"}
+              mkdir -p "$out"
+              typst compile --ignore-system-fonts --root . ${lib.escapeShellArg document.source} "$out/${document.name}.pdf"
             '';
             installPhaseCommand = "true";
           };
-          past-exams = mkPastExams false;
-          print-version = mkPastExams true;
+          readingPackages = lib.listToAttrs (map (document:
+            lib.nameValuePair document.name (mkPaper document)
+          ) documents);
+          printPackages = lib.listToAttrs (map (document:
+            lib.nameValuePair "${document.name}-print" (pkgs.runCommand "408-${document.name}-print" {
+              nativeBuildInputs = [ pdfPython ];
+            } ''
+              mkdir -p "$out"
+              python3 ${./scripts/booklet.py} \
+                "${readingPackages.${document.name}}/${document.name}.pdf" \
+                "$out/${document.name}-print.pdf" \
+                ${lib.optionalString document.cover "--cover-back-blank --back-cover-blank"}
+            '')
+          ) documents);
+          past-exams = pkgs.symlinkJoin {
+            name = "408-past-exams";
+            paths = builtins.attrValues readingPackages;
+          };
+          print-version = pkgs.symlinkJoin {
+            name = "408-print-version";
+            paths = builtins.attrValues printPackages;
+          };
           collections = typixLib.mkTypstDerivation {
             name = "408-topic-collections";
             inherit src fontPaths;
@@ -79,7 +129,12 @@
             installPhaseCommand = "true";
           };
         in {
-          packages = { default = past-exams; inherit past-exams print-version collections; fonts = founderFonts; math-fonts = mathFonts; };
+          packages = readingPackages // printPackages // {
+            default = past-exams;
+            inherit past-exams print-version collections;
+            fonts = founderFonts;
+            math-fonts = mathFonts;
+          };
           checks = { inherit past-exams print-version collections; };
           devShell = typixLib.devShell {
             inherit fontPaths;

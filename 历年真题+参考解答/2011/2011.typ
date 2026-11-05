@@ -532,10 +532,10 @@ TCP/IP参考模型的网络层提供的是
     cloud(12.25, 1.25, sx: 1.35, sy: 1.04)
 
     content((7.20, 5.05), box(inset: 0pt)[
-      #image("assets/router-symbol.svg", width: 1.04cm, height: 0.73cm)
+      #image("../../assets/network/router-symbol.svg", width: 1.04cm, height: 0.73cm)
     ])
     content((7.20, 1.50), box(inset: 0pt)[
-      #image("assets/router-symbol.svg", width: 1.04cm, height: 0.73cm)
+      #image("../../assets/network/router-symbol.svg", width: 1.04cm, height: 0.73cm)
     ])
 
     content((6.50, 5.43), text(size: 0.82em)[R1])
@@ -835,9 +835,9 @@ wait（）、signal（））操作，实现上述过程中的互斥与同步。�
     import cetz.draw: *
     // Original proportions: host at left, gateway on the link, Internet at right.
     line((1.1, 0), (26.4, 0), stroke: 0.55pt)
-    content((1.1, 0), image("../2012/assets/visio-2003-pc.svg", width: 2.2em, height: 2.2em, fit: "stretch"))
-    content((13.4, 0), image("../2012/assets/visio-2003-router.svg", width: 2.9em, height: 1.85em, fit: "stretch"))
-    content((26.6, 0.2), image("../2012/assets/visio-2003-cloud.svg", width: 6.3em, height: 3.5em, fit: "stretch"))
+    content((1.1, 0), image("../../assets/network/visio-2003-pc.svg", width: 2.2em, height: 2.2em, fit: "stretch"))
+    content((13.4, 0), image("../../assets/network/visio-2003-router.svg", width: 2.9em, height: 1.85em, fit: "stretch"))
+    content((26.6, 0.2), image("../../assets/network/visio-2003-cloud.svg", width: 6.3em, height: 3.5em, fit: "stretch"))
     content((26.6, 0.2), text(fill: white, size: 0.95em)[Internet])
     content((5.1, 0.75), text(size: 0.78em)[10.2.128.100])
     content((10.0, 0.75), text(size: 0.78em)[10.2.128.1])

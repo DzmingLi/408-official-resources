@@ -59,7 +59,7 @@ R1收到其邻居路由器 R2的距离矢量，距离矢量中包含信息
   line((-6.5,-1.3),ps.at(3)); line(ps.at(5),(6.5,-1.3))
   for (a,b) in (((-8,4.8),(-10.5,4.8)),((-8,4.8),(-10,6.2)),((-8,4.8),(-8,6.6)),((0,5.8),(-1.3,7.1)),((0,5.8),(1.3,7.1)),((8,4.8),(8,6.6)),((8,4.8),(10.2,6)),((8,4.8),(10.7,4.8))) { line(a,b) }
   for (i,p) in ps.enumerate() {
-    content(p,image("../../../../历年真题+参考解答/2009/assets/router-symbol.svg",width: 1.4em))
+    content(p,image("../../../../assets/network/cisco-router.svg",width: 1.4em))
     let label=[#("R"+str(if i < 6 {11+i} else {(22,33,44).at(i - 6)}))]
     content(if i==0 {(p.at(0) - 1.35,p.at(1))} else if i==2 {(p.at(0)+1.35,p.at(1))} else if i==7 {(p.at(0) - 1.4,p.at(1))} else {(p.at(0),p.at(1) - 1.05)},text(size: 0.8em,label))
   }

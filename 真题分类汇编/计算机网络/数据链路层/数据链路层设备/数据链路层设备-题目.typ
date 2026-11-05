@@ -52,7 +52,7 @@
   
     let host(x, address) = {
       content((x, 0.62), box(fill: white, inset: 0pt)[
-        #image("../../../../历年真题+参考解答/2014/assets/desktop-symbol.svg", width: 2.24em, height: 2.24em)
+        #image("../../../../assets/network/desktop-symbol.svg", width: 2.24em, height: 2.24em)
       ])
       // The shallow keyboard echoes the older PC symbols in the scan.
       rect((x - 0.60, 0.14), (x + 0.60, 0.34), fill: white, stroke: 0.52pt)

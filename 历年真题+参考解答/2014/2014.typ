@@ -454,7 +454,7 @@ I. LRU算法 II. FIFO算法 III. OPT算法
   
     let host(x, address) = {
       content((x, 0.62), box(fill: white, inset: 0pt)[
-        #image("assets/desktop-symbol.svg", width: 2.24em, height: 2.24em)
+        #image("../../assets/network/desktop-symbol.svg", width: 2.24em, height: 2.24em)
       ])
       // The shallow keyboard echoes the older PC symbols in the scan.
       rect((x - 0.60, 0.14), (x + 0.60, 0.34), fill: white, stroke: 0.52pt)
@@ -664,7 +664,7 @@ I. 提供无连接服务
     
       let router(x, y, label) = {
         content((x, y), box(fill: white, inset: 0pt)[
-          #image("assets/router-symbol.svg",
+          #image("../../assets/network/router-symbol.svg",
             width: 0.82cm, height: 0.82cm, fit: "stretch")
         ])
         content((x, y - 0.25), [#text(size: 0.86em)[#label]])

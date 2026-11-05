@@ -90,7 +90,7 @@ L0接口的IP地址是202.118.2.1；R2的L0接口的IP地址是202.118.2.2，L1�
 
     let router(x, y, name) = {
       content((x, y), box(fill: white, inset: 0pt)[
-        #image("../../../../历年真题+参考解答/2009/assets/router-symbol.svg",
+        #image("../../../../assets/network/cisco-router.svg",
           width: 1.05cm, height: 1.424cm, fit: "stretch")
       ])
       label(x, y + 1.05, name, size: 0.86em)
@@ -123,7 +123,7 @@ L0接口的IP地址是202.118.2.1；R2的L0接口的IP地址是202.118.2.2，L1�
 
     // 原图是完全正视的 CRT、卧式机箱与独立键盘，不采用透视 PC 图标。
     content((2.15, 0.64), box(fill: white, inset: 0pt)[
-      #image("../../../../历年真题+参考解答/2009/assets/pc-symbol.svg",
+      #image("../../../../assets/network/pc-symbol.svg",
         width: 0.82cm, height: 0.70cm, fit: "contain")
     ])
 
@@ -209,10 +209,10 @@ R1和R2的路由表结构为：
     cloud(12.25, 1.25, sx: 1.35, sy: 1.04)
 
     content((7.20, 5.05), box(inset: 0pt)[
-      #image("../../../../历年真题+参考解答/2011/assets/router-symbol.svg", width: 1.04cm, height: 0.73cm)
+      #image("../../../../assets/network/router-symbol.svg", width: 1.04cm, height: 0.73cm)
     ])
     content((7.20, 1.50), box(inset: 0pt)[
-      #image("../../../../历年真题+参考解答/2011/assets/router-symbol.svg", width: 1.04cm, height: 0.73cm)
+      #image("../../../../assets/network/router-symbol.svg", width: 1.04cm, height: 0.73cm)
     ])
 
     content((6.50, 5.43), text(size: 0.82em)[R1])
@@ -260,13 +260,13 @@ R1和R2的路由表结构为：
       circle((12.45, 0.65), radius: (1.75, 0.38), fill: white, stroke: 0.065em)
 
       content((7.00, 5.00), box(inset: 0pt)[
-        #image("../../../../历年真题+参考解答/2013/assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
       content((7.00, 2.82), box(inset: 0pt)[
-        #image("../../../../历年真题+参考解答/2013/assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
       content((7.00, 0.65), box(inset: 0pt)[
-        #image("../../../../历年真题+参考解答/2013/assets/router-symbol.svg", width: 1.05cm, height: 0.75cm)
+        #image("../../../../assets/network/router-symbol.svg", width: 1.05cm, height: 0.75cm)
       ])
 
       content((1.95, 5.00), text(size: 0.90em)[153.14.5.0/25])
@@ -390,7 +390,7 @@ R1和R2的路由表结构为：
     
       let router(x, y, label) = {
         content((x, y), box(fill: white, inset: 0pt)[
-          #image("../../../../历年真题+参考解答/2014/assets/router-symbol.svg",
+          #image("../../../../assets/network/router-symbol.svg",
             width: 0.82cm, height: 0.82cm, fit: "stretch")
         ])
         content((x, y - 0.25), [#text(size: 0.86em)[#label]])

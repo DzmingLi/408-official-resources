@@ -39,7 +39,7 @@
   set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
   set-style(stroke:0.065em)
   let label(x,y,body,anchor:"center") = content((x,y),text(size:0.7em)[#body],anchor:anchor)
-  let router(x,y) = content((x,y),image("../../../../历年真题+参考解答/2009/assets/router-symbol.svg",width:2em,height:1.8em))
+  let router(x,y) = content((x,y),image("../../../../assets/network/cisco-router.svg",width:2em,height:1.8em))
   let switch(x,y,name) = {
     merge-path({line((x - 1,y),(x - 1,y - 0.6),(x,y - 1.1),(x+1,y - 0.6),(x+1,y))},close:true,fill:luma(90%))
     merge-path({line((x - 1,y),(x,y+0.5),(x+1,y),(x,y - 0.5))},close:true,fill:luma(92%))
@@ -69,9 +69,9 @@
   label(12.2,1.5,[203.10.2.6/30],anchor:"west")
   label(1.1,0.5,[192.168.1.1],anchor:"west")
   label(13.1,0.5,[192.168.1.1],anchor:"west")
-  content((2.8,-3.2),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:1.5em))
-  content((8.3,-3.2),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:1.7em))
-  content((15.2,-3.2),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:1.7em))
+  content((2.8,-3.2),image("../../../../assets/network/visio-2007-isometric-server.png",width:1.5em))
+  content((8.3,-3.2),image("../../../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
+  content((15.2,-3.2),image("../../../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
   merge-path({line((20.3,-2.5),(21.3,-2.8),(21,-3.6),(20,-3.3))},close:true,fill:white)
   merge-path({line((20,-3.3),(21,-3.6),(21.5,-4),(20.4,-3.8))},close:true,fill:luma(92%))
   for (x,name,ip) in ((2.8,[Web服务器],[192.168.1.2]),(8.3,[H1],[192.168.1.3]),
@@ -248,7 +248,7 @@
   content((16.2,1.7), text(size: 0.8em)[192.168.1.62/27], anchor: "west")
   content((15,0), std.rect(fill: white, inset: 0.3em, stroke: 0.045em)[⇄])
   content((13,-0.1), [交换机], anchor: "east")
-  content((21,0), image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png", width: 2.5em))
+  content((21,0), image("../../../../assets/network/visio-2007-isometric-pc.png", width: 2.5em))
   content((23,0), text(size: 0.8em)[H\ 192.168.1.60], anchor: "west")
 }))
 
@@ -275,7 +275,7 @@
   // 大纲 PDF 第 88 页：按原图像素坐标和正文 35 px 的字号比例重画。
   let p(x,y)=((x - 197) / 35,(1530 - y) / 35)
   let label(x,y,body)=content(p(x,y),text(size:0.62em,body))
-  let icon(x,y,w,h,name)=content(p(x,y),image("../../../../历年真题+参考解答/2012/assets/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
+  let icon(x,y,w,h,name)=content(p(x,y),image("../../../../assets/network/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
   rect(p(197,1263),p(748,1528)); rect(p(819,1351),p(1131,1530))
   circle(p(403,1395),radius:(188 / 35,76 / 35))
   circle(p(619,1314),radius:(71 / 35,34 / 35))
@@ -293,13 +293,13 @@
   icon(363,1391.5,63,58,"pc"); icon(474.5,1392.5,63,55,"switch")
   icon(619.5,1393.5,63,62,"router"); label(619.5,1409,[R1])
   // 原始 Visio 模具的矢量图元：TR1 水平镜像，TR2 保留原朝向。
-  content(p(684,1393), std.scale(x: -100%, image("../../../../历年真题+参考解答/2025/assets/visio-satellite-dish.svg", width: 56 / 35 * 1em)))
-  content(p(885.5,1393.5), image("../../../../历年真题+参考解答/2025/assets/visio-satellite-dish.svg", width: 57 / 35 * 1em))
+  content(p(684,1393), std.scale(x: -100%, image("../../../../assets/network/visio-satellite-dish.svg", width: 56 / 35 * 1em)))
+  content(p(885.5,1393.5), image("../../../../assets/network/visio-satellite-dish.svg", width: 57 / 35 * 1em))
   icon(950.5,1394,65,62,"router"); label(950.5,1409,[R2])
   icon(950,1480,63,55,"switch"); icon(1040,1480,50,60,"server")
   icon(949,1293.5,98,54,"cloud")
   content(p(949,1293.5),text(size:0.62em,fill:white,[Internet]))
-  content(p(792,1292), image("../../../../历年真题+参考解答/2025/assets/visio-satellite.svg", width: 72 / 35 * 1em))
+  content(p(792,1292), image("../../../../assets/network/visio-satellite.svg", width: 72 / 35 * 1em))
   for (x,y,body) in ((272,1280,[工程部网络]),(277,1395,[管理区子网]),
     (619,1316,[作业区子网]),(619,1477,[生活区子网]),(365,1432,[H]),
     (376,1451,[10.10.10.33/26]),(450,1366,[S1]),(729,1386,[TR1]),(846,1388,[TR2]),
@@ -393,7 +393,7 @@ ARP协议的功能是
     server(7.4, 16.6)
     server(14.3, 16.6)
     for x in (3.5, 10.3, 22.5) {
-      content((x, 4.4), image("../../../../历年真题+参考解答/2015/assets/visio-2007-isometric-pc.png", width: 5.4em))
+      content((x, 4.4), image("../../../../assets/network/visio-2007-isometric-pc.png", width: 5.4em))
     }
     label(7.4, 19.8, [WWW服务器])
     label(14.3, 19.8, [DHCP服务器])
@@ -475,7 +475,7 @@ ARP协议的功能是
   let p(x,y)=((x - 195) / 35,(1380 - y) / 35)
   let label(x,y,body)=content(p(x,y),text(size:0.72em,body))
   let icon(x,y,w,name)=content(p(x,y),image("../../../../历年真题+参考解答/2022/official-images/network-"+name+".png",width:w / 35 * 1em))
-  let vector(x,y,w,h,name)=content(p(x,y),image("../../../../历年真题+参考解答/2012/assets/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
+  let vector(x,y,w,h,name)=content(p(x,y),image("../../../../assets/network/visio-2003-"+name+".svg",width:w / 35 * 1em,height:h / 35 * 1em,fit:"stretch"))
   for (a,b) in (((345,1075),(916,1075)),((456,1075),(456,1318)),
     ((285,1198),(456,1198)),((285,1318),(606,1318)),((760,1075),(760,1198))) {line(p(..a),p(..b))}
   vector(275,1078,160,77,"cloud")
@@ -548,7 +548,7 @@ ARP协议的功能是
     if label==[H4] {
       line((x - 0.7,y),(x - 0.35,y+0.7),(x+0.6,y+0.7),(x+0.25,y),close: true,fill: luma(75%))
       line((x - 0.7,y),(x - 0.9,y - 0.3),(x+0.35,y - 0.3),(x+0.25,y),close: true,fill: white)
-    } else { content((x,y),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width: 1.5em)) }
+    } else { content((x,y),image("../../../../assets/network/visio-2007-isometric-pc.png",width: 1.5em)) }
     content((tx,ty),text(size: 0.65em,label))
     content((tx,ty - 0.7),text(size: 0.63em,ip))
     content((tx,ty - 1.4),text(size: 0.63em,mac))
@@ -568,9 +568,9 @@ ARP协议的功能是
   // 大纲 PDF 第 81 页。报文的省略行、地址行分别定位，不继承正文段落行距。
   let p(x,y)=((x - 348) / 35,(1425 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(350,1133),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:3.2em))
+  content(p(350,1133),image("../../../../assets/network/visio-2007-isometric-pc.png",width:3.2em))
   content(p(350,1054),[H])
-  content(p(834,1138),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:2.3em))
+  content(p(834,1138),image("../../../../assets/network/visio-2007-isometric-server.png",width:2.3em))
   content(p(845,1036),[DHCP服务器]); content(p(845,1064),[192.168.5.1])
   for x in (348,833) {line(p(x,1170),p(x,1425),mark:(end:">",fill:black,scale:0.7))}
   line(p(833,1202),p(348,1265),mark:(end:">",fill:black,scale:0.7))

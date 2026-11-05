@@ -836,7 +836,7 @@ L0接口的IP地址是202.118.2.1；R2的L0接口的IP地址是202.118.2.2，L1�
 
     let router(x, y, name) = {
       content((x, y), box(fill: white, inset: 0pt)[
-        #image("assets/router-symbol.svg",
+        #image("../../assets/network/cisco-router.svg",
           width: 1.05cm, height: 1.424cm, fit: "stretch")
       ])
       label(x, y + 1.05, name, size: 0.86em)
@@ -869,7 +869,7 @@ L0接口的IP地址是202.118.2.1；R2的L0接口的IP地址是202.118.2.2，L1�
 
     // 原图是完全正视的 CRT、卧式机箱与独立键盘，不采用透视 PC 图标。
     content((2.15, 0.64), box(fill: white, inset: 0pt)[
-      #image("assets/pc-symbol.svg",
+      #image("../../assets/network/pc-symbol.svg",
         width: 0.82cm, height: 0.70cm, fit: "contain")
     ])
 

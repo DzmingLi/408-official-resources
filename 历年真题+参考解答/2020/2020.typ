@@ -335,7 +335,7 @@ $t$ 时刻安全性检测结果是
   line((15,-0.5),(12,-3)); line((15,-0.5),(18,-3))
   for (x1,x2,x3) in ((0,-2,2),(6,4,8),(12,10,14),(18,16,20)) {
     line((x1,-3.5),(x2,-6)); line((x1,-3.5),(x3,-6))
-    content((x2,-6.25), image("../2012/assets/visio-2007-isometric-pc.png", width: 1.5em))
+    content((x2,-6.25), image("../../assets/network/visio-2007-isometric-pc.png", width: 1.5em))
     laptop(x3,-6.2)
     device(x1,-3,hub:true)
   }
@@ -429,7 +429,7 @@ $t$ 时刻安全性检测结果是
   line((1,0),(1,2)); line((4.5,0),(4.5,2))
   line((2.6,0),(2.6,-1.4))
   line((5.3,2),(6.5,1.7),(6,1.3),(7.2,1),(8,1.4))
-  content((1,2.3),image("../2012/assets/visio-2007-isometric-server.png",width:1.4em))
+  content((1,2.3),image("../../assets/network/visio-2007-isometric-server.png",width:1.4em))
   merge-path({
     line((3.6,2.65),(3.6,1.9))
     bezier((3.6,1.9),(5.4,1.9),(3.6,1.35),(5.4,1.35))
@@ -440,14 +440,14 @@ $t$ 时刻安全性检测结果是
   line((5.05,2.77),(4.6,2.65),mark:(end:">",fill:black,scale:0.5))
   line((4.3,2.45),(4.1,2.67),mark:(end:">",fill:black,scale:0.5))
   line((4.75,2.62),(5,2.43),mark:(end:">",fill:black,scale:0.5))
-  content((2.6,-2),image("../2012/assets/visio-2007-isometric-pc.png",width:1.7em))
+  content((2.6,-2),image("../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
   content((1,4.25),text(size:0.8em)[本地域名])
   content((1,3.4),text(size:0.8em)[服务器])
   content((4.5,3.7),text(size:0.8em)[路由器])
   content((0.1,-0.8),text(size:0.8em)[局域网],anchor:"west")
   content((3.8,-2),[H]); content((10.7,4.65),text(size:0.8em)[Internet])
   for (x,y) in ((8.8,2.5),(14,4.6),(14.8,2),(12.5,-0.5)) {
-    content((x,y),image("../2012/assets/visio-2007-isometric-server.png",width:1.4em))
+    content((x,y),image("../../assets/network/visio-2007-isometric-server.png",width:1.4em))
   }
   for (x,y,label) in ((9.8,3,[com顶级]),(9.8,2.1,[域名服务器]),(15,5.1,[根域名]),
     (15,4.2,[服务器]),(15.8,2.5,[abc.com]),(15.8,1.6,[域名服务器]),(13.5,-0.5,[www.abc.com])) {
@@ -548,7 +548,7 @@ int imul(int x, int y) { return x * y; }
   set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
   set-style(stroke:0.065em)
   let label(x,y,body,anchor:"center") = content((x,y),text(size:0.7em)[#body],anchor:anchor)
-  let router(x,y) = content((x,y),image("../2009/assets/router-symbol.svg",width:2em,height:1.8em))
+  let router(x,y) = content((x,y),image("../../assets/network/cisco-router.svg",width:2em,height:1.8em))
   let switch(x,y,name) = {
     merge-path({line((x - 1,y),(x - 1,y - 0.6),(x,y - 1.1),(x+1,y - 0.6),(x+1,y))},close:true,fill:luma(90%))
     merge-path({line((x - 1,y),(x,y+0.5),(x+1,y),(x,y - 0.5))},close:true,fill:luma(92%))
@@ -578,9 +578,9 @@ int imul(int x, int y) { return x * y; }
   label(12.2,1.5,[203.10.2.6/30],anchor:"west")
   label(1.1,0.5,[192.168.1.1],anchor:"west")
   label(13.1,0.5,[192.168.1.1],anchor:"west")
-  content((2.8,-3.2),image("../2012/assets/visio-2007-isometric-server.png",width:1.5em))
-  content((8.3,-3.2),image("../2012/assets/visio-2007-isometric-pc.png",width:1.7em))
-  content((15.2,-3.2),image("../2012/assets/visio-2007-isometric-pc.png",width:1.7em))
+  content((2.8,-3.2),image("../../assets/network/visio-2007-isometric-server.png",width:1.5em))
+  content((8.3,-3.2),image("../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
+  content((15.2,-3.2),image("../../assets/network/visio-2007-isometric-pc.png",width:1.7em))
   merge-path({line((20.3,-2.5),(21.3,-2.8),(21,-3.6),(20,-3.3))},close:true,fill:white)
   merge-path({line((20,-3.3),(21,-3.6),(21.5,-4),(20.4,-3.8))},close:true,fill:luma(92%))
   for (x,name,ip) in ((2.8,[Web服务器],[192.168.1.2]),(8.3,[H1],[192.168.1.3]),

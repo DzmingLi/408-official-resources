@@ -31,7 +31,7 @@
   line((15,-0.5),(12,-3)); line((15,-0.5),(18,-3))
   for (x1,x2,x3) in ((0,-2,2),(6,4,8),(12,10,14),(18,16,20)) {
     line((x1,-3.5),(x2,-6)); line((x1,-3.5),(x3,-6))
-    content((x2,-6.25), image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png", width: 1.5em))
+    content((x2,-6.25), image("../../../../assets/network/visio-2007-isometric-pc.png", width: 1.5em))
     laptop(x3,-6.2)
     device(x1,-3,hub:true)
   }

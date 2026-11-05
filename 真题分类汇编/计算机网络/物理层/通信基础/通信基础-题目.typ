@@ -152,11 +152,11 @@ $8 "Mb" space (1 "M" = 10^6)$的报文。若忽略链路传播延迟、分组头
   set-style(stroke: 0.045em)
   line((0,0),(18,0))
   for (x,label) in ((0,[H1]),(18,[H2])) {
-    content((x,0),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width: 2em))
+    content((x,0),image("../../../../assets/network/visio-2007-isometric-pc.png",width: 2em))
     content((x,-1.3),label)
   }
   for (x,label) in ((6,[R1]),(12,[R2])) {
-    content((x,0),image("../../../../历年真题+参考解答/2014/assets/router-symbol.svg",width: 1.8em))
+    content((x,0),image("../../../../assets/network/router-symbol.svg",width: 1.8em))
     content((x,-0.9),label)
   }
   for (x,label) in ((3,[10 Mb/s]),(9,[100 Mb/s]),(15,[1000 Mb/s])) { content((x,0.8),label) }

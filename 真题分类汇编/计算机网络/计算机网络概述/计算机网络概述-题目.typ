@@ -22,18 +22,18 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
     let host(x, label) = {
       // VSDfx Generic 3D 的 CRT Monitor 与 Keyboard：原图也是两个符号叠放。
       content((x, 1.38), box(fill: white, inset: 0pt)[
-        #image("../../../历年真题+参考解答/2010/assets/crt-monitor-symbol.png",
+        #image("../../../assets/network/crt-monitor-symbol.png",
           width: 0.57cm, height: 0.60cm, fit: "stretch")
       ])
       content((x - 0.18, 0.94), box(fill: white, inset: 0pt)[
-        #image("../../../历年真题+参考解答/2010/assets/keyboard-symbol.png",
+        #image("../../../assets/network/keyboard-symbol.png",
           width: 0.47cm, height: 0.33cm, fit: "stretch")
       ])
       content((x, 0.40), [#text(size: 0.78em)[#label]])
     }
 
     let router(x, y) = content((x, y), box(fill: white, inset: 0pt)[
-      #image("../../../历年真题+参考解答/2010/assets/router-symbol.svg",
+      #image("../../../assets/network/router-symbol.svg",
         width: 0.78cm, height: 0.58cm, fit: "stretch")
     ])
 
@@ -87,7 +87,7 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
     content(pos,text(size: 0.65em,label), angle: if a==1 and b==2 {31deg} else if a==2 and b==3 {-31deg} else if a==1 and b==4 {-31deg} else if a==4 and b==3 {31deg} else {0deg})
   }
   for i in (1,2,3,4) {
-    content(ps.at(i),image("../../../历年真题+参考解答/2009/assets/router-symbol.svg",width: 1.3em))
+    content(ps.at(i),image("../../../assets/network/cisco-router.svg",width: 1.3em))
     content((ps.at(i).at(0),ps.at(i).at(1)-1.05),text(size: 0.65em)[路由器])
   }
   for (i,label) in ((0,[H1]),(5,[H2])) {
