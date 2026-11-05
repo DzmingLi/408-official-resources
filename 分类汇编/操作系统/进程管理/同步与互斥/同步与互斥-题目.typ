@@ -97,6 +97,12 @@ mov x, R2    // (R2)→x
 #choices([仅Ⅰ、Ⅳ], [仅Ⅱ、Ⅲ], [仅Ⅰ、Ⅱ、Ⅲ], [仅Ⅰ、Ⅲ、Ⅳ])
 ]]
 
+#block(breakable: false)[#question(label: n => [2026 27])[
+若进程 P 读、写数据的集合分别记为 $R("P")$ 和 $W("P")$，进程 Q 读、写数据的集合分别记为 $R("Q")$ 和 $W("Q")$，则进程 P 和 Q 并发执行时#emphasis[不会]发生并发错误的充要条件是
+#statements(columns: 2, [Ⅰ．$W("P") ∩ W("Q")=emptyset$], [Ⅱ．$R("P") ∩ W("Q")=emptyset$], [Ⅲ．$W("P") ∩ R("Q")=emptyset$], [Ⅳ．$R("P") ∩ R("Q")=emptyset$])
+#choices([Ⅰ、Ⅳ同时成立], [Ⅱ、Ⅲ同时成立], [Ⅰ、Ⅱ、Ⅲ同时成立], [Ⅰ、Ⅱ、Ⅲ、Ⅳ同时成立])
+]]
+
 == 基本的实现方法
 
 #block(breakable: false)[#question(label: n => [2010 27])[
@@ -161,6 +167,49 @@ do {
 下列与该实现机制相关的叙述中，正确的是
 #choices([退出临界区的进程负责唤醒阻塞态进程], [等待进入临界区的进程不会主动放弃CPU], [上述伪代码满足“让权等待”的同步准则], [`while(TSL(&lock))`语句应在关中断状态下执行])
 ]]
+
+#question(label: n => [2023 45])[
+（7分）现要求学生使用 swap 指令和布尔型变量 lock 实现临界区互斥。lock 为线程间共享的变量，lock 的值为 TRUE 时线程不能进入临界区，为 FALSE 时线程能够进入临界区。某同学编写的实现临界区互斥的伪代码如题45（a）图所示。
+#figure([
+#set text(size: .85em)
+#grid(columns: (1.6fr, 1fr), gutter: .7em,
+ [#table(columns: 1, rows: (auto, 20em), align: left + top,
+ [#align(center)[某同学编写的伪代码]],
+ [
+ `bool lock = FALSE; // 共享变量`\
+ ……
+ #grid(columns: (1fr, auto), gutter: .8em,
+ block(stroke: (dash: "dashed", thickness: .5pt), inset: .3em)[
+ ```
+ bool key = TRUE;
+ if(key == TRUE)
+     swap key, lock; // 交换key和lock的值
+ ```
+ ], [进入区])
+ 临界区；
+ #grid(columns: (1fr, auto), gutter: .8em,
+ block(width: 100%, stroke: (dash: "dashed", thickness: .5pt), inset: .3em)[`lock = TRUE;`], [退出区])
+ ……
+ ])
+ #align(center)[（a）]],
+ [#table(columns: 1, rows: (auto, 20em), align: left + top,
+ [#align(center)[newSwap()的代码]],
+ [```c
+ void newSwap(bool *a, bool *b)
+ {
+     bool temp = *a;
+     *a = *b;
+     *b = temp;
+ }
+ ```])
+ #align(center)[（b）]])
+], caption: [题45图])
+请回答下列问题。
+#subquestions[
+ + 题45（a）图的伪代码中哪些语句存在错误？将其改为正确的语句（不增加语句的条数）。
+ + 题45（b）图给出了交换两个变量值的函数 newSwap()的代码，是否可以用函数调用语句“`newSwap(&key, &lock)`”代替指令“`swap key, lock`”以实现临界区互斥？为什么？
+]
+]
 
 == 信号量
 
@@ -343,6 +392,34 @@ signal(S) {
   edge(<a>,<c>,"->"),edge(<b>,<c>,"->"),edge(<c>,<d>,"->"),edge(<c>,<e>,"->"),edge(<e>,<f>,"->"),
 )), caption: [题46图], numbering: none)
 ]
+
+#question(label: n => [2024 46])[
+（本题8分）计算机系统中的进程之间往往需要相互协作以完成一个任务。在某网络系统中，缓冲区 B 用于存放一个数据分组，对 B 的操作有 C1、C2 和 C3。C1 将一个数据分组写入 B 中，C2 从 B 中读出一个数据分组，C3 对 B 中的数据分组进行修改。要求 B 为空时才能执行 C1，B 非空时才能执行 C2 和 C3。
+
+请回答下列问题。
+
+#subquestions[
++ 假设进程 P1 和 P2 均需要执行 C1，实现 C1 的代码是否为临界区？为什么？（2分）
++ 假设 B 初始为空，进程 P1 执行 C1 一次，进程 P2 执行 C2 一次。请定义尽可能少的信号量，并用 wait()、signal() 操作描述进程 P1 和 P2 之间的同步或互斥关系，说明所用信号量的作用及其初值。（3分）
++ 假设 B 初始不为空，进程 P1 和 P2 各执行 C3 一次。请定义尽可能少的信号量，并用 wait()、signal() 操作描述进程 P1 和 P2 之间的同步或互斥关系，说明所用信号量的作用及其初值。（3分）
+]
+]
+
+#question(label: n => [2025 45])[
+（本题7分）甲、乙、丙三人一起植树，甲负责挖树坑，乙负责将树苗放入树坑中并填土，丙负责为新种的树苗浇水。植树的步骤依次为：挖树坑、放树苗、填土和浇水。现有铁锹和水桶各1个，铁锹用于挖树坑和填土，水桶用于浇水。当树坑的数量小于3时，甲才可以挖树坑。假设初始时树坑的数量为0，铁锹和水桶均可用。请定义尽可能少的信号量，用 wait()、signal() 操作描述植树过程中三人之间的同步或互斥关系，并说明所用信号量的作用及其初值。
+]
+
+#block(breakable: false)[#question(label: n => [2026 26])[
+某系统中有8个进程均会执行如下图所示的代码片段，其中信号量 S 的初值为5。若某时刻 S 的值为−2，已执行到代码 Q 中的进程有 $m$ 个，因执行 wait(S)而被阻塞的进程有 $n$ 个，则 $m$ 和 $n$ 的值分别是
+#align(center, block(stroke: .5pt, inset: .45em)[
+```
+wait(S);
+代码Q;
+signal(S);
+```
+])
+#choices([5、2], [5、3], [6、2], [7、1])
+]]
 
 == 条件变量
 

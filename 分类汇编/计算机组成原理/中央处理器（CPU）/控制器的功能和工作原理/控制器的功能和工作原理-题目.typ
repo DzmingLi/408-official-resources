@@ -444,3 +444,93 @@ int imul(int x, int y) { return x * y; }
 
 ]
 ]
+
+#question(label: n => [2024 43])[
+（本题13分）假定计算机 M 字长为32位，按字节编址，采用32位定长指令字，指令 add、slli 和 lw 的格式、编码和功能说明如题43图（a）所示。
+
+#figure(align(center)[
+  #set text(size: 0.8em)
+  #table(columns: (3em,7fr,5fr,5fr,3fr,5fr,7fr,14em),stroke: none,align: center,
+    [指令], [31#h(1fr)25], [24#h(1fr)20], [19#h(1fr)15], [14#h(1fr)12], [11#h(1fr)7], [6#h(1fr)0], [指令功能说明],
+    [add], ..([0000000],[rs2],[rs1],[000],[rd],[0110011]).map(x=>table.cell(stroke: 0.045em,x)), [R[rd] ← R[rs1]+R[rs2]],
+    [slli], ..([0000000],[shamt],[rs1],[010],[rd],[0010011]).map(x=>table.cell(stroke: 0.045em,x)), [R[rd] ← R[rs1]\<\<shamt],
+    [lw], table.cell(colspan: 2,stroke: 0.045em)[imm], ..([rs1],[010],[rd],[0000011]).map(x=>table.cell(stroke: 0.045em,x)), [R[rd] ← M[R[rs1]+imm]],
+  )
+],caption: [题43图（a）],kind: image)
+
+其中，R[$x$] 表示通用寄存器 $x$ 的内容，M[$x$] 表示地址为 $x$ 的存储单元内容，shamt 为移位位数，imm 为补码表示的偏移量。题43图（b）给出了计算机 M 的部分数据通路及其控制信号（用带箭头虚线表示），其中，A 和 B 分别表示从通用寄存器 rs1 和 rs2 中读出的内容；IR[31:20] 表示指令寄存器中的高12位；控制信号 Ext 为0、1时扩展器分别实现零扩展、符号扩展，ALUctr 为000、001、010时 ALU 分别实现加、减、逻辑左移运算。
+
+#figure(align(center,cetz.canvas(length:1em,{
+  import cetz.draw: *
+  // 2026 大纲 PDF 第 61 页；包括 ALUctr 的 3 位标记。
+  set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
+  let p(x,y)=((x - 153) / 35,(966 - y) / 35)
+  let label(x,y,body)=content(p(x,y),body)
+  let arrow(a,b)=line(p(..a),p(..b),mark:(end:">",fill:black,scale:0.65))
+  rect(p(371,819),p(519,873)); label(445,846,[扩展器])
+  line(..((607,736),(674,770),(674,844),(607,879)).map(q=>p(..q)),close:true)
+  label(619,768,[0]); label(619,852,[1])
+  content(p(650,804),[MUX],angle:-90deg)
+  line(..((754,648),(843,694),(843,807),(754,854),(754,768),(773,750),(754,733)).map(q=>p(..q)),close:true)
+  content(p(803,750),[ALU],angle:-90deg)
+  for (a,b) in (((283,849),(371,849)),((519,851),(607,851)),((674,811),(754,811)),
+    ((520,692),(754,692)),((520,769),(607,769)),((843,754),(1031,754))) {arrow(a,b)}
+  label(502,692,[A]);label(502,769,[B]);label(217,847,[IR[31:20]]);label(1050,754,[F])
+  for (x,y,n) in ((314,849,[12]),(550,851,[32]),(689,811,[32]),(550,769,[32]),(550,692,[32]),(972,754,[32])) {
+    line(p(x - 7,y - 7),p(x+7,y+7));label(x+15,y - 19,n)
+  }
+  for (y,body) in ((703,[OF]),(731,[SF]),(777,[ZF]),(805,[CF])) {
+    arrow((843,y),(897,y));label(923,y,body)
+  }
+  for (x,y,body) in ((445,875,[Ext]),(642,861,[ALUBsrc]),(802,832,[ALUctr])) {
+    line(p(x,915),p(x,y),stroke:(thickness:0.045em,dash:"dashed"),mark:(end:">",fill:black,scale:0.65))
+    label(x,928,body)
+  }
+  line(p(795,871),p(809,885));label(818,864,[3])
+  for (x,y,body) in ((259,895,[0：零扩展]),(269,936,[1：符号扩展]),
+    (938,852,[000：加]),(938,887,[001：减]),(978,924,[010：逻辑左移]),(898,958,[⋯])) {label(x,y,body)}
+})),caption:[题43图（b）],kind:image)
+
+请回答下列问题。
+
+#subquestions[
++ 计算机 M 最多有多少个通用寄存器？为什么 shamt 字段占5位？（2分）
++ 执行 add 指令时，控制信号 ALUBsrc 的取值应是什么？若 rs1 和 rs2 寄存器内容分别是8765 4321H和9876 5432H，则 add 指令执行后，ALU 输出端 F、OF 和 CF 的结果分别是什么？若该 add 指令处理的是无符号整数，则应根据哪个标志判断是否溢出？（5分）
++ 执行 slli 指令时，控制信号 Ext 的取值可以是0也可以是1，为什么？（2分）
++ 执行 lw 指令时，控制信号 Ext、ALUctr 的取值分别是什么？（2分）
++ 若一条指令的机器码是 A040 A103H，则该指令一定是 lw 指令，为什么？若执行该指令时，R[01H]=FFFF A2D0H，则所读取数据的存储地址是什么？（2分）
+]
+]
+
+#block(breakable: false)[#question(label: n => [2025 19])[
+下列关于 CPU 中的数据通路和控制器的叙述中，#emphasis[错误]的是
+
+#choices([通用寄存器组中应该包含程序计数器],[控制器中一定包含指令操作码的译码电路],[单周期 CPU 中的控制器比多周期 CPU 中的更简单],[流水线 CPU 需解决数据相关和控制相关等冒险问题])
+]]
+
+#question(label: n => [2026 44])[
+原卷第43题共用背景（不含小问）：
+
+
+（本题10分）某16位计算机 C 按字节编址，通用寄存器 R0～R15 的编号为0～15，存储器地址为16位，采用定长指令字，指令格式有 R、I 和 M 型，如下所示。
+#text(size: .9em)[
+#table(columns: (3em, 3.2em, 3.2em, 4.2em, 3.2em, 1fr), stroke: none, align: center,
+ [格式], [4位], [4位], [4位], [4位], [功能说明],
+ [R型], table.cell(stroke: .5pt)[0000], table.cell(stroke: .5pt)[rt], table.cell(stroke: .5pt)[rs/num], table.cell(stroke: .5pt)[op1], [R\[rt\]←R\[rt\] op1 R\[rs\]，R\[rt\]←R\[rt\] op1 num],
+ [I型], table.cell(stroke: .5pt)[op2], table.cell(stroke: .5pt)[rt], table.cell(colspan: 2, stroke: .5pt)[imm8], [R\[rt\]←R\[rt\] op2 imm8],
+ [M型], table.cell(stroke: .5pt)[op3], table.cell(colspan: 3, stroke: .5pt)[offset], [R\[0\]←M\[R\[15\]+offset\]，M\[R\[15\]+offset\]←R\[0\]])
+]
+其中，op1 为0001、0010分别表示加、左移指令，op2 为0100表示加立即数指令，op3 为1110、1111分别表示取数、存数指令，R\[r\]表示寄存器 r 中的内容，num 为移位位数，M\[addr\]表示存储器地址 addr 中的内容。
+
+
+
+（本题13分）假定题43中计算机 C 的部分数据通路如题44图所示。
+#figure(image("../../../../历年真题+参考解答/2026/official-images/q44.png", width: 29em), caption: [题44图])
+图中带箭头虚线表示控制信号，IR.rt、IR.rs 分别表示 IR 中的 rt、rs 字段，$"IR"_(11 tilde 0)$ 为 IR 中低12位。要求取指令周期内完成 PC 增量操作。请回答下列问题。
+#subquestions[
+ + 题44图中①和②是同一类部件，其名称是什么？（1分）
+ + 已知 I 型指令中 imm8 可以是带符号整数或无符号整数，M 型指令中 offset 是带符号整数，控制信号 ExtOp 至少有几位？为什么？（2分）
+ + 取指周期中，MARsrc、ALUAsrc、ALUBsrc、RegWr 的取值各是什么？（4分）
+ + 左移指令执行周期中，ALUBsrc、RegWsrc、RegDst、RegWr 的取值各是什么？ExtOp 是否可以与 M 型指令的 ExtOp 取值相同？为什么？（6分）
+]
+]

@@ -67,6 +67,40 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
 #choices([80%], [83%], [87%], [91%])
 ]
 
+#question(label: n => [2023 33])[
+在下图所示的分组交换网络中，主机 H1 和 H2 通过路由器互连，2段链路的带宽均为100 Mb/s，时延带宽积（即单向传播时延×带宽）均为1000 b。若 H1 向 H2 发送1个大小为1 MB的文件，分组长度为1000 B，则从 H1 开始发送时刻起到 H2 收到文件全部数据时刻止，所需的时间至少是（注：$"M"=10^6$）
+#align(center, image("../../../历年真题+参考解答/2023/official-images/q33.png", width: 19em))
+#choices([80.02 ms], [80.08 ms], [80.09 ms], [80.10 ms])
+]
+
+#question(label: n => [2024 33])[
+若某分组交换网络及每段链路的带宽如题33图所示，则 H1 到 H2 的最大吞吐量约为
+
+// 图标采用已有的黑底白箭头圆柱；连线和标签仍为题内矢量内容。
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  set-style(stroke: 0.045em)
+  let ps=((-8,0),(-4,0),(1,3),(6,0),(1,-3),(10,0))
+  for (a,b,label,pos) in ((0,1,[10 Mb/s],(-6,0.5)),(1,2,[1000 Mb/s],(-1.7,2)),(2,3,[1000 Mb/s],(3.7,2)),(1,3,[1 Mb/s],(1,0.5)),(1,4,[100 Mb/s],(-1.7,-2)),(4,3,[100 Mb/s],(3.7,-2)),(3,5,[10 Mb/s],(8,0.5))) {
+    line(ps.at(a),ps.at(b))
+    content(pos,text(size: 0.65em,label), angle: if a==1 and b==2 {31deg} else if a==2 and b==3 {-31deg} else if a==1 and b==4 {-31deg} else if a==4 and b==3 {31deg} else {0deg})
+  }
+  for i in (1,2,3,4) {
+    content(ps.at(i),image("../../../历年真题+参考解答/2009/assets/router-symbol.svg",width: 1.3em))
+    content((ps.at(i).at(0),ps.at(i).at(1)-1.05),text(size: 0.65em)[路由器])
+  }
+  for (i,label) in ((0,[H1]),(5,[H2])) {
+    let (x,y)=ps.at(i)
+    line((x - 0.8,y),(x - 0.5,y+0.8),(x+0.6,y+0.8),(x+0.3,y),close: true,fill: luma(75%))
+    line((x - 0.8,y),(x - 1,y - 0.35),(x+0.4,y - 0.35),(x+0.3,y),fill: white,close: true)
+    content((x,y - 0.9),label)
+  }
+})),caption: [题33图],kind: image)
+
+#choices([1 Mb/s], [10 Mb/s], [100 Mb/s], [1000 Mb/s])
+]
+
 == 计算机网络分层结构
 
 #question(label: n => [2010 33])[
@@ -78,6 +112,11 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
   [协议的内部实现细节],
   [每一层必须完成的功能],
 )
+]
+
+#question(label: n => [2026 33])[
+下列关于分层网络体系结构的叙述中，#emphasis[错误]的是
+#choices([有利于标准化], [层次越多效率越高], [有利于各层技术独立演化], [降低网络系统设计与实现的复杂度])
 ]
 
 == 计算机网络协议、接口、服务等概念

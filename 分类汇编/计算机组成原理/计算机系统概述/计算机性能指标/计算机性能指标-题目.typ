@@ -99,3 +99,8 @@ I/O时间。若CPU速度提高 50% ，I/O速度不变，则运行基准程序 A�
 
 #choices([2.8，28 μs], [28，28 μs], [2.8，28 ms], [28，28 ms])
 ]]
+
+#block(breakable: false)[#question(label: n => [2023 12])[
+若机器 M 的主频为1.5 GHz，在 M 上执行程序 P 的指令条数为 $5 times 10^5$，P 的平均 CPI 为1.2，则 P 在 M 上的指令执行速度和用户 CPU 时间分别为
+#choices([0.8 GIPS，0.4 ms], [0.8 GIPS，0.4 μs], [1.25 GIPS，0.4 ms], [1.25 GIPS，0.4 μs])
+]]

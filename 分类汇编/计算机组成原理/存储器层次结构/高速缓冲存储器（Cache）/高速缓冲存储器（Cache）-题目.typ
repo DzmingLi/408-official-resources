@@ -108,6 +108,11 @@ for(k=0;k<1000;k++)
 #choices([8，20], [8，23], [64，20], [64，23])
 ]]
 
+#block(breakable: false)[#question(label: n => [2026 18])[
+某计算机按字节编址，数据 Cache 共有1024行，采用4路组相联映射方式，主存块大小为32 B。若需要访问主存地址为1028的4字节数据，则该数据所在主存块对应的 Cache 组号是
+#choices([4], [16], [32], [64])
+]]
+
 == Cache中主存块的替换算法
 
 #block(breakable: false)[#question(label: n => [2012 17])[

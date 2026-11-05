@@ -12,6 +12,14 @@
 
 === 2022 6：D
 
+=== 2025 6：C
+
+=== 2026 7
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
+
 === 2021 41
 
 #subquestions(allow-oversize: true)[

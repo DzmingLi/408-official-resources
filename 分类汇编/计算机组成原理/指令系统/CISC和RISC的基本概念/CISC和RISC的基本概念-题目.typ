@@ -17,3 +17,9 @@
   [RISC 的指令数、寻址方式和指令格式种类相对 CISC 少],
 )
 ]]
+
+#block(breakable: false)[#question(label: n => [2025 17])[
+下列关于 RISC 的叙述中，#emphasis[错误]的是
+
+#choices([多采用硬连线方式实现控制器],[通常采用 Load/Store 型指令设计风格],[难以采用流水线数据通路实现微架构],[多采用寄存器传递过程调用时的参数])
+]]

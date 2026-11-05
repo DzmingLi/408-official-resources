@@ -453,3 +453,35 @@ int Majority1( int A[ ],int n )// 采用计数排序思想,时间:O(n),空间:O(
   设 $n=(abs("S1")+abs("S2")+abs("S3"))$，参考答案的时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
 ]
+
+=== 2025 41
+
+#subquestions(allow-oversize: true)[
++ 算法的基本设计思想
+  从后向前扫描一趟数组 $A$，对每个 $A[i]$（$0 ≤ i ≤ n-1$），分别找到从 $A[n-1]$ 到 $A[i]$ 中的最大值 Max 和最小值 Min，然后分以下情况处理：\
+  ①若 $A[i] ≥ 0$，则 $A[i]$ 与 Max 相乘；\
+  ②若 $A[i] < 0$，则 $A[i]$ 与 Min 相乘；\
+  相乘的结果保存在 $r e s[i]$ 中。
+
++ 算法实现
+
+  #block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em)[
+  ```c
+  void calMulMax(int A[], int res[], int n)
+  {
+      int i, Max, Min;
+      Max=Min=A[n-1];
+      for(i=n-1; i>=0; i--) // 从后向前扫描数组A
+      {
+          if(A[i]>Max) Max=A[i];
+          else if(A[i]<Min) Min=A[i];
+          if(A[i]>=0) res[i]=A[i]*Max; // 根据A[i]的正负性分别处理
+          else res[i]=A[i]*Min;
+      }
+  }
+  ```
+  ]
+
++ 算法的时间复杂度为 $O(n)$；空间复杂度为 $O(1)$。
+
+]

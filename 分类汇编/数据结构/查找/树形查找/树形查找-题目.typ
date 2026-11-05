@@ -133,6 +133,52 @@ $T_2$ 的存储结果如下：
 ]
 ]
 
+#block(breakable: false)[#question(label: n => [2024 7])[
+一棵二叉搜索树如题7图所示，k1、k2、k3 分别是对应结点中保存的关键字。子树 $T$ 的任一结点中保存的关键字 $x$ 满足的是
+
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 2026 大纲 PDF 第 50 页：以正文汉字字距 33 px 为 1em 描点。
+  // 文字以实际字面包围盒居中，不让字体的 cap-height 把标记压向圆底。
+  let p(x,y) = ((x - 570) / 33, (495 - y) / 33)
+  set-style(stroke: 0.045em, content: (wrap: body =>
+    box(text(size: 0.9em, top-edge: "bounds", bottom-edge: "bounds", body))))
+  for (a,b) in (((647,258),(592,302)),((647,258),(723,318)),
+    ((723,318),(657,386)),((723,318),(775,367)),
+    ((657,386),(598,429)),((657,386),(715,430))) { line(p(..a),p(..b)) }
+  for (x,y,label) in ((647,258,[k1]),(723,318,[k2]),(657,386,[k3])) {
+    circle(p(x,y),radius: 23.5 / 33,fill: white)
+    content(p(x,y),label)
+  }
+  for (a,b,c) in (((592,302),(570,365),(611,365)),
+    ((775,367),(755,432),(796,432)),((598,429),(577,493),(619,493)),
+    ((715,430),(693,495),(735,495))) { line(p(..a),p(..b),p(..c),close: true) }
+  content(p(715,477),$T$)
+})),caption: [题7图],kind: image)
+
+#choices([$x < "k1"$], [$x > "k2"$], [$"k1" < x < "k3"$], [$"k3" < x < "k2"$])
+]]
+
+#question(label: n => [2026 41])[
+（本题13分）已知二叉搜索树采用二叉链表存储，类型定义如下：
+#block(stroke: (dash: "dashed", thickness: .5pt), inset: .45em)[
+```c
+typedef struct BSTNode                 //二叉搜索树结点
+{
+    int data;                         //保存结点的关键字值
+    struct BSTNode *left, *right;      //指向左孩子、右孩子的指针
+} BinTNode;
+typedef BinTNode *BTree;               //二叉搜索树
+```
+]
+对于给定的非空二叉搜索树 $T$（root 为指向 $T$ 的根结点的指针）和整数 $k$，请设计尽可能高效的查找算法：`void searchX(BTree root, int k)`，查找 $T$ 中其关键字值与 $k$ 之差的绝对值最小的所有结点，输出差值的绝对值和结点中的关键字值。要求：
+#subquestions[
+ + 给出算法的基本设计思想。（4分）
+ + 根据设计思想，采用 C 或 C++语言描述算法，关键之处给出注释。（9分）
+]
+]
+
 == 平衡二叉树
 
 #block(breakable: false)[#question(label: n => [2009 4])[
@@ -288,4 +334,9 @@ T中平衡因子为0的分支结点的个数是
 ))
 
 #choices([16], [20], [23], [25])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 8])[
+高度为4的平衡二叉树中，根结点左、右子树的结点个数相差最多是
+#choices([1], [2], [3], [5])
 ]]

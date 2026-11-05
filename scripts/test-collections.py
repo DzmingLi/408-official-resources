@@ -5,7 +5,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-MODULE = runpy.run_path(str(Path(__file__).with_name('extract-collections.py')))
+FULL_MODULE = runpy.run_path(str(Path(__file__).with_name('extract-collections.py')))
+# Keep the reviewed 2009–2022 classification regressions, alongside tests of
+# the complete corpus and user-selected ranges below.
+MODULE = dict(FULL_MODULE, PLANS=FULL_MODULE['select_plans'](2009, 2022, True))
 ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -19,7 +22,7 @@ class CollectionTests(unittest.TestCase):
         publisher = runpy.run_path(str(ROOT / 'scripts/publish-release.py'))
         groups = publisher['collection_plan']()
         self.assertEqual({g['subject']: len(g['rows']) for g in groups}, {
-            '数据结构': 31, '计算机组成原理': 28, '操作系统': 15, '计算机网络': 16})
+            '数据结构': 33, '计算机组成原理': 30, '操作系统': 17, '计算机网络': 18})
         ds = groups[0]['rows']
         self.assertEqual(list(dict.fromkeys(r['chapter'] for r in ds)),
                          ['基本概念', '线性表', '栈、队列和数组', '树与二叉树', '图', '查找', '排序'])
@@ -292,10 +295,10 @@ class CollectionTests(unittest.TestCase):
     def test_answers_are_complete_and_reproducible(self):
         module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
         outputs = list(module['outputs'](ROOT))
-        self.assertEqual(len(outputs), len(MODULE['PLANS']))
+        self.assertEqual(len(outputs), len(FULL_MODULE['PLANS']))
         for target, content in outputs:
             self.assertEqual(target.read_text(), content, str(target))
-        for title, plan in MODULE['PLANS'].items():
+        for title, plan in FULL_MODULE['PLANS'].items():
             target = ROOT / '分类汇编' / plan['directory'] / (title + '-answers.typ')
             expected = [entry for entries in plan['sections'].values() for entry in entries]
             actual = [line for line in target.read_text().splitlines() if line.startswith('=== ')]
@@ -326,10 +329,8 @@ class CollectionTests(unittest.TestCase):
             'DNS系统-题目': ('网络应用模型', 'DNS系统'),
         }
         self.assertEqual(builder['MERGED_COLLECTIONS'], expected_merges)
-        self.assertEqual(builder['SINGLE_PAGE_MERGES'],
-                         {'传输层提供的服务与UDP协议-题目', 'FTP与电子邮件-题目', '操作系统的基本概念与发展历程-题目'})
         expected = {MODULE['render'](ROOT, title, plan)[0].resolve()
-                    for title, plan in MODULE['PLANS'].items()}
+                    for title, plan in FULL_MODULE['PLANS'].items()}
         actual = []
         previews = ROOT / '分类汇编/preview'
         for source in previews.glob('*.typ'):
@@ -424,7 +425,7 @@ class CollectionTests(unittest.TestCase):
 
     def test_only_requested_lectures_exist(self):
         self.assertEqual(len(MODULE['PLANS']), 97)
-        self.assertEqual(MODULE['MAX_YEAR'], 2022)
+        self.assertEqual(MODULE['MAX_YEAR'], 2026)
 
     def test_no_reserved_or_duplicate_questions(self):
         seen = set()
@@ -441,7 +442,7 @@ class CollectionTests(unittest.TestCase):
                     seen.add(key)
 
     def test_generated_content_matches_original_sources(self):
-        for title, plan in MODULE['PLANS'].items():
+        for title, plan in FULL_MODULE['PLANS'].items():
             target, content, count = MODULE['render'](ROOT, title, plan)
             self.assertEqual(target.read_text(), content)
             self.assertEqual(content.count('#question(label:'), count)
@@ -566,6 +567,121 @@ class CollectionTests(unittest.TestCase):
             locations = [title for title, plan in MODULE['PLANS'].items()
                          for entries in plan['sections'].values() if entry in entries]
             self.assertEqual(locations, ['TCP协议'])
+
+
+class BuildSelectionTests(unittest.TestCase):
+    def test_paper_options_are_only_a4_and_a5(self):
+        import subprocess
+        import sys
+        builder = runpy.run_path(str(ROOT / 'scripts/build-collections.py'))
+        self.assertEqual(set(builder['PAPER_SIZES']), {'A4', 'A5'})
+        with tempfile.TemporaryDirectory() as tmp:
+            result = subprocess.run([sys.executable, 'scripts/build-collections.py',
+                                     '--output', tmp, '--paper-size', 'B5'],
+                                    cwd=ROOT, capture_output=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn(b'invalid choice', result.stderr)
+
+    def test_full_corpus_covers_every_paper_question(self):
+        plans = FULL_MODULE['PLANS']
+        papers = [e for p in plans.values() for entries in p['sections'].values()
+                  for e in entries if len(e) == 2]
+        self.assertEqual(set(papers), {(y, n) for y in range(2009, 2027) for n in range(1, 48)})
+        self.assertEqual(len(papers), 848)  # two deliberate cross-subject reuses
+        for subject in ('数据结构', '计算机组成原理', '操作系统', '计算机网络'):
+            entries = [e for p in plans.values() if p['directory'].startswith(subject + '/')
+                       for es in p['sections'].values() for e in es]
+            self.assertEqual(len(entries), len(set(entries)), subject)
+
+    def test_year_filter_and_historical_filter_are_independent(self):
+        selected = FULL_MODULE['select_plans'](2018, 2022)
+        entries = [e for p in selected.values() for es in p['sections'].values() for e in es]
+        self.assertTrue(all(len(e) == 3 or 2018 <= e[0] <= 2022 for e in entries))
+        self.assertEqual(len({e for e in entries if len(e) == 2}), 5 * 47)
+        current = FULL_MODULE['select_plans'](current_syllabus_only=True)
+        current_papers = {e for p in current.values() for es in p['sections'].values()
+                          for e in es if len(e) == 2}
+        self.assertEqual(len(current_papers), 842)
+        self.assertTrue(set(FULL_MODULE['HISTORICAL_QUESTIONS']).isdisjoint(current_papers))
+        self.assertIn((2013, 15), current_papers)  # Hamming is still in networking
+        self.assertNotIn('IPv6', FULL_MODULE['select_plans'](through_year=2022))
+        self.assertIn('IPv6', FULL_MODULE['PLANS'])
+
+    def test_invalid_year_windows_fail_before_creating_output(self):
+        import subprocess
+        import sys
+        for start, end in ((2008, 2022), (2026, 2025), (2009, 2027)):
+            with tempfile.TemporaryDirectory() as tmp:
+                output = Path(tmp) / 'pdfs'
+                result = subprocess.run([sys.executable, 'scripts/build-collections.py',
+                                         '--output', str(output), '--from-year', str(start),
+                                         '--through-year', str(end)], cwd=ROOT, capture_output=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertFalse(output.exists())
+
+    def test_filtered_sources_do_not_modify_canonical_files_and_keep_pairs(self):
+        builder = runpy.run_path(str(ROOT / 'scripts/build-collections.py'))
+        plans = FULL_MODULE['select_plans'](2026, 2026)
+        originals = {p: p.read_bytes() for p in (ROOT / '分类汇编').rglob('*.typ')
+                     if 'preview' not in str(p) and 'answers-preview' not in str(p)}
+        (ROOT / '.build').mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=ROOT / '.build') as tmp:
+            collections = builder['prepare_sources'](ROOT, Path(tmp), plans)
+            for source in (collections / 'preview').glob('*.typ'):
+                inputs, _ = builder['collection_inputs'](source, collections, plans)
+                answer = collections / 'answers-preview' / source.name.replace('-题目', '-answers')
+                paired, _ = builder['collection_inputs'](answer, collections, plans)
+                self.assertEqual(paired, [p.with_name(p.name.replace('-题目', '-answers')) for p in inputs])
+                for content in inputs:
+                    text = content.read_text()
+                    self.assertNotIn('[2025 ', text)
+                    self.assertNotIn('[2023 ', text)
+                    self.assertTrue('[2026 ' in text or '[旧版题型示例]' in text)
+            # Some members of a registered merge disappear with a narrow range.
+            self.assertNotIn('FTP', plans)
+            self.assertIn('电子邮件', FULL_MODULE['select_plans'](2025, 2025))
+        for source, before in originals.items():
+            self.assertEqual(source.read_bytes(), before)
+
+    def test_available_answers_and_explicit_missing_years(self):
+        module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
+        for year in (2024, 2025):
+            _, items = module['answers'](ROOT, year)
+            self.assertEqual(set(items), set(range(1, 48)))
+            self.assertTrue(all(items[n] in 'ABCD' for n in range(1, 41)))
+            self.assertTrue(all(len(items[n]) > 20 for n in range(41, 48)))
+        for year in (2023, 2026):
+            _, items = module['answers'](ROOT, year)
+            self.assertEqual(set(items), set(range(1, 48)))
+            self.assertEqual(set(items.values()), {'本仓库尚未收录本题参考答案。'})
+
+    def test_new_cross_topic_questions_and_shared_context(self):
+        for entry, title in (((2023, 40), 'IPv6'), ((2024, 35), 'IPv4'),
+                             ((2025, 47), 'IPv4'), ((2026, 46), '文件系统')):
+            owners = [t for t, p in FULL_MODULE['PLANS'].items()
+                      for entries in p['sections'].values() if entry in entries]
+            self.assertEqual(owners, [title])
+        for year, title in ((2023, '高级语言程序与机器级代码之间的对应'),
+                            (2024, '高级语言程序与机器级代码之间的对应'),
+                            (2025, '异常和中断机制'), (2026, '控制器的功能和工作原理')):
+            selected = FULL_MODULE['select_plans'](year, year)
+            _, text, _ = FULL_MODULE['render'](ROOT, title, selected[title])
+            self.assertIn('共用背景（不含小问）', text)
+
+    def test_paper_dimensions_are_checked(self):
+        from pypdf import PdfWriter
+        builder = runpy.run_path(str(ROOT / 'scripts/build-collections.py'))
+        for paper, dimensions in builder['PAPER_SIZES'].items():
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / 'paper.pdf'
+                writer = PdfWriter()
+                writer.add_blank_page(*(mm * 72 / 25.4 for mm in dimensions))
+                with path.open('wb') as stream:
+                    writer.write(stream)
+                builder['validate_pdf'](path, paper)
+                wrong = 'A5' if paper == 'A4' else 'A4'
+                with self.assertRaisesRegex(ValueError, 'expected ' + wrong):
+                    builder['validate_pdf'](path, wrong)
 
 
 if __name__ == '__main__':

@@ -69,6 +69,18 @@
 #choices([850 ms，50 ms], [1 650 ms，50 ms], [850 ms，75 ms], [1 650 ms，75 ms])
 ]
 
+#question(label: n => [2024 38])[
+假设主机 H 通过 TCP 向服务器发送长度为3000 B的报文，往返时间 RTT=10 ms，最长报文段寿命 MSL=30 s，最大报文段长度 MSS=1000 B，忽略 TCP 段的传输时延，报文传输结束后 H 首先请求断开连接，则从 H 请求建立 TCP 连接时刻起，到 H 进入 CLOSED 状态为止，所需的时间至少是
+
+#choices([30.03 s], [30.04 s], [60.03 s], [60.04 s])
+]
+
+#question(label: n => [2025 39])[
+Time 是一个提供时间查询服务的 C/S 架构网络应用，支持客户通过 UDP 或 TCP 向 Time 服务器请求时间服务。若某客户与某 Time 服务器通信的往返时间 RTT=8 ms，则该客户分别通过 UDP 和 TCP 向该服务器请求服务，所需的最少时间分别是
+
+#choices([8 ms，8 ms],[8 ms，16 ms],[16 ms，8 ms],[16 ms，16 ms])
+]
+
 == TCP可靠传输
 
 #question(label: n => [2011 40])[
@@ -80,60 +92,6 @@
   [1200],
   [1400],
 )
-]
-
-#question(label: n => [2019 38])[
-某客户通过一个 TCP 连接向服务器发送数据的部分过程如题38图所示。客户在 $t_0$ 时刻第一次收到确认序列号 ack_seq = 100 的段，并发送序列号 seq = 100 的段，但发生丢失。若 TCP 支持快速重传，则客户重新发送 seq = 100 段的时刻是
-
-#figure(
-  cetz.canvas(length: 1em, {
-    import cetz.draw: *
-    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
-    set-style(stroke: 0.065em)
-    line((0, 17.5), (0, 0), mark: (end: ">", fill: black, scale: 0.8))
-    line((12, 17.5), (12, 0), mark: (end: ">", fill: black, scale: 0.8))
-    let message(a, b, body, angle, fraction: auto) = {
-      line(a, b, mark: (end: ">", fill: black, scale: 0.75))
-      let fraction = if fraction != auto { fraction } else if a.at(0) > b.at(0) { 0.83 } else { 0.25 }
-      let m = (a.at(0) + fraction * (b.at(0) - a.at(0)),
-        a.at(1) + fraction * (b.at(1) - a.at(1)) + 0.55)
-      content(m, std.rotate(-angle, reflow: true, text(size: 0.8em, body)))
-    }
-    message((12, 16.8), (0, 13.8), [ack_seq=100], 14deg, fraction: 0.7)
-    message((0, 13.8), (7.5, 12), [seq=100], -14deg, fraction: 0.55)
-    content((8.7, 11.8), [丢失])
-    message((0, 12.3), (12, 9.3), [seq=200], -14deg)
-    message((0, 10.8), (12, 7.8), [seq=300], -14deg)
-    message((0, 9.3), (12, 6.3), [seq=400], -14deg)
-    message((12, 9.3), (0, 6.3), [ack_seq=100], 14deg)
-    message((12, 7.8), (0, 4.8), [ack_seq=100], 14deg)
-    message((12, 6.3), (0, 3.3), [ack_seq=100], 14deg)
-    for (i, y) in ((0, 13.8), (1, 6.3), (2, 4.8), (3, 3.3), (4, 1.8)) {
-      content((-0.9, y), $t_#i$)
-    }
-    circle((0, 1.8), radius: 0.09, fill: black)
-    line((0, 1.8), (0.6, 2.1), (1.6, 2.1))
-    content((1.8, 2.1), text(size: 0.85em)[$t_4$ 时刻 seq=100 段超时], anchor: "west")
-    content((-1.7, 0.6), [时间])
-    content((0, 20.5), [客户])
-    content((12, 20.5), [服务器])
-    // 客户端的 CRT 显示器与键盘。
-    line((-0.7, 18.9), (0.4, 18.5), (0.4, 17.5), (-0.7, 17.9), close: true, fill: luma(85%))
-    line((0.4, 18.5), (1.1, 18.9), (1.1, 17.9), (0.4, 17.5), close: true, fill: luma(55%))
-    line((-0.55, 18.65), (0.22, 18.37), (0.22, 17.75), (-0.55, 18.03), close: true, fill: white)
-    line((-0.8, 17.7), (0.5, 17.25), (0.9, 17.5), (-0.4, 17.95), close: true, fill: luma(80%))
-    line((-1.1, 17.35), (-0.2, 17.0), (0.15, 16.8), (-0.8, 17.12), close: true, fill: white)
-    // 服务器机箱。
-    line((11.2, 19.15), (12.2, 18.65), (12.2, 17.0), (11.2, 17.5), close: true, fill: luma(35%))
-    line((12.2, 18.65), (13, 19.1), (13, 17.45), (12.2, 17.0), close: true, fill: luma(55%))
-    line((11.2, 19.15), (12, 19.6), (13, 19.1), (12.2, 18.65), close: true, fill: luma(70%))
-    line((11.4, 18.6), (11.9, 18.35), stroke: white + 0.08em)
-    circle((11.55, 18.1), radius: 0.05, fill: white, stroke: none)
-  }),
-  caption: [题38图], numbering: none,
-)
-
-#choices([$t_1$], [$t_2$], [$t_3$], [$t_4$])
 ]
 
 #question(label: n => [2012 47])[
@@ -257,6 +215,60 @@
 ]
 ]
 
+#question(label: n => [2019 38])[
+某客户通过一个 TCP 连接向服务器发送数据的部分过程如题38图所示。客户在 $t_0$ 时刻第一次收到确认序列号 ack_seq = 100 的段，并发送序列号 seq = 100 的段，但发生丢失。若 TCP 支持快速重传，则客户重新发送 seq = 100 段的时刻是
+
+#figure(
+  cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+    set-style(stroke: 0.065em)
+    line((0, 17.5), (0, 0), mark: (end: ">", fill: black, scale: 0.8))
+    line((12, 17.5), (12, 0), mark: (end: ">", fill: black, scale: 0.8))
+    let message(a, b, body, angle, fraction: auto) = {
+      line(a, b, mark: (end: ">", fill: black, scale: 0.75))
+      let fraction = if fraction != auto { fraction } else if a.at(0) > b.at(0) { 0.83 } else { 0.25 }
+      let m = (a.at(0) + fraction * (b.at(0) - a.at(0)),
+        a.at(1) + fraction * (b.at(1) - a.at(1)) + 0.55)
+      content(m, std.rotate(-angle, reflow: true, text(size: 0.8em, body)))
+    }
+    message((12, 16.8), (0, 13.8), [ack_seq=100], 14deg, fraction: 0.7)
+    message((0, 13.8), (7.5, 12), [seq=100], -14deg, fraction: 0.55)
+    content((8.7, 11.8), [丢失])
+    message((0, 12.3), (12, 9.3), [seq=200], -14deg)
+    message((0, 10.8), (12, 7.8), [seq=300], -14deg)
+    message((0, 9.3), (12, 6.3), [seq=400], -14deg)
+    message((12, 9.3), (0, 6.3), [ack_seq=100], 14deg)
+    message((12, 7.8), (0, 4.8), [ack_seq=100], 14deg)
+    message((12, 6.3), (0, 3.3), [ack_seq=100], 14deg)
+    for (i, y) in ((0, 13.8), (1, 6.3), (2, 4.8), (3, 3.3), (4, 1.8)) {
+      content((-0.9, y), $t_#i$)
+    }
+    circle((0, 1.8), radius: 0.09, fill: black)
+    line((0, 1.8), (0.6, 2.1), (1.6, 2.1))
+    content((1.8, 2.1), text(size: 0.85em)[$t_4$ 时刻 seq=100 段超时], anchor: "west")
+    content((-1.7, 0.6), [时间])
+    content((0, 20.5), [客户])
+    content((12, 20.5), [服务器])
+    // 客户端的 CRT 显示器与键盘。
+    line((-0.7, 18.9), (0.4, 18.5), (0.4, 17.5), (-0.7, 17.9), close: true, fill: luma(85%))
+    line((0.4, 18.5), (1.1, 18.9), (1.1, 17.9), (0.4, 17.5), close: true, fill: luma(55%))
+    line((-0.55, 18.65), (0.22, 18.37), (0.22, 17.75), (-0.55, 18.03), close: true, fill: white)
+    line((-0.8, 17.7), (0.5, 17.25), (0.9, 17.5), (-0.4, 17.95), close: true, fill: luma(80%))
+    line((-1.1, 17.35), (-0.2, 17.0), (0.15, 16.8), (-0.8, 17.12), close: true, fill: white)
+    // 服务器机箱。
+    line((11.2, 19.15), (12.2, 18.65), (12.2, 17.0), (11.2, 17.5), close: true, fill: luma(35%))
+    line((12.2, 18.65), (13, 19.1), (13, 17.45), (12.2, 17.0), close: true, fill: luma(55%))
+    line((11.2, 19.15), (12, 19.6), (13, 19.1), (12.2, 18.65), close: true, fill: luma(70%))
+    line((11.4, 18.6), (11.9, 18.35), stroke: white + 0.08em)
+    circle((11.55, 18.1), radius: 0.05, fill: white, stroke: none)
+  }),
+  caption: [题38图], numbering: none,
+)
+
+#choices([$t_1$], [$t_2$], [$t_3$], [$t_4$])
+]
+
 == TCP流量控制
 
 #question(label: n => [2010 39])[
@@ -324,6 +336,20 @@ MSS = 1 KB 大小的段发送数据，并一直有数据发送；乙每收到一
 #choices([1KB], [8KB], [16KB], [32KB])
 ]
 
+#question(label: n => [2016 41])[
+原卷题33～41共用下图，本题仍依据该图回答。
+
+#figure(image("../../../../历年真题+参考解答/2016/official-images/q33-41.png",width:29em),caption:[2016年题33～41图],kind:image)
+
+（9分）假设题33～41图中的H3访问Web服务器S时，S为新建的TCP连接分配了20 KB（K=1024）的接收缓存，最大段长MSS=1 KB，平均往返时间RTT=200 ms。H3建立连接时的初始序号为100，且持续以MSS大小的段向S发送数据，拥塞窗口初始阈值为32 KB；S对收到的每个段进行确认，并通告新的接收窗口。假定TCP连接建立完成后，S端的TCP接收缓存仅有数据存入而无数据取出。请回答下列问题。
+#subquestions[
++ 在TCP连接建立过程中，H3收到的S发送过来的第二次握手TCP段的SYN和ACK标志位的值分别是多少？确认序号是多少？
++ H3收到的第8个确认段所通告的接收窗口是多少？此时H3的拥塞窗口变为多少？H3的发送窗口变为多少？
++ 当H3的发送窗口等于0时，下一个待发送的数据段序号是多少？H3从发送第1个数据段到发送窗口等于0时刻为止，平均数据传输速率是多少（忽略段的传输延时）？
++ 若H3与S之间通信已经结束，在 $t$ 时刻H3请求断开该连接，则从 $t$ 时刻起，S释放该连接的最短时间是多少？
+]
+]
+
 #question(label: n => [2017 39])[
 若甲向乙发起一个 TCP 连接，最大段长 MSS=1 KB，RTT=5 ms，乙开辟的接收缓存为64 KB，则甲从连接建立成功至发送窗口达到32 KB，需经过的时间至少是
 #choices([25 ms], [30 ms], [160 ms], [165 ms])
@@ -341,16 +367,40 @@ MSS = 1 KB 大小的段发送数据，并一直有数据发送；乙每收到一
 #choices([4 RTT], [5 RTT], [11 RTT], [16 RTT])
 ]
 
-#question(label: n => [2016 41])[
-原卷题33～41共用下图，本题仍依据该图回答。
+#question(label: n => [2025 38])[
+主机甲通过 TCP 向主机乙发送数据的部分过程如题38图所示，seq 为序号，ack_seq 为确认序号，rcvwnd 为接收窗口。甲在 $t_0$ 时刻的拥塞窗口和发送窗口均为2000 B，拥塞控制阈值为8000 B，MSS=1000 B，甲始终以 MSS 发送 TCP 段。若甲在 $t_1$ 时刻收到如图所示的确认段，则甲在未收到新的确认段之前，还可以继续向乙发送的 TCP 段数是
 
-#figure(image("../../../../历年真题+参考解答/2016/official-images/q33-41.png",width:29em),caption:[2016年题33～41图],kind:image)
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 大纲 PDF 第 82 页，保留原图的斜率、两次发送的间距和标签离线距离。
+  let p(x,y)=((x - 399) / 35,(1560 - y) / 35)
+  set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
+  content(p(400,1100),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
+  content(p(978,1102),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
+  for x in (399,978) {line(p(x,1147),p(x,1560),mark:(end:">",fill:black,scale:0.7))}
+  for (a,b) in (((399,1174),(978,1318)),((399,1222),(747,1308)),
+    ((978,1318),(399,1484)),((399,1484),(496,1512))) {
+    line(p(..a),p(..b),mark:(end:">",fill:black,scale:0.7))
+  }
+  content(p(567,1190),[seq=2001，1000 B数据],angle:-14deg)
+  content(p(567,1237),[seq=3001，1000 B数据],angle:-14deg)
+  content(p(674,1386),[seq=4001，ack_seq=3001，rcvwnd=4000 B],angle:16deg)
+  for (y,label) in ((1174,[$t_0$]),(1484,[$t_1$])) {circle(p(399,y),radius:0.12,fill:black);content(p(368,y),label)}
+  content(p(363,1547),[时间])
+})),caption: [题38图],kind: image)
 
-（9分）假设题33～41图中的H3访问Web服务器S时，S为新建的TCP连接分配了20 KB（K=1024）的接收缓存，最大段长MSS=1 KB，平均往返时间RTT=200 ms。H3建立连接时的初始序号为100，且持续以MSS大小的段向S发送数据，拥塞窗口初始阈值为32 KB；S对收到的每个段进行确认，并通告新的接收窗口。假定TCP连接建立完成后，S端的TCP接收缓存仅有数据存入而无数据取出。请回答下列问题。
+#choices([2],[3],[4],[5])
+]
+
+#question(label: n => [2026 47])[
+（本题9分）人工智能（AI）是引领未来的战略性技术，其发展高度依赖强大的算力供给，通过网络互联分散的算力中心，可以充分聚合算力资源，满足人工智能对大规模算力的需求，支撑人工智能国家发展战略。某算力调度交易平台聚合各地的算力中心的算力，向用户提供算力服务的示意场景如题47图所示。算力用户 C 向平台申请算力服务，平台通过优化调度各算力中心算力，向 C 授权使用算力中心 $i$ 的算力，$S_i$ 为算力中心 $i$ 的负载均衡服务器，用于接收算力用户的计算任务描述数据文件，并向算力中心 $i$ 内部分派计算任务。为确保可靠传输，假设 C 建立一条 TCP 连接向服务器 $S_i$ 上传一个总长度为2000 B的计算任务描述数据文件，拥塞窗口初始阈值为8 MSS，MSS=500 B，$S_i$ 对收到的每个 TCP 段进行确认，且确认段不封装数据，接收窗口 rwnd 始终为1000 B，RTT=5 ms。C 建立连接时选择的初始序号为1000，$S_i$ 选择的初始序号为2000，SYN、ACK、FIN 为标志位，seq 为序号，ack\_seq 为确认序号。在整个文件传输过程中未出现任何重传或报文段丢失。
+#figure(image("../../../../历年真题+参考解答/2026/official-images/q47.png", width: 25em), caption: [题47图])
+请回答下列问题。
 #subquestions[
-+ 在TCP连接建立过程中，H3收到的S发送过来的第二次握手TCP段的SYN和ACK标志位的值分别是多少？确认序号是多少？
-+ H3收到的第8个确认段所通告的接收窗口是多少？此时H3的拥塞窗口变为多少？H3的发送窗口变为多少？
-+ 当H3的发送窗口等于0时，下一个待发送的数据段序号是多少？H3从发送第1个数据段到发送窗口等于0时刻为止，平均数据传输速率是多少（忽略段的传输延时）？
-+ 若H3与S之间通信已经结束，在 $t$ 时刻H3请求断开该连接，则从 $t$ 时刻起，S释放该连接的最短时间是多少？
+ + C 与 $S_i$ 建立 TCP 连接过程需要几次握手？C 收到的 SYN=1、ACK=1的 TCP 段的确认序号（ack\_seq）是多少？（2分）
+ + 当 C 接收到 $S_i$ 发送的“ACK=1，seq=2001，ack\_seq=2001，rwnd=1000”确认段后，C 的拥塞窗口增加到多少？C 的发送窗口设置为多少？（2分）
+ + C 与 $S_i$ 释放 TCP 连接过程需要几次挥手？C 收到的最后一个 TCP 报文段的序号（seq）、确认序号（ack\_seq）、FIN 的值分别是多少？（4分）
+ + 若忽略报文段传输时延，且时间从 C 请求建立 TCP 连接时刻算起，则 C 确认 $S_i$ 已成功接收到文件的时间是多少？（1分）
 ]
 ]

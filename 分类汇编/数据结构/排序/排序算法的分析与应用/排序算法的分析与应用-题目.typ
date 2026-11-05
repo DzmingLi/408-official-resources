@@ -105,6 +105,18 @@ void cmpCountSort(int a[], int b[], int n)
 ]
 ]
 
+#block(breakable: false)[#question(label: n => [2023 10])[
+下列排序算法中，不稳定的是
+#statements(columns: 2, [Ⅰ．希尔排序], [Ⅱ．归并排序], [Ⅲ．快速排序], [Ⅳ．堆排序], [Ⅴ．基数排序])
+#choices([Ⅰ、Ⅱ], [Ⅱ、Ⅴ], [Ⅰ、Ⅲ、Ⅳ], [Ⅲ、Ⅳ、Ⅴ])
+]]
+
+#block(breakable: false)[#question(label: n => [2025 10])[
+下列排序算法中，最坏情况下元素移动次数最少的是
+
+#choices([起泡排序],[直接插入排序],[快速排序],[简单选择排序])
+]]
+
 #block(breakable: false)[#question(label: n => [旧版题型示例])[
 下列排序算法中，时间复杂度为 $O(n log_2 n)$ 且占用额外空间最少的是
 

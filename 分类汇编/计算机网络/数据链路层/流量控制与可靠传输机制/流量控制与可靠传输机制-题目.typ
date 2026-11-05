@@ -135,6 +135,50 @@ Mbps，乙每收到一个数据帧立即利用一个短帧（忽略其传输延�
 )
 ]
 
+#question(label: n => [2023 35])[
+假设通过同一条信道，数据链路层分别采用停-等协议、GBN 协议和 SR 协议（发送窗口和接收窗口相等）传输数据，3个协议的数据帧长相同，忽略确认帧长度，帧序号位数为3比特。若对应3个协议的发送方最大信道利用率分别是 U1、U2 和 U3，则 U1、U2 和 U3 满足的关系是
+#choices([$"U1"<="U2"<="U3"$], [$"U1"<="U3"<="U2"$], [$"U2"<="U3"<="U1"$], [$"U3"<="U2"<="U1"$])
+]
+
+#question(label: n => [2024 37])[
+主机甲通过选择重传（SR）滑动窗口协议向主机乙发送帧的部分过程如题37图所示，Fx 为数据帧，ACKx 为确认帧，$x$ 是位数为3比特的序号。乙只对正确接收的数据帧进行独立确认，发送窗口与接收窗口大小相同且均为最大值。甲在 $t_1$ 时刻和 $t_2$ 时刻发送的数据帧分别是
+
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 2026 年大纲 PDF 第 58 页：按正文约 35 px/em 换算扫描坐标。
+  let p(x,y) = ((x - 494) / 35, (867 - y) / 35)
+  set-style(stroke: 0.06em, content: (wrap: body => box(text(size: 0.75em, top-edge: "bounds", bottom-edge: "bounds", body))))
+  content(p(492,296),[甲]); content(p(941,296),[乙])
+  content(p(492.5,365.5),image("../../../../历年真题+参考解答/2024/official-images/q37-pc.png",width: (93 / 35) * 1em))
+  content(p(938,365.5),image("../../../../历年真题+参考解答/2024/official-images/q37-pc.png",width: (93 / 35) * 1em))
+  for x in (494,943) { line(p(x,407),p(x,867),mark: (end: ">",fill: black,scale: 0.8)) }
+  for (a,b,label,pos,angle) in (
+    ((494,417),(943,529),[F0],(569,416),-14deg),
+    ((494,479),(661,522),[F1],(569,472),-14deg),
+    ((494,530),(943,642),[F2],(569,534),-14deg),
+    ((494,594),(943,705),[F3],(569,586),-14deg),
+    ((943,543),(494,650),[ACK0],(775,556),14deg),
+    ((494,668),(644,707),[?],(566,676),-14deg),
+    ((943,658),(494,771),[ACK2],(705,698),14deg),
+    ((943,718),(747,771),[ACK3],(823,729),15deg),
+    ((494,807),(644,845),[?],(566,811),-14deg),
+  ) {
+    line(p(..a),p(..b),mark: (end: ">",fill: black,scale: 0.8))
+    content(p(..pos),label,angle: angle)
+  }
+  content(p(697,521),[丢失]); content(p(714,773),[丢失])
+  for (y,label) in ((668,[$t_1$]),(807,[$t_2$])) {
+    circle(p(494,y),radius: 0.09,fill: black)
+    content(p(469,y+1),label)
+  }
+  line(p(429,791),p(486,791),p(494,807))
+  content(p(379,791),[F1超时]); content(p(437,851),[时间])
+})),caption: [题37图],kind: image)
+
+#choices([F1，F3], [F1，F4], [F3，F1], [F4，F1])
+]
+
 #question(label: n => [旧版题型示例])[
 在选择重传协议（SR）中，当帧的序号字段为3比特，且接收窗口与发送窗口尺寸相同时，发送窗口的最大尺寸为
 

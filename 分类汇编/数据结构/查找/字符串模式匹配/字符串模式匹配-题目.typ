@@ -25,3 +25,9 @@
 
 #choices([9], [10], [12], [15])
 ]]
+
+#block(breakable: false)[#question(label: n => [2024 6])[
+KMP 算法使用修正后的 next 数组进行模式匹配，模式串 $S=$“aabaab”，当主串中某字符与 $S$ 中某字符失配时，$S$ 将向右滑动的最长距离是
+
+#choices([5], [4], [3], [2])
+]]

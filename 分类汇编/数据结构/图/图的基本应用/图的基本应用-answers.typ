@@ -71,6 +71,12 @@
 
 === 2021 8：C
 
+=== 2023 6
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
+
 === 旧版题型示例
 
 #block(breakable: false)[
@@ -110,9 +116,60 @@
 
 === 2018 7：D
 
+=== 2019 6：A
+
 === 2021 7：A
 
-=== 2019 6：A
+=== 2024 41
+
+#subquestions(allow-oversize: true)[
++ 算法的基本设计思想
+  建立图 $G$ 各顶点的入度表 degree[]。
+
+  选择入度为0的顶点 $v$，将 $v$ 的所有邻接点的入度减1，重复执行这个过程。若每次选出的入度为0的顶点有且仅有一个，且共进行了 G.numVertices 次，则意味着存在唯一的拓扑序列，返回1，否则不存在拓扑序列，或存在多个拓扑序列，返回0。
+
++ 用 C 语言描述的算法
+
+  #block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em,breakable: true)[
+  ```c
+  int uniquely(MGraph G) // 判定有向图是否存在唯一的拓扑序列
+  {
+      int *degree, i, j, count=0, in0=-1, prev_in0;
+      degree=(int *)malloc(G.numVertices * sizeof(int));
+      for(j=0; j<G.numVertices; j++) // 计算各顶点的入度
+      {
+          degree[j]=0;
+          for(i=0; i<G.numVertices; i++)
+              degree[j]+=G.Edge[i][j];
+          if(degree[j]==0)
+          {
+              if(in0==-1) in0=j; // 入度为0的顶点
+              else in0=-2;      // 有多个入度为0的顶点
+          }
+      }
+      while(in0>=0)
+      {
+          count++;
+          prev_in0=in0;
+          in0=-1;
+          for(j=0; j<G.numVertices; j++)
+              if(G.Edge[prev_in0][j]>0)
+              {
+                  if(--degree[j]==0) // 邻接点入度值减1
+                  {
+                      if(in0==-1) in0=j; // 入度为0的顶点
+                      else in0=-2;      // 有多个入度为0的顶点
+                  }
+              }
+      }
+      free(degree);
+      if(count==G.numVertices) return 1;
+      else return 0;
+  }
+  ```
+  ]
+
+]
 
 == 关键路径
 
@@ -141,3 +198,13 @@
 === 2020 8：B
 
 === 2022 7：B
+
+=== 2025 42
+
+#subquestions(allow-oversize: true)[
++ 完成该工程的最短时间是12。关键活动是 a，e，m，n。
++ 与 e 同时进行的活动可能有 b，c，d。
++ 时间余量最大的活动是 j。时间余量是6。
++ b 的持续时间最多是4。压缩 k 的持续时间。
+
+]

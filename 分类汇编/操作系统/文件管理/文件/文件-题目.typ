@@ -34,6 +34,17 @@
 #choices([各进程只能用“读”方式打开文件 F], [在系统打开文件表中仅有一个表项包含 F 的属性], [各进程的用户打开文件表中关于 F 的表项内容相同], [进程关闭 F 时，系统删除 F 在系统打开文件表中的表项])
 ]]
 
+#block(breakable: false)[#question(label: n => [2023 31])[
+若文件 F 仅被进程 P 打开并访问，则当进程 P 关闭 F 时，下列操作中，文件系统需要完成的是
+#choices([删除目录中文件 F 的目录项], [释放 F 的索引节点所占的内存空间], [释放 F 的索引节点所占的外存空间], [将文件磁盘索引节点中的链接计数减1])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 29])[
+下列系统调用的实现中，包含文件按名查找功能的是
+
+#choices([open()], [read()], [write()], [close()])
+]]
+
 == 文件的保护
 
 #block(breakable: false)[#question(label: n => [2009 30])[

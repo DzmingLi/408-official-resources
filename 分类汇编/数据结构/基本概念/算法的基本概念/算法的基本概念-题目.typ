@@ -99,3 +99,18 @@ for (int i = 1; i < n; i *= 2)
 
 #choices([$O(log n)$], [$O(n)$], [$O(n log n)$], [$O(n^2)$])
 ]]
+
+#block(breakable: false)[#question(label: n => [2025 1])[
+下列程序段的时间复杂度是
+
+#block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em)[
+```c
+int count=0, i, j;
+for(i=1; i*i<=n; i++)
+    for(j=1; j<=i; j++)
+        count++;
+```
+]
+
+#choices([$O(log n)$],[$O(n)$],[$O(n log n)$],[$O(n^2)$])
+]]

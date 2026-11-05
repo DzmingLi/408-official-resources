@@ -9,6 +9,19 @@
 
 #let exam-diagram = diagram.with(node-stroke: 0.065em, node-fill: white, edge-stroke: 0.065em)
 
+== 顺序存储
+
+#block(breakable: false)[#question(label: n => [2023 1])[
+下列对顺序存储的有序表（长度为 $n$）实现给定操作的算法中，平均时间复杂度为 $O(1)$ 的是
+#choices([查找包含指定值元素的算法], [插入包含指定值元素的算法], [删除第 $i(1<=i<=n)$ 个元素的算法], [获取第 $i(1<=i<=n)$ 个元素的算法])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 1])[
+线性表 $L$ 含有 $n(n>=3)$ 个元素，采用顺序存储方式保存。在 $L$ 中原有元素相对次序保持不变且仍有空闲存储空间的情况下，下列操作中，一定会移动多个元素的是
+#statements(columns: 2, [Ⅰ．在表头插入一个元素], [Ⅱ．在表头删除一个元素], [Ⅲ．在表尾插入一个元素], [Ⅳ．在表尾删除一个元素])
+#choices([仅Ⅰ、Ⅱ], [仅Ⅰ、Ⅲ], [仅Ⅱ、Ⅳ], [仅Ⅲ、Ⅳ])
+]]
+
 == 链式存储
 
 #block(breakable: false)[#question(label: n => [2013 1])[
@@ -60,4 +73,24 @@ m+n的降序链表，则最坏情况下的时间复杂度是
   [`q = h->next; h->next = q->next; if(p != q)p = h; free(q);`],
   [`q = h->next; h->next = q->next; if(p == q)p = h; free(q);`],
 )
+]]
+
+#block(breakable: false)[#question(label: n => [2023 2])[
+现有非空双向链表 $L$，其结点结构为：#inline-node([prev], [data], [next])，prev 是指向直接前驱结点的指针，next 是指向直接后继结点的指针。若要在 $L$ 中指针 p 所指向的结点（非尾结点）之后插入指针 s 指向的新结点，则在执行了语句序列“`s->next=p->next; p->next=s;`”后，下列语句序列中还需要执行的是
+#choices([`s->next->prev=p; s->prev=p;`], [`p->next->prev=s; s->prev=p;`], [`s->prev=s->next->prev; s->next->prev=s;`], [`p->next->prev=s->prev; s->next->prev=p;`])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 1])[
+已知带头结点的非空单链表 $L$ 的头指针为 $h$，结点结构为 #inline-node(columns: 2, [data], [next])，其中 next 是指向直接后继结点的指针。现有指针 $p$ 和 $q$，若 $p$ 指向 $L$ 中非首且非尾的任意一个结点，则执行语句序列“q=p->next; p->next=q->next; q->next=h->next; h->next=q;”的结果是
+
+#choices([在 $p$ 所指结点后插入 $q$ 所指结点], [在 $q$ 所指结点后插入 $p$ 所指结点], [将 $p$ 所指结点移到 $L$ 的头结点之后], [将 $q$ 所指结点移到 $L$ 的头结点之后])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 2])[
+已知带头结点的双向链表 $L$ 含有 $n(n>=3)$ 个元素，结点结构为 #inline-node([p2], [d], [p1])，其中，p2 和 p1 分别是指向其直接前驱和直接后继结点的指针，指针 head 指向头结点，指针 cu = head。现要将 $L$ 各结点中的 p2 指针修改为指向 p1 所指结点的直接后继结点。当指针指向的结点不存在时，相应的指针值为 NULL。下列选项中，可以完成修改功能的是
+#choices(
+ [`while(cu!=NULL){cu->p2=cu->p1->p1; cu=cu->p1;}`],
+ [`while(cu!=NULL&&cu->p2!=NULL){cu->p2=cu->p1->p1; cu=cu->p1;}`],
+ [`while(cu!=NULL){if(cu->p1!=NULL){cu->p2=cu->p1->p1; cu=cu->p1;}}`],
+ [`while(cu!=NULL){if(cu->p1!=NULL) cu->p2=cu->p1->p1; else cu->p2=NULL; cu=cu->p1;}`])
 ]]

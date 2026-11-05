@@ -74,6 +74,7 @@
             unstable_typstPackages = typstPackages;
             nativeBuildInputs = [ pdfPython ];
             buildPhaseTypstCommand = ''
+              python3 scripts/test-collections.py
               python3 scripts/build-collections.py --output "$out"
             '';
             installPhaseCommand = "true";

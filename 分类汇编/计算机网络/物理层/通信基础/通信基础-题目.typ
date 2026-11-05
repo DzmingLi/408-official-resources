@@ -36,6 +36,16 @@
 #choices([4], [8], [16], [32])
 ]
 
+#question(label: n => [2023 34])[
+某无噪声理想信道带宽为4 MHz，采用 QAM 调制，若该信道的最大数据传输速率是48 Mb/s，则该信道采用的 QAM 调制方案是
+#choices([QAM-16], [QAM-32], [QAM-64], [QAM-128])
+]
+
+#question(label: n => [2026 34])[
+若在带宽为200 kHz、信噪比 $S\/N=1023$ 的信道上发送一个长度为1500 B的分组，则发送该分组的传输时延至少是
+#choices([0.375 ms], [0.75 ms], [3 ms], [6 ms])
+]
+
 == 编码与调制
 
 #question(label: n => [2009 34])[
@@ -111,6 +121,12 @@ kHz，采用4个相位、每个相位具有4种振幅的QAM调制技术，则该
 #choices([200 kb/s], [400 kb/s], [800 kb/s], [1 600 kb/s])
 ]
 
+#question(label: n => [2024 34])[
+在下列二进制数字调制方法中，需要2个不同频率载波的是
+
+#choices([ASK], [PSK], [FSK], [DPSK])
+]
+
 == 电路交换、报文交换与分组交换
 
 #question(label: n => [2013 35])[
@@ -125,6 +141,28 @@ $8 "Mb" space (1 "M" = 10^6)$的报文。若忽略链路传播延迟、分组头
   [1600 ms、800 ms],
   [1600 ms、801 ms],
 )
+]
+
+#question(label: n => [2025 33])[
+某网络拓扑及各链路带宽如题33图所示。网络按电路交换方式运行时，主机 H1 与 H2 建立一条带宽为10 Mb/s的电路，建立电路时间为32 μs；按分组交换方式运行时，分组长度为400 B，忽略分组首部开销。现 H1 向 H2 发送一个2 MB（$1"M"=10^6$）的文件，分别采用电路交换、报文交换、分组交换方式时，H2 至少需要 $T_"CS"$、$T_"MS"$、$T_"PS"$ 时间才能接收到全部文件内容，则 $T_"CS"$、$T_"MS"$、$T_"PS"$ 满足的关系是
+
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  set-style(stroke: 0.045em)
+  line((0,0),(18,0))
+  for (x,label) in ((0,[H1]),(18,[H2])) {
+    content((x,0),image("../../../../历年真题+参考解答/2012/assets/visio-2007-isometric-pc.png",width: 2em))
+    content((x,-1.3),label)
+  }
+  for (x,label) in ((6,[R1]),(12,[R2])) {
+    content((x,0),image("../../../../历年真题+参考解答/2014/assets/router-symbol.svg",width: 1.8em))
+    content((x,-0.9),label)
+  }
+  for (x,label) in ((3,[10 Mb/s]),(9,[100 Mb/s]),(15,[1000 Mb/s])) { content((x,0.8),label) }
+})),caption: [题33图],kind: image)
+
+#choices([$T_"CS">T_"MS">T_"PS"$],[$T_"MS">T_"PS">T_"CS"$],[$T_"MS">T_"CS">T_"PS"$],[$T_"PS">T_"MS">T_"CS"$])
 ]
 
 == 数据报与虚电路

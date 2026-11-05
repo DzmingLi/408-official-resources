@@ -9,7 +9,8 @@ from pathlib import Path
 import re
 import runpy
 
-MAX_YEAR = 2022
+MIN_YEAR = 2009
+MAX_YEAR = 2026
 # Exclusions below apply within each subject, not across all four subjects.
 EXCLUDED_NETWORK_QUESTIONS = {(2013, 37): 'HDLC协议条目已从现行考纲移除'}
 # Classification rule: keep each question whole and assign it to the last
@@ -244,6 +245,24 @@ PLANS.update(COA['PLANS'])
 EXCLUDED_COA_QUESTIONS = COA['EXCLUDED_COA_QUESTIONS']
 DS = runpy.run_path(str(Path(__file__).with_name('ds-collection-plan.py')))
 PLANS.update(DS['PLANS'])
+EXTENDED = runpy.run_path(str(Path(__file__).with_name('extended-collection-plan.py')))
+EXTENDED['extend'](PLANS)
+HISTORICAL_QUESTIONS = EXTENDED['HISTORICAL']
+
+
+def select_plans(from_year=MIN_YEAR, through_year=MAX_YEAR, current_syllabus_only=False):
+    """Filter copies of the full classification without editing source files."""
+    if not MIN_YEAR <= from_year <= through_year <= MAX_YEAR:
+        raise ValueError(f'年份须满足 {MIN_YEAR} <= 起始年份 <= 截止年份 <= {MAX_YEAR}')
+    selected = {}
+    for title, plan in PLANS.items():
+        sections = {leaf: [entry for entry in entries if
+                          (len(entry) == 3 or from_year <= entry[0] <= through_year)
+                          and not (current_syllabus_only and entry[:2] in HISTORICAL_QUESTIONS)]
+                    for leaf, entries in plan['sections'].items()}
+        if any(sections.values()):
+            selected[title] = dict(plan, sections=sections)
+    return selected
 
 
 def questions(source, expected=47, command='question'):
@@ -367,7 +386,9 @@ def render(root, title, plan):
                         backgrounds.append(f'原卷第{previous}题共用背景（不含小问）：\n\n' + background)
                     body = '\n' + '\n\n'.join(backgrounds) + '\n\n' + body
             if plan['directory'].startswith('计算机组成原理/') and kind == 'paper':
-                shared = {(2014, 45): 44, (2015, 44): 43, (2017, 44): 43}
+                shared = {(2014, 45): 44, (2015, 44): 43, (2017, 44): 43,
+                          (2023, 44): 43, (2024, 44): 43,
+                          (2025, 44): 43, (2026, 44): 43}
                 if ((year, number) in shared
                         and ('paper', year, shared[year, number]) not in seen):
                     previous = shared[year, number]

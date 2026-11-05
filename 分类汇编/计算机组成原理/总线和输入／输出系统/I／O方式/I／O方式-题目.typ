@@ -201,6 +201,17 @@ ns，则在该设备持续工作过程中，CPU用于该设备的I/O时间占整
 )
 ]]
 
+#block(breakable: false)[#question(label: n => [2024 21])[
+下列关于中断 I/O 方式的叙述中，#emphasis[错误]的是
+
+#choices([中断屏蔽字用于确定中断响应的优先级], [保存断点和程序状态字在中断响应阶段完成], [保存通用寄存器和设置新中断屏蔽字由软件实现], [单重中断方式下中断处理时 CPU 处于关中断状态])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 22])[
+中断控制 I/O 方式下，实现 I/O 需要硬件和软件协同完成。中断响应及处理过程所包含的下列工作中，必须由硬件完成的是
+#choices([开中断], [中断判优], [保存断点], [保存通用寄存器])
+]]
+
 == DMA方式
 
 #question(label: n => [2009 43])[
@@ -292,3 +303,22 @@ ns，则在该设备持续工作过程中，CPU用于该设备的I/O时间占整
 
 ]
 ]
+
+#block(breakable: false)[#question(label: n => [2023 22])[
+下列关于 I/O 控制方式的叙述中，错误的是
+#choices([查询方式下，通过 CPU 执行查询程序进行 I/O 操作], [中断方式下，通过 CPU 执行中断服务程序进行 I/O 操作], [DMA 方式下，通过 CPU 执行 DMA 传送程序进行 I/O 操作], [对于 SSD、网络适配器等高速设备，采用 DMA 方式输入/输出])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 22])[
+DMA 控制 I/O 方式下，设备的输入/输出由 DMA 控制器控制完成，此时，DMA 控制器控制的数据传输通路位于
+
+#choices([CPU 和主存之间], [CPU 和 DMA 控制器之间], [设备接口和主存之间], [设备接口和 DMA 控制器之间])
+]]
+
+#block(breakable: false)[#question(label: n => [2025 21])[
+下列设备中，适合采用 DMA 输入/输出方式的是
+
+#statements(columns: (1fr,1fr,1fr,1fr),[Ⅰ．键盘],[Ⅱ．网卡],[Ⅲ．固态硬盘],[Ⅳ．针式打印机])
+
+#choices([仅Ⅰ、Ⅱ],[仅Ⅱ、Ⅲ],[仅Ⅱ、Ⅳ],[仅Ⅲ、Ⅳ])
+]]

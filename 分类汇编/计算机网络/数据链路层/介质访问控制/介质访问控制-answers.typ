@@ -45,6 +45,14 @@
 
 === 2020 37：A
 
+=== 2023 36
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
+
+=== 2025 35：C
+
 === 旧版题型示例
 
 #block(breakable: false)[

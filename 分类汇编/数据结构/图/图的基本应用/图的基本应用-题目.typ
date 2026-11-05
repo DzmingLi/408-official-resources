@@ -235,6 +235,12 @@ c，后续得到的其余各最短路径的目标顶点依次是
 #choices([26，3，14，6], [25，3，14，6], [21，3，14，6], [15，3，14，6])
 ]]
 
+#block(breakable: false)[#question(label: n => [2023 6])[
+已知无向连通图 $G$ 中各边的权值均为1。下列算法中，一定能够求出图 $G$ 中从某顶点到其余各顶点最短路径的是
+#statements(columns: 2, [Ⅰ．普里姆（Prim）算法], [Ⅱ．克鲁斯卡尔（Kruskal）算法], [Ⅲ．图的广度优先搜索算法])
+#choices([仅Ⅰ], [仅Ⅲ], [Ⅰ、Ⅱ], [Ⅰ、Ⅱ、Ⅲ])
+]]
+
 #block(breakable: false)[#question(label: n => [旧版题型示例])[#set par(justify: false)
 
 设无向图 $G = (V, E)$，其中 $V = \{1, 2, 3, 4, 5\}$，$E = \{(1, 2, 4), (2, 5, 5), (1, 3, 2), (2, 4, 4), (3, 4, 1), (4, 5, 3), (1, 5, 8)\}$，每条边由一个三元组表示，三元组中前两个元素为与该边关联的顶点，第三个元素为该边的权。请写出图 $G$ 中从顶点1到其余各点的最短路径的求解过程。要求列出最短路径上的各顶点，并计算路径长度。
@@ -339,6 +345,12 @@ c，后续得到的其余各最短路径的目标顶点依次是
 #choices([1, 5, 2, 3, 6, 4], [5, 1, 2, 6, 3, 4], [5, 1, 2, 3, 6, 4], [5, 2, 1, 6, 3, 4])
 ]]
 
+#block(breakable: false)[#question(label: n => [2019 6])[
+用有向无环图描述表达式 $(x+y) ast ((x+y) \/ x)$，需要的顶点个数至少是
+
+#choices([5], [6], [8], [9])
+]]
+
 #block(breakable: false)[#question(label: n => [2021 7])[
 给定如下有向图，该图的拓扑有序序列的个数是
 
@@ -357,11 +369,27 @@ c，后续得到的其余各最短路径的目标顶点依次是
 #choices([1], [2], [3], [4])
 ]]
 
-#block(breakable: false)[#question(label: n => [2019 6])[
-用有向无环图描述表达式 $(x+y) ast ((x+y) \/ x)$，需要的顶点个数至少是
+#question(label: n => [2024 41])[
+（本题13分）2023年10月26日，神舟十七号载人飞船发射取得圆满成功，再次彰显了中国航天事业的辉煌成就。载人航天工程是包含众多子工程的复杂系统工程，为了保证工程的有序开展，需要明确各子工程的前导子工程，以协调各子工程的实施。该问题可以简化、抽象为有向图的拓扑序列问题。已知有向图 $G$ 采用邻接矩阵存储，类型定义如下。
 
-#choices([5], [6], [8], [9])
-]]
+#block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em)[
+```c
+typedef struct                       // 图的类型定义
+{
+    int numVertices, numEdges;        // 图的顶点数和有向边数
+    char VerticesList[MAXV];          // 顶点表，MAXV为已定义常量
+    int Edge[MAXV][MAXV];             // 邻接矩阵
+} MGraph;
+```
+]
+
+请设计算法：int uniquely(MGraph G)，判定 $G$ 是否存在唯一的拓扑序列，若是，则返回1，否则返回0。要求如下。
+
+#subquestions[
++ 给出算法的基本设计思想。（4分）
++ 根据设计思想，采用 C 或 C++ 语言描述算法，关键之处给出注释。（9分）
+]
+]
 
 == 关键路径
 
@@ -487,3 +515,41 @@ A为上三角矩阵，按行为主序（行优先）保存在如下的一维数�
 
 #choices([c], [g], [h], [j])
 ]]
+
+#question(label: n => [2025 42])[
+（本题10分）某工程包含12个活动，使用题42图所示的 AOE 网描述，图中各边上标注了活动及其持续时间。
+
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 2026 大纲 PDF 第 84 页，按原图结点、边权位置描点；33 px 为正文 1em。
+  let p(x,y) = ((x - 360) / 33,(760 - y) / 33)
+  set-style(stroke: 0.045em,content:(wrap:body =>
+    box(text(size:0.85em,top-edge:"bounds",bottom-edge:"bounds",body))))
+  let ps=((512,599),(831,600),(361,679),(675,681),(990,683),(510,759),(830,761)).map(q => p(..q))
+  for (a,b,label,pos) in (
+    (0,2,[a=2],(428,621)),(0,1,[b=5],(679,584)),(2,5,[c=1],(411,735)),
+    (0,3,[d=3],(628,632)),(2,3,[e=3],(509,665)),(3,1,[f=4],(797,647)),
+    (3,5,[g=1],(557,714)),(5,6,[h=1],(646,780)),(3,4,[j=1],(820,701)),
+    (1,4,[k=2],(920,622)),(3,6,[m=4],(710,730)),(6,4,[n=3],(915,746)),
+  ) {
+    let u=ps.at(a); let v=ps.at(b)
+    let dx=v.at(0)-u.at(0); let dy=v.at(1)-u.at(1)
+    let d=calc.sqrt(dx*dx+dy*dy)
+    let r=24 / 33
+    line((u.at(0)+r*dx/d,u.at(1)+r*dy/d),(v.at(0)-r*dx/d,v.at(1)-r*dy/d),mark: (end: ">",fill:black,scale:0.55))
+    content(p(..pos),label)
+  }
+  for (i,q) in ps.enumerate() { circle(q,radius:24 / 33,fill:white); content(q,[#(i+1)]) }
+})),caption: [题42图],kind: image)
+
+请回答下列问题（活动均用活动名表示）。
+
+#subquestions[
++ 完成该工程的最短时间是多少？哪些活动是关键活动？（3分）
++ 若以最短时间完成工程，则与活动 e 同时进行的活动可能有哪些？（3分）
++ 时间余量最大的活动是哪个？其时间余量是多少？（2分）
++ 假设工程从时刻0启动，因某种原因，活动 b 在时刻6开始。为了保证工程不延期，在其他活动持续时间均不变的情况下，b 的持续时间最多是多少？若不改变 b 的持续时间，则压缩哪个活动的持续时间可以保证工程不延期？（2分）
+
+]
+]

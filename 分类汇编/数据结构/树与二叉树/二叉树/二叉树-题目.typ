@@ -47,6 +47,12 @@
 #choices([31], [16], [15], [10])
 ]]
 
+#block(breakable: false)[#question(label: n => [2025 3])[
+若二叉树的结点值均为正整数，采用顺序存储方式保存在数组 $R$ 中，用 $-1$ 表示结点不存在，则下列数组中，#emphasis[不能]表示一棵二叉树的是
+
+#choices([$R[ ]={20,15,40,-1,-1,35}$],[$R[ ]={15,40,10,18,35,-1,-1}$],[$R[ ]={15,40,10,-1,-1,-1,12}$],[$R[ ]={17,20,35,-1,18,45,-1,-1,19,27}$])
+]]
+
 == 二叉树的遍历
 
 #block(breakable: false)[#question(label: n => [2009 3])[
@@ -191,6 +197,30 @@ typedef struct node
 )
 
 #choices([仅Ⅰ], [仅Ⅲ], [Ⅱ、Ⅲ], [Ⅱ、Ⅳ])
+]]
+
+#block(breakable: false)[#question(label: n => [2023 5])[
+已知一棵二叉树的树形如下图所示，若其后序遍历序列为 f，d，b，e，c，a，则其先（前）序遍历序列是
+#align(center, diagram(spacing: (1.5em, 1.5em), node-stroke: .6pt,
+ node((1,0), [], name: <a>, shape: circle, radius: .45em),
+ node((0,1), [], name: <b>, shape: circle, radius: .45em),
+ node((2,1), [], name: <c>, shape: circle, radius: .45em),
+ node((-1,2), [], name: <d>, shape: circle, radius: .45em),
+ node((1,2), [], name: <e>, shape: circle, radius: .45em),
+ node((0,3), [], name: <f>, shape: circle, radius: .45em),
+ edge(<a>,<b>), edge(<a>,<c>), edge(<b>,<d>), edge(<b>,<e>), edge(<d>,<f>)))
+#choices([a，e，d，f，b，c], [a，c，e，b，d，f], [c，a，b，e，f，d], [d，f，e，b，a，c])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 3])[
+若 $p$、$q$ 和 $v$ 均为二叉树 $T$ 中的结点，$v$ 有两个孩子结点，$T$ 的中序遍历序列形如“$dots, p, v, q, dots$”，则下列叙述中，正确的是
+
+#choices([$p$ 没有右孩子，$q$ 没有左孩子], [$p$ 没有右孩子，$q$ 有左孩子], [$p$ 有右孩子，$q$ 没有左孩子], [$p$ 有右孩子，$q$ 有左孩子])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 3])[
+若二叉树 $T$ 的中序遍历序列是 $b,e,d,f,c,a,g$，层序遍历序列是 $a,b,g,c,d,e,f$，则 $T$ 的后序遍历序列是
+#choices([$c,e,d,f,b,g,a$], [$c,e,f,d,b,g,a$], [$e,f,d,c,b,g,a$], [$e,g,f,d,b,c,a$])
 ]]
 
 #question(label: n => [旧版题型示例])[

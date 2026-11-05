@@ -175,6 +175,45 @@ short si = usi;
 #choices([$-2^32 ∼ 2^31 - 1$], [$-2^31 ∼ 2^31 - 1$], [$-2^32 ∼ 2^32 - 1$], [$-2^31 ∼ 2^32 - 1$])
 ]]
 
+#block(breakable: false)[#question(label: n => [2023 13])[
+若 short 型变量 $x=-8190$，则 $x$ 的机器数是
+#choices([E002H], [E001H], [9FFFH], [9FFEH])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 12])[
+C 语言代码段如下。
+
+#block(stroke: (dash: "dotted", thickness: 0.045em), inset: 0.5em)[
+```c
+int i=32777;
+short si=i;
+int j=si;
+```
+]
+
+执行上述代码段后，$j$ 的值是
+
+#choices([$-32 thin 777$], [$-32 thin 759$], [32 759], [32 777])
+]]
+
+#block(breakable: false)[#question(label: n => [2025 12])[
+在32位计算机上执行下列 C 语言代码段后，$u i$ 的值是
+
+#block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em)[
+```c
+short si=-32767;
+unsigned int ui=si;
+```
+]
+
+#choices([$2^15-1$],[$2^15+1$],[$2^32-2^15-1$],[$2^32-2^15+1$])
+]]
+
+#block(breakable: false)[#question(label: n => [2026 13])[
+对机器数1010 0110B先算术右移3位，再算术左移2位，最终结果是
+#choices([1101 0000B], [1101 0011B], [0101 0000B], [0101 0011B])
+]]
+
 #block(breakable: false)[#question(label: n => [旧版题型示例])[
 假定一个十进制数为 $-66$，按补码形式存放在一个8位寄存器中，该寄存器的内容用十六进制表示为
 

@@ -21,6 +21,10 @@ def answers(root, year, sample=False):
         source = root / '旧版题型示例/题型示例-答案.typ'
     else:
         source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
+    if not source.exists() and not sample and year in (2023, 2026):
+        # Retain one explicit answer slot for every question; never invent a
+        # reference answer or silently omit an otherwise classified paper.
+        return source, {n: '本仓库尚未收录本题参考答案。' for n in range(1, 48)}
     text = source.read_text()
     result = {}
     if sample or year <= 2014:
@@ -69,6 +73,8 @@ def answers(root, year, sample=False):
 
 
 def clean_answer(body, year, number, sample):
+    if year >= 2023:
+        body = '\n'.join(line.rstrip() for line in body.splitlines())
     # These old OCR artefacts were checked in the rendered answer pages.
     body = body.replace('【答案要点】', '').strip()
     for n, glyph in enumerate('①②③④⑤⑥⑦⑧⑨⑩', 1):
@@ -89,9 +95,9 @@ def clean_answer(body, year, number, sample):
     return body
 
 
-def outputs(root):
+def outputs(root, plans=None):
     cache = {}
-    for title, plan in PLANS.items():
+    for title, plan in (PLANS if plans is None else plans).items():
         target = root / '分类汇编' / plan['directory'] / f'{title}-answers.typ'
         template = os.path.relpath(root / 'template.typ', target.parent)
         lines = [

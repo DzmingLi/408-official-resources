@@ -40,6 +40,12 @@
 #choices([仅Ⅰ、Ⅱ], [仅Ⅰ、Ⅲ], [仅Ⅱ、Ⅲ], [Ⅰ、Ⅱ和Ⅲ])
 ]]
 
+#block(breakable: false)[#question(label: n => [2025 22])[
+下列选项中，会触发外部中断请求的事件是
+
+#choices([DMA 传送结束],[总线事务结束],[页故障处理结束],[执行断点指令])
+]]
+
 == 异常和中断的检测与响应
 
 #question(label: n => [2014 45])[
@@ -199,3 +205,84 @@ OP为操作码；Rs和Rd为寄存器编号；OFFSET为偏移量，用补码表�
 
 #choices([系统调用], [页缺失], [DMA 传送结束], [打印机缺纸])
 ]]
+
+#block(breakable: false)[#question(label: n => [2023 21])[
+下列关于硬件和异常/中断关系的叙述中，错误的是
+#choices([CPU 在执行一条指令过程中检测异常事件], [CPU 在执行完一条指令时检测中断请求信号], [开中断时 CPU 检测到中断请求后就进行中断响应], [外部设备通过中断控制器向 CPU 发中断结束信号])
+]]
+
+#question(label: n => [2025 44])[
+原卷第43题共用背景（不含小问）：
+
+
+（本题12分）现有 C 语言程序 P 的部分代码如题43图所示。假定运行程序 P 的计算机 M 字长为32位，按字节编址，数据 Cache 的数据区大小为32 KB，采用8路组相联映射方式，主存块大小为64 B，Cache 的命中时间为2个时钟周期，缺失损失为200个时钟周期；采用页式虚拟存储管理方式，页大小为4 KB。数组 $d$ 的起始虚拟地址 $"VA"_31 ∼ "VA"_0$ 为0180 0020H。
+
+#figure(align(center,block(stroke: 0.045em,inset: 0.5em)[
+```c
+int x, d[2048], i;
+...
+for(i=0; i<2048; i++)
+    d[i]=d[i]/x;
+...
+```
+]),caption: [题43图],kind: image)
+
+
+
+
+
+
+（本题11分）对于题43中计算机 M 和程序 P，假定 P 的部分机器级代码如题44图（a）所示，其中，R0～R4 为通用寄存器，SEXT 表示按符号扩展；M 中补码除法器逻辑结构如题44图（b）所示。
+
+#figure(align(center,block(stroke: 0.045em,inset: 0.5em)[
+```asm
+...
+// x在R2中，i在R4中
+// 数组d的首地址在R3中
+mov  R1, (R3+R4*4)    // R1←d[i]
+scov R1              // {R0,R1}←SEXT(R1)
+idiv R1, R2          // R1←{R0,R1}/R2
+...
+```
+]),caption: [题44图（a）],kind: image)
+
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 大纲 PDF 第 86 页：寄存器、ALU 及控制线按原图坐标定位。
+  let p(x,y) = ((x - 335) / 35, (989 - y) / 35)
+  set-style(stroke: 0.04em, content: (wrap: body => box(text(size: 0.8em, top-edge: "bounds", bottom-edge: "bounds", body))))
+  let arr(..pts) = line(..pts.pos().map(q => p(..q)),mark: (end: ">",fill: black,scale: 0.45))
+  rect(p(439,661),p(621,701)); content(p(530,682),[除数寄存器Y])
+  line(..((351,757),(433,757),(458,777),(483,757),(571,757),(521,830),(395,830)).map(q => p(..q)),close: true)
+  content(p(460,804),[32位ALU])
+  arr((532,701),(532,757)); arr((459,830),(459,892))
+  rect(p(362,892),p(751,932))
+  line(p(537,892),p(537,932),stroke: (dash: "dotted",thickness: 0.04em))
+  content(p(449,912),[余数寄存器R]); content(p(644,912),[余数/商寄存器Q])
+  content(p(652,955),[32位])
+  arr((459,932),(459,989),(335,989),(335,701),(387,701),(387,757))
+  rect(p(857,882),p(1009,946),radius: 32 / 35); content(p(933,916),[控制逻辑])
+  for (pts,label,pos) in (
+    (((935,882),(935,790),(550,790)),[ALUop],(619,775)),
+    (((857,905),(751,905)),[左移],(808,886)),
+    (((857,920),(751,920)),[写使能],(808,944)),
+  ) {
+    line(..pts.map(q => p(..q)),stroke: (dash: "dotted",thickness: 0.04em),mark: (end: ">",fill: black,scale: 0.45))
+    content(p(..pos),label)
+  }
+  arr((459,989),(919,989),(919,946)); arr((941,989),(941,946)); content(p(977,983),[时钟])
+  for (a,b,pos) in (((372,710),(398,736),(411,716)),((518,716),(544,742),(557,728)),
+    ((445,841),(471,867),(483,854)),((445,945),(471,971),(483,956))) {
+    line(p(..a),p(..b)); content(p(..pos),[32])
+  }
+})),caption: [题44图（b）],kind: image)
+
+请回答下列问题。
+
+#subquestions[
++ 若执行题44图（a）中 idiv 指令的除法运算时，$d[i]=$0x87654321、$x=$0xff，则补码除法器中寄存器 R、Q 和 Y 的初始内容分别是什么（用十六进制表示）？题44图（b）中哪个部件包含计数器？在补码除法器执行过程中，由 ALUop 所控制的 ALU 运算有哪几种？（6分）
++ 假设 idiv 指令执行过程中会检测并触发除法异常，则执行 idiv 指令时，哪些情况下会发生除法异常（要求给出此时 $d[i]$ 和 $x$ 的十六进制表示机器数）？发生除法异常时，在异常响应过程中 CPU 需要完成哪些操作？（5分）
+
+]
+]

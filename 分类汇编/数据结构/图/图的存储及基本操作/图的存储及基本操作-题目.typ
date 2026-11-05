@@ -69,3 +69,81 @@ $ bold(A) = mat(delim: "[", 0, 1, 0, 1; 0, 0, 1, 1; 0, 1, 0, 0; 1, 0, 0, 0) $
     
 ]
 ]
+
+#question(label: n => [2023 41])[
+（13分）已知有向图 $G$ 采用邻接矩阵存储，类型定义如下：
+#block(stroke: (dash: "dashed", thickness: .5pt), inset: .45em)[
+```c
+typedef struct                  // 图的类型定义
+{
+    int numVertices, numEdges;   // 图的顶点数和有向边数
+    char VerticesList[MAXV];     // 顶点表，MAXV为已定义常量
+    int Edge[MAXV][MAXV];        // 邻接矩阵
+} MGraph;
+```
+]
+将图中出度大于入度的顶点称为 K 顶点。例如题41图中，顶点 a 和 b 为 K 顶点。
+#figure(diagram(spacing: (2.3em, 1.8em), node-stroke: .6pt,
+ node((1,0), [a], name: <a>, shape: circle, radius: .55em),
+ node((0,1), [b], name: <b>, shape: circle, radius: .55em),
+ node((2,1), [d], name: <d>, shape: circle, radius: .55em),
+ node((1,2), [c], name: <c>, shape: circle, radius: .55em),
+ edge(<a>,<b>, "->"), edge(<a>,<d>, "->"), edge(<b>,<d>, "->"), edge(<b>,<c>, "->"), edge(<c>,<d>, "->")), caption: [题41图])
+请设计算法：`int printVertices(MGraph G)`，对给定的任意非空有向图 $G$，输出 $G$ 中所有的 K 顶点，并返回 K 顶点的个数。要求：
+#subquestions[
+ + 给出算法的基本设计思想。
+ + 根据设计思想，采用 C 或 C++语言描述算法，关键之处给出注释。
+]
+]
+
+== 邻接表
+
+#block(breakable: false)[#question(label: n => [2026 6])[
+若用邻接表保存有向图 $G=(V,E)$，则计算 $G$ 中某顶点入度的时间复杂度是
+#choices([$O(abs(V))$], [$O(min(abs(V),abs(E)))$], [$O(abs(E))$], [$O(max(abs(V),abs(E)))$])
+]]
+
+== 邻接多重表、十字链表
+
+#block(breakable: false)[#question(label: n => [2024 4])[
+若无向图 $G=(V,E)$ 的邻接多重表如题4图所示，则 $G$ 中顶点 $b$ 与 $d$ 的度分别是
+
+#figure(align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
+  // 大纲 PDF 第 49 页；包括原图每个边结点最左侧的空白标记域。
+  let p(x,y) = ((x - 271) / 35, (819 - y) / 35)
+  set-style(stroke: 0.055em, content: (wrap: body => box(text(size: 0.8em, top-edge: "bounds", bottom-edge: "bounds", body))))
+  rect(p(271,417),p(357,782)); line(p(321,417),p(321,782))
+  for y in (491,563,636,708) { line(p(271,y),p(357,y)) }
+  for (i,label,y) in ((0,[$a$],455),(1,[$b$],529),(2,[$c$],601),(3,[$d$],673),(4,[$e$],745)) {
+    content(p(253,y),str(i)); content(p(296,y),label)
+  }
+  let cellrow(x,y,labels) = {
+    rect(p(x,y),p(x+206,y+49))
+    for dx in (36,86,122,171) { line(p(x+dx,y),p(x+dx,y+49)) }
+    for (dx,label) in (18,61,104,146.5,188.5).zip(labels) { content(p(x+dx,y+24.5),label) }
+  }
+  for (x,y,labels) in (
+    (477,433,([], [0], [], [1], [∧])),(477,505,([], [1], [], [3], [∧])),
+    (477,577,([], [2], [], [0], [∧])),(477,648,([], [3], [], [2], [])),
+    (477,722,([], [4], [], [2], [∧])),(735,434,([], [0], [], [3], [])),
+    (734,724,([], [4], [∧], [3], [])),
+  ) { cellrow(x,y,labels) }
+  for y in (455,529,601,673,745) { line(p(337,y),p(477,y),mark: (end: ">",fill: black,scale: 0.6)) }
+  // 先画边框再画指针，保留原图从指针域内部伸出的线段。
+  for pts in (
+    ((581,455),(581,395),(838,395),(838,434)),
+    ((921,459),(921,531),(683,531)),
+    ((581,529),(581,490),(711,490),(711,457),(683,457)),
+    ((838,459),(838,603),(683,603)),
+    ((580,603),(580,637),(714,637),(714,674),(683,674)),
+    ((579,673),(579,709),(426,709),(426,819),(920,819),(920,773)),
+    ((662,673),(662,722)),
+    ((579,746),(579,795),(836,795),(836,773)),
+    ((920,749),(965,749),(965,458),(941,458)),
+  ) { line(..pts.map(q => p(..q)),mark: (end: ">",fill: black,scale: 0.6)) }
+})), caption: [题4图], kind: image)
+
+#choices([0，2], [2，4], [2，5], [3，4])
+]]

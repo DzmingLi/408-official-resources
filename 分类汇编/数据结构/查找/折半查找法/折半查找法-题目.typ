@@ -61,3 +61,16 @@ L中不存在的元素，则关键字的比较次数最多是
    for v in p { circle(v,radius:.24,fill:white,stroke:.05em) }
  }))])
 ]]
+
+#block(breakable: false)[#question(label: n => [2023 8])[
+对含600个元素的有序顺序表进行折半查找，关键字间的比较次数最多是
+#choices([9], [10], [30], [300])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 5])[
+下列数据结构中，#emphasis[不适合]直接使用折半查找的是
+
+#statements(columns: (1fr,1fr), [Ⅰ．有序链表], [Ⅱ．无序数组], [Ⅲ．有序静态链表], [Ⅳ．无序静态链表])
+
+#choices([仅Ⅰ、Ⅱ], [仅Ⅱ、Ⅳ], [仅Ⅰ、Ⅲ、Ⅳ], [Ⅰ、Ⅱ、Ⅲ、Ⅳ])
+]]

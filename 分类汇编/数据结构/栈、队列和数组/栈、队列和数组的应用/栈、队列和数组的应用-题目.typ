@@ -90,3 +90,15 @@ void main()
 
 ]
 ]]
+
+#block(breakable: false)[#question(label: n => [2024 2])[
+与表达式 $x+y*(z-u)\/v$ 等价的后缀表达式是
+
+#choices([$x y z u - * v \/ +$], [$x y z u - v \/ * +$], [$+ x \/ * y - z u v$], [$+ x * y \/ - z u v$])
+]]
+
+#block(breakable: false)[#question(label: n => [2025 2])[
+已知算法 A 用于检查字符串中各类括号是否匹配，A 执行过程中使用初始为空的栈保存遇到的括号。若栈的容量是3，则下列选项中，A #emphasis[不能]处理的是
+
+#choices([$(a + [b + (c+d)\/e] + f) + g-h$],[$[a*((b+c)\/(d-e)+f\/g)-h]$],[$[a*(b-(c-d)*e\/(f+g))-h]$],[$[a-(b+[c*(d+e)-f]+g+h)]$])
+]]

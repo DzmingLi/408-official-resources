@@ -14,11 +14,21 @@
 
 === 2020 32：C
 
+=== 2026 27
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
+
 == 基本的实现方法
 
 === 2010 27：D
 
 === 2016 27：B
+
+=== 2023 45
+
+本仓库尚未收录本题参考答案。
 
 == 信号量
 
@@ -169,6 +179,118 @@ T2:
 ```
   ],
 )
+
+=== 2024 46
+
+#subquestions(allow-oversize: true)[
++ 实现 C1 的代码是临界区。因为代码 C1 执行对 B 的写操作，且 P1 和 P2 需要互斥执行 C1。
+
++ 进程 P1 和 P2 的同步伪代码如下。
+
+  #table(columns: (1fr,1fr),
+    table.cell(colspan: 2)[Semaphore S=0;　\/\/ 实现进程 P1 与 P2 的同步],
+    [
+  ```c
+  P1
+      ...
+      C1;
+      signal(S);
+  ...
+  ```
+    ], [
+  ```c
+  P2
+      ...
+      wait(S);
+      C2;
+  ...
+  ```
+    ],
+  )
+
++ 进程 P1 和 P2 的互斥伪代码如下。
+
+  #table(columns: (1fr,1fr),
+    table.cell(colspan: 2)[Semaphore mutex=1;　\/\/ 实现 P1 与 P2 互斥执行 C3],
+    [
+  ```c
+  P1
+      ...
+      wait(mutex);
+      C3;
+      signal(mutex);
+  ...
+  ```
+    ], [
+  ```c
+  P2
+      ...
+      wait(mutex);
+      C3;
+      signal(mutex);
+  ...
+  ```
+    ],
+  )
+
+]
+
+=== 2025 45
+
+#table(columns: (1fr,1fr,1fr),
+  table.cell(colspan: 3)[
+```c
+Semaphore position=3; // 可挖树坑的数量
+Semaphore pit=0;      // 树坑的数量
+Semaphore tree=0;     // 待浇水的树苗数
+Semaphore mutex=1;    // 实现铁锹的互斥使用
+```
+  ], [
+```c
+甲：
+for(;;)
+{
+    wait(position);
+    wait(mutex);
+    挖树坑;
+    signal(mutex);
+    signal(pit);
+    ...
+}
+```
+  ], [
+```c
+乙：
+for(;;)
+{
+    wait(pit);
+    放树苗;
+    signal(position);
+    wait(mutex);
+    填土;
+    signal(mutex);
+    signal(tree);
+    ...
+}
+```
+  ], [
+```c
+丙：
+for(;;)
+{
+    wait(tree);
+    浇水;
+    ...
+}
+```
+  ],
+)
+
+=== 2026 26
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
 
 == 条件变量
 

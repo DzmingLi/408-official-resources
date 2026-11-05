@@ -39,6 +39,12 @@
 #choices([删除 file1 的快捷方式], [释放 file1 的文件控制块], [释放 file1 占用的磁盘空间], [删除目录 dir 中与 file1 对应的目录项])
 ]]
 
+#block(breakable: false)[#question(label: n => [2025 29])[
+某文件系统采用目录和索引节点管理文件，当用户在目录中新建文件 F 时，下列操作中，文件系统#emphasis[不会]做的是
+
+#choices([对 F 的索引节点进行初始化],[在目录文件中写入 F 的索引节点号],[在目录文件中写入 F 的访问权限信息],[在目录文件中增加一条 F 对应的目录项])
+]]
+
 == 硬链接和软链接
 
 #block(breakable: false)[#question(label: n => [2009 31])[

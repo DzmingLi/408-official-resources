@@ -45,6 +45,12 @@ ns、80 ns、70 ns和60 ns，则该计算机的 CPU 时钟周期至少是
 #choices([60 ps], [70 ps], [80 ps], [100 ps])
 ]]
 
+#block(breakable: false)[#question(label: n => [2025 18])[
+下列关于 CPI 和 CPU 时钟周期的叙述中，#emphasis[错误]的是
+
+#choices([不同类型指令的 CPI 可能不一样],[程序的 CPI 与 Cache 缺失率无关],[单周期 CPU 的时钟周期以最耗时指令所用时间为准],[流水线 CPU 的时钟周期以最长流水段所用时间为准])
+]]
+
 == 结构冒险、数据冒险和控制冒险的处理
 
 #block(breakable: false)[#question(label: n => [2010 19])[
@@ -268,6 +274,27 @@ I4: store s2, 0(t2)   // M[R[t2]+0]←R[s2]
 下列指令对中，不存在数据冒险的是
 
 #choices([I1 和 I3], [I2 和 I3], [I2 和 I4], [I3 和 I4])
+]]
+
+#block(breakable: false)[#question(label: n => [2023 19])[
+在采用“取指、译码/取数、执行、访存、写回”5段流水线的 RISC 处理器中，执行如下指令序列（第一列为指令序号），其中 s0、s1、s2、s3 和 t2 表示寄存器编号。
+#block(stroke: (dash: "dashed", thickness: .5pt), inset: .45em)[
+```
+I1    add s2, s1, s0     // R[s2]←R[s1]+R[s0]
+I2    load s3, 0(s2)     // R[s3]←M[R[s2]+0]
+I3    beq t2, s3, L1     // if R[t2]=R[s3] jump to L1
+I4    addi t2, t2, 20    // R[t2]←R[t2]+20
+I5  L1: …
+```
+]
+若采用转发（旁路）技术处理数据冒险，采用硬件阻塞方式处理控制冒险，则在指令 I1～I4 执行过程中，发生流水线阻塞的指令有
+#choices([仅 I3], [I2、I4], [I3、I4], [I2、I3、I4])
+]]
+
+#block(breakable: false)[#question(label: n => [2024 19])[
+对于采用“取指、译码/取数、执行、访存、写回”5段流水线的 RISC 数据通路，下列关于指令流水线数据冒险处理的叙述中，#emphasis[错误]的是
+
+#choices([相邻两条指令中的操作数相关可能引起数据冒险], [在数据相关的指令间插入“气泡”能避免数据冒险], [所有数据冒险都可以通过加入转发（旁路）电路解决], [所有数据冒险都能通过调整指令顺序和插入 nop 指令解决])
 ]]
 
 == 超标量和动态流水线的基本概念

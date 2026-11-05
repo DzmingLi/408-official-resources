@@ -5,6 +5,7 @@
 // 书宋 bounds 行盒实测约 0.9em，再留 1.1em 空隙，中心距约 2em。
 // 选项区不另加前后留白。
 #let exam-line-gap = 1.1em
+#let exam-page-limits = state("exam-page-limits", (height: 216mm, break-oversize: false))
 // 单项选择题的答案矩阵整体居中；格内对齐和边距由原表格参数保留。
 #let answer-key(..args) = align(center, table(..args))
 // 行内链表/树节点：统一字形度量，不按 p/g 等字母的包围盒分别居中。
@@ -45,14 +46,16 @@
       let n = if explicit in (none, auto) { next-number } else { explicit }
       let marker = box(text(font: "FZShuSong-Z01S", numbering(it.numbering, n)))
       let content = [#h(-measure(marker).width - 0.3em)#marker#h(0.3em)#item.body]
-      layout(size => {
-        // 仅超过整页正文高度（250mm - 2 × 17mm）的答案小问可分页。
-        // 剩余页高不足的普通小问仍整体移到下一页。
-        let oversize = allow-oversize and measure(
-          block(width: size.width, inset: (left: 2em), content)).height > 216mm
-        block(breakable: oversize, above: exam-line-gap, below: 0pt,
-          inset: (left: 2em), content)
-      })
+      context {
+        let limits = exam-page-limits.get()
+        layout(size => {
+          // 小页上的超长小问允许分页，普通小问仍整体移到下一页。
+          let oversize = (allow-oversize or limits.break-oversize) and measure(
+            block(width: size.width, inset: (left: 2em), content)).height > limits.height
+          block(breakable: oversize, above: exam-line-gap, below: 0pt,
+            inset: (left: 2em), content)
+        })
+      }
       next-number = n + 1
     }
   }
@@ -71,12 +74,17 @@
   sample: false,
   hide-source-headings: 0,
   wide-labels: false,
+  page-size: (176mm, 250mm),
+  page-margin: paper-margin,
+  fit-wide-content: false,
   body,
 ) = {
   let title = if title != none { title } else { str(year) + "年全国硕士研究生招生考试" }
   let cover = if cover == auto { not solutions } else { cover }
   set document(title: title + " " + subject, date: none)
-  set page(width: 176mm, height: 250mm, margin: paper-margin,
+  exam-page-limits.update((height: page-size.at(1) - 2 * page-margin,
+    break-oversize: page-size.at(1) < 250mm))
+  set page(width: page-size.at(0), height: page-size.at(1), margin: page-margin,
     header: none, footer: none)
   set text(font: ("FZShuSong-Z01S", "FZSTS_MPS"), size: 10.5pt,
     lang: "zh", top-edge: "bounds", bottom-edge: "bounds")
@@ -207,7 +215,13 @@
       set block(above: exam-line-gap, below: exam-line-gap)
       // figure 已管理外部留白，内部居中图形不再重复加列表级留白。
       show align: it => it
-      it
+      if fit-wide-content {
+        layout(size => {
+          let width = measure(it.body).width
+          if width > size.width { scale(size.width / width * 100%, reflow: true, it) }
+          else { it }
+        })
+      } else { it }
     }
   }
   show image: set block(above: exam-line-gap, below: exam-line-gap)
@@ -220,7 +234,13 @@
     // ezexam 将题内空行转成 linebreak，canvas 前的弱块间距会被吃掉。
     // 页脚显式使用 center + top，不属于正文图表。
     if it.alignment == center { v(exam-line-gap, weak: false) }
-    it
+    if fit-wide-content and it.alignment == center {
+      layout(size => {
+        let width = measure(it.body).width
+        if width > size.width { scale(size.width / width * 100%, reflow: true, it) }
+        else { it }
+      })
+    } else { it }
   }
   // 代码外框本身需要留白；只给框内 raw 设置间距无法分开外框与题干。
   show block: it => {
@@ -264,7 +284,14 @@
     // 换行只增加紧凑的一行，不继承正文的 1.3em leading / spacing。
     set par(leading: 0.25em, spacing: 0em, justify: false)
     show par: it => it
-    block(breakable: false, above: exam-line-gap, below: exam-line-gap, it)
+    let content = block(breakable: false, above: exam-line-gap, below: exam-line-gap, it)
+    if fit-wide-content {
+      layout(size => {
+        let width = measure(it, width: size.width).width
+        if width > size.width { scale(size.width / width * 100%, reflow: true, content) }
+        else { content }
+      })
+    } else { content }
   }
   show figure.where(kind: "question"): it => {
     set block(breakable: true)

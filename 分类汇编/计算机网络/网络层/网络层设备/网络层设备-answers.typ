@@ -127,6 +127,12 @@
 
 ]
 
+=== 2026 37
+
+#block(breakable: false)[
+本仓库尚未收录本题参考答案。
+]
+
 === 旧版题型示例
 
 #block(breakable: false)[

@@ -68,3 +68,21 @@ struct record {
 
 #choices([2020 FE03H], [2020 FE04H], [2020 FE05H], [2020 FE06H])
 ]]
+
+#block(breakable: false)[#question(label: n => [2025 15])[
+某32位计算机按字节编址，采用小端方式存放数据，编译器按边界对齐方式为下列 C 语言结构型数组变量 $e m p l o y e e$ 分配存储空间。
+
+#block(stroke: (dash: "dotted",thickness: 0.045em),inset: 0.5em)[
+```c
+struct record {
+    int id;
+    char name[10];
+    int salary;
+} employee[200];
+```
+]
+
+若 $e m p l o y e e$ 的首地址为0000 A0B0H，employee[1].id 的机器数为1234 5678H，则该机器数中的56H所在存储单元的地址是
+
+#choices([0000 A0C3H],[0000 A0C4H],[0000 A0C5H],[0000 A0C6H])
+]]
