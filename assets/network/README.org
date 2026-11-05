@@ -4,6 +4,16 @@
 
 寻找出题时可能使用的原始 Visio 安装模具或厂商官方图标库，再对照题图核对轮廓、视角、细节和连接位置。扫描件只用于核对，不自行描绘替代。第三方 SVG、转换网站或素材聚合站只能提供线索，不能作为原始素材出处。
 
+匹配依据必须是官方扫描 PDF，不以仓库中已有的自绘图标、替代素材或重排版 PDF 作为参照。具体页码、匹配特征、排除候选及版本不确定性记录在 [[file:matching-evidence.json][扫描对照记录]]。
+
+** 2010年第34题的核对结果
+
+直接对照2012版考纲书内第28页（PDF第33页），并用2015版《历年真题标准解析》书内第81页（PDF第87页）复核。原题是完整的 PC：CRT 顶部有折线凹口，主机机座向两侧外扩，右下方有斜边，键盘独立置于左前方。轮廓与 =COMPS= 的 =PC= 母版一致。
+
+2003、2007版均存在此图形，仅凭扫描无法认定出题时的具体版本。现选用已从安装介质核实的 =visio-2003-pc.svg= 。此前把单独的 CRT 与键盘拼成主机，缺少正确的机座轮廓，已经更正，并删除两个替代 PNG。
+
+这两个旧 PNG 可追到 VSD Grafx 自己发布的 [[https://visiocafe.com/vsdfx.htm][原始模具系列]]：=VSDfx-Computers-3D.vss= 的 =Keyboard= 、 =Monitor= ，libvisio零起始索引为24、25。模具内封装的是 EMF，含路径与部分位图记录。作者官网说明该系列由 [[https://www.vsdfx.com/services.htm][VSD Grafx 开发并维护发布]]；但确定旧替代图标的来源，并不能证明它就是试卷使用的原始图形。本次没有把这些模具转换件作为原题素材发布。
+
 ** 已直接取得的 Visio 原始模具
 
 原始素材为 Microsoft Office Visio Professional 安装介质中的 VSS。安装介质的归档位置、CAB 和 VSS 的 SHA256、导出序号与处理方式记录在 [[file:visio-sources.json][Visio 提取清单]]。本次按 ISO 文件目录定位 CAB，再直接解包 VSS，没有使用中间网站的转换件。
@@ -32,7 +42,7 @@ python3 scripts/extract-visio-icons.py \
   --output assets/network/visio-2007-isometric-pc.svg --grayscale
 #+end_src
 
-程序只测量并裁去透明画布留白、转换灰度，保留原生路径、描边、渐变和分组；若 master 内嵌位图会拒绝将其作为纯矢量导出。不要把导出列表的零起始序号与 Visio 文件内部的 Master ID 混用。
+程序只测量并裁去透明画布留白、转换灰度，保留原生路径、描边、渐变和分组；若 master 封装外部图像或 WMF/EMF，会要求单独检查封装格式，不把它直接认作纯矢量，也不笼统认作位图。不要把导出列表的零起始序号与 Visio 文件内部的 Master ID 混用。
 
 [[https://learn.microsoft.com/en-us/office/vba/api/visio.cell.resultstr][微软官方 Visio 文档]]也明确使用 =COMPS_U.VSS= 中的 =PC= 母版。该文档能确认模具用途，不能单独证明某年真题使用了哪个版本。
 
@@ -41,5 +51,4 @@ python3 scripts/extract-visio-icons.py \
 - [[https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html][Cisco 官方 Network Topology Icons]]提供黑白 EPS、Visio VSS 和图标参考 PDF。已取得官网的 =doc.zip= 和 =PDF_icons.zip= 用于核对。现有 =cisco-router.svg= 、 =terminal-symbol.svg= 属于该系列，但已有 SVG 经中间分发，应继续以官网原件核对。
 - =router-symbol.svg= 来自 Michel Bakni 的 [[https://commons.wikimedia.org/wiki/File:Router_symbol.svg][Router symbol.svg]]，保留作者和授权说明；尚未确定对应的原始 Visio 模具版本。
 - =desktop-symbol.svg= 来自 [[https://github.com/tabler/tabler-icons/blob/main/icons/outline/device-desktop.svg][Tabler Icons]]，属于既有通用替代素材，不能认作真题原图。
-- =crt-monitor-symbol.png= 和 =keyboard-symbol.png= 的原始素材仍待追溯；保留现状，不用任意相近图标或位图描摹替换。
-- =pc-symbol.svg= 是既有按2009年扫描图描绘的替代，原始素材尚未确定。它不作为原图依据，后续找到匹配原件再替换，不继续自行重绘。
+- =pc-symbol.svg= 是既有按2009年扫描图描绘的替代，原始素材尚未确定。已直接核对2010版考纲书内第31页（PDF第37页）和2015版标准解析书内第102页（PDF第108页）：原图接近正视，包含CRT、卧式机箱及横置键盘；低分辨率扫描不足以可靠辨认细小侧面。已检查 COMPS PC、Cisco 官网4个PC/终端EPS、Visio 2002原始介质中的旧版网络/PC模具，并补查Visio 2000归档中的基本网络模具。有近似Computer/Workstation候选，但机箱盘位、边框、透视或键盘未完整对上，均未认定。2000归档为重打包安装文件，未与原始发行光盘独立核验，只作为候选线索。既有自绘不作匹配依据，不按它筛选候选，也不据近似图强行替换。

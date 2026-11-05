@@ -867,7 +867,7 @@ L0接口的IP地址是202.118.2.1；R2的L0接口的IP地址是202.118.2.2，L1�
     // E2 线压住两端边框极小距离：左端接 R1，右端不明显伸入椭圆。
     line((11.10, 2.05), (12.34, 2.05), stroke: 0.55pt)
 
-    // 原图是完全正视的 CRT、卧式机箱与独立键盘，不采用透视 PC 图标。
+    // 既有临摹替代，真实素材尚待确定；不能以此自绘图排除原始母版候选。
     content((2.15, 0.64), box(fill: white, inset: 0pt)[
       #image("../../assets/network/pc-symbol.svg",
         width: 0.82cm, height: 0.70cm, fit: "contain")

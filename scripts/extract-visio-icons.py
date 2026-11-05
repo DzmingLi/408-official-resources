@@ -44,7 +44,7 @@ def main():
         parser.error(f'master index must be between 0 and {len(shapes) - 1}')
     svg = shapes[args.master]
     if svg.findall('.//{http://www.w3.org/2000/svg}image'):
-        raise ValueError('Selected master embeds a bitmap; refusing to label it vector-only')
+        raise ValueError('Selected master embeds an image or metafile; WMF/EMF may contain vectors and must be inspected separately')
     png = subprocess.check_output([args.renderer, '-w', '1440', '-h', '1440'], input=ET.tostring(svg))
     bounds = Image.open(io.BytesIO(png)).getchannel('A').getbbox()
     if bounds is None:

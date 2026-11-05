@@ -728,14 +728,11 @@ Mbps，分组大小为1000B，其中分组头大小为20B。若主机H1向主机
     set-style(content: (wrap: body => box(text(top-edge: "bounds", bottom-edge: "bounds", body))))
 
     let host(x, label) = {
-      // VSDfx Generic 3D 的 CRT Monitor 与 Keyboard：原图也是两个符号叠放。
-      content((x, 1.38), box(fill: white, inset: 0pt)[
-        #image("../../assets/network/crt-monitor-symbol.png",
-          width: 0.57cm, height: 0.60cm, fit: "stretch")
-      ])
-      content((x - 0.18, 0.94), box(fill: white, inset: 0pt)[
-        #image("../../assets/network/keyboard-symbol.png",
-          width: 0.47cm, height: 0.33cm, fit: "stretch")
+      // 对照2012版考纲书内28页：原图是 COMPS 的完整 PC 母版。
+      // 2003与2007版轮廓相同，扫描图不足以区分具体版本。
+      content((x - 0.05, 1.27), box(fill: white, inset: 0pt)[
+        #image("../../assets/network/visio-2003-pc.svg",
+          width: 0.72cm, height: 0.72cm, fit: "contain")
       ])
       content((x, 0.40), [#text(size: 0.78em)[#label]])
     }
