@@ -51,7 +51,7 @@ PDF文件命名如下：
 *** 历年试卷与参考答案
 
 #+begin_src sh
-nix build .#pdfs --out-link result
+nix build .#past-exams
 #+end_src
 
 =nix build= 等价于默认构建历年试卷阅读版。
@@ -59,7 +59,7 @@ nix build .#pdfs --out-link result
 需要同时构建小册子打印版时，显式指定：
 
 #+begin_src sh
-nix build .#pdfs-with-print --out-link result-with-print
+nix build .#past-exams-with-print --out-link result-with-print
 #+end_src
 
 =result-with-print/= 中包含阅读版及对应的 =-print.pdf= 打印版。GitHub Releases 自动发布使用此构建目标。

@@ -54,7 +54,7 @@
               !excluded && allowed &&
               (type == "directory" || lib.any (ext: lib.hasSuffix ext relative) [ ".typ" ".py" ".org" ".svg" ".png" ".jpg" ".jpeg" ".json" ".toml" ]);
           };
-          mkPdfs = withPrint: typixLib.mkTypstDerivation {
+          mkPastExams = withPrint: typixLib.mkTypstDerivation {
             name = "kaoyan-408-official-pdfs" + lib.optionalString withPrint "-with-print";
             inherit src fontPaths;
             emojiFont = null;
@@ -66,8 +66,8 @@
             '';
             installPhaseCommand = "true";
           };
-          pdfs = mkPdfs false;
-          pdfs-with-print = mkPdfs true;
+          past-exams = mkPastExams false;
+          past-exams-with-print = mkPastExams true;
           collections = typixLib.mkTypstDerivation {
             name = "408-topic-collections";
             inherit src fontPaths;
@@ -80,8 +80,8 @@
             installPhaseCommand = "true";
           };
         in {
-          packages = { default = pdfs; inherit pdfs pdfs-with-print collections; fonts = founderFonts; math-fonts = mathFonts; };
-          checks = { inherit pdfs pdfs-with-print collections; };
+          packages = { default = past-exams; inherit past-exams past-exams-with-print collections; fonts = founderFonts; math-fonts = mathFonts; };
+          checks = { inherit past-exams past-exams-with-print collections; };
           devShell = typixLib.devShell {
             inherit fontPaths;
             emojiFont = null;

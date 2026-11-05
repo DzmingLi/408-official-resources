@@ -33,7 +33,7 @@ python3 scripts/extract-collection-answers.py --patch
 # 将上述命令输出的补丁应用到源稿后检查
 python3 scripts/extract-collections.py --check
 python3 scripts/extract-collection-answers.py --check
-nix build .#pdfs .#collections
+nix build .#past-exams .#collections
 #+end_src
 
 PDF构建与年份、纸张选项见 [[file:README.org::*构建][README构建说明]]。构建产物、临时目录和 =本地参考/= 不提交；旧版题型示例的本地自制解析不公开，也不混入真题分类汇编。
