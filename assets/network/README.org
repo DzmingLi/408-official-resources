@@ -1,0 +1,45 @@
+#+title: 网络图标原始素材与核对记录
+
+** 素材选择
+
+寻找出题时可能使用的原始 Visio 安装模具或厂商官方图标库，再对照题图核对轮廓、视角、细节和连接位置。扫描件只用于核对，不自行描绘替代。第三方 SVG、转换网站或素材聚合站只能提供线索，不能作为原始素材出处。
+
+** 已直接取得的 Visio 原始模具
+
+原始素材为 Microsoft Office Visio Professional 安装介质中的 VSS。安装介质的归档位置、CAB 和 VSS 的 SHA256、导出序号与处理方式记录在 [[file:visio-sources.json][Visio 提取清单]]。本次按 ISO 文件目录定位 CAB，再直接解包 VSS，没有使用中间网站的转换件。
+
+| 导出图标 | Visio 版本 | 安装 CAB | 原始模具 | libvisio 中的零起始 master 序号 |
+|----------+------------+----------+----------+--------------------------------|
+| =visio-2003-pc.svg= 、 =visio-2003-laptop.svg= | 2003 | =N5614A01.CAB= | =COMPS_U.VSS= | 0、6 |
+| =visio-2003-server.svg= | 2003 | =N5614A01.CAB= | =PERIPH_U.VSS= | 3 |
+| =visio-2003-router.svg= 、 =visio-2003-switch.svg= | 2003 | =N5614E01.CAB= | =NETSYM_U.VSS= | 0、5 |
+| =visio-2003-cloud.svg= | 2003 | =N5614E01.CAB= | =NETLOC_U.VSS= | 0 |
+| =visio-2007-isometric-pc.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =COMPS_M.VSS= | 0 |
+| =visio-2007-isometric-server.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =SERVER_M.VSS= | 1（带文件夹的服务器） |
+| =visio-satellite.svg= 、 =visio-satellite-dish.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =DTLNET_M.VSS= | 11、12 |
+
+2003年的6个既有 SVG，其全部路径数据与本次从安装 CAB 新提取的相应 master 一致。2007年的电脑、文件服务器已由原生矢量导出件替换旧的低分辨率 PNG；卫星及天线也已改为直接从安装模具提取。
+
+2007安装 CAB 保留 Microsoft Corporation 的代码签名，文件摘要一致；使用 osslsigncode 在2006年签署时点验证代码签名通过。该验证未验证旧时间戳证书链，不能表述为当前完整证书链验证通过。ISO 只按范围读取了所需 CAB，清单中的整张 ISO SHA1 是归档站报告值，未独立校验整张 ISO。
+
+复现导出使用 [[file:../../scripts/extract-visio-icons.py][extract-visio-icons.py]]，需要 libvisio、librsvg 和 Pillow。例如：
+
+#+begin_src sh
+python3 scripts/extract-visio-icons.py \
+  --stencil /path/to/COMPS_M.VSS_2052 --master 0 \
+  --cabinet /path/to/VISIOLR.CAB \
+  --source 'https://archive.org/download/MSVisio2007CHS/Office%20Visio%20Professional%202007.iso' \
+  --output assets/network/visio-2007-isometric-pc.svg --grayscale
+#+end_src
+
+程序只测量并裁去透明画布留白、转换灰度，保留原生路径、描边、渐变和分组；若 master 内嵌位图会拒绝将其作为纯矢量导出。不要把导出列表的零起始序号与 Visio 文件内部的 Master ID 混用。
+
+[[https://learn.microsoft.com/en-us/office/vba/api/visio.cell.resultstr][微软官方 Visio 文档]]也明确使用 =COMPS_U.VSS= 中的 =PC= 母版。该文档能确认模具用途，不能单独证明某年真题使用了哪个版本。
+
+** 厂商原件与尚未确认的素材
+
+- [[https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html][Cisco 官方 Network Topology Icons]]提供黑白 EPS、Visio VSS 和图标参考 PDF。已取得官网的 =doc.zip= 和 =PDF_icons.zip= 用于核对。现有 =cisco-router.svg= 、 =terminal-symbol.svg= 属于该系列，但已有 SVG 经中间分发，应继续以官网原件核对。
+- =router-symbol.svg= 来自 Michel Bakni 的 [[https://commons.wikimedia.org/wiki/File:Router_symbol.svg][Router symbol.svg]]，保留作者和授权说明；尚未确定对应的原始 Visio 模具版本。
+- =desktop-symbol.svg= 来自 [[https://github.com/tabler/tabler-icons/blob/main/icons/outline/device-desktop.svg][Tabler Icons]]，属于既有通用替代素材，不能认作真题原图。
+- =crt-monitor-symbol.png= 和 =keyboard-symbol.png= 的原始素材仍待追溯；保留现状，不用任意相近图标或位图描摹替换。
+- =pc-symbol.svg= 是既有按2009年扫描图描绘的替代，原始素材尚未确定。它不作为原图依据，后续找到匹配原件再替换，不继续自行重绘。

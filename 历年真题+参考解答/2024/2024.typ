@@ -348,7 +348,7 @@ DMA 控制 I/O 方式下，设备的输入/输出由 DMA 控制器控制完成�
     if label==[H4] {
       line((x - 0.7,y),(x - 0.35,y+0.7),(x+0.6,y+0.7),(x+0.25,y),close: true,fill: luma(75%))
       line((x - 0.7,y),(x - 0.9,y - 0.3),(x+0.35,y - 0.3),(x+0.25,y),close: true,fill: white)
-    } else { content((x,y),image("../../assets/network/visio-2007-isometric-pc.png",width: 1.5em)) }
+    } else { content((x,y),image("../../assets/network/visio-2007-isometric-pc.svg",width: 1.5em)) }
     content((tx,ty),text(size: 0.65em,label))
     content((tx,ty - 0.7),text(size: 0.63em,ip))
     content((tx,ty - 1.4),text(size: 0.63em,mac))

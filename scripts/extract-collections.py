@@ -1,9 +1,6 @@
-"""Emit an apply_patch for manually classified, source-faithful topic collections.
-
-No file is written by this extractor. Apply --patch output with apply_patch;
---check verifies that checked-in collections still match the original papers.
-"""
+"""Extract classified content into a disposable source tree, without compiling PDFs."""
 import argparse
+import json
 import os
 from pathlib import Path
 import re
@@ -325,8 +322,8 @@ def rebase_images(body, source, target):
     return re.sub(r'(\bimage\s*\(\s*")([^"\n]+)"', replace, body)
 
 
-def render(root, title, plan):
-    target = root / '真题分类汇编' / plan['directory'] / (title + '-题目.typ')
+def render(root, title, plan, output_root=None):
+    target = (output_root or root) / '真题分类汇编' / plan['directory'] / (title + '-题目.typ')
     template = os.path.relpath(root / 'template.typ', target.parent)
     lines = [
         '// 自动提取完整题干；分类由 scripts/extract-collections.py 人工维护。',
@@ -429,29 +426,58 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parent.parent)
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument('--patch', action='store_true')
+    mode.add_argument('--catalog', action='store_true', help='Print the Nix target catalog as JSON')
     mode.add_argument('--check', action='store_true')
+    mode.add_argument('--output', type=Path, help='Write disposable Typst sources here')
+    parser.add_argument('--collection', help='Stable lecture code, such as cn-01-01')
+    parser.add_argument('--answers', action='store_true')
+    parser.add_argument('--from-year', type=int, default=MIN_YEAR)
+    parser.add_argument('--through-year', type=int, default=MAX_YEAR)
+    parser.add_argument('--current-syllabus-only', action='store_true')
     args = parser.parse_args()
     root = args.root.resolve()
-    if args.patch:
-        print('*** Begin Patch')
-    for title, plan in PLANS.items():
-        target, text, count = render(root, title, plan)
-        if args.check:
-            if not target.exists() or target.read_text() != text:
-                raise SystemExit(f'{target}: collection needs regeneration')
-            print(f'{title}: {count} questions, cutoff {MAX_YEAR}')
-        elif not target.exists():
-            print(f'*** Add File: {target}')
-            for line in text.splitlines():
-                print('+' + line)
-        elif target.read_text() != text:
-            import difflib
-            print(f'*** Update File: {target}')
-            for line in list(difflib.unified_diff(target.read_text().splitlines(), text.splitlines(), n=3))[2:]:
-                print('@@' if line.startswith('@@') else line)
-    if args.patch:
-        print('*** End Patch')
+    catalog_module = runpy.run_path(str(Path(__file__).with_name('collection-catalog.py')))
+    catalog = catalog_module['collection_catalog'](root, PLANS)
+    serialized = json.dumps(catalog, ensure_ascii=False, indent=2) + '\n'
+    if args.catalog:
+        print(serialized, end='')
+        return
+    if args.check or args.output:
+        target = root / '真题分类汇编/collections.json'
+        if target.read_text() != serialized:
+            raise SystemExit('分类目录需要更新：python3 scripts/extract-collections.py --catalog > 真题分类汇编/collections.json')
+    if args.check:
+        print('Collection target catalog matches the classification.')
+        return
+    rows = [row for group in catalog for row in group['rows'] if row['code'] == args.collection]
+    if len(rows) != 1:
+        parser.error('--collection must identify one lecture code from collections.json')
+    try:
+        selected = select_plans(args.from_year, args.through_year, args.current_syllabus_only)
+    except ValueError as error:
+        parser.error(str(error))
+    row = rows[0]
+    plans = {member['title']: selected[member['title']]
+             for member in row['members'] if member['title'] in selected}
+    if not plans:
+        parser.error('No questions match this lecture and year range')
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=True)
+    if args.answers:
+        module = runpy.run_path(str(Path(__file__).with_name('extract-collection-answers.py')))
+        contents = module['outputs'](root, plans, output_root=output)
+    else:
+        contents = ((target, text) for title, plan in plans.items()
+                    for target, text, _ in [render(root, title, plan, output_root=output)])
+    for target, text in contents:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text)
+    template = os.path.relpath(root / '真题分类汇编/template.typ', output)
+    suffix = 'answers' if args.answers else '题目'
+    lines = [f'#import "{template}": collection',
+             f'#show: collection.with(title: "{row["subject"]}真题分类汇编", subject: "{row["heading"]}", solutions: {str(args.answers).lower()})']
+    lines += [f'#include "真题分类汇编/{plan["directory"]}/{title}-{suffix}.typ"' for title, plan in plans.items()]
+    (output / 'entry.typ').write_text('\n'.join(lines) + '\n')
 
 
 if __name__ == '__main__':

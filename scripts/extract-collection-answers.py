@@ -1,9 +1,4 @@
-"""Generate companion answers from the same classification plan as the questions.
-
-Only emits an apply_patch; --check checks reproducibility without writing files.
-"""
-import argparse
-import difflib
+"""Extract companion answers using the same selected classification as the questions."""
 import os
 from pathlib import Path
 import re
@@ -87,10 +82,10 @@ def clean_answer(body, year, number):
     return body
 
 
-def outputs(root, plans=None):
+def outputs(root, plans=None, output_root=None):
     cache = {}
     for title, plan in (PLANS if plans is None else plans).items():
-        target = root / '真题分类汇编' / plan['directory'] / f'{title}-answers.typ'
+        target = (output_root or root) / '真题分类汇编' / plan['directory'] / f'{title}-answers.typ'
         template = os.path.relpath(root / 'template.typ', target.parent)
         lines = [
             '// 与题目版共用分类清单；由 scripts/extract-collection-answers.py 生成。',
@@ -125,31 +120,3 @@ def outputs(root, plans=None):
                 else:
                     lines += [body, '']
         yield target, '\n'.join(lines).rstrip() + '\n'
-
-
-def main():
-    parser = argparse.ArgumentParser()
-    mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument('--patch', action='store_true')
-    mode.add_argument('--check', action='store_true')
-    args = parser.parse_args()
-    if args.patch:
-        print('*** Begin Patch')
-    for target, text in outputs(ROOT):
-        previous = target.read_text() if target.exists() else None
-        if args.check:
-            if previous != text:
-                raise SystemExit(f'{target}: answer collection needs regeneration')
-        elif previous is None:
-            print(f'*** Add File: {target}')
-            print('\n'.join('+' + line for line in text.splitlines()))
-        elif previous != text:
-            print(f'*** Update File: {target}')
-            for line in list(difflib.unified_diff(previous.splitlines(), text.splitlines(), n=3))[2:]:
-                print('@@' if line.startswith('@@') else line)
-    if args.patch:
-        print('*** End Patch')
-
-
-if __name__ == '__main__':
-    main()

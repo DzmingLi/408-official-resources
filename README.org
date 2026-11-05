@@ -88,23 +88,24 @@ nix build .#2024-answers-print
 nix build .#collections --out-link result-collections
 #+end_src
 
+各讲的题目、答案也有独立目标，例如 =nix build .#cn-01-01-questions= 、 =nix build .#cn-01-01-answers= 。科目汇总目标为 =collections-ds= 、 =collections-coa= 、 =collections-os= 、 =collections-cn= 。
+
 例如，只构建截至2022年（含2022年）的A5汇编，将更新年份保留为整卷模拟：
 
 #+begin_src sh
-nix develop -c python3 scripts/build-collections.py \
-  --output output/collections-2009-2022-A5 \
-  --through-year 2022 --paper-size A5
+nix build --impure --file nix/collections-build.nix \
+  --arg throughYear 2022 --argstr paperSize A5 \
+  --out-link result-collections
 #+end_src
 
 | 选项 | 作用 | 默认值 |
 |------+------|--------|
-| =--from-year= | 起始年份，含该年 | 2009 |
-| =--through-year= | 截止年份，含该年 | 2026 |
-| =--paper-size= | =A4= 或 =A5= | =A4= |
-| =--current-syllabus-only= | 排除独立标明的4道历史考点题 | 不排除 |
-| =--output= | 本次构建的PDF保存目录 | 必填 |
+| =--arg fromYear= | 起始年份，含该年 | 2009 |
+| =--arg throughYear= | 截止年份，含该年 | 2026 |
+| =--argstr paperSize= | =A4= 或 =A5= | =A4= |
+| =--arg currentSyllabusOnly true= | 排除独立标明的4道历史考点题 | 不排除 |
 
-起止年份可在2009—2026年内选择；输出目录须为空，不同配置使用不同目录。筛选不修改完整分类源稿，空讲自动跳过。汇编只收录历年真题，不含旧版题型示例；2023、2026年尚无答案源稿，答案册逐题注明缺失。纸张选项只影响真题分类汇编，历年整卷的纸张与打印版拼版方式保持原有设置。
+起止年份可在2009—2026年内选择，空讲自动跳过。分类汇编不另存题目和答案的派生 =.typ= 副本；每讲构建时按分类清单从历年卷提取临时源稿，再由 Nix 调用 Typst 编译。汇编只收录历年真题，不含旧版题型示例；2023、2026年尚无答案源稿，答案册逐题注明缺失。纸张选项只影响真题分类汇编。
 
 ** 友情链接
 

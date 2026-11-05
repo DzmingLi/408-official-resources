@@ -253,7 +253,7 @@ struct record {
   set-style(stroke: 0.045em)
   line((0,0),(18,0))
   for (x,label) in ((0,[H1]),(18,[H2])) {
-    content((x,0),image("../../assets/network/visio-2007-isometric-pc.png",width: 2em))
+    content((x,0),image("../../assets/network/visio-2007-isometric-pc.svg",width: 2em))
     content((x,-1.3),label)
   }
   for (x,label) in ((6,[R1]),(12,[R2])) {
@@ -287,9 +287,9 @@ struct record {
   // 大纲 PDF 第 81 页。报文的省略行、地址行分别定位，不继承正文段落行距。
   let p(x,y)=((x - 348) / 35,(1425 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(350,1133),image("../../assets/network/visio-2007-isometric-pc.png",width:3.2em))
+  content(p(350,1133),image("../../assets/network/visio-2007-isometric-pc.svg",width:3.2em))
   content(p(350,1054),[H])
-  content(p(834,1138),image("../../assets/network/visio-2007-isometric-server.png",width:2.3em))
+  content(p(834,1138),image("../../assets/network/visio-2007-isometric-server.svg",width:2.3em))
   content(p(845,1036),[DHCP服务器]); content(p(845,1064),[192.168.5.1])
   for x in (348,833) {line(p(x,1170),p(x,1425),mark:(end:">",fill:black,scale:0.7))}
   line(p(833,1202),p(348,1265),mark:(end:">",fill:black,scale:0.7))
@@ -324,8 +324,8 @@ struct record {
   // 大纲 PDF 第 82 页，保留原图的斜率、两次发送的间距和标签离线距离。
   let p(x,y)=((x - 399) / 35,(1560 - y) / 35)
   set-style(stroke:0.045em,content:(wrap:body=>box(text(size:0.8em,top-edge:"bounds",bottom-edge:"bounds",body))))
-  content(p(400,1100),image("../../assets/network/visio-2007-isometric-pc.png",width:3.3em)); content(p(402,1027),[甲])
-  content(p(978,1102),image("../../assets/network/visio-2007-isometric-server.png",width:2.3em)); content(p(983,1031),[乙])
+  content(p(400,1100),image("../../assets/network/visio-2007-isometric-pc.svg",width:3.3em)); content(p(402,1027),[甲])
+  content(p(978,1102),image("../../assets/network/visio-2007-isometric-server.svg",width:2.3em)); content(p(983,1031),[乙])
   for x in (399,978) {line(p(x,1147),p(x,1560),mark:(end:">",fill:black,scale:0.7))}
   for (a,b) in (((399,1174),(978,1318)),((399,1222),(747,1308)),
     ((978,1318),(399,1484)),((399,1484),(496,1512))) {

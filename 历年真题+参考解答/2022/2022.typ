@@ -367,7 +367,7 @@ $-0.4375$ 的 IEEE 754 单精度浮点数表示为
   content((16.2,1.7), text(size: 0.8em)[192.168.1.62/27], anchor: "west")
   content((15,0), std.rect(fill: white, inset: 0.3em, stroke: 0.045em)[⇄])
   content((13,-0.1), [交换机], anchor: "east")
-  content((21,0), image("../../assets/network/visio-2007-isometric-pc.png", width: 2.5em))
+  content((21,0), image("../../assets/network/visio-2007-isometric-pc.svg", width: 2.5em))
   content((23,0), text(size: 0.8em)[H\ 192.168.1.60], anchor: "west")
 }))
 

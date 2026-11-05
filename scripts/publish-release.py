@@ -7,9 +7,7 @@ import json
 import os
 from pathlib import Path
 import re
-import runpy
 import shutil
-import unicodedata
 from urllib.parse import quote
 import subprocess
 import tempfile
@@ -36,54 +34,14 @@ def release_files(directory):
     return actual
 
 
-COLLECTION_SUBJECTS = {'数据结构': 'ds', '计算机组成原理': 'coa', '操作系统': 'os', '计算机网络': 'cn'}
-
-
 def collection_plan():
-    """Use the reviewed lecture plan and merge rules to enumerate release pairs."""
+    """Read the same lecture catalog used by native Nix targets."""
     root = Path(__file__).resolve().parent.parent
-    plans = runpy.run_path(str(root / 'scripts/extract-collections.py'))['PLANS']
-    merges = runpy.run_path(str(root / 'scripts/build-collections.py'))['MERGED_COLLECTIONS']
-    merged = {title: name for name, titles in merges.items() for title in titles}
-    rows = {}
-    for title, plan in plans.items():
-        name = merged.get(title, title + '-题目')
-        if name in rows:
-            continue
-        members = merges.get(name, (title,))
-        directory = Path(plan['directory'])
-        subject, chapter = directory.parts[:2]
-        question = directory.parent / (name + '.pdf')
-        answer = question.with_name(name.replace('-题目', '-answers') + '.pdf')
-        rows[name] = dict(subject=subject, chapter=chapter, title=name.removesuffix('-题目'),
-                          question=question, answer=answer, members=members)
-    groups = []
-    for subject, prefix in COLLECTION_SUBJECTS.items():
-        normalize = lambda text: unicodedata.normalize('NFKC', text).replace(' ', '').replace('／', '/')
-        syllabus = (root / '考试大纲' / (subject + '.org')).read_text()
-        headings = [re.sub(r'^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十]+\))', '', normalize(line))
-                    for line in re.findall(r'^\*+\s+(.+)', syllabus, re.MULTILINE)]
-
-        def position(name):
-            name = {'输入输出管理': '输入/输出(I/O)管理'}.get(name, name)
-            name = normalize(name)
-            return headings.index(name) if name in headings else len(headings)
-
-        def order(row):
-            topics = [topic for title in row['members'] for topic in (title, *plans[title]['sections'])]
-            return position(row['chapter']), min(position(topic) for topic in topics)
-
-        selected = sorted((r for r in rows.values() if r['subject'] == subject), key=order)
-        chapters = list(dict.fromkeys(row['chapter'] for row in selected))
-        numbers = {}
-        for row in selected:
-            chapter = row['chapter']
-            numbers[chapter] = numbers.get(chapter, 0) + 1
-            code = f'{prefix}-{chapters.index(chapter) + 1:02d}-{numbers[chapter]:02d}'
-            row['question_name'] = code + '-questions.pdf'
-            row['answer_name'] = code + '-answers.pdf'
-        groups.append(dict(subject=subject, tag='collection-' + subject,
-                           title=subject + '真题分类汇编', rows=selected))
+    groups = json.loads((root / '真题分类汇编/collections.json').read_text())
+    for group in groups:
+        for row in group['rows']:
+            row['question'] = Path(row['question'])
+            row['answer'] = Path(row['answer'])
     return groups
 
 
@@ -104,7 +62,7 @@ def collection_notes(group, commit, repo):
     lines = [f'由提交 {commit} 自动生成，共 {len(group["rows"])} 讲，各含题目与答案 PDF（A4 阅读版）。',
              '', '收录2009—2026年全部真题，不含题型示例；历史考点单独标明。',
              '2023、2026年尚无参考答案源稿，答案册逐题标为“本仓库尚未收录本题参考答案”。',
-             '自行构建可通过 --through-year、--from-year 和 --paper-size 选择年份与 A4/A5 纸张。',
+             '自行构建可通过 Nix 的 mkCollections 函数选择 fromYear、throughYear 和 A4/A5 paperSize。',
              '历年真题选择题仅列答案字母；综合题保留对应参考答案或整理解析。',
              '下载文件按科目、章节和讲次编号，中文讲名及下载入口如下。', '']
     chapter = None

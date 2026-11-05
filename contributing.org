@@ -20,21 +20,20 @@
 
 共用的网络设备图标统一存放在 =assets/network/= ，保留文件中的来源说明；单题专用图片仍放在对应年份目录中。
 
+图标优先寻找并核对原始 Visio 模具、厂商官方图标或其矢量导出件，不自行按扫描图描绘替代。来源、版本及待核对项目见 [[file:assets/network/README.org][图标来源记录]]。
+
 ** 维护真题分类
 
 分类清单位于 =scripts/extract-collections.py= 和各科 =*-collection-plan.py= 中，2023—2026年及历史考点补充位于 =scripts/extended-collection-plan.py= 。只收录历年真题，不把旧版题型示例加入分类清单。
 
 跨考点题保留完整题干，归入最后实际考查的考纲知识点；背景和干扰选项不计。各科内部题号不得重复，已有跨科复用规则保持明确记录。题目与答案必须共用同一清单；缺少答案时明确标注，不能自行填入未核对内容。
 
-修改清单或答案源稿后，生成并应用提取器输出的补丁，再检查源稿同步：
+直接修改历年试卷、答案源稿或分类清单，不维护汇编的派生 =.typ= 文件。修改分类清单后，更新 Nix 与发布流程共用的讲次目录，再检查并构建：
 
 #+begin_src sh
 nix develop
-python3 scripts/extract-collections.py --patch
-python3 scripts/extract-collection-answers.py --patch
-# 将上述命令输出的补丁应用到源稿后检查
+python3 scripts/extract-collections.py --catalog > 真题分类汇编/collections.json
 python3 scripts/extract-collections.py --check
-python3 scripts/extract-collection-answers.py --check
 nix build .#past-exams .#collections
 #+end_src
 
