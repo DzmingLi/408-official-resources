@@ -245,7 +245,6 @@ class ReleaseTests(unittest.TestCase):
             '2024/2024.typ': '2024',
             '2024/2024-答案.typ': '2024-answers',
             '旧版题型示例/题型示例.typ': 'old-sample',
-            '旧版题型示例/题型示例-答案.typ': 'old-sample-answers',
         }
         for source, stem in expected.items():
             with self.subTest(source=source):
@@ -261,7 +260,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(len(names), len(set(names)))
         self.assertFalse(any('答案' in name or '--' in name for name in names))
 
-    def test_only_old_samples_and_their_answers_are_selected(self):
+    def test_only_official_old_sample_questions_are_selected(self):
         module = runpy.run_path(str(Path(__file__).with_name('build-pdfs.py')))
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -272,14 +271,13 @@ class ReleaseTests(unittest.TestCase):
                 source.touch()
             selected = module['sources'](root)
             self.assertEqual({p.name for p in selected},
-                             {'题型示例.typ', '题型示例-答案.typ'})
+                             {'题型示例.typ'})
 
     def test_reading_and_print_assets_are_both_expected(self):
         module = runpy.run_path(str(Path(__file__).with_name('publish-release.py')))
         names = {'2024.pdf', '2024-print.pdf',
                  '2024-answers.pdf', '2024-answers-print.pdf',
-                 'old-sample.pdf', 'old-sample-print.pdf',
-                 'old-sample-answers.pdf', 'old-sample-answers-print.pdf'}
+                 'old-sample.pdf', 'old-sample-print.pdf'}
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
             for name in names:
@@ -288,7 +286,8 @@ class ReleaseTests(unittest.TestCase):
 
     def test_reject_extra_release_files(self):
         module = runpy.run_path(str(Path(__file__).with_name('publish-release.py')))
-        for extra in ('SHA256SUMS', 'PRINTING.txt', 'manifest.json', 'past-exams.zip', '2013-sample.pdf'):
+        for extra in ('SHA256SUMS', 'PRINTING.txt', 'manifest.json', 'past-exams.zip', '2013-sample.pdf',
+                      'old-sample-answers.pdf', 'old-sample-answers-print.pdf'):
             with self.subTest(extra=extra), tempfile.TemporaryDirectory() as tmp:
                 directory = Path(tmp)
                 for name in ('2024.pdf', '2024-print.pdf', extra):

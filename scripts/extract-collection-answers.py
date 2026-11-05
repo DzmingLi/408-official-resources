@@ -18,7 +18,10 @@ rebase_images = EXTRACT['rebase_images']
 
 def answers(root, year, sample=False):
     if sample:
-        source = root / '旧版题型示例/题型示例-答案.typ'
+        # The syllabus published sample questions without reference answers.
+        # Self-authored solutions are local-only and must never enter releases.
+        source = root / '旧版题型示例/题型示例.typ'
+        return source, {n: '原考纲未附本题参考答案。' for n in range(1, 16)}
     else:
         source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
     if not source.exists() and not sample and year in (2023, 2026):
@@ -125,8 +128,6 @@ def outputs(root, plans=None):
                 body = rebase_images(body, source, target)
                 label = '旧版题型示例' if sample else f'{year} {number}'
                 lines += [f'=== {label}', '']
-                if sample:
-                    body = '自制解析（非官方）：原考纲未提供示例答案，以下答案与解析由本仓库自行编写。\n\n' + body
                 if (sample and number not in (10, 14)) or (year, number) in ((2009, 41), (2011, 41), (2015, 42), (2016, 41), (2017, 47)):
                     lines += ['#block(breakable: false)[', body, ']', '']
                 elif not sample and number <= 40 and body in 'ABCD':

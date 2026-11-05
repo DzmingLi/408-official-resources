@@ -26,18 +26,17 @@
 
 #subquestions(allow-oversize: true)[
 + 因为页内偏移量是12位，所以页大小为4KB，（1分）
-  
-  页表项数为 $2^(3 2) \/ 4 upright(K) = 2^(2 0)$ ，该一级页表最大为
-  $2^(2 0) times 4 upright(med B) = 4 upright(med M B) 。$ （2分）
-  
+
+  页表项数为 $2^(32) \/ 4 upright("K") = 2^(20)$ ，该一级页表最大为
+  $2^(20) times 4 upright("B") = 4 upright("MB") 。$ （2分）
+
 + 页目录号可表示为：
-  $(((upright(u n s i g n e d i n t)) (upright(L A))) gt.double 2 2) & 0 times 3 upright(F F) 。$
+  $(((upright("unsignedint")) (upright("LA"))) gt.double 22) & 0 times 3 upright("FF") 。$
   （1分）
-  
+
   页表索引可表示为：
-  $(((upright(u n s i g n e d i n t)) (upright(L A))) gt.double 1 2) & 0 times 3 upright(F F) 。$
+  $(((upright("unsignedint")) (upright("LA"))) gt.double 12) & 0 times 3 upright("FF") 。$
   （1分）
-  
 
 ]
 *【评分说明】*
@@ -53,11 +52,10 @@ int）（LA））\>\>22；如果两个表达式没有对LA进行类型转换，�
   00008000H，表明其位于第8个页处，对应页表中的第8个页表项，所以第8个页表项的物理地址
   \= 页表起始地址 + 8×页表项的字节数 =
   00200000H+8×4=00200020H。由此可得如下图所示的答案。（3分）
-  
-  #image("../../../../历年真题+参考解答/2013/official-images/page-042-img-11.jpg")
-  
+
+  #align(center, image("../../../../历年真题+参考解答/2013/official-images/page-042-img-11.jpg", width: 27em))
+
   【评分说明】共5个答数。物理地址1和物理地址2共1分；页框号1和页框号2共1分；物理地址3给1分。
-  
 
 ]
 

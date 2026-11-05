@@ -7,15 +7,37 @@
 === 2010 41
 
 #subquestions(allow-oversize: true)[
-+ 构造的散列表如下：
++ 由装载因子0.7，数据总数7个
+  $arrow.r$存储空间长度为 $10 arrow.r P = 10$ 。所以，构造的散列表为：
 
-  #align(center, table(columns: 11, align: center + horizon,
-    [下标], [0], [1], [2], [3], [4], [5], [6], [7], [8], [9],
-    [关键字], [7], [14], [], [8], [], [11], [30], [18], [9], [],
-  ))
-+ 查找成功的平均查找长度：$"ASL"_("成功")=12/7$。
+  $ upright("H") \( 7 \) = \( 7 times 3 \) upright("MOD") 7 = 0 $
 
-  查找不成功的平均查找长度：$"ASL"_("不成功")=18/7$。
+  $ upright("H") \( 8 \) = \( 8 times 3 \) upright("MOD") 7 = 3 $
+
+  $ upright("H") \( 11 \) = \( 11 times 3 \) upright("MOD") 7 = 5 $
+
+  $ upright("H") \( 18 \) = \( 18 times 3 \) upright("MOD") 7 = 5 $
+
+  $ upright("H") \( 9 \) = \( 9 times 3 \) upright("MOD") 7 = 6 $
+
+  $ upright("H") \( 14 \) = \( 14 times 3 \) upright("MOD") 7 = 0 $
+
+  $ upright("H") \( 30 \) = \( 30 times 3 \) upright("MOD") 7 = 6 $
+
+  #figure(
+    align(center)[#table(
+      columns: 11,
+      align: (auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,),
+      [下标], [0], [1], [2], [3], [4], [5], [6], [7], [8], [9],
+      [关键字], [7], [14], [], [8], [], [11], [30], [18], [9], [],
+    )]
+    , kind: table
+    )
+
++ 查找成功的平均查找长度：
+  $upright("ASL")_(upright("成功")) = \( 1 + 1 + 1 + 1 + 2 + 3 + 3 \) \/ 7 = 12 \/ 7 。$查找不成功的平均查找长度：
+  $upright("ASL")_(upright("不成功")) = \( 3 + 2 + 1 + 2 + 1 + 5 + 4 \) \/ 7 = 18 \/ 7 。$
+
 ]
 
 === 2011 9：D

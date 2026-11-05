@@ -304,7 +304,11 @@ for(;;)
 
 #subquestions(allow-oversize: true)[
 + 缓冲区是一互斥资源，因此设互斥信号量 mutex。
-+ 同步问题：P1、P2因为奇数的放置与取用而同步，设同步信号量 odd；P1、P3因为偶数的放置与取用而同步，设同步信号量 even；P1、P2、P3因为共享缓冲区，设同步信号量 empty。
+
++
+  同步问题：P1、P2因为奇数的放置与取用而同步，设同步信号量
+  odd；P1、P3因为偶数的放置与取用而同步，设同步信号量
+  even；P1、P2、P3因为共享缓冲区，设同步信号量 empty。
 
   ```text
   semaphore mutex = 1;
@@ -334,7 +338,7 @@ for(;;)
           countodd();
       }
       Process P3
-      while (true) {
+      while (True) {
           P(even);
           P(mutex);
           geteven();
@@ -344,18 +348,25 @@ for(;;)
       }
   } coend
   ```
+
 ]
 
 === 2011 45
 
 #subquestions(allow-oversize: true)[
-+ 互斥资源：取号机（一次只允许一位顾客领号），因此设一个互斥信号量 mutex；
-+ 同步问题：顾客需要获得空座位等待叫号，当营业员空闲时，将选取一位顾客并为其服务。空座位的有、无影响等待顾客数量，顾客的有、无决定了营业员是否能开始服务，故分别设置信号量 empty 和 full 来实现这一同步关系。另外，顾客获得空座位后，需要等待叫号和被服务。这样，顾客与营业员就服务何时开始又构成了一个同步关系，定义信号量 service 来完成这一同步过程。
++
+  互斥资源：取号机（一次只允许一位顾客领号），因此设一个互斥信号量 mutex；
+
++
+  同步问题：顾客需要获得空座位等待叫号，当营业员空闲时，将选取一位顾客并为其服务。空座位的有、无影响等待顾客数量，顾客的有、无决定了营业员是否能开始服务，故分别设置信号量
+  empty 和 full
+  来实现这一同步关系。另外，顾客获得空座位后，需要等待叫号和被服务。这样，顾客与营业员就服务何时开始又构成了一个同步关系，定义信号量
+  service 来完成这一同步过程。
 
   ```text
   semaphore mutex = 1;   // 互斥使用取号机
   semaphore empty = 10;  // 空座位的数量
-  semaphore full = 0;    // 已占座位的数量
+  semaphore full = 0;  // 已占座位的数量
   semaphore service = 0; // 等待叫号
   cobegin {
       process 顾客 i {
@@ -377,7 +388,19 @@ for(;;)
       }
   } coend
   ```
+
 ]
+*【评分说明】*
+①能正确给出互斥信号量定义、含义及初值，给1分。
+
+②能正确给出3个同步信号量定义、含义及初值，给2分。
+
+③营业员进程描述正确的，给2分。
+
+④顾客进程描述中，互斥描述正确的，给1分；同步描述正确的，给2分；共3分。
+
+⑤其他正确解答，参照 ① $tilde.op$
+④的标准给分。
 
 === 2014 47
 
@@ -385,34 +408,47 @@ for(;;)
 
 ```text
 semaphore empty = 1000; // 空缓冲区数
-semaphore full = 0;     // 非空缓冲区数
+semaphore full = 0;  // 非空缓冲区数（1分）
 semaphore mutex1 = 1;   // 用于实现生产者之间的互斥
-semaphore mutex2 = 1;   // 用于实现消费者之间的互斥
+semaphore mutex2 = 1;   // 用于实现消费者之间的互斥（1分）
 int in = 0;
 int out = 0;
-生产者进程
+生产者进程（2分）
 while (TRUE) {
     produce;
     P(empty);
     P(mutex1);
     put an item into buf[in];
-    in = (in+1) mod n;
+    in = (in + 1) mod n;
     V(mutex1);
     V(full);
 }
-消费者进程
+消费者进程（4分）
 while (TRUE) {
     P(mutex2);
     for (int i = 0; i < 10; i++) {
         P(full);
         get an item from buf[out];
-        out = (out+1) mod n;
+        out = (out + 1) mod n;
         V(empty);
     }
     V(mutex2);
     consume;
 }
 ```
+
+*【评分说明】*
+①信号量的初值和含义都正确给2分。
+
+②生产者之间的互斥操作正确给1分；生产者与消费者之间的同步操作正确给2分；消费者之间互斥操作正确给1分。
+
+③控制消费者连续取产品数量正确给2分。
+
+④仅给出经典生产者-消费者问题的信号量定义和伪代码描述，最多给3分。
+
+⑤若考生将题意理解成缓冲区中至少有10件产品，消费者才能开始取产品，其他均正确，得6分。
+
+⑥部分正确，酌情给分。
 
 === 2015 45
 
@@ -504,46 +540,4 @@ CoEnd
 
 === 旧版题型示例
 
-自制解析（非官方）：原考纲未提供示例答案，以下答案与解析由本仓库自行编写。
-
-理发师同步
-
-设 waiting 为接待室内等待的顾客数，初值0。mutex（初值1）保护 waiting；customers（初值0）记录待服务顾客；ready（初值0）通知一位顾客进入工作室。seated、done 和 left（初值均为0）依次通知顾客入座、理发完成和顾客离开。
-
-```text
-semaphore mutex = 1, customers = 0, ready = 0;
-semaphore seated = 0, done = 0, left = 0;
-int waiting = 0;
-barber() {
-    while (true) {
-        P(customers); // 无顾客时阻塞，即睡觉
-        P(mutex);
-        waiting--;
-        V(ready);     // 让一位顾客进入工作室
-        V(mutex);
-        P(seated);    // 顾客坐好后才能开始理发
-        cut_hair();
-        V(done);
-        P(left);      // 等该顾客离开工作椅
-    }
-}
-customer() {
-    P(mutex);
-    if (waiting == n) {
-        V(mutex);
-        leave_shop();
-        return;
-    }
-    waiting++;
-    V(customers);
-    V(mutex);
-    P(ready);
-    sit_for_haircut();
-    V(seated);
-    P(done);
-    leave_work_chair();
-    V(left);
-}
-```
-
-理发师阻塞在 customers 时不占有 mutex；顾客也先释放 mutex 再等待 ready，因此不会因持锁等待而互相阻塞。题目不要求先来先服务；若要求公平，等待顾客还须采用 FIFO 队列。
+原考纲未附本题参考答案。

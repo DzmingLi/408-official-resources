@@ -22,7 +22,7 @@ def gh(*args):
 def release_files(directory):
     """Require a nonempty PDF-only directory of complete reading/print pairs."""
     entries = list(directory.iterdir())
-    pattern = r'(?:20\d{2}(?:-answers)?|old-sample(?:-answers)?)(?:-print)?\.pdf'
+    pattern = r'(?:20\d{2}(?:-answers)?|old-sample)(?:-print)?\.pdf'
     invalid = [p.name for p in entries if not p.is_file() or not re.fullmatch(pattern, p.name)]
     if invalid:
         raise ValueError(f'Unexpected release files: {sorted(invalid)}')
@@ -105,7 +105,7 @@ def collection_notes(group, commit, repo):
              '', '收录2009—2026年全部真题及相关旧版题型示例，历史考点单独标明。',
              '2023、2026年尚无参考答案源稿，答案册逐题标为“本仓库尚未收录本题参考答案”。',
              '自行构建可通过 --through-year、--from-year 和 --paper-size 选择年份与 A4/A5 纸张。',
-             '历年真题选择题仅列答案字母；综合题保留对应参考答案或整理解析。旧版题型示例保留详细解析，标注为自制、非官方。',
+             '历年真题选择题仅列答案字母；综合题保留对应参考答案或整理解析。旧版题型示例仅提供题目，答案位置注明原考纲未附参考答案。',
              '下载文件按科目、章节和讲次编号，中文讲名及下载入口如下。', '']
     chapter = None
     for row in group['rows']:
@@ -186,7 +186,7 @@ def main():
                            assets, commit, repo, existing_tags, latest=False)
         return
     notes = (f'由提交 {commit} 自动生成，共 {len(actual)//2} 份阅读版和 {len(actual)//2} 份小册子打印版 PDF。\n\n'
-             '旧版题型示例解析为本仓库自制，非官方答案，包含选择题与综合题的详细解析。\n\n'
+             '旧版题型示例仅发布官方题目，不发布本地自制解析。\n\n'
              '只提供可单独下载的 PDF，打印版文件名以 -print.pdf 结尾。'
              '打印版使用 ISO B4 横向纸张，100% 打印、双面短边翻转，每面 1 页。'
              '不要再次开启小册子拼版，也不要跳过空白面；请先用一张纸试打。\n')

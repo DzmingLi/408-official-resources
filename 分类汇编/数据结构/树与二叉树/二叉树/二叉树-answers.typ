@@ -30,18 +30,22 @@
 
 【答案一】
 
-#subquestions(allow-oversize: true)[
-+ 算法的设计思想：
+1）算法的设计思想：（4分）
 
-  本问题可采用递归算法实现。根据定义：
+本问题可采用递归算法实现。根据定义：
 
-  二叉树的WPL值=树中全部叶结点的带权路径长度之和\
-  =根结点左子树中全部叶结点的带权路径长度之和+根结点右子树中全部叶结点的带权路径长度之和
+二叉树的 WPL 值=树中全部叶结点的带权路径长度之和
 
-  叶结点的带权路径长度=该结点的weight域的值×该结点的深度
+\=根结点左子树中全部叶结点的带权路径长度之和+
 
-  设根结点的深度为0，若某结点的深度为 $d$ 时，则其孩子结点的深度为 $d+1$。
-+ 算法中使用的二叉树结点的数据类型定义如下：
+根结点右子树中全部叶结点的带权路径长度之和
+
+叶结点的带权路径长度=该结点的 weight 域的值 $times$该结点的深度
+
+设根结点的深度为0，若某结点的深度为 d时，则其孩子结点的深度为 d+1
+
+#subquestions(start: 2, allow-oversize: true)[
++ 算法中使用的二叉树结点的数据类型定义如下：（2分）
 
   ```c
   typedef struct node {
@@ -49,7 +53,8 @@
       struct node *left, *right;
   } BTree;
   ```
-+ 算法实现：
+
++ 算法实现：（7分）
 
   ```c
   int WPL(BTree *root) { // 根据WPL的定义采用递归算法实现
@@ -62,18 +67,25 @@
           return WPL1(root->left, d+1) + WPL1(root->right, d+1);
   }
   ```
+
 ]
-
-【答案二】
-
+*【答案二】*
 #subquestions(allow-oversize: true)[
-+ 算法的设计思想：
++ 算法的设计思想：（4分）
 
-  若借用非叶结点的weight域保存其孩子结点中weight域值的和，则树的WPL等于树中所有非叶结点weight域值之和。
+  若借用非叶结点的 weight 域保存其孩子结点中 weight 域值的和，则树的 WPL
+  等于树中所有非叶结点 weight 域值之和。
 
-  采用后序遍历策略，在遍历二叉树 $T$ 时递归计算每个非叶结点的weight域的值，则树 $T$ 的WPL等于根结点左子树的WPL加上右子树的WPL，再加上根结点中weight域的值。
-+ 算法中使用的二叉树结点的数据类型定义同【答案一】。
-+ 算法实现：
+  采用后序遍历策略，在遍历二叉树
+  $T$时递归计算每个非叶结点的weight域的值，则树
+  $T$的WPL等于根结点左子树的WPL加上右子树的WPL，再加上根结点中weight域
+
+  的值。
+
++
+  算法中使用的二叉树结点的数据类型定义同【答案一】。（2分）
+
++ 算法实现：（7分）
 
   ```c
   int WPL(BTree *root) { // 基于递归的后序遍历算法实现
@@ -89,7 +101,19 @@
       }
   }
   ```
+
 ]
+*【评分说明】*
+①若考生给出能够满足题目要求的其他算法（包括用非递归的遍历方式实现的算法），且正确，可同样给分。
+
+②参考答案中只给出了使用C语言的版本，使用C++语言正确实现的算法同样给分。
+
+③若对算法的基本设计思想和主要数据结构的描述不十分清晰，但在算法实现中能够清晰反映出算法思想且正确，参照
+①的标准给分。
+
+④若考生给出的二叉树结点的数据类型定义及算法实现中，使用的是除整型之外的其他数值类型，可视同使用整型类型。
+
+⑤若考生给出的答案中算法主要设计思想或算法实现中部分正确，可酌情给分。
 
 === 2015 2：B
 
@@ -171,61 +195,7 @@
 
 === 旧版题型示例
 
-自制解析（非官方）：原考纲未提供示例答案，以下答案与解析由本仓库自行编写。
-
-输出最长根路径
-
-#subquestions(allow-oversize: true)[
-+ 先深度优先遍历，记录最深叶结点；再从根遍历到该叶结点，用顺序表保存沿途结点并输出。多条最长路径只保留首先找到的一条。两次遍历均为 $O(n)$，总时间为 $O(n)$；递归栈和路径表最多保存树高 $h$ 个结点，辅助空间为 $O(h)$。
-+ 以下使用 C++，以整数表示结点数据。
-
-  ```cpp
-  #include <vector>
-  #include <iostream>
-  struct Node {
-      int Data;
-      Node *LeftChild, *RightChild;
-  };
-  ```
-  ```cpp
-  void deepest(Node *p, int depth,
-               Node *&leaf, int &best) {
-      if (!p) return;
-      if (!p->LeftChild && !p->RightChild
-          && depth > best) {
-          best = depth;
-          leaf = p;
-      }
-      deepest(p->LeftChild, depth + 1, leaf, best);
-      deepest(p->RightChild, depth + 1, leaf, best);
-  }
-  ```
-  ```cpp
-  bool findPath(Node *p, Node *target,
-                std::vector<Node *> &path) {
-      if (!p) return false;
-      path.push_back(p);
-      if (p == target
-          || findPath(p->LeftChild, target, path)
-          || findPath(p->RightChild, target, path))
-          return true;
-      path.pop_back(); // 回溯：当前子树没有目标
-      return false;
-  }
-  ```
-  ```cpp
-  void longestRootPath(Node *root) {
-      if (!root) return;
-      Node *leaf = nullptr;
-      int best = 0;
-      deepest(root, 1, leaf, best);
-      std::vector<Node *> path;
-      findPath(root, leaf, path);
-      for (Node *p : path)
-          std::cout << p->Data << ' ';
-  }
-  ```
-]
+原考纲未附本题参考答案。
 
 == 线索二叉树的基本概念和构造
 

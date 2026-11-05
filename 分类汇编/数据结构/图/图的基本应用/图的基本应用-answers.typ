@@ -62,7 +62,19 @@
 #block(breakable: false)[
 该方法不一定能（或不能）求得最短路径。
 
-举例说明（略）。
+举例说明如下：
+
+#align(center, image("../../../../历年真题+参考解答/2009/official-images/page-117-img-12.jpg", width: 16em))
+
+图a
+
+#align(center, image("../../../../历年真题+参考解答/2009/official-images/page-117-img-14.jpg", width: 16em))
+
+图b
+
+图a中，设初始顶点为1，目标顶点为4，欲求从顶点1到顶点4之间的最短路径。显然，这两点之间的最短路径长度为2。但利用给定方法求得的路径长度为3，因此这条路径并不是这两点之间的最短路径。
+
+图b中，设初始顶点为1，目标顶点为3，欲求从顶点1到顶点3之间的最短路径。利用给定的方法，无法求出顶点1到顶点3的路径。
 ]
 
 === 2012 7：C
@@ -80,28 +92,7 @@
 === 旧版题型示例
 
 #block(breakable: false)[
-自制解析（非官方）：原考纲未提供示例答案，以下答案与解析由本仓库自行编写。
-
-最短路径
-
-所有边权为正，可用 Dijkstra 算法。集合 $S$ 表示已确定最短距离的顶点；其余距离按经新加入顶点的路径进行松弛。
-
-#table(columns: (1.3fr, 1fr, 1fr, 1fr, 1fr), align: center + horizon,
-  [已确定的顶点], [$d(2)$], [$d(3)$], [$d(4)$], [$d(5)$],
-  [1], [4], [2], [$infinity$], [8],
-  [1，3], [4], [2], [3], [8],
-  [1，3，4], [4], [2], [3], [6],
-  [1，3，4，2], [4], [2], [3], [6],
-  [1，3，4，2，5], [4], [2], [3], [6])
-
-先确定顶点3，令 $d(4)=2+1=3$；再确定顶点4，令 $d(5)=3+3=6$，经4到2的距离7大于已有的4，故不更新。随后确定2和5，距离不再改变。
-
-#table(columns: (1fr, 2fr, 1fr), align: center + horizon,
-  [终点], [最短路径], [路径长度],
-  [2], [1→2], [4],
-  [3], [1→3], [2],
-  [4], [1→3→4], [3],
-  [5], [1→3→4→5], [6])
+原考纲未附本题参考答案。
 ]
 
 == 拓扑排序
@@ -177,17 +168,29 @@
 
 #block(breakable: false)[
 #subquestions(allow-oversize: true)[
-+ 图 $G$ 的邻接矩阵 $A$ 如下：
++ 图 G的邻接矩阵 A如下：（2分）
 
-  $ A=mat(delim: "[", 0,4,6,infinity,infinity,infinity; infinity,0,5,infinity,infinity,infinity; infinity,infinity,0,4,3,infinity; infinity,infinity,infinity,0,infinity,3; infinity,infinity,infinity,infinity,0,3; infinity,infinity,infinity,infinity,infinity,0) $
-+ 图 $G$ 如下：
+  $ mat(delim: "[", 0, 4, 6, oo, oo, oo; oo, 0, 5, oo, oo, oo; oo, oo, 0, 4, 3, oo; oo, oo, oo, 0, oo, 3; oo, oo, oo, oo, 0, 3; oo, oo, oo, oo, oo, 0) $
+
++ 图G如下：（2分）
 
   #align(center, image("../../../../历年真题+参考解答/2011/official-images/page-077-img-6.jpg", width: 27em))
-+ 下图中双线箭头所标识的4个活动组成图 $G$ 的关键路径。
+
+  【评分说明】
+
+  ①若考生画出的图 G与上图同构，给2分。
+
+  ②若考生画出的图 G部分正确，可酌情给分。
+
++ 下图中双线箭头所标识的4个活动组成图
+  G的关键路径。（3分）
 
   #align(center, image("../../../../历年真题+参考解答/2011/official-images/page-077-img-11.jpg", width: 27em))
 
-  图 $G$ 的关键路径的长度为16。
+  图 G的关键路径的长度为16。（1分）
+
+  【评分说明】若考生给出的答案（1）或（2）不完全正确，但所画的图是含6个顶点、7条边的有向无环图，且所求得的关键路径及路径长度与考生所画的图吻合，则按（3）的标准给分。部分正确，可酌情给分。
+
 ]
 ]
 

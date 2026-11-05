@@ -207,11 +207,13 @@ class CollectionTests(unittest.TestCase):
             self.assertIn('共用背景（不含小问）', text)
             self.assertIn(f'[{year} {number}]', text)
 
-    def test_long_sample_program_answer_can_paginate(self):
+    def test_sample_answers_contain_only_the_missing_official_answer_notice(self):
         module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
         output = dict(module['outputs'](ROOT))
         target = ROOT / '分类汇编/操作系统/进程管理/同步与互斥/同步与互斥-answers.typ'
         sample = output[target].split('=== 旧版题型示例', 1)[1]
+        self.assertIn('原考纲未附本题参考答案。', sample)
+        self.assertNotIn('```', sample)
         self.assertNotIn('#block(breakable: false)', sample)
 
     def test_2010_delay_question_is_network_performance(self):
@@ -237,22 +239,37 @@ class CollectionTests(unittest.TestCase):
         for title, headings in expected.items():
             self.assertEqual(list(MODULE['PLANS'][title]['sections']), headings)
 
-    def test_early_answers_use_syllabus_except_2013(self):
-        import hashlib
-        for year in (2009, 2010, 2011, 2012, 2014):
+    def test_early_composite_answers_use_verified_hep_2015_source(self):
+        for year in range(2009, 2015):
             text = (ROOT / f'历年真题+参考解答/{year}/{year}-答案.typ').read_text()
-            self.assertIn('// 按考纲录入', text)
-            self.assertNotIn('评分说明', text)
+            self.assertIn('2015高教社《考研计算机专业基础综合历年真题标准解析》', text)
             self.assertEqual(text.count('【答案要点】'), 7)
-        sample = ROOT / '历年真题+参考解答/2013/2013-答案.typ'
-        self.assertEqual(hashlib.sha256(sample.read_bytes()).hexdigest(),
-                         'a880b6d3729f8cf76c3127522e2eab12f9d7ad842f5b67ce0b338654970233ad')
+            self.assertNotIn('textcircled', text)
+            self.assertNotIn('M _ Search', text)
+            self.assertNotIn('! =', text)
+            if year >= 2011:
+                self.assertIn('评分说明', text)
         old = (ROOT / '历年真题+参考解答/2009/2009-答案.typ').read_text()
-        self.assertIn('举例说明（略）。', old)
-        self.assertNotIn('page-117-img-12.jpg', old)
+        self.assertIn('page-117-img-12.jpg', old)
+        self.assertIn('page-117-img-14.jpg', old)
         code = (ROOT / '历年真题+参考解答/2012/2012-答案.typ').read_text()
         self.assertIn('let schedule =', code)
+        self.assertIn('$I_#(i+1)$', code)
         self.assertIn('table.cell(colspan: 17)[时间单元]', code)
+        self.assertIn('STORE  R2, [x]', code)
+        self.assertIn('仅正确写出指令执行前的（R1）可给1分', code)
+
+    def test_hep_alternative_algorithms_and_grading_tables_are_retained(self):
+        median = (ROOT / '历年真题+参考解答/2011/2011-答案.typ').read_text()
+        self.assertEqual(median.count('int M_Search'), 2)
+        self.assertIn('[$O(log_2 n)$], [$O(1)$], [5], [8]', median)
+        self.assertIn('各给1分', median)
+        majority = (ROOT / '历年真题+参考解答/2013/2013-答案.typ').read_text()
+        self.assertIn('int Majority1', majority)
+        self.assertIn('[$O(n log_2 n)$]', majority)
+        wpl = (ROOT / '历年真题+参考解答/2014/2014-答案.typ').read_text()
+        self.assertIn('其孩子结点的深度为 d+1', wpl)
+        self.assertIn('使用C++语言正确实现的算法同样给分', wpl)
 
     def test_fast_ethernet_question_moves_to_lan_and_physical_merges(self):
         for entry in ((2019, 34), (2013, 34)):
@@ -272,20 +289,22 @@ class CollectionTests(unittest.TestCase):
             self.assertFalse((ROOT / f'分类汇编/preview/{name}-题目.typ').exists())
             self.assertFalse((ROOT / f'分类汇编/answers-preview/{name}-answers.typ').exists())
 
-    def test_official_mcqs_keep_letters_and_samples_keep_self_authored_explanations(self):
+    def test_official_mcqs_keep_letters_and_sample_solutions_stay_private(self):
         module = runpy.run_path(str(ROOT / 'scripts/extract-collection-answers.py'))
         for year in range(2009, 2023):
             _, items = module['answers'](ROOT, year)
             for number in range(1, 41):
                 self.assertIn(items[number], ('A', 'B', 'C', 'D'), (year, number))
         _, sample = module['answers'](ROOT, 2013, sample=True)
-        for number in range(1, 9):
-            self.assertEqual(sample[number][0], 'AADBCBBB'[number - 1])
-            self.assertIn('\n\n', sample[number])
-            self.assertGreater(len(sample[number]), 40)
+        self.assertEqual(set(sample), set(range(1, 16)))
+        self.assertEqual(set(sample.values()), {'原考纲未附本题参考答案。'})
+        self.assertFalse((ROOT / '旧版题型示例/题型示例-答案.typ').exists())
         for target, content in module['outputs'](ROOT):
             for block in content.split('=== 旧版题型示例\n')[1:]:
-                self.assertIn('自制解析（非官方）', block.split('=== ', 1)[0])
+                answer = block.split('=== ', 1)[0]
+                self.assertIn('原考纲未附本题参考答案。', answer)
+                self.assertNotIn('自制解析（非官方）', answer)
+                self.assertNotIn('```', answer)
         for year in range(2009, 2015):
             text = (ROOT / f'历年真题+参考解答/{year}/{year}-答案.typ').read_text()
             choices, solutions = text.split('= 二、综合应用题', 1)
