@@ -67,7 +67,7 @@
 
 ]
 = 【答案二】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 算法的设计思想：（4分）
 
   若借用非叶结点的 weight 域保存其孩子结点中 weight 域值的和，则树的 WPL
@@ -113,7 +113,7 @@
 ⑤若考生给出的答案中算法主要设计思想或算法实现中部分正确，可酌情给分。
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 本题中的网络可抽象为图结构。（1分）
 
 ]
@@ -208,7 +208,7 @@ Link和Net，同时在表头结点中定义了两个指针，分别指向由这�
 ②若考生给出的从R1到达子网192.1.x.x的最短路径及代价正确，但不完全符合代价不减的次序，可酌情给分。
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   子网192.1.6.0/24和192.1.7.0/24在R1的路由表中可聚合为一个子网
   192.1.6.0/23。于是得到R1的路由表如下：（6分）
@@ -245,7 +245,7 @@ Link和Net，同时在表头结点中定义了两个指针，分别指向由这�
 考生只要回答：增加前缀 Prefix为“0.0.0.0/0”，Metric为10，同样给分。
 
 = 44. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   因为每条指令长度为32位，占4个单元，所以存储器编址单位是字节。（2分）
 
@@ -266,7 +266,7 @@ Link和Net，同时在表头结点中定义了两个指针，分别指向由这�
 对于第1问，若考生回答：因为指令1和2、2和3、3和4、5和6发生数据相关，因而发生阻塞的指令为第2、3、4、6条指令，同样给3分。答对3个以上给3分，部分正确酌情给分。
 
 = 45. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 由于（R6）=1000，故（R2）=1000。（1分）
 
 + 指令 Cache 数据区的容量：
@@ -300,7 +300,7 @@ TLB及磁盘的访问次数，而未说明原因，给3分。若给出的
 TLB及磁盘的访问次数不正确，但解题思路正确，可酌情给分。
 
 = 46. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   向前移动文件的前29条记录，每条记录读写各1次，腾出一个磁盘块空间，以将该记录插入到此磁盘块作为文件的第30条记录。（1分）故需要磁盘访问的次数为：
   $29 times 2 + 1 = 59$次。（1分）

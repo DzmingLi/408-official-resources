@@ -12,7 +12,7 @@
 
 === 2014 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 本题中的网络可抽象为图结构。（1分）
 
 ]

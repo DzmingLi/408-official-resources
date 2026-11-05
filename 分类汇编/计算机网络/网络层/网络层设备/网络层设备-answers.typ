@@ -16,7 +16,7 @@
 
 === 2009 47
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   把IP地址空间202.118.1.0/24划分为2个等长的子网。划分结果为：子网1：子网地址为202.118.1.0，子网掩码为255.255.255.128（或子网1：202.
   118.1.0/25）
@@ -81,7 +81,7 @@
 
 === 2013 47
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   （6分）在AS1中，子网153.14.5.0/25和子网153.14.5.128/25可以聚合为子网153.
   14.5.0/24；在AS2中，子网194.17.20.0/25和子网194.17.21.0/24可以聚合为子网
@@ -124,7 +124,7 @@
 
 === 2014 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   子网192.1.6.0/24和192.1.7.0/24在R1的路由表中可聚合为一个子网
   192.1.6.0/23。于是得到R1的路由表如下：（6分）

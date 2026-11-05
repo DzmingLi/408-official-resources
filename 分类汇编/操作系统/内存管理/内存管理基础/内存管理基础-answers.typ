@@ -24,7 +24,7 @@
 
 === 2013 46
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 因为页内偏移量是12位，所以页大小为4KB，（1分）
 
   页表项数为 $2^(32) \/ 4 upright("K") = 2^(20)$ ，该一级页表最大为

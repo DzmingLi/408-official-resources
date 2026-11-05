@@ -10,7 +10,7 @@
 
 === 2011 44
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   $16 upright("M") = 2^(24) \, 4 upright("K") = 2^(12)$
   ，故虚拟地址为24位，其中高12位为虚页号；（1分） $1 upright("M") = 2^(20)$

@@ -14,7 +14,7 @@
 
 === 2010 44
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 数据 Cache的总容量为：4256位（532字节）。
 
 +

@@ -25,7 +25,7 @@
 = 二、综合应用题
 
 = 41. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 由装载因子0.7，数据总数7个
   $arrow.r$存储空间长度为 $10 arrow.r P = 10$ 。所以，构造的散列表为：
 
@@ -60,7 +60,7 @@
 ]
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：
 
   先将
@@ -99,7 +99,7 @@
 ]
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   该指令系统最多可有16条指令；该机最多有8个通用寄存器；因为地址空间大小为128KB，按字编址，故共有64K个存储单元；地址位数为16位，所以MAR至少为16位；因为字长为16位，所以MDR至少为16位。
 
@@ -115,7 +115,7 @@
 ]
 
 = 44. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 数据 Cache的总容量为：4256位（532字节）。
 
 +
@@ -132,7 +132,7 @@
 ]
 
 = 45. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   用位图表示磁盘的空闲状态。每一位表示一个磁盘块的空闲状态，共需要
   16384/32=512个字=512×4个字节=2KB，正好可放在系统提供的内存中。
@@ -151,7 +151,7 @@
 ]
 
 = 46. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 因
   $17 upright("CAH") = 0001011111001010 upright("B")$
   ，表示页号的位为左边6位，所以页号为5。
@@ -168,7 +168,7 @@
 ]
 
 = 47. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 主机甲和主机乙之间单向传播延迟时间：
   $10 med mu upright("s") 。$
 

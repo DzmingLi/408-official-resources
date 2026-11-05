@@ -16,7 +16,7 @@
 
 === 2011 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + $134 = 128 + 6 = 10000110 upright("B")$
   ，所以 x的机器数为10000110B，故R1的内容为86H。（1分）
 

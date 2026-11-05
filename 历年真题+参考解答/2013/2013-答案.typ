@@ -25,7 +25,7 @@
 = 二、综合应用题
 
 = 41. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（4分）
 
   算法的策略是从前向后扫描数组元素，标记出一个可能成为主元素的元素
@@ -118,7 +118,7 @@ int Majority1( int A[ ],int n )// 采用计数排序思想,时间:O(n),空间:O(
 ]
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   采用顺序存储结构，数据元素按其查找概率降序排列。（2分）
 
@@ -152,7 +152,7 @@ int Majority1( int A[ ],int n )// 采用计数排序思想,时间:O(n),空间:O(
 ③若考生给出其他更高效的查找方法且正确，可参照评分标准给分。
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + CPU的时钟周期为：
   $1 \/ 800 upright("MHz") = 1.25 upright("ns")$。（1分）
 
@@ -187,7 +187,7 @@ int Majority1( int A[ ],int n )// 采用计数排序思想,时间:O(n),空间:O(
 计算公式正确但运算结果不正确时，可酌情给分。
 
 = 44. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   因为指令长度为16位，且下条指令地址为（PC）+2，故编址单位是字节。（1分）偏移量OFFSET为8位补码，范围为-128～127，故相对于当前条件转移指令，向后最多可跳转127条指令。（2分）
 
@@ -249,7 +249,7 @@ coend
 ③的标准给分。
 
 = 46. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 因为页内偏移量是12位，所以页大小为4KB，（1分）
 
   页表项数为 $2^(32) \/ 4 upright("K") = 2^(20)$ ，该一级页表最大为
@@ -285,7 +285,7 @@ int）（LA））\>\>22；如果两个表达式没有对LA进行类型转换，�
 ]
 
 = 47. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   （6分）在AS1中，子网153.14.5.0/25和子网153.14.5.128/25可以聚合为子网153.
   14.5.0/24；在AS2中，子网194.17.20.0/25和子网194.17.21.0/24可以聚合为子网

@@ -14,7 +14,7 @@
 
 === 2010 47
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 主机甲和主机乙之间单向传播延迟时间：
   $10 med mu upright("s") 。$
 

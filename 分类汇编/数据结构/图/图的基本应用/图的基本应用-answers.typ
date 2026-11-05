@@ -167,7 +167,7 @@
 === 2011 41
 
 #block(breakable: false)[
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 图 G的邻接矩阵 A如下：（2分）
 
   $ mat(delim: "[", 0, 4, 6, oo, oo, oo; oo, 0, 5, oo, oo, oo; oo, oo, 0, 4, 3, oo; oo, oo, oo, 0, oo, 3; oo, oo, oo, oo, 0, 3; oo, oo, oo, oo, oo, 0) $

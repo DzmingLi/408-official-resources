@@ -6,7 +6,7 @@
 
 === 2010 41
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 由装载因子0.7，数据总数7个
   $arrow.r$存储空间长度为 $10 arrow.r P = 10$ 。所以，构造的散列表为：
 

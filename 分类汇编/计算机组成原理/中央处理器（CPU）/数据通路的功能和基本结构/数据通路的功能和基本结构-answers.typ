@@ -42,7 +42,7 @@
 
 === 2013 44
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   因为指令长度为16位，且下条指令地址为（PC）+2，故编址单位是字节。（1分）偏移量OFFSET为8位补码，范围为-128～127，故相对于当前条件转移指令，向后最多可跳转127条指令。（2分）
 

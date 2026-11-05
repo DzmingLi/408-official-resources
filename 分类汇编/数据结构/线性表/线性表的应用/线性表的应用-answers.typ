@@ -6,7 +6,7 @@
 
 === 2009 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 算法的基本设计思想：
 
   定义两个指针变量 p和
@@ -61,7 +61,7 @@
 
 === 2010 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：
 
   先将
@@ -101,7 +101,7 @@
 
 === 2011 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（5分）
 
   分别求两个升序序列A、B的中位数，设为a和b。若
@@ -200,7 +200,7 @@ C语言。
 
 === 2012 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（4分）
 
   ①分别求出 str1和 str2所指的两个链表的长度 m和 n；
@@ -269,7 +269,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 
 === 2013 41
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（4分）
 
   算法的策略是从前向后扫描数组元素，标记出一个可能成为主元素的元素

@@ -8,7 +8,7 @@
 
 === 2010 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   该指令系统最多可有16条指令；该机最多有8个通用寄存器；因为地址空间大小为128KB，按字编址，故共有64K个存储单元；地址位数为16位，所以MAR至少为16位；因为字长为16位，所以MDR至少为16位。
 

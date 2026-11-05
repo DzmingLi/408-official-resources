@@ -6,7 +6,7 @@
 
 === 2012 41
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 6个表的合并顺序如下页图所示。
 
   根据下页图中的哈夫曼树，6个序列的合并过程为：

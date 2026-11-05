@@ -32,7 +32,7 @@
 
 === 2012 47
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   由于题47-a表中1、3、4号分组的源IP地址均为192.168.0.8（c0a80008H），所以1、3、4号分组是由H发送的；（3分）
 

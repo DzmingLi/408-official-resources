@@ -70,7 +70,7 @@
 
 ]
 *【答案二】*
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 算法的设计思想：（4分）
 
   若借用非叶结点的 weight 域保存其孩子结点中 weight 域值的和，则树的 WPL

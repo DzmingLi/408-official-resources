@@ -36,7 +36,7 @@
 
 === 2011 46
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   在磁盘中连续存放（采取连续结构），磁盘寻道时间更短，文件随机访问效率更高；
 
@@ -51,7 +51,7 @@
 
 === 2012 46
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 文件系统存储空间共有块数
   $2^(42) \/ 2^(10) = 2^(32)$为表示 $2^(32)$个块号，索引表项占 32/8 =4
   B。（2分）
@@ -77,7 +77,7 @@
 
 === 2014 46
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   向前移动文件的前29条记录，每条记录读写各1次，腾出一个磁盘块空间，以将该记录插入到此磁盘块作为文件的第30条记录。（1分）故需要磁盘访问的次数为：
   $29 times 2 + 1 = 59$次。（1分）

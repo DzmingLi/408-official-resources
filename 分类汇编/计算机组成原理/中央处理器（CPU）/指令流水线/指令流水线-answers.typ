@@ -26,7 +26,7 @@
 
 === 2012 44
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + $x$ 的机器码为 $[x]_(补)=1111110111111111 "B"$，即指令执行前(R1)=FDFFH，右移1位后为1111 1110 1111 1111B，即指令执行后(R1)=FEFFH。（2分）
 
   【评分说明】仅正确写出指令执行前的（R1）可给1分。
@@ -76,7 +76,7 @@
 
 === 2014 44
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   因为每条指令长度为32位，占4个单元，所以存储器编址单位是字节。（2分）
 

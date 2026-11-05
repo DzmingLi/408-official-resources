@@ -25,7 +25,7 @@
 = 二、综合应用题
 
 = 41. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 6个表的合并顺序如下页图所示。
 
   根据下页图中的哈夫曼树，6个序列的合并过程为：
@@ -73,7 +73,7 @@
 ]
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（4分）
 
   ①分别求出 str1和 str2所指的两个链表的长度 m和 n；
@@ -141,7 +141,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 【评分说明】若考生所估计的时间复杂度与考生所实现的算法一致，可给1分。
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 平均每秒CPU执行的指令数为：
   $80 upright("M") \/ 4 = 20 upright("M")$
   ，故MIPS数为20；（1分）平均每秒Cache缺失的次数为：
@@ -163,7 +163,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 ]
 
 = 44. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + $x$ 的机器码为 $[x]_(补)=1111110111111111 "B"$，即指令执行前(R1)=FDFFH，右移1位后为1111 1110 1111 1111B，即指令执行后(R1)=FEFFH。（2分）
 
   【评分说明】仅正确写出指令执行前的（R1）可给1分。
@@ -210,7 +210,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 ]
 
 = 45. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 页框号为21。（1分）
 
   因为起始驻留集为空，而0页对应的页框为空闲链表中的第三个空闲页框（21），其对应的页框号为21。
@@ -232,7 +232,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 ]
 
 = 46. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 文件系统存储空间共有块数
   $2^(42) \/ 2^(10) = 2^(32)$为表示 $2^(32)$个块号，索引表项占 32/8 =4
   B。（2分）
@@ -253,7 +253,7 @@ $O \( m + n \)$ ，可给12分；若算法正确，但时间复杂度超过 $O \
 ]
 
 = 47. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   由于题47-a表中1、3、4号分组的源IP地址均为192.168.0.8（c0a80008H），所以1、3、4号分组是由H发送的；（3分）
 

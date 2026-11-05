@@ -22,7 +22,7 @@
 
 === 2014 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 由于（R6）=1000，故（R2）=1000。（1分）
 
 + 指令 Cache 数据区的容量：
@@ -98,7 +98,7 @@ TLB及磁盘的访问次数不正确，但解题思路正确，可酌情给分�
 
 === 2012 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 页框号为21。（1分）
 
   因为起始驻留集为空，而0页对应的页框为空闲链表中的第三个空闲页框（21），其对应的页框号为21。
@@ -129,7 +129,7 @@ TLB及磁盘的访问次数不正确，但解题思路正确，可酌情给分�
 
 === 2010 46
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 因
   $17 upright("CAH") = 0001011111001010 upright("B")$
   ，表示页号的位为左边6位，所以页号为5。

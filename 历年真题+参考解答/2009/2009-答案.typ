@@ -42,7 +42,7 @@
 图b中，设初始顶点为1，目标顶点为3，欲求从顶点1到顶点3之间的最短路径。利用给定的方法，无法求出顶点1到顶点3的路径。
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 算法的基本设计思想：
 
   定义两个指针变量 p和
@@ -96,7 +96,7 @@
 ]
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 中断方式下，CPU每次用于数据传送的时钟周期数：
   $5 times 18 + 5 times 2 = 100$为达到外设0.5MB/s的数据传输率，外设每秒申请的中断次数：0.5MB/4B=
   125000。
@@ -153,7 +153,7 @@
   )
 
 = 45. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 缓冲区是一互斥资源，因此设互斥信号量 mutex。
 
 +
@@ -240,7 +240,7 @@ $4 upright("KB") = 2^(12) upright("B")$
 ]
 
 = 47. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   把IP地址空间202.118.1.0/24划分为2个等长的子网。划分结果为：子网1：子网地址为202.118.1.0，子网掩码为255.255.255.128（或子网1：202.
   118.1.0/25）

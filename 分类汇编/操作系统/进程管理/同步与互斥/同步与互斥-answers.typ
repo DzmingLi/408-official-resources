@@ -302,7 +302,7 @@ for(;;)
 
 === 2009 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 缓冲区是一互斥资源，因此设互斥信号量 mutex。
 
 +
@@ -353,7 +353,7 @@ for(;;)
 
 === 2011 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   互斥资源：取号机（一次只允许一位顾客领号），因此设一个互斥信号量 mutex；
 

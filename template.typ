@@ -37,7 +37,7 @@
       ..args.pos().map(body => block(breakable: false, body))))
 }
 // 小问使用原生 + 列表；每项整体不跨页，整个列表允许跨页。
-#let subquestions(start: 1, allow-oversize: false, body) = {
+#let subquestions(start: 1, allow-oversize: false, after-heading: false, body) = {
   set enum(numbering: "（1）", start: start)
   show enum: it => {
     let next-number = if it.start == auto { 1 } else { it.start }
@@ -59,8 +59,9 @@
       next-number = n + 1
     }
   }
-  // layout 内首项的 above 会在布局边界消失，显式保留列表前的正文行距。
-  v(exam-line-gap, weak: false)
+  // 标题已有下方留白，此时让列表前距与之合并，避免叠成空行。
+  // 普通题干之后仍显式保留列表前的正文行距。
+  v(exam-line-gap, weak: after-heading)
   body
 }
 #let paper-margin = 17mm

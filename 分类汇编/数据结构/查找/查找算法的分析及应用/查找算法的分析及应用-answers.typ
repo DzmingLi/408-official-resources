@@ -6,7 +6,7 @@
 
 === 2013 42
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   采用顺序存储结构，数据元素按其查找概率降序排列。（2分）
 

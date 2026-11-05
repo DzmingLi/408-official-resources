@@ -25,7 +25,7 @@
 = 二、综合应用题
 
 = 41. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 图 G的邻接矩阵 A如下：（2分）
 
   $ mat(delim: "[", 0, 4, 6, oo, oo, oo; oo, 0, 5, oo, oo, oo; oo, oo, 0, 4, 3, oo; oo, oo, oo, 0, oo, 3; oo, oo, oo, oo, 0, 3; oo, oo, oo, oo, oo, 0) $
@@ -52,7 +52,7 @@
 ]
 
 = 42. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 给出算法的基本设计思想：（5分）
 
   分别求两个升序序列A、B的中位数，设为a和b。若
@@ -150,7 +150,7 @@ int M_Search( int A[ ], int B[ ], int n)
 C语言。
 
 = 43. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + $134 = 128 + 6 = 10000110 upright("B")$
   ，所以 x的机器数为10000110B，故R1的内容为86H。（1分）
 
@@ -201,7 +201,7 @@ C语言。
 ]
 
 = 44. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   $16 upright("M") = 2^(24) \, 4 upright("K") = 2^(12)$
   ，故虚拟地址为24位，其中高12位为虚页号；（1分） $1 upright("M") = 2^(20)$
@@ -246,7 +246,7 @@ C语言。
 ]
 
 = 45. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   互斥资源：取号机（一次只允许一位顾客领号），因此设一个互斥信号量 mutex；
 
@@ -296,7 +296,7 @@ C语言。
 ④的标准给分。
 
 = 46. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   在磁盘中连续存放（采取连续结构），磁盘寻道时间更短，文件随机访问效率更高；
 
@@ -310,7 +310,7 @@ C语言。
 ]
 
 = 47. 【答案要点】
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   从题47-b图可知，该数据帧所封装的IP分组的目的地址就是Web服务器的IP地址，即64.170.98.32（40aa6220H）；（1分）该数据帧的目的MAC地址就是该主机的默认网关MAC地址，即00-21-27-21-51-ee。（1分）
 

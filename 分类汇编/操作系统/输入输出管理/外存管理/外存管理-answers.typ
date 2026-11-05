@@ -10,7 +10,7 @@
 
 === 2010 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   用位图表示磁盘的空闲状态。每一位表示一个磁盘块的空闲状态，共需要
   16384/32=512个字=512×4个字节=2KB，正好可放在系统提供的内存中。

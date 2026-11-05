@@ -8,7 +8,7 @@
 
 === 2011 47
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 +
   从题47-b图可知，该数据帧所封装的IP分组的目的地址就是Web服务器的IP地址，即64.170.98.32（40aa6220H）；（1分）该数据帧的目的MAC地址就是该主机的默认网关MAC地址，即00-21-27-21-51-ee。（1分）
 

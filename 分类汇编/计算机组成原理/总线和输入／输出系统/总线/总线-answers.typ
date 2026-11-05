@@ -36,7 +36,7 @@
 
 === 2013 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + CPU的时钟周期为：
   $1 \/ 800 upright("MHz") = 1.25 upright("ns")$。（1分）
 

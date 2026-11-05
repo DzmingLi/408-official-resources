@@ -63,7 +63,7 @@
 
 === 2009 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 中断方式下，CPU每次用于数据传送的时钟周期数：
   $5 times 18 + 5 times 2 = 100$为达到外设0.5MB/s的数据传输率，外设每秒申请的中断次数：0.5MB/4B=
   125000。
@@ -86,7 +86,7 @@
 
 === 2012 43
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 平均每秒CPU执行的指令数为：
   $80 upright("M") \/ 4 = 20 upright("M")$
   ，故MIPS数为20；（1分）平均每秒Cache缺失的次数为：

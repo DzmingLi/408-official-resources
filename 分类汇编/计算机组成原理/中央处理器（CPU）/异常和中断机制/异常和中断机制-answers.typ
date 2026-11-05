@@ -20,7 +20,7 @@
 
 === 2014 45
 
-#subquestions(allow-oversize: true)[
+#subquestions(after-heading: true, allow-oversize: true)[
 + 由于（R6）=1000，故（R2）=1000。（1分）
 
 + 指令 Cache 数据区的容量：
