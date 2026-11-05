@@ -56,13 +56,13 @@ nix build .#past-exams
 
 =nix build= 等价于默认构建历年试卷阅读版。
 
-需要同时构建小册子打印版时，显式指定：
+只构建小册子打印版：
 
 #+begin_src sh
-nix build .#past-exams-with-print --out-link result-with-print
+nix build .#print-version
 #+end_src
 
-=result-with-print/= 中包含阅读版及对应的 =-print.pdf= 打印版。GitHub Releases 自动发布使用此构建目标。
+=result/= 中仅包含 =-print.pdf= 打印版。GitHub Releases 自动发布分别构建阅读版和打印版。
 
 只预览一份试卷的阅读版：
 
@@ -72,7 +72,7 @@ nix develop -c python3 scripts/build-pdfs.py \
   --only 历年真题+参考解答/2026/2026.typ
 #+end_src
 
-如需同时预览打印版，在上述命令末尾添加 =--with-print= 。
+如需只预览打印版，在上述命令末尾添加 =--print-version= ，并使用单独的输出目录。
 
 *** 真题分类汇编
 

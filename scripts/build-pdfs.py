@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from tempfile import TemporaryDirectory
 
 from booklet import build_booklet
 
@@ -54,7 +55,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--jobs', type=int, default=4)
     parser.add_argument('--only', help='Preview one supported source')
-    parser.add_argument('--with-print', action='store_true', help='Also build booklet print PDFs')
+    parser.add_argument('--print-version', action='store_true', help='Build only booklet print PDFs')
     args = parser.parse_args()
     root, output = args.root.resolve(), args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -71,16 +72,18 @@ def main():
     def build(source):
         relative = source.relative_to(root)
         stem = output_stem(source, root)
-        target = output / (stem + '.pdf')
-        result = subprocess.run(['typst', 'compile', '--ignore-system-fonts', '--root', str(root), str(source), str(target)], capture_output=True, text=True)
-        if result.returncode:
-            raise RuntimeError(f'{relative}\n{result.stderr}')
-        if result.stderr:
-            print(f'{relative}\n{result.stderr}', file=sys.stderr, flush=True)
-        if args.with_print:
-            print_target = output / (stem + '-print.pdf')
-            build_booklet(target, print_target, **print_cover_blanks(source))
-        return target.name
+        with TemporaryDirectory(prefix='408-reading-') as temporary:
+            target = (Path(temporary) if args.print_version else output) / (stem + '.pdf')
+            result = subprocess.run(['typst', 'compile', '--ignore-system-fonts', '--root', str(root), str(source), str(target)], capture_output=True, text=True)
+            if result.returncode:
+                raise RuntimeError(f'{relative}\n{result.stderr}')
+            if result.stderr:
+                print(f'{relative}\n{result.stderr}', file=sys.stderr, flush=True)
+            if args.print_version:
+                print_target = output / (stem + '-print.pdf')
+                build_booklet(target, print_target, **print_cover_blanks(source))
+                return print_target.name
+            return target.name
 
     records, failed = [], False
     with ThreadPoolExecutor(max_workers=max(1, args.jobs)) as executor:
@@ -97,8 +100,8 @@ def main():
     if args.only:
         print(f'Preview built in {output}.', flush=True)
         return
-    print_summary = f' and {len(records)} print PDFs' if args.with_print else ''
-    print(f'Built {len(records)} reading PDFs{print_summary} in {output}', flush=True)
+    version = 'print' if args.print_version else 'reading'
+    print(f'Built {len(records)} {version} PDFs in {output}', flush=True)
 
 
 if __name__ == '__main__':

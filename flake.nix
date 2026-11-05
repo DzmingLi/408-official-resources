@@ -54,20 +54,19 @@
               !excluded && allowed &&
               (type == "directory" || lib.any (ext: lib.hasSuffix ext relative) [ ".typ" ".py" ".org" ".svg" ".png" ".jpg" ".jpeg" ".json" ".toml" ]);
           };
-          mkPastExams = withPrint: typixLib.mkTypstDerivation {
-            name = "kaoyan-408-official-pdfs" + lib.optionalString withPrint "-with-print";
+          mkPastExams = printVersion: typixLib.mkTypstDerivation {
+            name = "kaoyan-408-official-pdfs" + lib.optionalString printVersion "-print-version";
             inherit src fontPaths;
             emojiFont = null;
             unstable_typstPackages = typstPackages;
             nativeBuildInputs = [ pdfPython ];
             buildPhaseTypstCommand = ''
-              python3 scripts/build-pdfs.py --output "$out" --jobs 4 ${lib.optionalString withPrint "--with-print"}
-              ${lib.optionalString withPrint ''python3 scripts/publish-release.py --directory "$out" --check-only''}
+              python3 scripts/build-pdfs.py --output "$out" --jobs 4 ${lib.optionalString printVersion "--print-version"}
             '';
             installPhaseCommand = "true";
           };
           past-exams = mkPastExams false;
-          past-exams-with-print = mkPastExams true;
+          print-version = mkPastExams true;
           collections = typixLib.mkTypstDerivation {
             name = "408-topic-collections";
             inherit src fontPaths;
@@ -80,8 +79,8 @@
             installPhaseCommand = "true";
           };
         in {
-          packages = { default = past-exams; inherit past-exams past-exams-with-print collections; fonts = founderFonts; math-fonts = mathFonts; };
-          checks = { inherit past-exams past-exams-with-print collections; };
+          packages = { default = past-exams; inherit past-exams print-version collections; fonts = founderFonts; math-fonts = mathFonts; };
+          checks = { inherit past-exams print-version collections; };
           devShell = typixLib.devShell {
             inherit fontPaths;
             emojiFont = null;
