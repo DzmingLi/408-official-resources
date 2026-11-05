@@ -122,7 +122,7 @@ PLANS = {
         'directory': '数据结构/图/图的基本应用',
         'sections': {
             '最小（代价）生成树': [(2012, 8), (2015, 6), (2017, 42), (2018, 42), (2020, 7)],
-            '最短路径': [(2009, 41), (2012, 7), (2016, 8), (2021, 8), (2013, 9, 'sample')],
+            '最短路径': [(2009, 41), (2012, 7), (2016, 8), (2021, 8)],
             '拓扑排序': [(2010, 8), (2012, 6), (2014, 7), (2016, 7), (2018, 7), (2021, 7), (2019, 6)],
             '关键路径': [(2011, 41), (2013, 9), (2019, 5), (2020, 8), (2022, 7)],
         },
@@ -162,7 +162,7 @@ PLANS = {
         'directory': '计算机网络/网络层/网络层设备',
         'sections': {
             '路由器的组成和功能': [(2010, 38), (2012, 37), (2016, 33)],
-            '路由表与分组转发': [(2009, 47), (2011, 37), (2013, 47), (2014, 43), (2015, 38), (2019, 47), (2013, 15, 'sample')],
+            '路由表与分组转发': [(2009, 47), (2011, 37), (2013, 47), (2014, 43), (2015, 38), (2019, 47)],
         },
     },
     '网络层的功能': {
@@ -185,7 +185,7 @@ PLANS = {
         'directory': '计算机网络/数据链路层/介质访问控制',
         'sections': {
             '信道划分': [(2014, 37)],
-            '随机访问': [(2009, 37), (2010, 47), (2011, 36), (2013, 36), (2015, 36), (2016, 36), (2018, 35), (2019, 36), (2020, 37), (2013, 7, 'sample')],
+            '随机访问': [(2009, 37), (2010, 47), (2011, 36), (2013, 36), (2015, 36), (2016, 36), (2018, 35), (2019, 36), (2020, 37)],
             '轮询访问': [],
         },
     },
@@ -212,7 +212,7 @@ PLANS = {
             '滑动窗口与信道利用率': [(2015, 35), (2019, 35)],
             '停止－等待协议': [(2018, 36), (2020, 36)],
             '后退N帧协议（GBN）': [(2009, 35), (2012, 36), (2014, 36), (2017, 47)],
-            '选择重传协议（SR）': [(2011, 35), (2013, 8, 'sample')],
+            '选择重传协议（SR）': [(2011, 35)],
         },
     },
     '计算机网络概述': {
@@ -257,7 +257,7 @@ def select_plans(from_year=MIN_YEAR, through_year=MAX_YEAR, current_syllabus_onl
     selected = {}
     for title, plan in PLANS.items():
         sections = {leaf: [entry for entry in entries if
-                          (len(entry) == 3 or from_year <= entry[0] <= through_year)
+                          from_year <= entry[0] <= through_year
                           and not (current_syllabus_only and entry[:2] in HISTORICAL_QUESTIONS)]
                     for leaf, entries in plan['sections'].items()}
         if any(sections.values()):
@@ -326,7 +326,7 @@ def rebase_images(body, source, target):
 
 
 def render(root, title, plan):
-    target = root / '分类汇编' / plan['directory'] / (title + '-题目.typ')
+    target = root / '真题分类汇编' / plan['directory'] / (title + '-题目.typ')
     template = os.path.relpath(root / 'template.typ', target.parent)
     lines = [
         '// 自动提取完整题干；分类由 scripts/extract-collections.py 人工维护。',
@@ -336,7 +336,7 @@ def render(root, title, plan):
         '#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge',
         '#answer-state.update(false)',
         '#let emphasis = underline.with(stroke: (thickness: 0.07em, dash: (array: (0pt, 1em), phase: 0.5em), cap: "round"), offset: 0.16em)',
-        f'= 分类汇编：{title.replace("／", "/")}',
+        f'= 真题分类汇编：{title.replace("／", "/")}',
         '',
     ]
     if plan['directory'].startswith('数据结构/'):
@@ -350,19 +350,14 @@ def render(root, title, plan):
         for entry in ids:
             year, number = entry[:2]
             kind = entry[2] if len(entry) == 3 else 'paper'
-            if kind not in ('paper', 'sample'):
+            if kind != 'paper':
                 raise ValueError(f'Invalid question kind: {kind}')
             if not 2009 <= year <= MAX_YEAR or (kind, year, number) in seen:
                 raise ValueError(f'Invalid/duplicate classification: {year}-{number}')
             seen.add((kind, year, number))
-            if kind == 'sample':
-                source = root / '旧版题型示例' / '题型示例.typ'
-                body = questions(source, expected=15)[number - 1]
-                label = '旧版题型示例'
-            else:
-                source = root / '历年真题+参考解答' / str(year) / f'{year}.typ'
-                body = questions(source)[number - 1]
-                label = f'{year} {number}'
+            source = root / '历年真题+参考解答' / str(year) / f'{year}.typ'
+            body = questions(source)[number - 1]
+            label = f'{year} {number}'
             if year == 2014 and number == 43 and kind == 'paper':
                 background = questions(source)[41].split('请回答下列问题。')[0]
                 background = re.sub(r'^\s*（10分）', '', background)
@@ -414,10 +409,7 @@ def render(root, title, plan):
                 # Keep a large figure's opening stem on the same page as the
                 # figure, rather than leaving a lone introduction at the foot.
                 lines += ['#pagebreak(weak: true)', '']
-            if ((plan['directory'].startswith('操作系统/') and (kind == 'sample' or number <= 40))
-                    or (plan['directory'].startswith(('计算机组成原理/', '数据结构/'))
-                        and ((kind == 'paper' and number <= 40)
-                             or (kind == 'sample' and number <= 8)))):
+            if number <= 40 and plan['directory'].startswith(('操作系统/', '计算机组成原理/', '数据结构/')):
                 lines += [f'#block(breakable: false)[#question(label: n => [{label}])[{body}]]', '']
             elif ((title == 'WWW' and year == 2014 and number == 40)
                     or (title == '网络层设备' and year == 2015 and number == 38)
@@ -428,10 +420,6 @@ def render(root, title, plan):
                 # This complete short algorithm-design question fits on a page;
                 # keep its last one-line requirement from forming a lone page.
                 lines += [f'#block(breakable: false)[#question(label: n => [{label}])[{body}]]', '']
-            elif title == '图的基本应用' and kind == 'sample':
-                # Keep the single-paragraph graph exercise together; long math
-                # sets otherwise stretch the surrounding Chinese justification.
-                lines += [f'#block(breakable: false)[#question(label: n => [{label}])[#set par(justify: false)\n{body}]]', '']
             else:
                 lines += [f'#question(label: n => [{label}])[{body}]', '']
     return target, '\n'.join(lines).rstrip() + '\n', len(seen)

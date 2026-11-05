@@ -9,8 +9,8 @@ result-*
 __pycache__/
 /本地参考/
 /教材习题/
-/分类汇编/preview/
-/分类汇编/answers-preview/
+/真题分类汇编/preview/
+/真题分类汇编/answers-preview/
 
 
 # 旧网络稿图片不再使用；重绘用的图标放在 assets 中。

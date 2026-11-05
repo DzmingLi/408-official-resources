@@ -124,8 +124,6 @@ def plans():
             add(code, (year, number))
         for number, code in COMPOSITES[year].items():
             add(code, (year, number))
-    for code, number in [('sortanalysis', 1), ('heap', 2), ('traverse', 10)]:
-        add(code, (2013, number, 'sample'))
     for plan in result.values():
         for entries in plan['sections'].values():
             entries.sort(key=lambda entry: (len(entry) == 3, entry[0], entry[1]))

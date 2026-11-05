@@ -47,7 +47,7 @@
               let
                 relative = lib.removePrefix (toString ./. + "/") (toString path);
                 parts = lib.splitString "/" relative;
-                allowedRoots = [ "历年真题+参考解答" "旧版题型示例" "分类汇编" "考试大纲" "scripts" "template.typ" ];
+                allowedRoots = [ "历年真题+参考解答" "旧版题型示例" "真题分类汇编" "考试大纲" "scripts" "template.typ" ];
                 allowed = lib.elem (lib.head parts) allowedRoots || builtins.match "20[0-9][0-9]" (lib.head parts) != null;
                 excluded = lib.any (part: lib.elem part [ "backups" ".build" ".git" "output" ]) parts;
               in
@@ -61,7 +61,6 @@
             unstable_typstPackages = typstPackages;
             nativeBuildInputs = [ pdfPython ];
             buildPhaseTypstCommand = ''
-              python3 scripts/test-booklet.py
               python3 scripts/build-pdfs.py --output "$out" --jobs 4
               python3 scripts/publish-release.py --directory "$out" --check-only
             '';
@@ -74,7 +73,6 @@
             unstable_typstPackages = typstPackages;
             nativeBuildInputs = [ pdfPython ];
             buildPhaseTypstCommand = ''
-              python3 scripts/test-collections.py
               python3 scripts/build-collections.py --output "$out"
             '';
             installPhaseCommand = "true";

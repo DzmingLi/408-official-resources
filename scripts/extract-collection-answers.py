@@ -16,23 +16,16 @@ questions = EXTRACT['questions']
 rebase_images = EXTRACT['rebase_images']
 
 
-def answers(root, year, sample=False):
-    if sample:
-        # The syllabus published sample questions without reference answers.
-        # Self-authored solutions are local-only and must never enter releases.
-        source = root / '旧版题型示例/题型示例.typ'
-        return source, {n: '原考纲未附本题参考答案。' for n in range(1, 16)}
-    else:
-        source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
-    if not source.exists() and not sample and year in (2023, 2026):
+def answers(root, year):
+    source = root / f'历年真题+参考解答/{year}/{year}-答案.typ'
+    if not source.exists() and year in (2023, 2026):
         # Retain one explicit answer slot for every question; never invent a
         # reference answer or silently omit an otherwise classified paper.
         return source, {n: '本仓库尚未收录本题参考答案。' for n in range(1, 48)}
     text = source.read_text()
     result = {}
-    if sample or year <= 2014:
-        pattern = (r'^(?:=+\s*)?(\d{1,2})[.．、]\s*'
-                   + (r'(?=\S)' if sample else r'(?=[ABCD](?:\s|$)|【答案要点】)'))
+    if year <= 2014:
+        pattern = r'^(?:=+\s*)?(\d{1,2})[.．、]\s*(?=[ABCD](?:\s|$)|【答案要点】)'
         matches = list(re.finditer(pattern, text, re.MULTILINE))
         for i, match in enumerate(matches):
             number = int(match[1])
@@ -51,8 +44,6 @@ def answers(root, year, sample=False):
                     raise ValueError(f'{source}: conflicting repeated answer {number}')
             else:
                 result[number] = body
-        if sample:
-            result.update({n: result[n + 32] for n in range(9, 16)})
     else:
         result.update({int(n): letter for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text)})
         if set(range(1, 41)) - result.keys():
@@ -63,26 +54,24 @@ def answers(root, year, sample=False):
         result.update(zip(numbers, (body.strip() for body in blocks)))
     for n, letter in re.findall(r'\[(\d+)[．.]\s*([ABCD])\]', text):
         result.setdefault(int(n), letter)
-    # Official paper MCQs publish only letters; self-authored sample answers
-    # retain their explanations. Sample numbers 9–15 alias source 41–47.
-    for number in range(1, 9 if sample else 41):
+    # Official paper MCQs publish only letters.
+    for number in range(1, 41):
         if number in result:
             match = re.match(r'^([ABCD])(?:\s|$)', result[number])
             if not match:
                 raise ValueError(f'{source}: missing MCQ answer letter {number}')
-            if not sample:
-                result[number] = match[1]
+            result[number] = match[1]
     return source, result
 
 
-def clean_answer(body, year, number, sample):
+def clean_answer(body, year, number):
     if year >= 2023:
         body = '\n'.join(line.rstrip() for line in body.splitlines())
     # These old OCR artefacts were checked in the rendered answer pages.
     body = body.replace('【答案要点】', '').strip()
     for n, glyph in enumerate('①②③④⑤⑥⑦⑧⑨⑩', 1):
         body = body.replace('\\$\\\\textcircled{' + str(n) + '}\\$', glyph)
-    if not sample and (year, number) == (2012, 6):
+    if (year, number) == (2012, 6):
         # This is the tree for question 4, accidentally included by old OCR.
         body = re.sub(r'#image\("[^"]+"\)\s*第4题图\s*', '', body)
     # Old bare images otherwise expand to the full A4 width. Match each
@@ -91,7 +80,7 @@ def clean_answer(body, year, number, sample):
         (2009, 41): '15em', (2010, 34): '29em', (2010, 40): '24em',
         (2011, 41): '28em', (2013, 40): '32em', (2014, 42): '27em',
     }
-    if not sample and (year, number) in widths:
+    if (year, number) in widths:
         width = widths[year, number]
         body = re.sub(r'#image\("([^"\n]+)"\)',
                       lambda m: '#align(center, image("' + m[1] + '", width: ' + width + '))', body)
@@ -101,14 +90,14 @@ def clean_answer(body, year, number, sample):
 def outputs(root, plans=None):
     cache = {}
     for title, plan in (PLANS if plans is None else plans).items():
-        target = root / '分类汇编' / plan['directory'] / f'{title}-answers.typ'
+        target = root / '真题分类汇编' / plan['directory'] / f'{title}-answers.typ'
         template = os.path.relpath(root / 'template.typ', target.parent)
         lines = [
             '// 与题目版共用分类清单；由 scripts/extract-collection-answers.py 生成。',
             f'#import "{template}": subquestions, statements, inline-node',
             '#import "@preview/cetz:0.5.2" as cetz',
             '#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge',
-            f'= 分类汇编：{title.replace("／", "/")}', '',
+            f'= 真题分类汇编：{title.replace("／", "/")}', '',
         ]
         for section, entries in plan['sections'].items():
             if not entries:
@@ -116,24 +105,22 @@ def outputs(root, plans=None):
             if plan.get('section_headings', True):
                 lines += [f'== {section}', '']
             for entry in entries:
-                year, number = entry[:2]
-                sample = len(entry) == 3 and entry[2] == 'sample'
-                key = (year, sample)
-                if key not in cache:
-                    cache[key] = answers(root, year, sample)
-                source, items = cache[key]
+                year, number = entry
+                if year not in cache:
+                    cache[year] = answers(root, year)
+                source, items = cache[year]
                 if number not in items or not items[number].strip():
                     raise ValueError(f'{source}: missing answer {number}')
-                body = clean_answer(items[number], year, number, sample)
+                body = clean_answer(items[number], year, number)
                 body = rebase_images(body, source, target)
-                label = '旧版题型示例' if sample else f'{year} {number}'
+                label = f'{year} {number}'
                 lines += [f'=== {label}', '']
-                if (sample and number not in (10, 14)) or (year, number) in ((2009, 41), (2011, 41), (2015, 42), (2016, 41), (2017, 47)):
+                if (year, number) in ((2009, 41), (2011, 41), (2015, 42), (2016, 41), (2017, 47)):
                     lines += ['#block(breakable: false)[', body, ']', '']
-                elif not sample and number <= 40 and body in 'ABCD':
+                elif number <= 40 and body in 'ABCD':
                     # Keep a one-letter key with its source label.
                     lines[-2:] = [f'=== {label}：{body}', '']
-                elif not sample and number <= 40:
+                elif number <= 40:
                     lines += ['#block(breakable: false)[', body, ']', '']
                 else:
                     lines += [body, '']

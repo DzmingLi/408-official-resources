@@ -6,11 +6,11 @@
 - 历年真题与评分标准
 - 官方曾经发布的旧版题型示例
 
-这些资料全都来自每年教育部教育考试院（原教育部考试中心）出版的官方考试大纲。目前仍然缺失的资料是《2014年全国硕士研究生入学统一考试计算机科学与技术学科联考计算机学科专业基础综合考试大纲》。如果您手里有实体书或者PDF可以通过邮件联系仓库作者。
+这些资料全都来自每年教育部教育考试院（原教育部考试中心）出版的官方考试大纲。
 
 2009—2014年试卷的综合应用题（第41—47题）统一采用高等教育出版社2015版《考研计算机专业基础综合历年真题标准解析》中的参考答案及解析而不是考纲，基本内容相同，就是把略去的计算过程展开了，但重要的是添加了【评分说明】，我怀疑评分说明或许具有官方性质。
 
-目前的试卷排版我随便排的，它也不具备什么现实依据。目前没有明确资料给出考场试卷的排版参数, 一个可能的方案是靠每年的考生回忆试卷尺寸，字体，间距什么的，尽可能还原考场真题的排版也在路线图之中。
+目前的试卷排版我随便排的，它也不具备什么现实依据。目前没有明确资料给出考场试卷的排版参数。
 
 真题文字订正及考纲范围变更标记统一记录于 [[file:真题订正.org][真题订正与注解]]。新版题型示例复用了历年真题，本仓库仅保留旧版题型示例。
 
@@ -19,21 +19,21 @@
 - =考试大纲/= ：跟随每年发布的考试大纲更新
 - =历年真题+参考解答/= ：各年份试题和已有参考答案的 Typst 源文件。
 - =旧版题型示例/= ：2015年之前的的考试大纲使用的题型示例，之后年份的考试大纲的题型示例是从真题摘出来的，仅公开题目。
-- [[file:分类汇编/README.org][分类汇编/]]：按考试大纲分讲的分类汇编；完整分类覆盖2009～2026年全部真题，自行构建可选择起止年份及A4/A5纸张。
-- =内容来源/= ：官方扫描资料，用来备查。如发现录入错字、图片或排版错误，欢迎提交 Issue 或 PR，并指出对应的官方资料位置。
+- [[file:真题分类汇编/README.org][真题分类汇编/]]：按考试大纲分讲的真题分类汇编；完整分类覆盖2009～2026年全部真题，自行构建可选择起止年份及A4/A5纸张。
+- =内容来源/= ：官方扫描资料，用来备查。
 
 PDF 挂在 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub Releases]] ，随仓库更新自动构建。
 
-我知道不同人可能想用不同的排版参数来处理试卷
+* PDF 下载
 
 历年试卷统一发布在 [[https://github.com/DzmingLi/408-official-resources/releases/tag/pdf-latest][PDF downloads]]；
 
-分类汇编按科目独立发布：
+真题分类汇编按科目独立发布：
 
-- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-数据结构][数据结构分类汇编]]
-- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-计算机组成原理][计算机组成原理分类汇编]]
-- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-操作系统][操作系统分类汇编]]
-- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-计算机网络][计算机网络分类汇编]]
+- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-数据结构][数据结构真题分类汇编]]
+- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-计算机组成原理][计算机组成原理真题分类汇编]]
+- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-操作系统][操作系统真题分类汇编]]
+- [[https://github.com/DzmingLi/408-official-resources/releases/tag/collection-计算机网络][计算机网络真题分类汇编]]
 
 PDF文件命名如下：
 
@@ -42,7 +42,57 @@ PDF文件命名如下：
 - =年份-answers.pdf= 与 =年份-answers-print.pdf= ：参考答案阅读版、打印版。
 - =old-sample.pdf= 与 =old-sample-print.pdf= ：题型示例阅读版、打印版。
 
-分类汇编的收录范围、分类规则、答案提取与合并方式见 [[file:分类汇编/README.org][分类汇编说明]]。
+真题分类汇编的收录范围、分类规则、答案提取与合并方式见 [[file:真题分类汇编/README.org][真题分类汇编说明]]。
+
+* 构建
+
+需要启用 Flakes 的 Nix。以下命令在仓库根目录执行；依赖、字体和Typst包由 =flake.lock= 锁定，首次构建会下载所需内容。
+
+** 历年试卷与参考答案
+
+#+begin_src sh
+nix build .#pdfs --out-link result
+#+end_src
+
+=nix build= 等价于默认构建历年试卷。 =result/= 中包含阅读版及小册子打印版；旧版题型示例只单独构建题目，不构建自制解析。
+
+只预览一份试卷及其打印版：
+
+#+begin_src sh
+nix develop -c python3 scripts/build-pdfs.py \
+  --output output/preview-2026 \
+  --only 历年真题+参考解答/2026/2026.typ
+#+end_src
+
+** 真题分类汇编
+
+默认构建全部2009—2026年真题、A4纸张，分别输出题目与答案册：
+
+#+begin_src sh
+nix build .#collections --out-link result-collections
+#+end_src
+
+例如，只构建截至2022年（含2022年）的A5汇编，将更新年份保留为整卷模拟：
+
+#+begin_src sh
+nix develop -c python3 scripts/build-collections.py \
+  --output output/collections-2009-2022-A5 \
+  --through-year 2022 --paper-size A5
+#+end_src
+
+| 选项 | 作用 | 默认值 |
+|------+------|--------|
+| =--from-year= | 起始年份，含该年 | 2009 |
+| =--through-year= | 截止年份，含该年 | 2026 |
+| =--paper-size= | =A4= 或 =A5= | =A4= |
+| =--current-syllabus-only= | 排除独立标明的4道历史考点题 | 不排除 |
+| =--output= | 本次构建的PDF保存目录 | 必填 |
+
+起止年份可在2009—2026年内选择；输出目录须为空，不同配置使用不同目录。筛选不修改完整分类源稿，空讲自动跳过。汇编只收录历年真题，不含旧版题型示例；2023、2026年尚无答案源稿，答案册逐题注明缺失。纸张选项只影响真题分类汇编，历年整卷的纸张与打印版拼版方式保持原有设置。
+
+* 贡献
+
+缺失资料、纠错和排版改进的提交方式见 [[file:contributing.org][贡献指南]]。
 
 * 友情链接
 
