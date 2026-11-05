@@ -90,10 +90,6 @@ nix develop -c python3 scripts/build-collections.py \
 
 起止年份可在2009—2026年内选择；输出目录须为空，不同配置使用不同目录。筛选不修改完整分类源稿，空讲自动跳过。汇编只收录历年真题，不含旧版题型示例；2023、2026年尚无答案源稿，答案册逐题注明缺失。纸张选项只影响真题分类汇编，历年整卷的纸张与打印版拼版方式保持原有设置。
 
-* 贡献
-
-缺失资料、纠错和排版改进的提交方式见 [[file:contributing.org][贡献指南]]。
-
 * 友情链接
 
 - [[https://github.com/DzmingLi/kaoyan-math-official-resources][kaoyan-math-official-resources]]：考研数学官方资料。
