@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Cisco Network Topology Icons Black And White: “Router”.
-  Official library: https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
-  SVG distribution: https://vecta.io/symbols/241/cisco-network-topology-icons-black-and-white/224/router
--->
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 59 40" fill="#fff" fill-rule="evenodd"
-     stroke="#000" stroke-linecap="round" stroke-linejoin="round">
-  <use xlink:href="#A" x=".5" y=".5"/>
-  <symbol id="A" overflow="visible">
-    <use xlink:href="#C" stroke="none" fill="#000"/>
-    <use xlink:href="#C" stroke="#fff" stroke-linejoin="miter"
-         fill="none" stroke-width=".787"/>
-    <use xlink:href="#D" stroke="none" fill="#000"/>
-    <use xlink:href="#D" stroke="#fff" stroke-linejoin="miter"
-         fill="none" stroke-width=".787"/>
-    <path d="M22.442 6.685l2.362 3.543-9.054 2.362 1.968-1.575L3.547 8.653 7.09 5.898 20.867 8.26l1.575-1.575zm12.596 8.66-1.575-3.543 8.267-1.575-1.575 1.181 13.778 2.362-3.543 2.755-13.384-2.755-1.968 1.575zm-4.33-10.628 9.054-2.362v3.936L37.4 5.898l-4.33 3.543-4.33-.394 4.724-3.936-2.755-.394zm-3.937 14.171-8.66 1.575-.394-3.936 2.362.394 4.724-3.936 4.33.787-5.117 4.33 2.755.787z"
-          stroke="none"/>
-  </symbol>
-  <defs>
-    <path id="C" d="M57.865 11.416c0 5.905-12.99 11.022-28.736 11.022C12.99 22.438 0 17.321 0 11.416v16.139c0 6.298 12.99 11.416 29.129 11.416 15.745 0 28.736-5.117 28.736-11.416z"/>
-    <path id="D" d="M29.129 22.437c15.745 0 28.736-5.117 28.736-11.022C57.865 5.117 44.875 0 29.129 0 12.99 0 0 5.117 0 11.416c0 5.905 12.99 11.022 29.129 11.022z"/>
-  </defs>
+<!-- Cisco Network Topology Icons: router.eps.
+ Official library: https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
+ Original archive: https://www.cisco.com/c/dam/en_us/about/ac50/ac47/doc.zip
+ Native EPS paths converted with Ghostscript and pdftocairo. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37.19pt" height="25.18pt" viewBox="0 0 37.19 25.18">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0.195312 7 L 36.210938 7 L 36.210938 24.386719 L 0.195312 24.386719 Z M 0.195312 7 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0.195312 4 L 36.210938 4 L 36.210938 24.386719 L 0.195312 24.386719 Z M 0.195312 4 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 0.195312 0 L 36.210938 0 L 36.210938 15 L 0.195312 15 Z M 0.195312 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 0.195312 0 L 36.210938 0 L 36.210938 17 L 0.195312 17 Z M 0.195312 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 36.011719 7.117188 C 36.011719 10.945312 28.039062 14.046875 18.203125 14.046875 C 8.363281 14.046875 0.386719 10.945312 0.386719 7.117188 L 0.386719 17.265625 C 0.386719 21.089844 8.363281 24.191406 18.203125 24.191406 C 28.039062 24.191406 36.011719 21.089844 36.011719 17.265625 L 36.011719 7.117188 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 369.839034 178.310375 C 369.839034 138.782476 287.516134 106.756811 185.953634 106.756811 C 84.350799 106.756811 1.987565 138.782476 1.987565 178.310375 L 1.987565 73.521108 C 1.987565 34.033543 84.350799 2.007878 185.953634 2.007878 C 287.516134 2.007878 369.839034 34.033543 369.839034 73.521108 Z M 369.839034 178.310375 " transform="matrix(0.0968462, 0, 0, -0.0968462, 0.194231, 24.385862)"/>
+</g>
+<g clip-path="url(#clip-2)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 18.203125 14.046875 C 28.039062 14.046875 36.011719 10.945312 36.011719 7.117188 C 36.011719 3.292969 28.039062 0.191406 18.203125 0.191406 C 8.363281 0.191406 0.386719 3.292969 0.386719 7.117188 C 0.386719 10.945312 8.363281 14.046875 18.203125 14.046875 "/>
+</g>
+<g clip-path="url(#clip-3)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 185.953634 106.756811 C 287.516134 106.756811 369.839034 138.782476 369.839034 178.310375 C 369.839034 217.79794 287.516134 249.823605 185.953634 249.823605 C 84.350799 249.823605 1.987565 217.79794 1.987565 178.310375 C 1.987565 138.782476 84.350799 106.756811 185.953634 106.756811 Z M 185.953634 106.756811 " transform="matrix(0.0968462, 0, 0, -0.0968462, 0.194231, 24.385862)"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 14.132812 4.410156 L 15.605469 6.617188 L 10.042969 7.902344 L 11.257812 6.890625 L 2.664062 5.421875 L 4.820312 3.804688 L 13.113281 5.210938 L 14.132812 4.410156 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 21.957031 9.761719 L 20.953125 7.484375 L 25.972656 6.484375 L 25.101562 7.261719 L 33.460938 8.691406 L 31.457031 10.296875 L 23.144531 8.734375 L 21.957031 9.761719 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 19.214844 3.207031 L 24.835938 1.667969 L 24.902344 4.074219 L 23.496094 3.808594 L 20.753906 6.082031 L 18.136719 5.699219 L 20.96875 3.476562 L 19.214844 3.207031 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 16.808594 11.832031 L 11.457031 12.835938 L 11.257812 10.363281 L 12.796875 10.695312 L 15.742188 8.179688 L 18.347656 8.621094 L 15.203125 11.363281 L 16.808594 11.832031 "/>
 </svg>

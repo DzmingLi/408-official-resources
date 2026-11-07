@@ -33,15 +33,14 @@
 
 ** 其他图标
 
-- =cisco-cloud.svg= 从 Cisco 官网 EPS 包 =doc.zip= 的 =cloud.eps= 转换，保留原始矢量路径。[[https://www.cisco.com/c/dam/en_us/about/ac50/ac47/doc.zip][Cisco 官方 EPS 包]]
-- =cisco-router.svg= 和 =terminal-symbol.svg= 属于 Cisco 网络拓扑图标系列。现有 SVG 经第三方分发，可与官网原件核对。[[https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html][Cisco Network Topology Icons]]
+- =cisco-cloud.svg= 、 =cisco-router.svg= 和 =terminal-symbol.svg= 分别从 Cisco 官网 EPS 包 =doc.zip= 的 =cloud.eps= 、 =router.eps= 和 =terminal.eps= 转换。使用 Ghostscript 和 pdftocairo 转换原始矢量路径，SVG 中没有嵌入位图。[[https://www.cisco.com/c/dam/en_us/about/ac50/ac47/doc.zip][Cisco 官方 EPS 包]]，[[https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html][Cisco Network Topology Icons]]。
 - =router-symbol.svg= 来自 Michel Bakni，SVG 内保留作者与授权说明。[[https://commons.wikimedia.org/wiki/File:Router_symbol.svg][Router symbol.svg]]
 - =desktop-symbol.svg= 是 Tabler Icons 的通用桌面设备图标。[[https://github.com/tabler/tabler-icons/blob/main/icons/outline/device-desktop.svg][device-desktop.svg]]
-- =pc-symbol.svg= 是 2009 年第 47 题现有的自绘替代图，原始素材尚未确定。
 
 ** 扫描核对记录
 
 - 2010 年第 34 题的 H1、H2 与 =COMPS= 的完整 PC 母版轮廓一致，采用 =visio-2003-pc.svg= 。2003 和 2007 版均有此轮廓，扫描图无法区分具体版本。[[file:../内容来源/2012年计算机考试大纲.pdf][2012 版考纲书内第 28 页（PDF 第 33 页）]]，[[file:../内容来源/2015年计算机历年真题标准解析.pdf][2015 版标准解析书内第 81 页（PDF 第 87 页）]]。
-- 2009 年第 47 题扫描图中的主机接近正视，带卧式机箱和横置键盘。已核对 Visio 2000、2002、2003、2007 的候选模具及 Cisco 官方 EPS，尚无完整匹配。[[file:../内容来源/2010年计算机考试大纲.pdf][2010 版考纲书内第 31 页（PDF 第 37 页）]]，[[file:../内容来源/2015年计算机历年真题标准解析.pdf][2015 版标准解析书内第 102 页（PDF 第 108 页）]]。
+- 2009 年第 47 题扫描图中的主机接近正视，带卧式机箱和横置键盘。已核对 Visio 2000、2002、2003、2007 的候选模具及 Cisco 官方 EPS，尚无完整匹配。已撤下原有临摹图 =pc-symbol.svg= ，暂用 =2009/official-images/domain-server.png= ，直接裁自 [[file:../内容来源/2010年计算机考试大纲.pdf][2010 版考纲书内第 31 页（PDF 第 37 页）]] 内嵌的扫描图片，未描摹或矢量化。另核对了 [[file:../内容来源/2015年计算机历年真题标准解析.pdf][2015 版标准解析书内第 102 页（PDF 第 108 页）]]。
 - 2017 年第 35 题的锥形 AP 对应 =PERIPH= 的无线 AP 母版。2023 年第 33、38、47 题的平板显示器主机和 CRT 工作站分别对应 =COMPS= 的 2、5 号母版，立方体交换机对应 =NETSYM= 的 4 号母版。2026 年第 37、47 题带地球标记的服务器采用 =SERVER= 的 10 号母版，2016、2026 年的目录树采用 =WFOBJ= 中的文件夹与文档母版。上述序号均为 libvisio 的零起始导出序号，Visio 2007 表示实际提取所用版本。
-- 仍保留三张待溯源的设备扫描裁片。2016 年共用图中的正视主机和 DNS 服务器分别存于 =2016/official-images/desktop.png= 、 =dns-server.png= ，裁自原共用图。2022 年第 47 题的多天线 AP 存于 =2022/official-images/network-ap.png= 。已核查现有 Visio 和 Cisco 候选，尚未认定对应原件。
+- 除上述 2009 年裁片外，还保留三张待溯源的设备扫描裁片。2016 年共用图中的正视主机和 DNS 服务器分别存于 =2016/official-images/desktop.png= 、 =dns-server.png= ，裁自 [[file:../内容来源/2018年计算机考试大纲.pdf][2018 版考纲书内第 45 页（PDF 第 51 页）]] 的共用图。2022 年第 47 题的多天线 AP 存于 =2022/official-images/network-ap.png= ，核对依据为 [[file:../内容来源/2024年计算机考试大纲.pdf][2024 版考纲 PDF 第 45 页]]。已核查现有 Visio 和 Cisco 候选，尚未认定对应原件。
+- 对上述三张裁片，另核对了 Cisco 官方黑白与彩色 VSS、2016 版 PowerPoint 图标库、Microsoft 发布的 Visio 2010 网络示例，以及 Packet Tracer 7.0 的逻辑设备资源。已查看的主机、服务器和无线设备在视角、机箱或天线细节上均不匹配；这些来源暂不能作为替换依据。Packet Tracer 的这组原始资源为 PNG，不能仅凭设备名称将其视为原图或矢量图。

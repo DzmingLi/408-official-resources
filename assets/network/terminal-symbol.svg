@@ -1,42 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Cisco Network Topology Icons Black And White: “Terminal”.
-  Official library: https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
-  SVG distribution: https://vecta.io/symbols/241/cisco-network-topology-icons-black-and-white/265/terminal
--->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 46 43" fill="#fff" fill-rule="evenodd" stroke="#000"
-     stroke-linecap="round" stroke-linejoin="round">
-  <style><![CDATA[
-    .B{fill:#000}.C{stroke:#fff}.D{stroke-linejoin:miter}
-    .E{stroke-width:.787}.F{stroke:none}.G{stroke-linecap:square}
-  ]]></style>
-  <use xlink:href="#A" x=".5" y=".5"/>
-  <symbol id="A" overflow="visible">
-    <g class="B">
-      <path d="M6.293 36.972v-6.293h33.038v6.293H6.293z" class="C D E"/>
-      <path d="M44.838 25.172v6.293l-5.506 5.506v-6.293H6.293z" class="F"/>
-    </g>
-    <path d="M44.838 25.172v6.293l-5.506 5.506v-6.293H6.293" fill="none" class="C D E G"/>
-    <path d="M6.686 25.172h38.152z" class="B F"/>
-    <path d="M6.686 25.172h38.152" fill="none" class="C D E G"/>
-    <path d="M39.332 30.678l5.506-5.506z" class="B F"/>
-    <g class="C D E">
-      <path d="M39.332 30.678l5.506-5.506" fill="none" class="G"/>
-      <g class="B">
-        <path d="M39.331 30.679V5.9H6.293v24.779h33.038z"/>
-        <path d="M39.331 30.679l5.506-5.506V0H12.193l-5.9 5.9h33.038v24.779zm-2.753-2.753V8.653H9.44v19.273h27.139z"/>
-      </g>
-    </g>
-    <path d="M22.812 18.093zM39.331 5.9L44.838 0z" class="B F"/>
-    <g class="C D E">
-      <path d="M39.332 5.9L44.838 0" fill="none" class="G"/>
-      <g class="B">
-        <path d="M37.758 41.298v-3.54H0l4.327-4.327h37.758v3.54l-4.326 4.327z"/>
-        <path d="M37.758 37.758v3.54H0v-3.54h37.758z"/>
-      </g>
-    </g>
-    <path d="M37.758 37.759l4.326-4.327z" class="B F"/>
-    <path d="M37.758 37.759l4.326-4.327" fill="none" class="C D E G"/>
-  </symbol>
+<!-- Cisco Network Topology Icons: terminal.eps.
+ Official library: https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html
+ Original archive: https://www.cisco.com/c/dam/en_us/about/ac50/ac47/doc.zip
+ Native EPS paths converted with Ghostscript and pdftocairo. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29.37pt" height="26.92pt" viewBox="0 0 29.37 26.92">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 4 15 L 28.753906 15 L 28.753906 24 L 4 24 Z M 4 15 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 2 13 L 28.753906 13 L 28.753906 26 L 2 26 Z M 2 13 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 4 15 L 28.753906 15 L 28.753906 17 L 4 17 Z M 4 15 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 25 15 L 28.753906 15 L 28.753906 20 L 25 20 Z M 25 15 "/>
+</clipPath>
+<clipPath id="clip-4">
+<path clip-rule="nonzero" d="M 22 13 L 28.753906 13 L 28.753906 22 L 22 22 Z M 22 13 "/>
+</clipPath>
+<clipPath id="clip-5">
+<path clip-rule="nonzero" d="M 4 0.242188 L 28.753906 0.242188 L 28.753906 20 L 4 20 Z M 4 0.242188 "/>
+</clipPath>
+<clipPath id="clip-6">
+<path clip-rule="nonzero" d="M 2 0.242188 L 28.753906 0.242188 L 28.753906 22 L 2 22 Z M 2 0.242188 "/>
+</clipPath>
+<clipPath id="clip-7">
+<path clip-rule="nonzero" d="M 25 0.242188 L 28.753906 0.242188 L 28.753906 4 L 25 4 Z M 25 0.242188 "/>
+</clipPath>
+<clipPath id="clip-8">
+<path clip-rule="nonzero" d="M 22 0.242188 L 28.753906 0.242188 L 28.753906 7 L 22 7 Z M 22 0.242188 "/>
+</clipPath>
+<clipPath id="clip-9">
+<path clip-rule="nonzero" d="M 0 21 L 27 21 L 27 26.597656 L 0 26.597656 Z M 0 21 "/>
+</clipPath>
+<clipPath id="clip-10">
+<path clip-rule="nonzero" d="M 0 18 L 28.753906 18 L 28.753906 26.597656 L 0 26.597656 Z M 0 18 "/>
+</clipPath>
+<clipPath id="clip-11">
+<path clip-rule="nonzero" d="M 0 23 L 25 23 L 25 26.597656 L 0 26.597656 Z M 0 23 "/>
+</clipPath>
+<clipPath id="clip-12">
+<path clip-rule="nonzero" d="M 21 18 L 28.753906 18 L 28.753906 26.597656 L 21 26.597656 Z M 21 18 "/>
+</clipPath>
+</defs>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 4.566406 23.320312 L 4.566406 19.480469 L 25.085938 19.480469 L 25.085938 23.320312 L 4.566406 23.320312 "/>
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 46.643578 33.481793 L 46.643578 72.703894 L 256.240424 72.703894 L 256.240424 33.481793 Z M 46.643578 33.481793 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+<g clip-path="url(#clip-0)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 28.558594 15.980469 L 28.558594 19.859375 L 25.085938 23.359375 L 25.085938 19.480469 L 4.550781 19.480469 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 291.711887 108.45466 L 291.711887 68.833555 L 256.240424 33.082789 L 256.240424 72.703894 L 46.483976 72.703894 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<g clip-path="url(#clip-2)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 48.159793 108.45466 L 291.711887 108.45466 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<g clip-path="url(#clip-3)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 25.085938 19.480469 L 28.558594 15.980469 "/>
+</g>
+<g clip-path="url(#clip-4)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 256.240424 72.703894 L 291.711887 108.45466 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 25.058594 19.402344 L 25.058594 3.941406 L 4.550781 3.941406 L 4.550781 19.402344 L 25.058594 19.402344 "/>
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 255.961121 73.501902 L 255.961121 231.42772 L 46.483976 231.42772 L 46.483976 73.501902 Z M 255.961121 73.501902 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+<g clip-path="url(#clip-5)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 25.058594 19.402344 L 28.558594 15.902344 L 28.558594 0.441406 L 8.050781 0.441406 L 4.550781 3.941406 L 25.058594 3.941406 L 25.058594 19.402344 "/>
+</g>
+<g clip-path="url(#clip-6)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 255.961121 73.501902 L 291.711887 109.252669 L 291.711887 267.178486 L 82.234742 267.178486 L 46.483976 231.42772 L 255.961121 231.42772 Z M 255.961121 73.501902 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 23.269531 17.613281 L 23.269531 5.730469 L 6.34375 5.730469 L 6.34375 17.613281 L 23.269531 17.613281 "/>
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 237.686734 91.77629 L 237.686734 213.153332 L 64.798264 213.153332 L 64.798264 91.77629 Z M 237.686734 91.77629 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+<g clip-path="url(#clip-7)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 25.058594 3.941406 L 28.558594 0.441406 "/>
+</g>
+<g clip-path="url(#clip-8)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 255.961121 231.42772 L 291.711887 267.178486 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<g clip-path="url(#clip-9)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 24.074219 26.125 L 24.074219 23.851562 L 0.472656 23.851562 L 3.15625 21.164062 L 26.757812 21.164062 L 26.757812 23.441406 L 24.074219 26.125 "/>
+</g>
+<g clip-path="url(#clip-10)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 245.906218 4.833299 L 245.906218 28.055337 L 4.827949 28.055337 L 32.23953 55.506818 L 273.317799 55.506818 L 273.317799 32.24488 Z M 245.906218 4.833299 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<g clip-path="url(#clip-11)">
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 24.074219 23.851562 L 24.074219 26.125 L 0.472656 26.125 L 0.472656 23.851562 L 24.074219 23.851562 "/>
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 245.906218 28.055337 L 245.906218 4.833299 L 4.827949 4.833299 L 4.827949 28.055337 Z M 245.906218 28.055337 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 24.074219 23.851562 L 26.757812 21.164062 "/>
+<g clip-path="url(#clip-12)">
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="4" d="M 245.906218 28.055337 L 273.317799 55.506818 " transform="matrix(0.0979, 0, 0, -0.0979, 0, 26.59818)"/>
+</g>
 </svg>
