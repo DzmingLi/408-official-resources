@@ -21,7 +21,7 @@
 - =旧版题型示例/= ：2015年之前的的考试大纲使用的题型示例，之后年份的考试大纲的题型示例是从真题摘出来的，仅公开题目。
 - [[file:真题分类汇编/README.org][真题分类汇编/]]：按考试大纲分讲的真题分类汇编；完整分类覆盖2009～2026年全部真题，自行构建可选择起止年份及A4/A5纸张。
 - =内容来源/= ：官方扫描资料，用来备查。
-- =assets/network/= ：试卷和真题分类汇编共用的网络设备图标。
+- [[file:assets/README.org][assets/]]：试卷和真题分类汇编共用的图片素材及图标来源说明。
 
 PDF 挂在 [[https://github.com/DzmingLi/408-official-resources/releases][GitHub Releases]] ，随仓库更新自动构建。
 

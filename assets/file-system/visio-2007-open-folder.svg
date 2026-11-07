@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="60pt" height="62.5394pt" viewBox="13.1693 11.752 60 62.5394">
+<!-- Native Visio master extracted directly from installation media.
+ Source: https://archive.org/details/MSVisio2007CHS
+ Cabinet: VISIOLR.CAB; SHA256: be2395878706101c9138da0cd2c66ceaa41fdaf20cb42e4260b6946d69ee2628
+ Stencil: WFOBJ_M.VSS_2052; SHA256: c93a5e2a9fc321a0a3d4ad1bd51a75634bec90474e6e1e84885164b1d14252d4
+ Zero-based libvisio master index: 8.
+ Native vector paths retained; transparent canvas padding cropped. Paint converted to grayscale for printing. --><path d="  M71.5986,72.3164 L71.5986,42.1409 A4.4171,4.4171 0.0000 0,0 69.5489,37.9784 L47.9489,25.2074 A1.8147,1.8147 0.0000 0,1 46.6611,23.4179 A4.0148,4.0148 0.0000 0,0 44.8446,18.9299 L32.4426,11.7456 A1.4149,1.4149 0.0000 0,0 30.0981,13.1826 L30.0909,32.0173 L15.3516,23.3999 A1.5148,1.5148 0.0000 1,0 14.1059,25.6964 L29.1876,49.2456 L70.7271,72.9494 L71.5986,72.3164 Z" style="fill-rule: evenodd; fill: #000000; fill-opacity: 0.0000; " />
+<g id="Layer1038">
+<defs>
+  <linearGradient id="grad73">
+    <stop offset="0%" stop-color="#a0a0a0" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#f7f7f7" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad73" id="grad74" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M72.7184,73.2071 L72.7184,43.0316 A4.4171,4.4171 0.0000 0,0 70.6687,38.8691 L49.0687,26.0981 A1.8147,1.8147 0.0000 0,1 47.7809,24.3086 A4.0148,4.0148 0.0000 0,0 45.9644,19.8206 L33.5624,12.6363 A1.4149,1.4149 0.0000 0,0 31.2179,14.0733 L31.2044,49.1561 L71.8469,73.8401 L72.7184,73.2071 Z" style="stroke-width: 0.3750; stroke-linecap: butt; stroke-linejoin: miter; fill-rule: evenodd; fill: url(#grad74); " />
+<path d="  M72.7184,73.2071 L72.7184,43.0316 A4.4171,4.4171 0.0000 0,0 70.6687,38.8691 L49.0687,26.0981 A1.8147,1.8147 0.0000 0,1 47.7809,24.3086 A4.0148,4.0148 0.0000 0,0 45.9644,19.8206 L33.5624,12.6363 A1.4149,1.4149 0.0000 0,0 31.2179,14.0733 L31.2044,49.1561 L71.8469,73.8401 L72.7184,73.2071 Z" style="stroke-width: 0.3750; stroke: #a0a0a0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; fill: none; " />
+</g>
+<g id="Layer1039">
+<defs>
+  <linearGradient id="grad75">
+    <stop offset="0%" stop-color="#b9b9b9" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#f2f2f2" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad75" id="grad76" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M71.8469,73.8401 L56.6024,50.1041 A16.9313,16.9313 0.0000 0,0 51.9434,45.0296 L16.4714,24.2906 A1.5148,1.5148 0.0000 1,0 15.2257,26.5871 L30.3074,50.1363 L71.8469,73.8401 Z" style="stroke-width: 0.5625; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad76); " />
+<path d="  M71.8469,73.8401 L56.6024,50.1041 A16.9313,16.9313 0.0000 0,0 51.9434,45.0296 L16.4714,24.2906 A1.5148,1.5148 0.0000 1,0 15.2257,26.5871 L30.3074,50.1363 L71.8469,73.8401 Z" style="stroke-width: 0.5625; stroke: #7e7e7e; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<path d="  M69.8669,72.1518 L55.8524,50.6051 A16.9313,16.9313 0.0000 0,0 51.1934,45.5306 L15.2459,24.7938" style="stroke-width: 1.0693; stroke: #f2f2f2; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M72.7184,73.2071 L72.7184,43.0316 A4.4080,4.4080 0.0000 0,0 70.6687,38.8691 L49.0687,26.0981 A1.9970,1.9970 0.0000 0,1 47.7809,24.3086 A3.8008,3.8008 0.0000 0,0 45.9644,19.8206 L33.5624,12.6363 A1.4124,1.4124 0.0000 0,0 31.2179,14.0733 L31.2127,32.8916 L16.4714,24.2906 A1.5269,1.5269 0.0000 1,0 15.2257,26.5871 L30.3074,50.1363 L71.8469,73.8401 L72.7184,73.2071 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</svg>

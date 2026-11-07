@@ -175,7 +175,40 @@ signal(S);
 ]
 #question[
 支持 VLAN 划分的以太网交换机，已按端口划分了2个 VLAN。VLAN 划分结果及部分端口连接主机的 MAC 地址如下图所示。
-#align(center, image("official-images/q36.png", width: 29em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  let p(x,y) = (x/48,(590-y)/48)
+  set-style(stroke:.045em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .67em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let label(x,y,body) = content(p(x,y),body)
+  rect(p(218,105),p(1143,290))
+  for (x1,x2,name,x) in ((230,746,[VLAN1],425),(758,1124,[VLAN2],945)) {
+    rect(p(x1,94),p(x2,303),stroke:(dash:"dashed",thickness:.045em))
+    label(x,23,name); line(p(x,42),p(x+20,94))
+  }
+  label(1225,73,[交换机]); line(p(1194,90),p(1143,193))
+  let used = (2,5,8,9,12,13)
+  for index in range(24) {
+    let row = calc.floor(index/12)
+    let column = calc.rem(index,12)
+    let number = if row==0 { column+13 } else { column+1 }
+    let x = 262+75.3*column
+    let y = 167+52*row
+    line(p(x - 21,y - 11),p(x+21,y - 11),p(x+21,y+10),p(x+6,y+10),p(x+6,y+23),p(x - 6,y+23),p(x - 6,y+10),p(x - 21,y+10),close:true,fill:if number in used { luma(55%) } else { white })
+    label(x,y+(if row==0 {-36} else {52}),str(number))
+  }
+  for (a,b) in (((262,177),(115,177)),((337,237),(217,479)),((563,237),(480,397)),
+    ((789,237),(731,482)),((864,237),(970,397)),((1090,237),(1211,237))) { line(p(..a),p(..b)) }
+  for (x,y,n) in ((115,167,1),(217,489,2),(480,402,3),(731,492,4),(970,403,5),(1211,244,6)) {
+    let file = if n==3 { "laptop" } else { "pc" }
+    content(p(x,y),image("../../assets/network/visio-2003-"+file+".svg",width:2.2em,height:2.2em,fit:"contain"))
+    label(x,y+(if n==1 {-65} else {67}),[H#n])
+    let mac = [00-1A-2B-3C-4D-0#n]
+    label(x+(if n==1 {70} else {0}),y+(if n==1 {-100} else {109}),mac)
+  }
+}))
 下列具有不同目的 MAC 地址（DA）和源 MAC 地址（SA）的以太网帧 F1～F4 中，H3 会接收到的是
 #statements(columns: 1,
  [F1：DA = 00-1A-2B-3C-4D-03，SA = 00-1A-2B-3C-4D-01],
@@ -186,7 +219,32 @@ signal(S);
 ]
 #question[
 某网络在 $t_0$ 时刻的网络拓扑以及 R1 的路由表如下图所示，R1～R4 为路由器，基于链路状态路由算法计算路由，S0～S4 为 R1 的接口，链路上的数值为链路费用。若 $t_1(t_1>t_0)$ 时刻 R1 检测到连接 R1 和 R2 的链路断开，则 R1 经过重新计算路由并进行充分路由聚合后的路由表中路由项（入口）的数量是
-#align(center, image("official-images/q37.png", width: 28em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke:.05em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .73em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  for (a,b) in (((0,5),(5.5,5)),((5.5,5),(14.5,5)),((14.5,5),(22,5)),
+    ((0,-1.5),(5.5,-1.5)),((5.5,-1.5),(14.5,-1.5)),((14.5,-1.5),(22,-1.5)),
+    ((5.5,5),(5.5,-1.5)),((14.5,5),(14.5,-5.7)),((5.5,-1.5),(14.5,5)),((5.5,-1.5),(5.5,-6))) { line(a,b) }
+  for (x,y,name) in ((0,5,[199.10.20.0/27]),(22,5,[199.10.20.32/27]),
+    (22,-1.5,[199.10.20.64/26]),(14.5,-5.7,[199.10.20.128/25])) {
+    circle((x,y),radius:(3.2,1),fill:white); content((x,y),name)
+  }
+  content((-.3,-1.5),image("../../assets/network/cisco-cloud.svg",width:5.4em,height:3em,fit:"stretch"))
+  content((-.3,-1.5),[Internet])
+  for (x,y,n) in ((5.5,-1.5,1),(5.5,5,2),(14.5,5,3),(14.5,-1.5,4)) {
+    content((x,y),image("../../assets/network/visio-2003-router.svg",width:2.65em,height:2.4em,fit:"contain"))
+    content((x,y - .4),[R#n])
+  }
+  content((5.5,-6),image("../../assets/network/visio-2007-web-server.svg",width:1.8em))
+  for (x,y,label) in ((10,5,[5]),(5.5,1.8,[2]),(10,-1.5,[3]),(14.5,1.8,[4]),(9.9,2.3,[6])) {
+    content((x,y),box(fill:white,inset:.15em,label))
+  }
+  content((7,2.4),[$t_1 arrow.r oo$])
+  for (x,y,name) in ((2.7,-.9,[S0]),(4.5,.2,[S1]),(7,.3,[S2]),(7.6,-1.9,[S3]),(4.6,-3.3,[S4])) {content((x,y),name)}
+}))
 #figure(table(columns: (11em, 4em), align: center,
  [目的网络], [接口], [199.10.20.0/27], [S1], [199.10.20.32/27], [S2],
  [199.10.20.64/26], [S3], [199.10.20.128/25], [S3], [199.10.21.125/32], [S4], [0.0.0.0/0], [S0]), kind: table, caption: [R1路由表])
@@ -249,7 +307,7 @@ typedef BinTNode *BTree;               //二叉搜索树
  + 主存单元和通用寄存器的宽度各是多少位？（2分）
  + op1 和 op2 的编码是否可以相同？op2 和 op3 的编码是否可以相同？（2分）
  + 若 R\[2\]=ABCDH，R\[9\]=F001H，则指令0000 0010 1001 0001执行后，R2 和 R9 中内容分别是多少（用十六进制表示）？（2分）
- + 若变量 $x,y$ 均为16位带符号整数，在存储器中依次从低地址向高地址连续存放，$x$ 的地址在 R15 中，实现“`y=16*x-5;`”的4条指令 I1～I4 如题43表所示，写出①～④处的内容。（4分）
+ + 若变量 $x,y$ 均为16位带符号整数，在存储器中依次从低地址向高地址连续存放，$x$ 的地址在 R15 中，实现“`y=16*x - 5;`”的4条指令 I1～I4 如题43表所示，写出①～④处的内容。（4分）
 ]
 #figure(block(stroke: .5pt, inset: .45em)[
  #table(columns: (2em, 3em, 3em, 3em, 3em), stroke: none, align: center,
@@ -261,7 +319,80 @@ typedef BinTNode *BTree;               //二叉搜索树
 ]
 #question[
 （本题13分）假定题43中计算机 C 的部分数据通路如题44图所示。
-#figure(image("official-images/q44.png", width: 29em), caption: [题44图])
+#figure(cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  let p(x,y) = (x/48,(1030-y)/48)
+  set-style(stroke:.045em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .68em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let label(x,y,body) = content(p(x,y),body)
+  let arrow(..points) = line(..points.pos().map(point => p(..point)),mark:(end:">",fill:black,scale:.65))
+  let control(..points) = line(..points.pos().map(point => p(..point)),stroke:(dash:"dashed",thickness:.04em),mark:(end:">",fill:black,scale:.65))
+  let cell(x1,y1,x2,y2,body) = {
+    rect(p(x1,y1),p(x2,y2),fill:white); label((x1+x2)/2,(y1+y2)/2,body)
+  }
+  // Data paths and taps follow the original question; numbered boxes stay blank.
+  for points in (
+    ((299,63),(299,160)), ((352,63),(352,160)), ((437,63),(437,160)), ((489,63),(489,160)),
+    ((326,223),(326,373)), ((463,223),(463,373)),
+    ((83,446),(128,446)), ((95,521),(128,521)), ((207,483),(281,483)),
+    ((508,428),(620,428)), ((508,537),(620,537)),
+    ((699,392),(756,392)), ((699,573),(756,573)), ((556,580),(620,580)),
+    ((215,748),(328,748)), ((463,748),(579,748),(579,611),(620,611)),
+    ((730,182),(573,182),(573,358),(620,358)),
+    ((704,182),(704,113),(896,113),(896,423),(929,423)),
+    ((844,490),(929,490)), ((874,490),(874,182),(841,182)),
+    ((874,490),(874,815),(589,815)), ((1009,456),(1093,456)),
+    ((1205,456),(1320,456)), ((540,537),(540,705),(1093,705)),
+    ((1149,734),(1149,794),(1034,794),(1034,213)),
+    ((1034,794),(1034,895),(589,895)), ((508,856),(103,856),(103,578),(281,578)),
+    ((1061,183),(1104,183)), ((1192,160),(1320,160)), ((1320,195),(1192,195)),
+    ((1260,704),(1205,704)), ((1260,704),(1320,704)), ((981,148),(981,63)),
+  ) { arrow(..points) }
+  for (x,y) in ((704,182),(874,490),(540,537),(1034,794)) { circle(p(x,y),radius:.055,fill:black) }
+  cell(280,160,371,223,[①]); cell(416,160,509,223,[②])
+  cell(730,148,841,212,[PC]); cell(949,148,1061,213,[IR])
+  cell(1104,128,1192,232,[控制\ 单元])
+  cell(281,373,508,600,[])
+  for (x,y,body) in ((325,397,[ra]),(464,397,[rb]),(314,462,[rw]),(397,469,[GPRs]),(395,532,[通用寄存器组])) {label(x,y,body)}
+  cell(1093,423,1205,485,[MAR]); cell(1093,674,1205,734,[MDR])
+  cell(328,717,463,782,[扩展器])
+  rect(p(1320,115),p(1370,784),fill:white); label(1345,450,[主\ 存\ 储\ 器])
+  for (x,y,inputs,reversed) in ((128,401,2,false),(620,310,2,false),(620,489,3,false),(929,373,2,false),(508,771,2,true)) {
+    let left-top = if reversed { y+42 } else { y }
+    let left-bottom = if reversed { y+126 } else { y+166 }
+    let right-top = if reversed { y } else { y+40 }
+    let right-bottom = if reversed { y+166 } else { y+126 }
+    line(p(x,left-top),p(x+79,right-top),p(x+79,right-bottom),p(x,left-bottom),close:true,fill:white)
+    content(p(x+48,y+83),std.rotate(-90deg,[MUX]))
+    for i in range(inputs) {
+      let number = if reversed { 1-i } else { i }
+      let input-y = y+45+i*(if inputs==3 {36} else {76})
+      label(x+24,input-y,str(number))
+    }
+  }
+  line(p(756,340),p(844,384),p(844,579),p(756,625),p(756,537),p(778,483),p(756,455),close:true,fill:white)
+  content(p(805,481),std.rotate(-90deg,[ALU])); label(782,394,[A]); label(782,573,[B])
+  for points in (
+    ((223,63),(223,425),(281,425)), ((166,367),(166,422)),
+    ((242,123),(242,191),(280,191)),
+    ((546,123),(546,190),(509,190)), ((667,63),(667,333)), ((786,63),(786,148)),
+    ((1029,63),(1029,148)), ((969,600),(969,522)), ((1147,369),(1147,423)),
+    ((1147,616),(1147,674)), ((395,987),(395,782)), ((549,987),(549,918)),
+    ((660,987),(660,637)), ((801,987),(801,604)),
+    ((1120,128),(1120,63)), ((1180,128),(1180,63)),
+  ) { control(..points) }
+  line(p(1225,20),p(1225,810),stroke:(dash:"dashed",thickness:.04em))
+  for (x,y,body) in ((208,41,[RegWr]),(299,41,[IR.rt]),(352,41,[15]),(437,41,[IR.rs]),(489,41,[0]),
+    (667,41,[ALUAsrc]),(786,41,[PCin]),(1140,41,[控制信号]),(1151,98,[$dots.h$]),
+    (166,338,[RegDst]),(65,446,[0]),(57,521,[IR.rt]),(550,411,[busA]),(550,520,[busB]),(556,580,[2]),
+    (175,602,[busW]),(213,722,[$"IR"_(11 tilde 0)$]),(287,719,[12]),(508,719,[16]),
+    (969,594,[MARsrc]),(1266,139,[CBus]),(1268,437,[ABus]),(1268,681,[DBus]),
+    (395,1011,[ExtOp]),(535,1011,[RegWsrc]),(675,1011,[ALUBsrc]),(801,1011,[ALUctr])) {label(x,y,body)}
+  for (x,y) in ((287,748),(508,748)) {line(p(x - 12,y - 14),p(x+12,y+14))}
+  content(p(894,962),[注：busA=R\[ra\]，busB=R\[rb\]，\ R\[rw\]=busW，RegWr=1表示\ GPRs可写入信息],anchor:"west")
+}), caption: [题44图])
 图中带箭头虚线表示控制信号，IR.rt、IR.rs 分别表示 IR 中的 rt、rs 字段，$"IR"_(11 tilde 0)$ 为 IR 中低12位。要求取指令周期内完成 PC 增量操作。请回答下列问题。
 #subquestions[
  + 题44图中①和②是同一类部件，其名称是什么？（1分）
@@ -285,7 +416,25 @@ typedef BinTNode *BTree;               //二叉搜索树
 #question[
 （本题8分）某基于索引节点（inode）的文件系统的目录项由文件名和索引节点号构成。磁盘中存放了索引节点表、位图、目录等元数据以及文件数据，盘块大小为4 KB，盘块号占4 B。索引节点表包含了所有文件的索引节点，位于从100号盘块开始的4096个连续盘块中，索引节点号是索引节点在该表中的序号，从0开始编号。每个索引节点占128 B，包含直接地址项5个，一次间接地址项、二次间接地址项、三次间接地址项各1个。磁盘块位图和索引节点位图分别用于描述磁盘块和索引节点占用情况，0表示未占用，1表示已占用。某子目录树如题46图所示，其中各文件的文件名和索引节点号如题46表所示，file 大小为30 KB。
 #grid(columns: (1fr, 1fr), gutter: 2em,
- figure(image("official-images/q46-directory.png", width: 12em), caption: [题46图]),
+ figure(cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let folder(x,y,name) = {
+    content((x,y),image("../../assets/file-system/visio-2007-open-folder.svg",width:1.5em,height:1em,fit:"stretch"))
+    content((x+.9,y),name,anchor:"west")
+  }
+  let file(x,y,name) = {
+    content((x,y),image("../../assets/file-system/visio-2007-document.svg",width:.8em,height:1.2em,fit:"stretch"))
+    content((x+.65,y),name,anchor:"west")
+  }
+  line((.2,5.6),(.2,4),(2.15,4))
+  line((2.7,3.5),(2.7,1),(4.55,1))
+  folder(0,6,[dir]); folder(2.7,4,[dir1])
+  file(5,1,[file])
+}), caption: [题46图]),
  figure(table(columns: (5em, 7em), align: center,
  [文件名], [索引节点号], [dir], [100], [dir1], [201], [file], [1000]), kind: table, caption: [题46表]))
 请回答下列问题。
@@ -296,7 +445,33 @@ typedef BinTNode *BTree;               //二叉搜索树
 ]
 #question[
 （本题9分）人工智能（AI）是引领未来的战略性技术，其发展高度依赖强大的算力供给，通过网络互联分散的算力中心，可以充分聚合算力资源，满足人工智能对大规模算力的需求，支撑人工智能国家发展战略。某算力调度交易平台聚合各地的算力中心的算力，向用户提供算力服务的示意场景如题47图所示。算力用户 C 向平台申请算力服务，平台通过优化调度各算力中心算力，向 C 授权使用算力中心 $i$ 的算力，$S_i$ 为算力中心 $i$ 的负载均衡服务器，用于接收算力用户的计算任务描述数据文件，并向算力中心 $i$ 内部分派计算任务。为确保可靠传输，假设 C 建立一条 TCP 连接向服务器 $S_i$ 上传一个总长度为2000 B的计算任务描述数据文件，拥塞窗口初始阈值为8 MSS，MSS=500 B，$S_i$ 对收到的每个 TCP 段进行确认，且确认段不封装数据，接收窗口 rwnd 始终为1000 B，RTT=5 ms。C 建立连接时选择的初始序号为1000，$S_i$ 选择的初始序号为2000，SYN、ACK、FIN 为标志位，seq 为序号，ack\_seq 为确认序号。在整个文件传输过程中未出现任何重传或报文段丢失。
-#figure(image("official-images/q47.png", width: 25em), caption: [题47图])
+#figure(cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke:.055em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .8em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  // A cloud encloses the original grouping of centres, platform and user.
+  content((0,0),image("../../assets/network/cisco-cloud.svg",width:25em,height:17em,fit:"stretch"))
+  content((5.5,4.8),[Internet])
+  for (a,b) in (((-7,2.3),(0,4.5)),((0,4.5),(7,2.3)),((-7,2.3),(0,-1)),((7,2.3),(0,-1)),((0,4.5),(0,-1))) {
+    line(a,b,stroke:(dash:"dotted",thickness:.055em))
+  }
+  circle((0,-1),radius:(5.5,5.3),stroke:(dash:"dashed",thickness:.05em))
+  for (x,y,name,server) in ((-7,2.3,[算力中心1],[$S_1$]),(0,4.5,[算力中心$i$],[$S_i$]),(7,2.3,[算力中心$n$],[$S_n$])) {
+    circle((x,y),radius:(3.2,1.8),fill:white)
+    content((x,y+.9),name)
+    content((x - .5,y - .4),image("../../assets/network/visio-2007-web-server.svg",width:1.15em))
+    content((x+.7,y - .5),server)
+  }
+  content((-3.6,3.8),[$dots.h$]); content((3.6,3.8),[$dots.h$])
+  rect((-4.7,-1.7),(4.7,.9),fill:white)
+  for x in (-1.8,1.8) {content((x,.05),image("../../assets/network/visio-2007-web-server.svg",width:1.3em))}
+  content((0,-1.1),[算力调度交易平台])
+  circle((0,-5),radius:(3.8,1.7),fill:white)
+  content((-.6,-4.5),image("../../assets/network/visio-2007-web-server.svg",width:1.25em))
+  content((.8,-4.5),[C]); content((0,-5.8),[算力用户])
+}), caption: [题47图])
 请回答下列问题。
 #subquestions[
  + C 与 $S_i$ 建立 TCP 连接过程需要几次握手？C 收到的 SYN=1、ACK=1的 TCP 段的确认序号（ack\_seq）是多少？（2分）

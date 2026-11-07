@@ -32,7 +32,31 @@
 
 + 图G如下：（2分）
 
-  #align(center, image("official-images/page-077-img-6.jpg", width: 27em))
+  #align(center, cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(stroke: .055em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+    let points = ((0,3),(0,0),(6,1.5),(12,3),(12,0),(18,1.5))
+    for (a,b,weight,critical) in ((0,1,4,true),(0,2,6,false),(1,2,5,true),
+      (2,3,4,true),(2,4,3,false),(3,5,3,true),(4,5,3,false)) {
+      let start = points.at(a); let end = points.at(b)
+      let dx = end.at(0)-start.at(0); let dy = end.at(1)-start.at(1)
+      let distance = calc.sqrt(dx*dx+dy*dy)
+      let direction = (dx/distance,dy/distance)
+      let offsets = if false and critical { (-.065,.065) } else { (0,) }
+      for offset in offsets {
+        let p = (start.at(0)+.65*direction.at(0)-offset*direction.at(1), start.at(1)+.65*direction.at(1)+offset*direction.at(0))
+        let q = (end.at(0)-.68*direction.at(0)-offset*direction.at(1), end.at(1)-.68*direction.at(1)+offset*direction.at(0))
+        line(p,q,mark:(end:">",fill:black,scale:.7))
+      }
+      content(((start.at(0)+end.at(0))/2-.28,(start.at(1)+end.at(1))/2+.45), str(weight))
+    }
+    for (i,point) in points.enumerate() {
+      circle(point,radius:.65); content(point,str(i))
+    }
+  }))
 
   【评分说明】
 
@@ -43,7 +67,31 @@
 + 下图中双线箭头所标识的4个活动组成图
   G的关键路径。（3分）
 
-  #align(center, image("official-images/page-077-img-11.jpg", width: 27em))
+  #align(center, cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(stroke: .055em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+    let points = ((0,3),(0,0),(6,1.5),(12,3),(12,0),(18,1.5))
+    for (a,b,weight,critical) in ((0,1,4,true),(0,2,6,false),(1,2,5,true),
+      (2,3,4,true),(2,4,3,false),(3,5,3,true),(4,5,3,false)) {
+      let start = points.at(a); let end = points.at(b)
+      let dx = end.at(0)-start.at(0); let dy = end.at(1)-start.at(1)
+      let distance = calc.sqrt(dx*dx+dy*dy)
+      let direction = (dx/distance,dy/distance)
+      let offsets = if true and critical { (-.065,.065) } else { (0,) }
+      for offset in offsets {
+        let p = (start.at(0)+.65*direction.at(0)-offset*direction.at(1), start.at(1)+.65*direction.at(1)+offset*direction.at(0))
+        let q = (end.at(0)-.68*direction.at(0)-offset*direction.at(1), end.at(1)-.68*direction.at(1)+offset*direction.at(0))
+        line(p,q,mark:(end:">",fill:black,scale:.7))
+      }
+      content(((start.at(0)+end.at(0))/2-.28,(start.at(1)+end.at(1))/2+.45), str(weight))
+    }
+    for (i,point) in points.enumerate() {
+      circle(point,radius:.65); content(point,str(i))
+    }
+  }))
 
   图 G的关键路径的长度为16。（1分）
 

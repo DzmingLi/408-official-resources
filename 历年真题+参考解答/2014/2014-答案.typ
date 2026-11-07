@@ -167,7 +167,39 @@
 
   对应题42表的链式存储结构示意图如下。（2分）
 
-  #align(center, image("official-images/page-020-img-6.jpg", width: 27em))
+  #align(center, cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(stroke: .045em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .68em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+    let rows = (
+      ([10.1.1.1], ([10.1.1.2],[10.1.1.1],[3]), ([10.1.1.5],[10.1.1.9],[2]), [192.1.1.0]),
+      ([10.1.1.2], ([10.1.1.1],[10.1.1.2],[3]), ([10.1.1.6],[10.1.1.13],[4]), [192.1.6.0]),
+      ([10.1.1.5], ([10.1.1.6],[10.1.1.5],[6]), ([10.1.1.1],[10.1.1.10],[2]), [192.1.5.0]),
+      ([10.1.1.6], ([10.1.1.5],[10.1.1.6],[6]), ([10.1.1.2],[10.1.1.14],[4]), [192.1.7.0]),
+    )
+    for (i,row) in rows.enumerate() {
+      let y = 15-i*5
+      rect((0,y - 1.5),(2.8,y+1.5))
+      for offset in (-.5,.5) { line((0,y+offset),(2.8,y+offset)) }
+      content((1.4,y+1),row.at(0))
+      line((1.4,y),(4,y),mark:(end:">",fill:black,scale:.7))
+      if i < 3 { line((1.4,y - 1),(1.4,y - 3.5),mark:(end:">",fill:black,scale:.7)) }
+      else { content((1.4,y - 1),[∧]) }
+      for (j,fields) in (row.at(1),row.at(2),(row.at(3),[255.255.255.0],[1])).enumerate() {
+        let x = 4+j*4.3
+        rect((x,y - 3.3),(x+3.8,y+.5))
+        for offset in (-.45,-2.35) { line((x,y+offset),(x+3.8,y+offset)) }
+        line((x,y - 1.4),(x+3.8,y - 1.4),stroke:(dash:"dotted",thickness:.045em))
+        line((x+1.9,y - .45),(x+1.9,y+.5))
+        content((x+.95,y+.025),if j==2 { [Flag=2] } else { [Flag=1] })
+        for (k,field) in fields.enumerate() { content((x+1.9,y - .925-k*.95),field) }
+        if j < 2 { line((x+2.85,y),(x+4.3,y),mark:(end:">",fill:black,scale:.7)) }
+        else { content((x+2.85,y),[∧]) }
+      }
+    }
+  }))
 
 ]
 = 【评分说明】

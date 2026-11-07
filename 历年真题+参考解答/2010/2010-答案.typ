@@ -127,7 +127,40 @@
   ①程序A的数据访问命中率为 93.75%；
   ②程序B的数据访问命中率为0。根据上述计算出的命中率，得知程序B每次取数都要访问主存，所以程序A的执行比程序B快得多。
 
-  #align(center, image("official-images/page-100-img-0.jpg", width: 24em))
+  #align(center, cetz.canvas(length: 1.6em, {
+  import cetz.draw: *
+  set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .78em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  content((-1, 12.5), [行号]); content((11.5, 12.5), [块号])
+  rect((0, 1.5), (3.2, 11.7))
+  for y in (3.54, 5.58, 7.62, 9.66) { line((0,y),(3.2,y)) }
+  for (y, label) in ((10.68,[0]),(8.64,[$dots.v$]),(6.6,[5]),(4.56,[6]),(2.52,[7])) {
+    content((-.8,y), label)
+  }
+  content((1.6,.8), [Cache])
+  let labels = ([a\[0\]\[0\]], [$dots.h$], [a\[0\]\[15\]], [a\[0\]\[16\]],
+    [$dots.h$], [a\[0\]\[31\]], [$dots.h$], [a\[0\]\[255\]], [a\[1\]\[0\]],
+    [$dots.h$], [a\[1\]\[15\]], [$dots.h$], [a\[1\]\[255\]], [$dots.h$], [$dots.h$], [a\[255\]\[255\]])
+  for (i, label) in labels.enumerate() {
+    let y = 11.65 - i*.7
+    rect((7.3,y - .35),(10.5,y+.35)); content((8.9,y), label)
+  }
+  bezier((7.3,12),(10.5,12),(8.6,11.5),(9.2,12.65))
+  bezier((7.3,.8),(10.5,.8),(8.6,1.3),(9.2,.15))
+  content((8.9,-.05), [主存]); content((6.6,11.9), [320])
+  for (a,b) in (((3.2,7.62),(7.3,12)),((3.2,5.58),(7.3,9.9)),
+               ((3.2,5.58),(7.3,9.9-5.6)),((3.2,7.62),(7.3,6.4)),
+               ((3.2,3.54),(7.3,7.8))) {
+    line(a,b,stroke:(dash:"dashed",thickness:.045em))
+  }
+  for (top,bottom,label) in ((12,9.9,[5]),(9.9,7.8,[6]),(6.4,4.3,[21])) {
+    line((10.5,top),(10.9,top),(10.9,bottom),(10.5,bottom))
+    content((11.6,(top+bottom)/2),label)
+  }
+  content((11.6,6.9),[$dots.v$]); content((11.6,2),[$dots.v$])
+}))
 
 ]
 

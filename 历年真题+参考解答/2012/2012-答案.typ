@@ -38,7 +38,24 @@
 
   第4次合并：表ABC与表DE合并，生成含195个元素的表ABCDE；
 
-  #align(center, image("official-images/page-058-img-0.jpg", width: 15em))
+  #align(center, cetz.canvas(length: 1em, {
+    import cetz.draw: *
+    set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+    let points = ((5,8),(3.5,6),(6.5,6),(2,4),(6,4),(1,2),(3,2),(5,2),(7,2),(0,0),(2,0))
+    let weights = (395,195,200,85,110,45,40,50,60,10,35)
+    for (a,b) in ((0,1),(0,2),(1,3),(1,4),(3,5),(3,6),(4,7),(4,8),(5,9),(5,10)) {
+      line(points.at(a),points.at(b))
+    }
+    for (i,point) in points.enumerate() {
+      if i in (0,1,3,4,5) {
+        rect((point.at(0)-.85,point.at(1)-.5),(point.at(0)+.85,point.at(1)+.5),fill:white)
+      } else { circle(point,radius:(.85,.6),fill:white) }
+      content(point,str(weights.at(i)))
+    }
+  }))
 
   对应于合并过程的哈夫曼树
 

@@ -1,0 +1,47 @@
+#+title: 共用图片素材与图标来源
+
+** 目录与使用
+
+历年试卷和真题分类汇编共用的设备图标放在 =assets/network/= ，目录和文件图标放在 =assets/file-system/= 。单题专用图片放在对应年份目录。
+
+树、链表、表格、时序图、网络连线和数据通路使用 Typst 绘制。设备和文件图标按扫描件核对原始素材，保留来源记录。
+
+核对图标时，以官方出版物的扫描 PDF 为准，比较设备的轮廓、视角和细节。优先从原始 Visio 模具或厂商官方素材取得矢量图，扫描件用于比对。
+
+** Visio 图标
+
+下表中的 SVG 直接取自 Microsoft Office Visio Professional 安装介质内的 VSS 模具。母版序号按 libvisio 的导出顺序从 0 开始。图标保留原始矢量路径，并以灰度呈现。
+
+- Visio 2003 安装镜像。[[https://archive.org/details/office-11-vis][OFFICE11VIS.ISO 归档]]
+- Visio 2007 简体中文版安装镜像。[[https://archive.org/details/MSVisio2007CHS][Office Visio Professional 2007.iso 归档]]
+
+| SVG | Visio 版本 | 安装包内的 CAB | VSS 文件 | 母版序号 |
+|-----+-----------+----------------+----------+---------|
+| =visio-2003-pc.svg= 、 =visio-2003-laptop.svg= | 2003 | =N5614A01.CAB= | =COMPS_U.VSS= | 0、6 |
+| =visio-2003-server.svg= | 2003 | =N5614A01.CAB= | =PERIPH_U.VSS= | 3 |
+| =visio-2003-router.svg= 、 =visio-2003-switch.svg= | 2003 | =N5614E01.CAB= | =NETSYM_U.VSS= | 0、5 |
+| =visio-2003-cloud.svg= | 2003 | =N5614E01.CAB= | =NETLOC_U.VSS= | 0 |
+| =visio-2007-isometric-pc.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =COMPS_M.VSS_2052= | 0 |
+| =visio-2007-isometric-server.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =SERVER_M.VSS_2052= | 1（带文件夹的服务器） |
+| =visio-satellite.svg= 、 =visio-satellite-dish.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =DTLNET_M.VSS_2052= | 11、12 |
+| =visio-2003-hub.svg= | 2003 | =N5614E01.CAB= | =NETSYM_U.VSS= | 7（单向箭头集线器） |
+| =visio-2007-desktop.svg= 、 =visio-2007-workstation.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =COMPS_M.VSS_2052= | 2、5 |
+| =visio-2007-wireless-ap.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =PERIPH_M.VSS_2052= | 22 |
+| =visio-2007-web-server.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =SERVER_M.VSS_2052= | 10（带地球标记的服务器） |
+| =visio-2007-multilayer-switch.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =NETSYM_M.VSS_2052= | 4 |
+| =file-system/visio-2007-open-folder.svg= 、 =file-system/visio-2007-document.svg= | 2007 | =VISIO.ZH-CN/VISIOLR.CAB= | =WFOBJ_M.VSS_2052= | 8、4 |
+
+** 其他图标
+
+- =cisco-cloud.svg= 从 Cisco 官网 EPS 包 =doc.zip= 的 =cloud.eps= 转换，保留原始矢量路径。[[https://www.cisco.com/c/dam/en_us/about/ac50/ac47/doc.zip][Cisco 官方 EPS 包]]
+- =cisco-router.svg= 和 =terminal-symbol.svg= 属于 Cisco 网络拓扑图标系列。现有 SVG 经第三方分发，可与官网原件核对。[[https://www.cisco.com/c/en/us/about/brand-center/network-topology-icons.html][Cisco Network Topology Icons]]
+- =router-symbol.svg= 来自 Michel Bakni，SVG 内保留作者与授权说明。[[https://commons.wikimedia.org/wiki/File:Router_symbol.svg][Router symbol.svg]]
+- =desktop-symbol.svg= 是 Tabler Icons 的通用桌面设备图标。[[https://github.com/tabler/tabler-icons/blob/main/icons/outline/device-desktop.svg][device-desktop.svg]]
+- =pc-symbol.svg= 是 2009 年第 47 题现有的自绘替代图，原始素材尚未确定。
+
+** 扫描核对记录
+
+- 2010 年第 34 题的 H1、H2 与 =COMPS= 的完整 PC 母版轮廓一致，采用 =visio-2003-pc.svg= 。2003 和 2007 版均有此轮廓，扫描图无法区分具体版本。[[file:../内容来源/2012年计算机考试大纲.pdf][2012 版考纲书内第 28 页（PDF 第 33 页）]]，[[file:../内容来源/2015年计算机历年真题标准解析.pdf][2015 版标准解析书内第 81 页（PDF 第 87 页）]]。
+- 2009 年第 47 题扫描图中的主机接近正视，带卧式机箱和横置键盘。已核对 Visio 2000、2002、2003、2007 的候选模具及 Cisco 官方 EPS，尚无完整匹配。[[file:../内容来源/2010年计算机考试大纲.pdf][2010 版考纲书内第 31 页（PDF 第 37 页）]]，[[file:../内容来源/2015年计算机历年真题标准解析.pdf][2015 版标准解析书内第 102 页（PDF 第 108 页）]]。
+- 2017 年第 35 题的锥形 AP 对应 =PERIPH= 的无线 AP 母版。2023 年第 33、38、47 题的平板显示器主机和 CRT 工作站分别对应 =COMPS= 的 2、5 号母版，立方体交换机对应 =NETSYM= 的 4 号母版。2026 年第 37、47 题带地球标记的服务器采用 =SERVER= 的 10 号母版，2016、2026 年的目录树采用 =WFOBJ= 中的文件夹与文档母版。上述序号均为 libvisio 的零起始导出序号，Visio 2007 表示实际提取所用版本。
+- 仍保留三张待溯源的设备扫描裁片。2016 年共用图中的正视主机和 DNS 服务器分别存于 =2016/official-images/desktop.png= 、 =dns-server.png= ，裁自原共用图。2022 年第 47 题的多天线 AP 存于 =2022/official-images/network-ap.png= 。已核查现有 Visio 和 Cisco 候选，尚未认定对应原件。

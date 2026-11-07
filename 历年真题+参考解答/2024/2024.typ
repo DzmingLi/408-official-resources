@@ -375,8 +375,8 @@ DMA 控制 I/O 方式下，设备的输入/输出由 DMA 控制器控制完成�
   let p(x,y) = ((x - 494) / 35, (867 - y) / 35)
   set-style(stroke: 0.06em, content: (wrap: body => box(text(size: 0.75em, top-edge: "bounds", bottom-edge: "bounds", body))))
   content(p(492,296),[甲]); content(p(941,296),[乙])
-  content(p(492.5,365.5),image("official-images/q37-pc.png",width: (93 / 35) * 1em))
-  content(p(938,365.5),image("official-images/q37-pc.png",width: (93 / 35) * 1em))
+  content(p(492.5,365.5),image("../../assets/network/visio-2003-pc.svg",width: (93 / 35) * 1em,height: (79 / 35) * 1em,fit:"contain"))
+  content(p(938,365.5),image("../../assets/network/visio-2003-pc.svg",width: (93 / 35) * 1em,height: (79 / 35) * 1em,fit:"contain"))
   for x in (494,943) { line(p(x,407),p(x,867),mark: (end: ">",fill: black,scale: 0.8)) }
   for (a,b,label,pos,angle) in (
     ((494,417),(943,529),[F0],(569,416),-14deg),

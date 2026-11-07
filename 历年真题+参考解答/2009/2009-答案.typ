@@ -29,11 +29,41 @@
 
 举例说明如下：
 
-#align(center, image("official-images/page-117-img-12.jpg", width: 16em))
+#align(center, cetz.canvas(length: 2.2em, {
+  import cetz.draw: *
+  set-style(stroke: .05em)
+  let points = ((0, 0), (2, 1), (4, 1), (6, 0))
+  for (a, b, weight) in ((0, 1, 1), (1, 2, 1), (2, 3, 1), (0, 3, 2)) {
+    let start = points.at(a)
+    let end = points.at(b)
+    line(start, end)
+    let middle = ((start.at(0)+end.at(0))/2, (start.at(1)+end.at(1))/2)
+    content((middle.at(0), middle.at(1) + (if a == 0 and b == points.len()-1 { -.3 } else { .3 })), text(size: .85em, str(weight)))
+  }
+  for (i, point) in points.enumerate() {
+    circle(point, radius: .34, fill: white)
+    content(point, text(size: .9em, str(i+1)))
+  }
+}))
 
 图a
 
-#align(center, image("official-images/page-117-img-14.jpg", width: 16em))
+#align(center, cetz.canvas(length: 2.2em, {
+  import cetz.draw: *
+  set-style(stroke: .05em)
+  let points = ((0, 0), (2, 1.5), (2, -0.4))
+  for (a, b, weight) in ((0, 1, 1), (0, 2, 2)) {
+    let start = points.at(a)
+    let end = points.at(b)
+    line(start, end)
+    let middle = ((start.at(0)+end.at(0))/2, (start.at(1)+end.at(1))/2)
+    content((middle.at(0), middle.at(1) + (if a == 0 and b == points.len()-1 { -.3 } else { .3 })), text(size: .85em, str(weight)))
+  }
+  for (i, point) in points.enumerate() {
+    circle(point, radius: .34, fill: white)
+    content(point, text(size: .9em, str(i+1)))
+  }
+}))
 
 图b
 

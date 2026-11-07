@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30.4725pt" height="63.4843pt" viewBox="6.02362 10.9252 30.4725 63.4843">
+<!-- Native Visio master extracted directly from installation media.
+ Source: https://archive.org/details/MSVisio2007CHS
+ Cabinet: VISIOLR.CAB; SHA256: be2395878706101c9138da0cd2c66ceaa41fdaf20cb42e4260b6946d69ee2628
+ Stencil: WFOBJ_M.VSS_2052; SHA256: c93a5e2a9fc321a0a3d4ad1bd51a75634bec90474e6e1e84885164b1d14252d4
+ Zero-based libvisio master index: 4.
+ Native vector paths retained; transparent canvas padding cropped. Paint converted to grayscale for printing. --><path d="  M36.0958,39.7773 L28.3767,23.6970 L6.4239,11.0638 L6.4648,56.4875 L36.0958,73.6888 L36.0958,39.7773 Z" style="fill-rule: evenodd; fill: #000000; fill-opacity: 0.0000; " />
+<defs>
+  <linearGradient id="grad55">
+    <stop offset="0%" stop-color="#dbdbdb" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad55" id="grad56" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M6.4239,11.3506 L28.3767,23.9838 L36.0958,40.0641 L36.0958,73.9756 L6.4648,56.7743 L6.4239,11.3506 Z" style="fill-rule: evenodd; fill: url(#grad56); " />
+<path d="  M24.9844,32.5486 L10.7260,24.2860 M31.3481,42.1758 L10.7661,30.2480 M31.2895,48.6906 L10.7206,36.7713 M31.4275,55.3195 L10.7445,43.3346 M31.2918,61.6376 L10.7815,49.7522" style="stroke-width: 0.3750; stroke: #4f4f4f; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M28.2310,37.7581 L28.3767,23.9838 L36.0958,40.0641 L35.5700,42.0694 L28.2310,37.7581 Z" style="fill-rule: evenodd; fill: #dbdbdb; " />
+<g id="Layer1027">
+<path d="  M36.0958,40.0641 L28.3767,23.9838 L28.0938,35.7698 L35.8838,40.2962 L36.0958,40.0641 Z" style="stroke-width: 0.3777; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #ffffff; " />
+<path d="  M36.0958,40.0641 L28.3767,23.9838 L28.0938,35.7698 L35.8838,40.2962 L36.0958,40.0641 Z" style="stroke-width: 0.3777; stroke: #4f4f4f; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<path d="  M6.4239,11.3506 L28.3767,23.9838 L36.0958,40.0641 L36.0958,73.9756 L6.4648,56.7743 L6.4239,11.3506 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</svg>

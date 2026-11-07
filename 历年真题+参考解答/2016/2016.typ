@@ -41,7 +41,43 @@
 #question[
 设有如下图所示的火车车轨，入口到出口之间有 $n$ 条轨道，列车的行进方向均为从左至右，列车可驶入任意一条轨道。现有编号为1～9的9列列车，驶入的次序依次是8，4，2，5，3，9，1，6，7。若期望驶出的次序依次为1～9，则 $n$ 至少是
 
-#align(center, image("official-images/q03.png", width: 29em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke: .045em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .8em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  for y in (-.12,.12) {
+    line((0,y),(27,y))
+    for sign in (-1,1) {
+      bezier((5.8,y),(9,sign*2.2+y),(7.5,y),(7.1,sign*2.2+y))
+      line((9,sign*2.2+y),(18,sign*2.2+y))
+      bezier((18,sign*2.2+y),(21.2,y),(19.9,sign*2.2+y),(19.5,y))
+    }
+  }
+  for x in range(55).map(i => i*.5) { line((x,-.35),(x,.35)) }
+  for sign in (-1,1) {
+    for x in range(19).map(i => 9+i*.5) { line((x,sign*2.2-.35),(x,sign*2.2+.35)) }
+    for t in (.2,.4,.6,.8) {
+      let u = 1-t
+      let x = 5.8*u*u*u + 3*7.5*u*u*t + 3*7.1*u*t*t + 9*t*t*t
+      let y = sign*2.2*(3*u*t*t + t*t*t)
+      let dx = 3*(7.5-5.8)*u*u + 6*(7.1-7.5)*u*t + 3*(9-7.1)*t*t
+      let dy = sign*13.2*u*t
+      let norm = calc.sqrt(dx*dx+dy*dy)
+      let nx = -.35*dy/norm
+      let ny = .35*dx/norm
+      line((x+nx,y+ny),(x - nx,y - ny))
+      line((27-x+nx,y - ny),(27-x - nx,y+ny))
+    }
+  }
+  content((13.5,1.1),[$dots.v$]); content((13.5,-1.1),[$dots.v$])
+  for (i,n) in (7,6,1,9,3,5,2,4,8).enumerate() { content((.2+i*.5,.7),str(n)) }
+  for (i,n) in (9,8,7,6,5,4,3,2,1).enumerate() { content((22.5+i*.5,.7),str(n)) }
+  for (x,y,label) in ((1,-1,[入口]),(23.5,-1,[出口]),(13,-3.1,[轨道])) {
+    line((x - .7,y),(x+1.5,y),mark:(end:">",fill:black)); content((x+.4,y - .6),label)
+  }
+}))
 #choices([2], [3], [4], [5])
 ]
 
@@ -310,9 +346,48 @@ Thread4()
 
 *题33～41均依据题33～41图回答。*
 
-#figure(image("official-images/q33-41.png",width:29em),caption:[题33～41图],kind:image)
-
 #question[
+#figure(align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  let p(x,y) = (x/47,(800-y)/47)
+  set-style(stroke:.045em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .72em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let label(x,y,body) = content(p(x,y),body)
+  let cloud(x,y,w,h,body) = {
+    content(p(x,y),image("../../assets/network/cisco-cloud.svg",width:w/47*1em,height:h/47*1em,fit:"stretch"))
+    label(x,y,body)
+  }
+  for (a,b) in (((300,124),(847,124)),((517,124),(517,551)),((847,124),(847,354)),
+    ((188,355),(847,355)),((188,355),(188,551)),((517,551),(1031,551)),
+    ((517,551),(388,705)),((517,551),(655,705)),((829,551),(1031,705))) {line(p(..a),p(..b))}
+  cloud(209,153,380,220,[Internet\ 130.18.10.1\ Web服务器S])
+  cloud(188,355,295,155,[201.1.1.0/24]); cloud(1075,355,260,155,[201.1.2.0/25])
+  for (x,y,n) in ((517,120,1),(517,354,2),(847,350,3)) {
+    content(p(x,y),image("../../assets/network/visio-2003-router.svg",width:2.2em,height:2.2em,fit:"contain"))
+    label(x,y+22,[R#n])
+  }
+  content(p(188,550),image("official-images/dns-server.png",height:2.1em))
+  label(188,638,[DNS服务器]); label(188,676,[201.1.1.1])
+  content(p(517,550),image("../../assets/network/visio-2003-switch.svg",width:2.6em))
+  content(p(829,550),image("../../assets/network/visio-2003-hub.svg",width:2.6em))
+  label(449,491,[Switch]); label(777,491,[Hub])
+  for (x,y,n) in ((388,705,1),(655,705,2),(1031,705,3),(1031,551,4)) {
+    content(p(x,y),image("official-images/desktop.png",width:1.8em))
+    label(x+(if n<=2 {66} else {0}),y+(if n<=2 {0} else {-55}),[H#n])
+  }
+  for (x,y,body) in ((388,776,[192.168.3.2]),(655,776,[192.168.3.3]),
+    (1172,560,[192.168.3.252]),(1172,718,[192.168.3.251]),
+    (604,193,[201.1.3.9]),(732,329,[201.1.3.1]),(636,428,[192.168.3.254]),
+    (463,285,[NAT]),(545,285,[L0]),(443,333,[E0]),(591,333,[L1]),(493,431,[E1])) {label(x,y,body)}
+  content(p(1078,165),box(stroke:.045em,inset:.4em,text(size:.65em)[
+    图中：\ R1～R3为路由器；\ Switch为100Base-T交换机；\ Hub为100Base-T集线器；\
+    主机H1～H4的默认域名服务\ 器均配置为201.1.1.1。
+  ]))
+})),caption:[题33～41图],kind:image)
+// 题33～41共用图结束
+
 在OSI参考模型中，R1、Switch、Hub实现的最高功能层分别是
 #choices([2,2,1], [2,2,2], [3,2,1], [3,2,2])
 ]
@@ -446,7 +521,51 @@ Thread4()
 #question[
 （14分）某计算机采用页式虚拟存储管理方式，按字节编址，虚拟地址为32位，物理地址为24位，页大小为8 KB；TLB采用全相联映射；Cache数据区大小为64 KB，按2路组相联方式组织，主存块大小为64 B。存储访问过程的示意图如下。
 
-#align(center,image("official-images/q45.png",width:29em))
+#align(center,cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  let p(x,y) = (x/50,(650-y)/50)
+  set-style(stroke: .045em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .73em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let label(x,y,body) = content(p(x,y),body)
+  let arrow(..points) = line(..points.pos().map(point => p(..point)),mark:(end:">",fill:black,scale:.7))
+  let cell(x1,y1,x2,y2,body) = {
+    rect(p(x1,y1),p(x2,y2)); label((x1+x2)/2,(y1+y2)/2,body)
+  }
+  label(90,68,[虚拟地址]); cell(165,48,336,88,[A]); cell(336,48,451,88,[])
+  label(718,71,[物理地址]); cell(793,53,970,93,[C]); cell(970,53,1078,93,[D])
+  arrow((394,48),(394,18),(1022,18),(1022,53))
+  line(p(936,103),p(936,132),stroke:.14em)
+  line(p(924,132),p(936,150),p(948,132))
+  for (x1,x2,body) in ((793,888,[E]),(888,994,[F]),(994,1078,[G])) {cell(x1,163,x2,203,body)}
+  label(285,177,[标记]); label(397,177,[页框号])
+  rect(p(240,199),p(468,320))
+  for y in (240,280) { line(p(240,y),p(468,y)) }
+  line(p(335,199),p(335,320)); label(285,300,[B]); label(517,260,[TLB])
+  for y in (219,299) {
+    cell(78,y - 20,193,y+20,[比较器]); arrow((30,y),(78,y))
+    arrow((255,y),(193,y)); circle(p(255,y),radius:.055,fill:black)
+  }
+  label(134,259,[$dots.v$]); arrow((250,88),(250,117),(30,117),(30,501),(238,501))
+  label(285,380,[存在位]); label(395,380,[页框号])
+  rect(p(239,401),p(466,561)); line(p(325,401),p(325,561))
+  for y in (441,481,521) { line(p(239,y),p(466,y)) }
+  label(516,453,[页表])
+  circle(p(452,300),radius:.055,fill:black); arrow((452,300),(582,300))
+  circle(p(452,503),radius:.055,fill:black); arrow((452,503),(582,503))
+  arrow((582,503),(582,122),(879,122),(879,93))
+  for (x,label-body) in ((782,[标记]),(895,[数据]),(1008,[标记]),(1120,[数据])) { label(x,291,label-body) }
+  rect(p(733,315),p(1191,477))
+  for x in (830,963,1059) { line(p(x,315),p(x,477)) }
+  for y in (355,395,435) { line(p(733,y),p(1191,y)) }
+  label(783,416,[H]); label(1254,389,[Cache])
+  arrow((940,203),(940,244),(697,244),(697,418),(733,418))
+  for (x,tag-x) in ((781,840),(1009,840)) {
+    cell(x - 57,516,x+58,555,[比较器]); arrow((x,477),(x,516))
+    arrow((tag-x,203),(tag-x - 181,203),(tag-x - 181,596),(x,596),(x,555))
+  }
+}))
 
 请回答下列问题。
 #subquestions[
@@ -471,7 +590,27 @@ Thread4()
 + 假定目录树如下图所示，各文件占用的簇号及顺序如下表所示，其中 dir、dir1 是目录，file1、file2 是用户文件。请给出所有目录文件的内容。
 
   #align(center,grid(columns:(10em,auto),gutter:2em,
-    image("official-images/q47-directory.png",width:10em),
+    cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  let folder(x,y,name) = {
+    content((x,y),image("../../assets/file-system/visio-2007-open-folder.svg",width:1.5em,height:1em,fit:"stretch"))
+    content((x+.9,y),name,anchor:"west")
+  }
+  let file(x,y,name) = {
+    content((x,y),image("../../assets/file-system/visio-2007-document.svg",width:.8em,height:1.2em,fit:"stretch"))
+    content((x+.65,y),name,anchor:"west")
+  }
+  line((.2,5.6),(.2,4),(2.15,4))
+  line((2.7,3.5),(2.7,2),(4.55,2))
+  line((2.7,3.5),(2.7,0),(4.55,0))
+  folder(0,6,[dir]); folder(2.7,4,[dir1])
+  file(5,2,[file1])
+  file(5,0,[file2])
+}),
     table(columns:(4em,9em),align:center,[文件名],[簇号],[dir],[1],[dir1],[48],[file1],[100,106,108],[file2],[200,201,202]),
   ))
 + 若FAT的每个表项仅存放簇号，占2个字节，则FAT的最大长度为多少字节？该文件系统支持的文件长度最大是多少？

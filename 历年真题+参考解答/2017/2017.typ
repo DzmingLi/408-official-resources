@@ -220,7 +220,24 @@ I/O 指令实现的数据传送通常发生在
 ]
 #question[
 在下图所示的网络中，若主机 H 发送一个封装访问 Internet 的 IP 分组的 IEEE 802.11 数据帧 F，则帧 F 的地址1、地址2和地址3分别是
-#align(center, image("official-images/q35.png", width: 28em))
+#align(center, cetz.canvas(length:1em,{
+  import cetz.draw: *
+  set-style(stroke:.05em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .73em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  line((7,0),(18,0)); line((18,0),(23,0))
+  line((1.8,0),(5.9,0),stroke:(dash:"dashed",thickness:.1em),mark:(end:">",fill:black))
+  content((0,.3),image("../../assets/network/visio-2003-laptop.svg",width:3.6em))
+  content((7,.8),image("../../assets/network/visio-2007-wireless-ap.svg",width:2.4em,height:4.4em,fit:"stretch"))
+  content((7,-.15),[AP])
+  content((17,0),image("../../assets/network/visio-2003-router.svg",width:2.6em)); content((17,-.6),[R])
+  content((23,0),image("../../assets/network/cisco-cloud.svg",width:5.2em)); content((23,0),[Internet])
+  content((-2,.4),[H]); content((3.6,.9),box(stroke:.05em,inset:(x:.65em,y:.1em))[F])
+  content((0,-2.4),[00-12-34-56-78-9a]); content((7,-2.4),[00-12-34-56-78-9b])
+  content((12,.7),[00-12-34-56-78-9c])
+  for x in (1.5,1.8,2.1) {bezier((x,1.4),(x,2),(x+.2,1.6),(x+.2,1.8))}
+}))
 #choices(
  [00-12-34-56-78-9a，00-12-34-56-78-9b，00-12-34-56-78-9c],
  [00-12-34-56-78-9b，00-12-34-56-78-9a，00-12-34-56-78-9c],

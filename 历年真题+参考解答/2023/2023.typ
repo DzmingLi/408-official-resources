@@ -169,7 +169,15 @@ I5  L1: …
 ]
 #question[
 在下图所示的分组交换网络中，主机 H1 和 H2 通过路由器互连，2段链路的带宽均为100 Mb/s，时延带宽积（即单向传播时延×带宽）均为1000 b。若 H1 向 H2 发送1个大小为1 MB的文件，分组长度为1000 B，则从 H1 开始发送时刻起到 H2 收到文件全部数据时刻止，所需的时间至少是（注：$"M"=10^6$）
-#align(center, image("official-images/q33.png", width: 19em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke:.055em)
+  line((0,0),(16,0))
+  for (x,name,file,width) in ((0,[H1],"visio-2007-desktop.svg",2.4),(8,[路由器],"cisco-router.svg",3.3),(16,[H2],"visio-2007-workstation.svg",2.7)) {
+    content((x,0),image("../../assets/network/"+file,width:width*1em))
+    content((x,-2.1),text(size:.85em,name))
+  }
+}))
 #choices([80.02 ms], [80.08 ms], [80.09 ms], [80.10 ms])
 ]
 #question[
@@ -190,7 +198,23 @@ I5  L1: …
 ]
 #question[
 某网络拓扑如下图所示，其中路由器 R2 实现 NAT 功能。若主机 H 向 Internet 发送1个 IP 分组，则经过 R2 转发后，该 IP 分组的源 IP 地址是
-#align(center, image("official-images/q38.png", width: 26em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke:.055em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .8em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  line((0,0),(24,0))
+  content((0,0),image("../../assets/network/cisco-cloud.svg",width:5em))
+  content((0,0),[Internet])
+  for (x,name) in ((6,[R1]),(16,[R2])) {
+    content((x,0),image("../../assets/network/cisco-router.svg",width:3.1em))
+    content((x,-.35),text(fill:white,name))
+  }
+  content((24,0),image("../../assets/network/visio-2007-workstation.svg",width:2.6em))
+  content((16,1.6),[NAT]); content((11,.7),[195.123.0.34/30]); content((20,.7),[192.168.0.1])
+  content((24,-1.8),[H]); content((24,-2.7),[192.168.0.3])
+}))
 #choices([195.123.0.33], [195.123.0.35], [192.168.0.1], [192.168.0.3])
 ]
 #question[
@@ -342,7 +366,21 @@ for(i=0; i<24; i++)
 ]
 #question[
 （9分）某网络拓扑如题47图所示，主机 H 登录 FTP 服务器后，向服务器上传一个大小为18000 B的文件 F。假设 H 为传输 F 建立数据连接时，选择的初始序号为100，MSS=1000 B，拥塞控制初始阈值为4 MSS，RTT=10 ms，忽略 TCP 段的传输时延；在 F 的传输过程中，H 均以 MSS 段向服务器发送数据，且未发生差错、丢包和乱序现象。
-#figure(image("official-images/q47.png", width: 27em), caption: [题47图])
+#figure(cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke:.055em,content:(wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  line((0,0),(21,0))
+  content((21,0),image("../../assets/network/cisco-cloud.svg",width:9em,height:5.5em,fit:"stretch"))
+  content((0,0),image("../../assets/network/visio-2007-desktop.svg",width:2.5em))
+  content((6,0),image("../../assets/network/visio-2007-multilayer-switch.svg",width:2.5em))
+  content((12,0),image("../../assets/network/cisco-router.svg",width:3.2em))
+  content((20,0),image("../../assets/network/visio-2003-server.svg",width:2.2em))
+  content((23,1.6),[Internet]); content((20,-2),[FTP服务器])
+  content((0,-1.8),[H]); content((6,-1.8),[交换机]); content((12,-1.8),[路由器])
+}), caption: [题47图])
 请回答下列问题。
 #subquestions[
  + FTP 的控制连接是持久的还是非持久的？FTP 的数据连接是持久的还是非持久的？H 登录 FTP 服务器时，建立的 TCP 连接是控制连接还是数据连接？

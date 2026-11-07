@@ -318,6 +318,8 @@ def rebase_images(body, source, target):
             raise ValueError(f'Unexpected image path: {path}')
         absolute = (source.parent / path).resolve()
         relative = os.path.relpath(absolute, target.parent)
+        if path.endswith("/"):
+            relative += "/"
         return match.group(1) + relative + '"'
     return re.sub(r'(\bimage\s*\(\s*")([^"\n]+)"', replace, body)
 
@@ -360,11 +362,11 @@ def render(root, title, plan, output_root=None):
                 background = re.sub(r'^\s*（10分）', '', background)
                 body = ('\n原卷第42题的共用背景（仅附题干与图表，不收录其小问）：\n\n'
                         + background + '\n' + body)
-            if year == 2016 and kind == 'paper' and 33 <= number <= 41:
-                # The original has a shared stem outside question 33.
-                body = ('\n原卷题33～41共用下图，本题仍依据该图回答。\n\n'
-                        '#figure(image("official-images/q33-41.png",width:29em),'
-                        'caption:[2016年题33～41图],kind:image)\n' + body)
+            if year == 2016 and kind == 'paper' and 34 <= number <= 41:
+                # Reuse the shared drawing from question 33 in the source paper.
+                shared_drawing = questions(source)[32].split('// 题33～41共用图结束', 1)[0]
+                body = ('\n原卷题33～41共用下图，本题仍依据该图回答。\n'
+                        + shared_drawing + '\n' + body)
             if plan['directory'].startswith('操作系统/') and kind == 'paper':
                 shared = {(2014, 45): (44,), (2017, 45): (43, 44),
                           (2018, 45): (44,), (2019, 46): (45,)}

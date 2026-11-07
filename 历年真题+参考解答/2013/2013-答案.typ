@@ -1,4 +1,5 @@
 #import "../../template.typ": exam, subquestions, answer-key
+#import "@preview/cetz:0.5.2" as cetz
 #show: exam.with(year: 2013, subject: "计算机学科专业基础", code: "408", solutions: true)
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
@@ -138,7 +139,24 @@ int Majority1( int A[ ],int n )// 采用计数排序思想,时间:O(n),空间:O(
 = 【答案二】
 采用二叉链表存储结构，构造二叉排序树，元素存储方式见下图。（2分）
 
-#align(center, image("official-images/page-040-img-9.jpg", width: 27em))
+#align(center, cetz.canvas(length: 1em, {
+  import cetz.draw: *
+  set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .85em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+  for (origin,words,links,title) in (
+    (0, ((3,4,[for]),(0,2,[do]),(6,2,[while]),(3.5,0,[repeat])), ((0,1),(0,2),(2,3)), [二叉排序树1]),
+    (13, ((3,4,[repeat]),(0,2,[do]),(6,2,[while]),(2,0,[for])), ((0,1),(0,2),(1,3)), [二叉排序树2]),
+  ) {
+    for (a,b) in links { line((origin+words.at(a).at(0),words.at(a).at(1)),(origin+words.at(b).at(0),words.at(b).at(1))) }
+    for (x,y,label) in words {
+      circle((origin+x,y),radius:(1.4,.6),fill:white); content((origin+x,y),label)
+    }
+    content((origin+3,-1),title)
+  }
+  content((9.5,2),[或])
+}))
 
 采用二叉排序树的查找方法。（1分）
 
@@ -278,7 +296,25 @@ int）（LA））\>\>22；如果两个表达式没有对LA进行类型转换，�
   \= 页表起始地址 + 8×页表项的字节数 =
   00200000H+8×4=00200020H。由此可得如下图所示的答案。（3分）
 
-  #align(center, image("official-images/page-042-img-11.jpg", width: 27em))
+  #align(center, cetz.canvas(length: 1.2em, {
+    import cetz.draw: *
+    set-style(stroke: .05em, content: (wrap: body => {
+      set par(justify: false, leading: .15em, spacing: 0pt)
+      text(size: .8em, top-edge: "bounds", bottom-edge: "bounds", body)
+    }))
+    rect((0,0),(4,6)); content((2,6.55),[页表])
+    for y in (1.8,2.5,3.2) { line((0,y),(4,y)) }
+    content((2,2.85),[00901H]); content((2,2.15),[00900H])
+    content((-.2,2.85),[0020 0024H],anchor:"east")
+    content((-.2,2.15),[0020 0020H],anchor:"east")
+    content((-.2,.05),[0020 0000H],anchor:"east")
+    for (y,destination,target,label) in ((2.85,3.45,[0090 1000H],[代码页面2]),(2.15,1.5,[0090 0000H],[代码页面1])) {
+      circle((3.65,y),radius:.06,fill:black)
+      line((3.65,y),(5,y),(5,destination),(5.5,destination),mark:(end:">",fill:black))
+      content((5.7,destination),target,anchor:"west")
+      rect((11.3,destination - .6),(16.8,destination+.6)); content((14.05,destination),label)
+    }
+  }))
 
   【评分说明】共5个答数。物理地址1和物理地址2共1分；页框号1和页框号2共1分；物理地址3给1分。
 

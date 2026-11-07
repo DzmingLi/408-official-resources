@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="15.1181pt" height="43.8189pt" viewBox="34.9606 20.7874 15.1181 43.8189">
+<!-- Native Visio master extracted directly from installation media.
+ Source: https://archive.org/details/MSVisio2007CHS
+ Cabinet: VISIOLR.CAB; SHA256: be2395878706101c9138da0cd2c66ceaa41fdaf20cb42e4260b6946d69ee2628
+ Stencil: PERIPH_M.VSS_2052; SHA256: b2757f982e58e330ff8f7d4fb033692f4542b90c90056a5bf2f9ac47a1f3dfb5
+ Zero-based libvisio master index: 22.
+ Native vector paths retained; transparent canvas padding cropped. Paint converted to grayscale for printing. --><g id="Layer1230">
+<path d="  M42.5197,26.2708 A1.4173,1.4173 180.0000 1,1 41.1024,24.8535 A1.4173,1.4173 180.0000 0,1 42.5197,26.2708 Z M43.9251,40.9530 A2.8346,1.6299 0.0000 0,0 38.2797,40.9524 L35.4813,60.0955 A5.6693,3.2598 0.0000 1,0 46.7230,60.0937 L43.9467,41.1009 L43.9251,40.9530 Z M41.0431,42.7319 A2.8346,1.6299 0.0000 0,0 41.1626,42.7319 A3.1282,3.1282 0.0000 0,1 41.0431,42.7319 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #494949; fill-opacity: 0.0000; " />
+<path d="  M42.5197,26.2708 A1.4173,1.4173 180.0000 1,1 41.1024,24.8535 A1.4173,1.4173 180.0000 0,1 42.5197,26.2708 Z M43.9251,40.9530 A2.8346,1.6299 0.0000 0,0 38.2797,40.9524 L35.4813,60.0955 A5.6693,3.2598 0.0000 1,0 46.7230,60.0937 L43.9467,41.1009 L43.9251,40.9530 Z M41.0431,42.7319 A2.8346,1.6299 0.0000 0,0 41.1626,42.7319 A3.1282,3.1282 0.0000 0,1 41.0431,42.7319 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-opacity: 0.0000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; fill-opacity: 0.0000; " />
+</g>
+<g id="Layer1231">
+<defs>
+  <linearGradient id="grad413">
+    <stop offset="0%" stop-color="#dddddd" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad413" id="grad414" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(-0 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M45.3543,41.1024 A2.8346,1.6299 180.0000 1,1 42.5197,39.4724 A2.8346,1.6299 180.0000 0,1 45.3543,41.1024 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad414); " />
+<path d="  M45.3543,41.1024 A2.8346,1.6299 180.0000 1,1 42.5197,39.4724 A2.8346,1.6299 180.0000 0,1 45.3543,41.1024 Z" style="stroke-width: 0.7200; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1232">
+<defs>
+  <linearGradient id="grad415">
+    <stop offset="0%" stop-color="#c0c0c0" stop-opacity="1.0000" />
+    <stop offset="50%" stop-color="#ffffff" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#c0c0c0" stop-opacity="1.0000" />
+  </linearGradient>
+</defs>
+<path d="  M48.1404,60.0937 L45.3424,40.9530 A3.1282,3.1282 0.0000 0,1 39.6971,40.9524 L36.8986,60.0955 A5.6693,3.2598 0.0000 1,0 48.1404,60.0937 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad415); " />
+<path d="  M48.1404,60.0937 L45.3424,40.9530 A3.1282,3.1282 0.0000 0,1 39.6971,40.9524 L36.8986,60.0955 A5.6693,3.2598 0.0000 1,0 48.1404,60.0937 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1233">
+<defs>
+  <linearGradient id="grad416">
+    <stop offset="0%" stop-color="#c0c0c0" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad416" id="grad417" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(225 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M43.9370,26.2708 A1.4173,1.4173 180.0000 1,1 42.5197,24.8535 A1.4173,1.4173 180.0000 0,1 43.9370,26.2708 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad417); " />
+<path d="  M43.9370,26.2708 A1.4173,1.4173 180.0000 1,1 42.5197,24.8535 A1.4173,1.4173 180.0000 0,1 43.9370,26.2708 Z" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<path d="  M42.5197,41.1024 L42.5197,27.6882" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M39.5131,23.2642 A4.2520,4.2520 0.0000 0,0 39.5131,29.2774 M45.5267,29.2774 A4.2529,4.2529 0.0000 0,0 45.5267,23.2642 M37.5087,21.2598 A7.0866,7.0866 0.0000 0,0 37.5087,31.2818 M47.5313,31.2818 A7.0881,7.0882 0.0000 0,0 47.5313,21.2598" style="stroke-width: 0.7200; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M42.5197,39.4724 A2.8397,1.6328 0.0000 0,0 39.6971,40.9524 L36.8986,60.0955 A5.6693,3.2598 0.0000 1,0 48.1404,60.0937 L45.3640,41.1009 A2.8397,1.6328 0.0000 0,0 42.5197,39.4724 Z M42.5197,39.4724 L42.5197,27.6882 M43.9370,26.2708 A1.4173,1.4173 180.0000 1,1 42.5197,24.8535 A1.4173,1.4173 180.0000 0,1 43.9370,26.2708 Z" style="stroke-width: 1.5000; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</svg>
