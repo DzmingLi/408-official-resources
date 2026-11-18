@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="55.7pt" height="82.2pt" viewBox="46.2 35.4 55.7 82.2">
+<!-- Visio 2003, N5614E01.CAB, SERVER_U.VSS master 3. Original paths, grayscale paint. -->
+<path d="  M76.7314,107.9819 A30.8730,27.7968 177.9164 0,0 99.1821,100.3438 A10.8316,9.7523 0.0000 0,0 93.5875,84.5745 L65.9533,107.9663 L76.7314,107.9819 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #d3d3d3; " />
+<g id="Layer1027">
+<defs>
+  <linearGradient id="grad40">
+    <stop offset="0%" stop-color="#d8d8d8" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad40" id="grad41" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(-0 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M65.9262,64.1797 L97.2000,46.6770 L77.8154,36.0016 L46.8000,53.3801 A33.6781,32.3494 0.0000 0,0 65.9382,64.1804 Z" style="stroke-width: 0.3600; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad41); " />
+<path d="  M65.9262,64.1797 L97.2000,46.6770 L77.8154,36.0016 L46.8000,53.3801 A33.6781,32.3494 0.0000 0,0 65.9382,64.1804" style="stroke-width: 0.3600; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1028">
+<defs>
+  <linearGradient id="grad42">
+    <stop offset="0%" stop-color="#bcbcbc" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad42" id="grad43" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(225 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M65.9382,64.1804 A33.3019,31.9881 0.0000 0,1 46.8115,53.3298 L46.8115,98.0183 A32.6331,31.3457 0.0000 0,0 65.9382,108.0000 L65.9262,64.1797 Z" style="stroke-width: 0.3600; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad43); " />
+<path d="  M65.9382,64.1804 A33.3019,31.9881 0.0000 0,1 46.8115,53.3298 L46.8115,98.0183 A32.6331,31.3457 0.0000 0,0 65.9382,108.0000 L65.9262,64.1797" style="stroke-width: 0.3600; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1029">
+<defs>
+  <linearGradient id="grad44">
+    <stop offset="0%" stop-color="#a1a1a1" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad44" id="grad45" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M65.9262,64.1797 L65.9262,107.9505 L97.2000,90.6199 L97.2000,46.6770 L65.9262,64.1797 Z" style="stroke-width: 0.3600; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad45); " />
+<path d="  M65.9262,64.1797 L65.9262,107.9505 L97.2000,90.6199 L97.2000,46.6770 L65.9262,64.1797 Z" style="stroke-width: 0.3600; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1030">
+<path d="  M97.2000,46.6754 L77.8154,36.0000 L46.8000,53.3785 L46.8115,98.0167 A32.6331,31.3457 0.0000 0,0 65.9382,107.9984 L97.2000,90.6183 L97.2000,46.6754 Z" style="stroke-width: 1.0000; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<text x="46.8000" y="71.9992">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+<g id="Layer1031">
+<defs>
+  <linearGradient id="grad46">
+    <stop offset="0%" stop-color="#808080" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad46" id="grad47" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(135 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M56.9825,81.9097 A1.4701,2.0456 160.0000 1,1 54.9014,80.4903 A1.4701,2.0456 160.0000 0,1 56.9825,81.9097 Z" style="stroke-width: 0.3600; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad47); " />
+<path d="  M56.9825,81.9097 A1.4701,2.0456 160.0000 1,1 54.9014,80.4903 A1.4701,2.0456 160.0000 0,1 56.9825,81.9097 Z" style="stroke-width: 0.3600; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<path d="  M49.9015,89.5027 A38.4152,34.1296 85.0880 0,0 62.8246,96.3300 M49.9015,92.1715 A38.4152,34.1296 85.0880 0,0 62.8246,98.9988 M49.9015,94.8404 A38.4152,34.1296 85.0880 0,0 62.8246,101.6677" style="stroke-width: 0.6000; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<g id="Layer1032">
+<path d="  M49.8452,62.9553 A32.5948,31.3089 0.0000 0,0 62.7683,69.7826 A0.6623,0.6362 0.0000 0,0 62.7683,68.5413 A31.7080,30.4571 0.0000 0,1 50.1037,61.9126 A0.4291,0.4122 0.0000 0,0 49.3874,62.2630 A0.9352,0.8983 0.0000 0,0 49.8452,62.9553 Z" style="stroke-width: 0.3600; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #000000; " />
+<path d="  M49.8452,62.9553 A32.5948,31.3089 0.0000 0,0 62.7683,69.7826 A0.6623,0.6362 0.0000 0,0 62.7683,68.5413 A31.7080,30.4571 0.0000 0,1 50.1037,61.9126 A0.4291,0.4122 0.0000 0,0 49.3874,62.2630 A0.9352,0.8983 0.0000 0,0 49.8452,62.9553 Z" style="stroke-width: 0.3600; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<g id="Layer1033">
+<defs>
+  <linearGradient id="grad48">
+    <stop offset="0%" stop-color="#e3e3e3" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad48" id="grad49" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(315 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M57.4699,68.1671 A4.9815,2.9483 89.1510 0,0 53.5929,66.1810 A3.1866,1.6341 0.0004 0,0 57.4699,68.1671 Z" style="stroke-width: 0.1200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad49); " />
+<path d="  M57.4699,68.1671 A4.9815,2.9483 89.1510 0,0 53.5929,66.1810 A3.1866,1.6341 0.0004 0,0 57.4699,68.1671 Z" style="stroke-width: 0.1200; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<defs>
+  <radialGradient id="grad50" cx="50.0000%" cy="50.0000%" r="100.0000%">
+    <stop offset="0%" stop-color="#000000" stop-opacity="0.4000" />
+    <stop offset="100%" stop-color="#e3e3e3" stop-opacity="0.4000" />
+  </radialGradient>
+</defs>
+<path d="  M49.9015,66.6002 L49.9015,70.0759 A35.0621,33.6789 0.0000 0,0 62.8246,76.9032 L62.8246,73.4275 A36.2097,34.7811 0.0000 0,1 49.9015,66.6002 Z" style="fill-rule: evenodd; fill: url(#grad50); " />
+<path d="  M49.9015,68.1519 A31.7352,30.4832 0.0000 0,0 62.8246,74.9792 L62.8246,74.1103 A35.0763,33.6925 0.0000 0,1 49.9015,67.2830 L49.9015,68.1519 Z" style="fill-rule: evenodd; fill: #000000; " />
+<path d="  M49.9015,66.5382 L49.9015,70.0139 A35.0621,33.6789 0.0000 0,0 62.8246,76.8412" style="stroke-width: 0.3600; stroke: #ffffff; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M62.8246,76.9653 L62.8246,73.4896 A36.2097,34.7811 0.0000 0,1 49.9015,66.6623" style="stroke-width: 0.3600; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<path d="  M94.2637,116.9713 A23.2213,7.1953 51.3348 0,0 97.9021,115.0507 A13.8183,4.1830 63.8509 0,0 97.9214,112.0260 A1.4027,0.4200 71.2448 0,0 97.0438,109.6830 L93.8291,107.2089 L94.2637,116.9713 Z" style="stroke-width: 0.7200; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #d3d3d3; " />
+<g id="Layer1034">
+<defs>
+  <linearGradient id="grad51">
+    <stop offset="0%" stop-color="#9a9a9a" stop-opacity="1.0000" />
+    <stop offset="100%" stop-color="#e6e6e6" stop-opacity="1.0000" />
+  </linearGradient>
+  <linearGradient xlink:href="#grad51" id="grad52" x1="0" y1="0" x2="0" y2="1" gradientTransform="rotate(180 .5 .5)" gradientUnits="objectBoundingBox">
+  </linearGradient>
+</defs>
+<path d="  M72.7200,103.8567 L94.3200,117.0000 L94.3109,103.3705 L72.7200,90.0000 L72.7200,103.8567 Z" style="stroke-width: 1.0000; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: url(#grad52); " />
+<text x="72.7200" y="103.5000">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+<g id="Layer1035">
+<g id="Layer1036">
+<path d="  M74.0967,92.4553 L76.8500,94.1448 A1.8260,1.9347 0.0000 0,1 74.0967,95.3603 L74.0967,92.4553 Z M74.1196,100.2102 A5.1643,5.4716 0.0000 0,1 76.8500,104.8291 L74.0696,103.1274 L74.1196,100.2102 Z M90.1809,102.3981 A6.2187,6.5887 0.0000 0,0 92.9342,107.0170 L92.9342,104.0761 L90.1809,102.3981 Z M92.9342,111.6359 A1.9452,2.0610 0.0000 0,0 90.1809,112.8514 L92.9342,114.5944 L92.9342,111.6359 Z" style="stroke-width: 0.2000; stroke-linecap: round; stroke-linejoin: round; fill-rule: evenodd; fill: #808080; " />
+<path d="  M92.9342,104.0761 L92.9342,114.5944 L78.4562,105.8015 M74.0967,92.4553 L76.8500,94.1448 A1.8260,1.9347 0.0000 0,1 74.0967,95.3603 L74.0967,92.4553 Z M74.1196,100.2102 A5.1643,5.4716 0.0000 0,1 76.8500,104.8291 L74.0696,103.1274 L74.1196,100.2102 Z M90.1809,102.3981 A6.2187,6.5887 0.0000 0,0 92.9342,107.0170 L92.9342,104.0761 L90.1809,102.3981 Z M81.0046,104.7160 A2.7896,4.0685 334.1682 0,1 81.9043,99.7646 A2.7896,4.0685 334.1682 1,1 81.0046,104.7160 Z M92.9342,111.6359 A1.9452,2.0610 0.0000 0,0 90.1809,112.8514 L92.9342,114.5944 L92.9342,111.6359 Z" style="stroke-width: 0.2000; stroke: #808080; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+</g>
+<text x="78.0696" y="103.5248">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+<g id="Layer1037">
+<path d="  M72.7200,103.8567 L94.3200,117.0000 L94.3109,103.3705 L72.7200,90.0000 L72.7200,103.8567 Z" style="stroke-width: 1.0000; stroke: #000000; stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: round; fill: none; " />
+<text x="72.7200" y="103.5000">
+<tspan font-family="Arial" font-size="12.0000" fill="#000000" fill-opacity="1.0000" stroke-opacity="1.0000">
+</tspan>
+</text>
+</g>
+</svg>

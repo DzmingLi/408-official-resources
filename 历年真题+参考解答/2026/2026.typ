@@ -242,7 +242,9 @@ signal(S);
   for (x,y,label) in ((10,5,[5]),(5.5,1.8,[2]),(10,-1.5,[3]),(14.5,1.8,[4]),(9.9,2.3,[6])) {
     content((x,y),box(fill:white,inset:.15em,label))
   }
-  content((7,2.4),[$t_1 arrow.r oo$])
+  content((7.3,2.4),[$t_1$])
+  line((6.3,1.8),(7.7,1.8),mark:(end:">",fill:black,scale:.65))
+  content((8.1,1.8),[$oo$])
   for (x,y,name) in ((2.7,-.9,[S0]),(4.5,.2,[S1]),(7,.3,[S2]),(7.6,-1.9,[S3]),(4.6,-3.3,[S4])) {content((x,y),name)}
 }))
 #figure(table(columns: (11em, 4em), align: center,
@@ -338,7 +340,7 @@ typedef BinTNode *BTree;               //二叉搜索树
     ((326,223),(326,373)), ((463,223),(463,373)),
     ((83,446),(128,446)), ((95,521),(128,521)), ((207,483),(281,483)),
     ((508,428),(620,428)), ((508,537),(620,537)),
-    ((699,392),(756,392)), ((699,573),(756,573)), ((556,580),(620,580)),
+    ((699,392),(756,392)), ((699,573),(756,573)), ((572,580),(620,580)),
     ((215,748),(328,748)), ((463,748),(579,748),(579,611),(620,611)),
     ((730,182),(573,182),(573,358),(620,358)),
     ((704,182),(704,113),(896,113),(896,423),(929,423)),
@@ -365,20 +367,21 @@ typedef BinTNode *BTree;               //二叉搜索树
     let right-top = if reversed { y } else { y+40 }
     let right-bottom = if reversed { y+166 } else { y+126 }
     line(p(x,left-top),p(x+79,right-top),p(x+79,right-bottom),p(x,left-bottom),close:true,fill:white)
-    content(p(x+48,y+83),std.rotate(-90deg,[MUX]))
+    let direction = if reversed { -90deg } else { 90deg }
+    content(p(x+(if reversed {22} else {58}),y+83),std.rotate(direction,[MUX]))
     for i in range(inputs) {
       let number = if reversed { 1-i } else { i }
-      let input-y = y+45+i*(if inputs==3 {36} else {76})
-      label(x+24,input-y,str(number))
+      let input-y = if inputs == 3 { (537,580,611).at(i) } else { y+45+i*76 }
+      content(p(x+(if reversed {56} else {24}),input-y),std.rotate(direction,str(number)))
     }
   }
   line(p(756,340),p(844,384),p(844,579),p(756,625),p(756,537),p(778,483),p(756,455),close:true,fill:white)
-  content(p(805,481),std.rotate(-90deg,[ALU])); label(782,394,[A]); label(782,573,[B])
+  content(p(805,481),std.rotate(90deg,[ALU])); label(782,394,[A]); label(782,573,[B])
   for points in (
     ((223,63),(223,425),(281,425)), ((166,367),(166,422)),
     ((242,123),(242,191),(280,191)),
     ((546,123),(546,190),(509,190)), ((667,63),(667,333)), ((786,63),(786,148)),
-    ((1029,63),(1029,148)), ((969,600),(969,522)), ((1147,369),(1147,423)),
+    ((1029,63),(1029,148)), ((969,575),(969,522)), ((1147,369),(1147,423)),
     ((1147,616),(1147,674)), ((395,987),(395,782)), ((549,987),(549,918)),
     ((660,987),(660,637)), ((801,987),(801,604)),
     ((1120,128),(1120,63)), ((1180,128),(1180,63)),
@@ -451,26 +454,33 @@ typedef BinTNode *BTree;               //二叉搜索树
       set par(justify: false, leading: .15em, spacing: 0pt)
       text(size: .8em, top-edge: "bounds", bottom-edge: "bounds", body)
     }))
-  // A cloud encloses the original grouping of centres, platform and user.
-  content((0,0),image("../../assets/network/cisco-cloud.svg",width:25em,height:17em,fit:"stretch"))
-  content((5.5,4.8),[Internet])
-  for (a,b) in (((-7,2.3),(0,4.5)),((0,4.5),(7,2.3)),((-7,2.3),(0,-1)),((7,2.3),(0,-1)),((0,4.5),(0,-1))) {
-    line(a,b,stroke:(dash:"dotted",thickness:.055em))
+  content((0,0),image("../../assets/network/cisco-cloud.svg",width:33em,height:19.9em,fit:"stretch"))
+  content((5.6,5.5),[Internet])
+  // 两侧算力中心分别连到平台。两条虚线穿过平台，箭头分别指向 C 和 Si。
+  line((-8,2.5),(-3.5,.9))
+  line((8,2.5),(3.5,.9))
+  let tower = image("../../assets/network/visio-2003-tower-server.svg",width:1.45em)
+  for (x,y,name,server) in ((-8,2.5,[算力中心1],[$S_1$]),(0,5.2,[算力中心$i$],[$S_i$]),(8,2.5,[算力中心$n$],[$S_n$])) {
+    circle((x,y),radius:(3.2,2.05),fill:white)
+    content((x,y+1.05),name)
+    content((x,y - .55),tower)
+    content((x+1.12,y - .6),server)
   }
-  circle((0,-1),radius:(5.5,5.3),stroke:(dash:"dashed",thickness:.05em))
-  for (x,y,name,server) in ((-7,2.3,[算力中心1],[$S_1$]),(0,4.5,[算力中心$i$],[$S_i$]),(7,2.3,[算力中心$n$],[$S_n$])) {
-    circle((x,y),radius:(3.2,1.8),fill:white)
-    content((x,y+.9),name)
-    content((x - .5,y - .4),image("../../assets/network/visio-2007-web-server.svg",width:1.15em))
-    content((x+.7,y - .5),server)
-  }
-  content((-3.6,3.8),[$dots.h$]); content((3.6,3.8),[$dots.h$])
-  rect((-4.7,-1.7),(4.7,.9),fill:white)
-  for x in (-1.8,1.8) {content((x,.05),image("../../assets/network/visio-2007-web-server.svg",width:1.3em))}
-  content((0,-1.1),[算力调度交易平台])
-  circle((0,-5),radius:(3.8,1.7),fill:white)
-  content((-.6,-4.5),image("../../assets/network/visio-2007-web-server.svg",width:1.25em))
-  content((.8,-4.5),[C]); content((0,-5.8),[算力用户])
+  content((-4.7,4.6),std.rotate(-25deg,[$dots.h$]))
+  content((4.7,4.6),std.rotate(25deg,[$dots.h$]))
+  rect((-5,-2.65),(5,.9),fill:white)
+  content((-1.9,-.35),tower)
+  content((-1.36,-.94),std.rotate(-90deg,image("../../assets/network/tabler-key.svg",width:.78em)))
+  content((1.65,-.4),image("../../assets/network/visio-2003-payment-server.svg",width:1.65em))
+  content((0,-1.95),[算力调度交易平台])
+  circle((0,-5.85),radius:(4.1,2.05),fill:white)
+  content((0,-5.4),tower)
+  content((1.35,-5.85),[C])
+  content((0,-7.05),[算力用户])
+  let link = (dash:"dashed",thickness:.055em)
+  let tip = (end:">",fill:black,scale:.8)
+  bezier((-.74,4.25),(-.74,-5.35),(-5.05,2.05),(-5.05,-3.45),stroke:link,mark:tip)
+  bezier((.74,-5.35),(.74,4.25),(5.05,-3.45),(5.05,2.05),stroke:link,mark:tip)
 }), caption: [题47图])
 请回答下列问题。
 #subquestions[
