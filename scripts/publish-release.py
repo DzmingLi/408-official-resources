@@ -59,10 +59,10 @@ def collection_release_files(directory):
 
 
 def collection_notes(group, commit, repo):
-    lines = [f'由提交 {commit} 自动生成，共 {len(group["rows"])} 讲，各含题目与答案 PDF（A4 阅读版）。',
+    lines = [f'由提交 {commit} 自动生成，共 {len(group["rows"])} 讲，各含题目与答案 PDF。',
              '', '收录2009—2026年全部真题，不含题型示例；历史考点单独标明。',
              '2023、2026年尚无参考答案源稿，答案册逐题标为“本仓库尚未收录本题参考答案”。',
-             '自行构建可通过 Nix 的 mkCollections 函数选择 fromYear、throughYear 和 A4/A5 paperSize。',
+             '统一使用 A4 纸张；自行构建可通过 Nix 的 mkCollections 函数选择 fromYear、throughYear。',
              '历年真题选择题仅列答案字母；综合题保留对应参考答案或整理解析。',
              '下载文件按科目、章节和讲次编号，中文讲名及下载入口如下。', '']
     chapter = None

@@ -13,7 +13,7 @@
 
 以下构建与提取命令均在仓库根目录执行。
 
-默认构建全部2009—2026年真题、A4纸张，仍按原有正式合并规则分别输出题目与答案册：
+统一使用A4纸张，默认构建全部2009—2026年真题，仍按原有正式合并规则分别输出题目与答案册：
 
 #+begin_src sh
 nix build .#collections --out-link result-collections
@@ -21,11 +21,11 @@ nix build .#collections --out-link result-collections
 
 每讲题目和答案由独立的 Nix 目标构建，例如 =nix build .#cn-01-01-questions= 和 =nix build .#cn-01-01-answers= 。也可只构建一科：=collections-ds= 、 =collections-coa= 、 =collections-os= 、 =collections-cn= 。目标编号与发布页下载编号一致。
 
-自行构建可选择起止年份和纸张。例如构建截至2022年的A5汇编：
+自行构建可选择起止年份。例如构建截至2022年的汇编：
 
 #+begin_src sh
 nix build --impure --file nix/collections-build.nix \
-  --arg throughYear 2022 --argstr paperSize A5 \
+  --arg throughYear 2022 \
   --out-link result-collections
 #+end_src
 
@@ -37,7 +37,7 @@ nix build --impure --file nix/collections-build.nix \
   --out-link result-collections
 #+end_src
 
-纸张只支持A4（210 × 297 mm）与A5（148 × 210 mm），默认A4；均保持10.5pt正文字号，A5按可用宽度重新换行、分页，并等比适配超宽图表。PDF开头标明所选年份与纸张。真题分类汇编参数不影响历年整卷。
+纸张固定为A4（210 × 297 mm），保持10.5pt正文字号及17mm页边距，不再提供尺寸选项。PDF开头只标明所选年份，文件名和页头不额外标注尺寸。真题分类汇编参数不影响历年整卷。
 
 仓库只维护分类清单、讲次目录 =collections.json= 和汇编模板，不提交各讲题目、答案的派生 =.typ= 。每个 Nix 目标先调用提取器在构建目录生成所需源稿，再直接调用 Typst；并行、依赖和缓存由 Nix 管理。年份筛选与题答配对共用同一分类清单，无题的讲及小节跳过。
 

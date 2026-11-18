@@ -3,11 +3,10 @@ let
   root = ../.;
   catalog = builtins.fromJSON (builtins.readFile (root + "/真题分类汇编/collections.json"));
   rows = lib.concatMap (group: group.rows) catalog;
-  mkPackages = { fromYear ? 2009, throughYear ? 2026, paperSize ? "A4", currentSyllabusOnly ? false }:
+  mkPackages = { fromYear ? 2009, throughYear ? 2026, currentSyllabusOnly ? false }:
     assert lib.assertMsg (builtins.isInt fromYear && builtins.isInt throughYear
       && 2009 <= fromYear && fromYear <= throughYear && throughYear <= 2026)
       "collection years must satisfy 2009 <= fromYear <= throughYear <= 2026";
-    assert lib.assertMsg (lib.elem paperSize [ "A4" "A5" ]) "paperSize must be A4 or A5";
     assert lib.assertMsg (builtins.isBool currentSyllabusOnly) "currentSyllabusOnly must be a boolean";
     let
       selectedYears = member: lib.filter (year: fromYear <= year && year <= throughYear) member.years;
@@ -51,7 +50,6 @@ let
               ${lib.optionalString currentSyllabusOnly "--current-syllabus-only"} ${lib.optionalString answers "--answers"}
             mkdir -p "$out/$(dirname ${lib.escapeShellArg output})"
             typst compile --ignore-system-fonts --root . \
-              --input collection-size=${paperSize} \
               --input from-year=${toString fromYear} --input through-year=${toString throughYear} \
               generated/entry.typ "$out/${output}"
           '';
