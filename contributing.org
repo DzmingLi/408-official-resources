@@ -22,7 +22,7 @@
 
 ** 维护真题分类
 
-分类清单位于 =scripts/extract-collections.py= 和各科 =*-collection-plan.py= 中，2023—2026年及历史考点补充位于 =scripts/extended-collection-plan.py= 。只收录历年真题，不把旧版题型示例加入分类清单。
+分类清单位于 =scripts/extract-collections.py= 和各科 =*-collection-plan.py= 中，2023—2026年的分类补充位于 =scripts/extended-collection-plan.py= 。按现行考纲范围收录历年真题，排除记录见 [[file:真题订正.org][真题订正与注解]]。
 
 跨考点题保留完整题干，归入最后实际考查的考纲知识点；背景和干扰选项不计。各科内部题号不得重复，已有跨科复用规则保持明确记录。题目与答案必须共用同一清单；缺少答案时明确标注，不能自行填入未核对内容。
 

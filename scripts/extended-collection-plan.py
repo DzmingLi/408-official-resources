@@ -1,4 +1,4 @@
-"""Reviewed additions for 2023–2026 and retained historical syllabus topics.
+"""Reviewed additions for 2023–2026.
 
 Each token below describes a complete question, in original question order.
 Backgrounds and distractors do not determine ownership. Codes refer to the
@@ -11,9 +11,6 @@ NEW_LECTURES = {
     '操作系统结构': ('操作系统/操作系统基础/操作系统结构', ['操作系统结构']),
     '虚拟机': ('操作系统/操作系统基础/虚拟机', ['虚拟机']),
     'IPv6': ('计算机网络/网络层/IPv6', ['IPv6的主要特点', 'IPv6地址']),
-    'HDLC协议（历史考点）': ('计算机网络/数据链路层/HDLC协议（历史考点）', ['HDLC协议（历史考点）']),
-    'RAID（历史考点）': ('计算机组成原理/存储器层次结构/RAID（历史考点）', ['RAID（历史考点）']),
-    '微指令设计（历史考点）': ('计算机组成原理/中央处理器（CPU）/微指令设计（历史考点）', ['微指令设计（历史考点）']),
 }
 
 TOPICS = {
@@ -111,14 +108,6 @@ YEARS = {
     ),
 }
 
-HISTORICAL = {
-    (2013, 37): 'HDLC协议（历史考点）',
-    (2013, 20): 'RAID（历史考点）',
-    (2012, 18): '微指令设计（历史考点）',
-    (2014, 18): '微指令设计（历史考点）',
-}
-
-
 def extend(plans):
     for title, (directory, leaves) in NEW_LECTURES.items():
         plans[title] = dict(directory=directory, section_headings=len(leaves) > 1,
@@ -129,8 +118,6 @@ def extend(plans):
             title, index = TOPICS[code]
             leaf = list(plans[title]['sections'])[index]
             plans[title]['sections'][leaf].append((year, number))
-    for entry, title in HISTORICAL.items():
-        next(iter(plans[title]['sections'].values())).append(entry)
     for plan in plans.values():
         for entries in plan['sections'].values():
             entries.sort(key=lambda e: (len(e) == 3, e[0], e[1]))

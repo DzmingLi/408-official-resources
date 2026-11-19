@@ -244,18 +244,15 @@ DS = runpy.run_path(str(Path(__file__).with_name('ds-collection-plan.py')))
 PLANS.update(DS['PLANS'])
 EXTENDED = runpy.run_path(str(Path(__file__).with_name('extended-collection-plan.py')))
 EXTENDED['extend'](PLANS)
-HISTORICAL_QUESTIONS = EXTENDED['HISTORICAL']
 
 
-def select_plans(from_year=MIN_YEAR, through_year=MAX_YEAR, current_syllabus_only=False):
+def select_plans(from_year=MIN_YEAR, through_year=MAX_YEAR):
     """Filter copies of the full classification without editing source files."""
     if not MIN_YEAR <= from_year <= through_year <= MAX_YEAR:
         raise ValueError(f'年份须满足 {MIN_YEAR} <= 起始年份 <= 截止年份 <= {MAX_YEAR}')
     selected = {}
     for title, plan in PLANS.items():
-        sections = {leaf: [entry for entry in entries if
-                          from_year <= entry[0] <= through_year
-                          and not (current_syllabus_only and entry[:2] in HISTORICAL_QUESTIONS)]
+        sections = {leaf: [entry for entry in entries if from_year <= entry[0] <= through_year]
                     for leaf, entries in plan['sections'].items()}
         if any(sections.values()):
             selected[title] = dict(plan, sections=sections)
@@ -435,7 +432,6 @@ def main():
     parser.add_argument('--answers', action='store_true')
     parser.add_argument('--from-year', type=int, default=MIN_YEAR)
     parser.add_argument('--through-year', type=int, default=MAX_YEAR)
-    parser.add_argument('--current-syllabus-only', action='store_true')
     args = parser.parse_args()
     root = args.root.resolve()
     catalog_module = runpy.run_path(str(Path(__file__).with_name('collection-catalog.py')))
@@ -455,7 +451,7 @@ def main():
     if len(rows) != 1:
         parser.error('--collection must identify one lecture code from collections.json')
     try:
-        selected = select_plans(args.from_year, args.through_year, args.current_syllabus_only)
+        selected = select_plans(args.from_year, args.through_year)
     except ValueError as error:
         parser.error(str(error))
     row = rows[0]

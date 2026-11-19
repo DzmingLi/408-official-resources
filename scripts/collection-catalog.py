@@ -71,8 +71,7 @@ def collection_catalog(root, plans):
             row['question'] = str(row['question'])
             row['answer'] = str(row['answer'])
             row['members'] = [dict(title=title, directory=plans[title]['directory'],
-                                   years=sorted({entry[0] for entries in plans[title]['sections'].values() for entry in entries}),
-                                   historical='（历史考点）' in title)
+                                   years=sorted({entry[0] for entries in plans[title]['sections'].values() for entry in entries}))
                               for title in row['members']]
         groups.append(dict(subject=subject, prefix=prefix, tag='collection-' + subject,
                            title=subject + '真题分类汇编', rows=selected))

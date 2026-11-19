@@ -3,14 +3,13 @@ let
   root = ../.;
   catalog = builtins.fromJSON (builtins.readFile (root + "/真题分类汇编/collections.json"));
   rows = lib.concatMap (group: group.rows) catalog;
-  mkPackages = { fromYear ? 2009, throughYear ? 2026, currentSyllabusOnly ? false }:
+  mkPackages = { fromYear ? 2009, throughYear ? 2026 }:
     assert lib.assertMsg (builtins.isInt fromYear && builtins.isInt throughYear
       && 2009 <= fromYear && fromYear <= throughYear && throughYear <= 2026)
       "collection years must satisfy 2009 <= fromYear <= throughYear <= 2026";
-    assert lib.assertMsg (builtins.isBool currentSyllabusOnly) "currentSyllabusOnly must be a boolean";
     let
       selectedYears = member: lib.filter (year: fromYear <= year && year <= throughYear) member.years;
-      hasQuestions = member: selectedYears member != [] && !(currentSyllabusOnly && member.historical);
+      hasQuestions = member: selectedYears member != [];
       selectedRows = lib.filter (row: lib.any hasQuestions row.members) rows;
       mkCollection = row: answers:
         let
@@ -47,7 +46,7 @@ let
           buildPhaseTypstCommand = ''
             python3 scripts/extract-collections.py --output generated --collection ${row.code} \
               --from-year ${toString fromYear} --through-year ${toString throughYear} \
-              ${lib.optionalString currentSyllabusOnly "--current-syllabus-only"} ${lib.optionalString answers "--answers"}
+              ${lib.optionalString answers "--answers"}
             mkdir -p "$out/$(dirname ${lib.escapeShellArg output})"
             typst compile --ignore-system-fonts --root . \
               --input from-year=${toString fromYear} --input through-year=${toString throughYear} \
